@@ -1,0 +1,63 @@
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: white;
+    background-color: black;
+}
+.ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.9em; 
+}
+.ui-dialog .ui-dialog-buttonpane{
+      padding: 0;
+}
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+.radioButtons{
+  font-weight: normal;
+  padding-top:0.7%;
+}
+.mandatory-field{
+  color:red;
+}
+.Arrow{
+  color:#337ab7;
+}
+.nameLink {
+    cursor: pointer;
+    text-decoration: none;
+} 
+small.error, span.error {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgb(240, 65, 36);
+}
+.gridDetails{
+  float:left;
+  margin-top:1%;
+  font-size:18px;
+}
+
+/*Beneficiary Controller*/
+
+.BeneficiaryCtrl h3{
+	text-decoration: underline;
+	text-align: center;
+}
+.BeneficiaryCtrl .stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.BeneficiaryCtrl .stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.BeneficiaryCtrl .stylish-input-group button{
+    border:0;
+    background:transparent;
+}
