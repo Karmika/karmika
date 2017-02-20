@@ -5,16 +5,8 @@ $this->title = 'Register Beneficiary';
 $url =  Yii::$app->homeUrl;
 
 ?>
-<style type="text/css">
-    .col-sm-2{
-        padding-left: 0px;
-    }
-    .lable-bottom-margin{
-        margin-bottom:20px;
-    }
-</style>
 
-<div class="beneficiaryCtrl" ng-cloak ng-controller="BeneficiaryController">
+<div class="BeneficiaryCtrl" ng-cloak ng-controller="BeneficiaryController">
 
 
 <div class="row">
@@ -22,7 +14,7 @@ $url =  Yii::$app->homeUrl;
     <div class="wizard">
 
 
-        <div class="wizard-inner" >
+        <div class="wizard-inner">
             <div class="connecting-line"></div>
             <ul class="nav nav-tabs" role="tablist">
 
@@ -37,14 +29,14 @@ $url =  Yii::$app->homeUrl;
                 <li role="presentation" class="disabled">
                     <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Nominee and Dependents">
                         <span class="round-tab">
-                            <i class="glyphicon glyphicon-pencil"></i>
+                            <i class="glyphicon glyphicon-user"></i>
                         </span>
                     </a>
                 </li>
                 <li role="presentation" class="disabled">
                     <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Employment Certificate">
                         <span class="round-tab">
-                            <i class="glyphicon glyphicon-comment"></i>
+                            <i class="glyphicon glyphicon-certificate"></i>
                         </span>
                     </a>
                 </li>
@@ -65,11 +57,6 @@ $url =  Yii::$app->homeUrl;
                 </li>
             </ul>
         </div>
-
-
-
-
-
 
 
         <form role="form">
@@ -426,6 +413,71 @@ $url =  Yii::$app->homeUrl;
 
                     <h3 align="center">Upload Files</h3>
                     <hr/>
+
+
+
+
+
+
+
+
+
+  
+
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 40px">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="50%">Document Name</th>
+                    <th ng-show="uploader.isHTML5">Size</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                    <td>{{ item.file.name }}</td>
+                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="uploader.queue.length < 1">
+                    <td colspan="4"><p class="text-center" style="color:red">-- Please upload your files here --</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+    <div class="row"  style="padding-left:1.5%">
+        <!-- <input class="btn btn-success" type="file" nv-file-select="" uploader="uploader" multiple  /><br/> -->
+        <label class="btn btn-success btn-file">
+            Browse <input  type="file" nv-file-select="" uploader="uploader" multiple hidden>
+        </label>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <ul class="list-inline pull-right">
                         <li><button type="button" class="btn btn-default prev-step">Previous</button></li>

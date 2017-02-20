@@ -61,3 +61,29 @@ small.error, span.error {
     border:0;
     background:transparent;
 }
+
+.BeneficiaryCtrl .col-sm-2{
+    padding-left: 0px;
+}
+.BeneficiaryCtrl .lable-bottom-margin{
+    margin-bottom:20px;
+}
+.BeneficiaryCtrl .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.BeneficiaryCtrl .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
