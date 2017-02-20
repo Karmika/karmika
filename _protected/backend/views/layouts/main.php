@@ -26,7 +26,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => Yii::t('app', Yii::$app->name),
+                'brandLabel' => Yii::t('app', "Karmika"),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top',
@@ -34,9 +34,9 @@ AppAsset::register($this);
             ]);
 
             // display Account and Users to admin+ roles
-            if (Yii::$app->user->can('admin'))
+            if (Yii::$app->user->can('theCreator'))
             {
-                $menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
+                //$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
                 $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
             }
             
@@ -74,8 +74,8 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; <?= Yii::t('app', Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; <?= Yii::t('app', "Karmika") ?> <?= date('Y') ?></p>
+        <p class="pull-right">Karnataka State Government<?//= Yii::powered() ?></p>
         </div>
     </footer>
 

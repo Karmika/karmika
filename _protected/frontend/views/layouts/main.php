@@ -43,7 +43,7 @@ WebAsset::register($this);
             ]);
 
             // everyone can see Home page
-            $menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/beneficiary/index']];
+            //$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/beneficiary/index']];
             /*
             // we do not need to display Article/index, About and Contact pages to editor+ roles
             if (!Yii::$app->user->can('editor')) 
@@ -94,7 +94,7 @@ WebAsset::register($this);
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; <?= Yii::t('app', "Karmika") ?> <?= date('Y') ?></p>
-        <p class="pull-right">Karnataka State Governament <?//= Yii::powered() ?></p>
+        <p class="pull-right">Karnataka State Government <?//= Yii::powered() ?></p>
         </div>
     </footer>
 
