@@ -9,12 +9,14 @@ app.controller("BeneficiaryController",['$scope','$http','config','$window','Cus
     $scope.searchName = "";
     $scope.isActiveFilter = 1;
     $scope.ListError = false;
-    
+
     $scope.genders = config.genders;
     $scope.martialStatusList = config.martialStatusList;
     $scope.casteList = config.casteList;
     $scope.natureOfWorks = config.natureOfWorks;
     $scope.bloodGroupList = config.bloodGroupList;
+
+    $scope.AcknowledgementNumber = "";
 
     /* Nominee */
 
@@ -37,14 +39,15 @@ app.controller("BeneficiaryController",['$scope','$http','config','$window','Cus
     /* END : Nominee */
 
     /* Start : upload related code */
-
-    var uploader = $scope.uploader = new FileUploader({
-            url: config.baseUrl+config.uploadRootFolder+"?pathToUpload=upload_1"
-    });
-        
-    $scope.UploadFiles = function(){
-        uploader.uploadAll();
-    } 
+    $scope.uploader = new FileUploader();
+    $scope.InitializeUpload = function(){
+        $scope.uploader = new FileUploader({
+                url: config.baseUrl+config.uploadRootFolder+"?pathToUpload="+$scope.AcknowledgementNumber
+        });
+        $scope.UploadFiles = function(){
+            uploader.uploadAll();
+        } 
+    }
 
     /* End : upload related code */
 
@@ -62,8 +65,10 @@ app.controller("BeneficiaryController",['$scope','$http','config','$window','Cus
         $http.post(config.baseUrl+"/beneficiary/createbeneficiary",$scope.Beneficiary)
         .then(function(response) {  
             if(response.data.status == "success"){
-                $scope.UploadFiles();
-                $window.location.href = config.baseUrl+"/beneficiary/success?id="+response.data.id;
+                //$scope.UploadFiles();
+                $scope.AcknowledgementNumber = response.data.id;
+                $scope.InitializeUpload();
+                //$window.location.href = config.baseUrl+"/beneficiary/success?id="+response.data.id;
             } 
         });
     }

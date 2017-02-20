@@ -91,7 +91,7 @@ $url =  Yii::$app->homeUrl;
     <hr/>
 
     <form class="form-vertical" name="beneficiary" role="form" novalidate ng-submit="Savedata()">
-                <label class="lable-bottom-margin">Personal Details: ಆರ್ಜಿದಾರರ ಹೆಸರು </label><br>
+                <label class="lable-bottom-margin">Personal Details&nbsp;:&nbsp; ವೈಯಕ್ತಿಕ ವಿವರಗಳು </label><br>
                 <div class="row form-group">
                     <label class="control-label col-md-1" for="benf_first_name"><span class="mandatory-field">*&nbsp;</span>First&nbsp;Name ಮೊದಲ&nbsp;ಹೆಸರು </label>
                     <div class="col-md-3">
@@ -112,6 +112,50 @@ $url =  Yii::$app->homeUrl;
                     </div>
                 </div>
                 <div class="row form-group">
+                    <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No</label>
+                    <div class="col-md-3">
+                        <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
+                        <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
+                    </div>
+
+                    <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth</label>
+                    <div class="col-md-3" ng-controller="DatepickerPopupController">
+                        <p class="input-group">
+                            <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_birth" is-open="popup1.opened" name="benf_date_of_birth" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Select date of birth" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                    </div>
+                    <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age</label>
+                    <div class="col-md-3">
+                        <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" required />
+                        <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex</label>
+                    <div class="col-md-3">
+                        <label ng-repeat="item in genders">
+                            <input required type="radio" name="benf_sex" ng-model="Beneficiary.benf_sex" value="{{item.entity_id}}" /> {{item.entity_value}} &nbsp;&nbsp;
+                        </label>
+                        <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select sex</small>
+                    </div>
+
+                    <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality</label>
+                    <div class="col-md-3">
+                        <input letters-only class="form-control" ng-model="Beneficiary.nationality" name="nationality" placeholder="INDIAN" maxlength="25" required />
+                        <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
+                    </div>
+
+                    <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Caste</label>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-options="caste.id as caste.value for caste in casteList" ng-model="Beneficiary.benf_caste"></select>
+                        <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select caste</small>
+                    </div>
+                </div>
+                <div class="row form-group">
                     <label class="control-label col-md-2 stay-left" for="benf_martial_status"><span class="mandatory-field">*&nbsp;</span>Martial&nbsp;Status&nbsp;:&nbsp;</label>
                     <div class="col-md-4">
                         <label ng-repeat="item in martialStatusList">
@@ -129,7 +173,7 @@ $url =  Yii::$app->homeUrl;
                     </div>
                 </div>
 
-                <label class="lable-bottom-margin">Beneficiary Permanent Address: ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
+                <label class="lable-bottom-margin">Beneficiary Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
                 <div class="row form-group">
                     <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Line-1</label>
                     <div class="col-md-3">
@@ -165,54 +209,10 @@ $url =  Yii::$app->homeUrl;
                         <input class="form-control" ng-model="Beneficiary.benf_prmt_address_state" name="address_line2" placeholder="" maxlength="25" required readonly="true" />
                     </div>
                 </div>
-                <div class="row form-group">
-                    <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No</label>
-                    <div class="col-md-3">
-                        <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
-                        <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
-                    </div>
-
-                    <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth</label>
-                    <div class="col-md-3" ng-controller="DatepickerPopupController">
-                        <p class="input-group">
-                            <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_birth" is-open="popup1.opened" name="benf_date_of_birth" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Select date of birth" />
-                            <span class="input-group-btn">
-                              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                        <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
-                    </div>
-                    <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age</label>
-                    <div class="col-md-3">
-                        <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" required />
-                        <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex</label>
-                    <div class="col-md-3 radioButtons">
-                        <label ng-repeat="item in genders">
-                            <input required type="radio" name="benf_sex" ng-model="Beneficiary.benf_sex" value="{{item.entity_id}}" /> {{item.entity_value}} &nbsp;&nbsp;
-                        </label>
-                        <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select sex</small>
-                    </div>
-
-                    <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality</label>
-                    <div class="col-md-3">
-                        <input letters-only class="form-control" ng-model="Beneficiary.nationality" name="nationality" placeholder="INDIAN" maxlength="25" required />
-                        <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
-                    </div>
-
-                    <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Caste</label>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-options="caste.id as caste.value for caste in casteList" ng-model="Beneficiary.benf_caste"></select>
-                        <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select caste</small>
-                    </div>
-                </div>
                 <hr>
 
                 <p class="row">
-                    <label class="col-md-6 stay-left lable-bottom-margin">Beneficiary Local Address: ಆರ್ಜಿದಾರರ ಸ್ಥಳೀಯ ವಿಳಾಸ</label><span class="col-md-3 col-md-offset-3 pull-right"><input type="checkbox" class="" name="" ng-change="toggleSameAsPermanentAddress()" ng-model='Benf.sameAsPermanentAddress'> Same as Permanent Address </span>
+                    <label class="col-md-6 stay-left lable-bottom-margin">Beneficiary Local Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ಸ್ಥಳೀಯ ವಿಳಾಸ</label><span class="col-md-3 col-md-offset-3 pull-right"><input type="checkbox" class="" name="" ng-change="toggleSameAsPermanentAddress()" ng-model='Benf.sameAsPermanentAddress'> Same as Permanent Address </span>
                 </p>
                 <div class="row form-group">
                     <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Line-1</label>
@@ -252,7 +252,7 @@ $url =  Yii::$app->homeUrl;
 
                 <br>
                 <hr>
-                <label class="lable-bottom-margin">Name and address of Present Employer:</label>
+                <label class="lable-bottom-margin">Name and address of Present Employer&nbsp;:&nbsp;</label>
                 <div class="row form-group">
                     <label class="control-label col-md-1" for="employer_full_name"><span class="mandatory-field">*&nbsp;</span>Employer Name</label>
                     <div class="col-md-7">
@@ -265,6 +265,32 @@ $url =  Yii::$app->homeUrl;
                         <select class="form-control" ng-options="caste.id as caste.value for caste in natureOfWorks" ng-model="Beneficiary.benf_nature_of_work"></select>
                         <small class="error" ng-show="beneficiary.benf_nature_of_work.$invalid && beneficiary.benf_nature_of_work.$dirty">Please select Nature of Work</small>
                     </div>
+                </div>
+
+                <div class="row">
+                    <label class="control-label col-md-1" for="benf_date_of_employment"><span class="mandatory-field">*&nbsp;</span>Date&nbsp;of Employment</label>
+                    <div class="col-md-3" ng-controller="DatepickerPopupController">
+                        <p class="input-group">
+                            <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_employment" is-open="popup1.opened" name="benf_date_of_employment" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Employment Date" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <small class="error" ng-show="beneficiary.benf_date_of_employment.$invalid && beneficiary.benf_date_of_employment.$dirty">Please provide date of employment and only acceptable format is DD-MM-YYYY</small>
+                    </div>
+
+                    <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day</label>
+                    <div class="col-md-3">
+                        <input class="form-control" ng-model="Beneficiary.benf_wages_per_day" name="benf_wages_per_day" placeholder="Wages per Day" required ng-value="" ng-change="setWagesPerMonth()" />
+                        <small class="error" ng-show="beneficiary.benf_wages_per_day.$invalid && beneficiary.benf_wages_per_day.$dirty">Please provide applicant wages per day</small>
+                    </div>
+
+                    <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month</label>
+                    <div class="col-md-3">
+                        <input class="form-control" ng-model="Beneficiary.benf_wages_per_month" name="benf_wages_per_month" placeholder="Wages per Month" ng-change="setWagesPerDay()" required />
+                        <small class="error" ng-show="beneficiary.benf_wages_per_month.$invalid && beneficiary.benf_wages_per_month.$dirty">Please provide applicant Age</small>
+                    </div>
+
                 </div>
 
                 <div class="row form-group">
@@ -302,35 +328,9 @@ $url =  Yii::$app->homeUrl;
                         <input class="form-control" ng-model="Beneficiary.emplr_address_state" name="emplr_address_state" placeholder="" maxlength="25" required readonly="true" />
                     </div>
                 </div>
-
-                <div class="row">
-                    <label class="control-label col-md-1" for="benf_date_of_employment"><span class="mandatory-field">*&nbsp;</span>Date&nbsp;of Employment</label>
-                    <div class="col-md-3" ng-controller="DatepickerPopupController">
-                        <p class="input-group">
-                            <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_employment" is-open="popup1.opened" name="benf_date_of_employment" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Employment Date" />
-                            <span class="input-group-btn">
-                              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                        <small class="error" ng-show="beneficiary.benf_date_of_employment.$invalid && beneficiary.benf_date_of_employment.$dirty">Please provide date of employment and only acceptable format is DD-MM-YYYY</small>
-                    </div>
-
-                    <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day</label>
-                    <div class="col-md-3">
-                        <input class="form-control" ng-model="Beneficiary.benf_wages_per_day" name="benf_wages_per_day" placeholder="Wages per Day" required ng-value="" ng-change="setWagesPerMonth()" />
-                        <small class="error" ng-show="beneficiary.benf_wages_per_day.$invalid && beneficiary.benf_wages_per_day.$dirty">Please provide applicant wages per day</small>
-                    </div>
-
-                    <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month</label>
-                    <div class="col-md-3">
-                        <input class="form-control" ng-model="Beneficiary.benf_wages_per_month" name="benf_wages_per_month" placeholder="Wages per Month" ng-change="setWagesPerDay()" required />
-                        <small class="error" ng-show="beneficiary.benf_wages_per_month.$invalid && beneficiary.benf_wages_per_month.$dirty">Please provide applicant Age</small>
-                    </div>
-
-                </div>
                 <!-- BANK Details -->
                 <hr>
-                <label class="lable-bottom-margin">Bank Details : </label>
+                <label class="lable-bottom-margin">Bank Details &nbsp;:&nbsp; </label>
                 <div class="row form-group">
                   <label class="control-label col-md-1" for="benf_bank_account_number"><span class="mandatory-field">*&nbsp;</span>Account Number</label>
                     <div class="col-md-3">
@@ -358,7 +358,7 @@ $url =  Yii::$app->homeUrl;
                         <button type="reset" class="btn btn-danger">Reset</button>
                     </div>
                 </div> -->
-                <button ng-disabled="beneficiary.$invalid" type="button" ng-click="SSavedata()" class="btn btn-primary next-step pull-right">Save and continue</button>
+                <button ng-disabled="beneficiary.$invalid" type="button" ng-click="Savedata()" class="btn btn-primary next-step pull-right">Save and continue</button>
     </form>
 
 
@@ -409,83 +409,56 @@ $url =  Yii::$app->homeUrl;
                     </ul>
                 </div>
 
+<!--   tab 4    tab 4    tab 4    tab 4    tab 4    tab 4    tab 4    tab 4    tab 4    tab 4    tab 4  -->
+       
                 <div class="tab-pane" role="tabpanel" id="step4">
 
                     <h3 align="center">Upload Files</h3>
                     <hr/>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 40px">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Document Name</th>
+                                            <th ng-show="uploader.isHTML5">Size</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td>{{ item.file.name }}</td>
+                                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td nowrap>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="uploader.queue.length < 1">
+                                            <td colspan="4"><p class="text-center" style="color:red">-- Please upload your files here --</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-
-
-
-
-
-
-
-
-  
-
-  <div class="row">
-    <div class="col-md-12" style="margin-bottom: 40px">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th width="50%">Document Name</th>
-                    <th ng-show="uploader.isHTML5">Size</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in uploader.queue">
-                    <td>{{ item.file.name }}</td>
-                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-                    <td nowrap>
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                            <span class="glyphicon glyphicon-trash"></span> Remove
-                        </button>
-                    </td>
-                </tr>
-                <tr ng-if="uploader.queue.length < 1">
-                    <td colspan="4"><p class="text-center" style="color:red">-- Please upload your files here --</p></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-  </div>
-
-    <div class="row"  style="padding-left:1.5%">
-        <!-- <input class="btn btn-success" type="file" nv-file-select="" uploader="uploader" multiple  /><br/> -->
-        <label class="btn btn-success btn-file">
-            Browse <input  type="file" nv-file-select="" uploader="uploader" multiple hidden>
-        </label>
-    </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                        <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                    </ul>
+                        <div class="row"  style="padding-left:1.5%">
+                            <!-- <input class="btn btn-success" type="file" nv-file-select="" uploader="uploader" multiple  /><br/> -->
+                            <label class="btn btn-success btn-file">
+                                Browse <input  type="file" nv-file-select="" uploader="uploader" multiple hidden>
+                            </label>
+                        </div>
+                  
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                            <li><button ng-click="UploadFiles()" type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                        </ul>
                 </div>
 
+<!--   Last Tab   Last Tab   Last Tab   Last Tab   Last Tab   Last Tab   Last Tab   Last Tab   Last Tab   -->
+                
                 <div class="tab-pane" role="tabpanel" id="complete">
 
                     <h3 align="center">Preview and Submit</h3>

@@ -93,7 +93,7 @@ class BeneficiaryController extends FrontendController
     public function actionAllbeneficiaries()
     {
         $beneficiary_details = BeneficiaryMaster::find()
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;
