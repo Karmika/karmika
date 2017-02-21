@@ -16,6 +16,7 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $status;
+    public $mobile;
 
     /**
      * Returns the validation rules for attributes.
@@ -32,13 +33,14 @@ class SignupForm extends Model
                 'message' => 'This username has already been taken.'],
 
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
+            //['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 
                 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
+            ['mobile', 'string', 'max' => 15],
             // use passwordStrengthRule() method to determine password strength
             $this->passwordStrengthRule(),
 
@@ -83,6 +85,7 @@ class SignupForm extends Model
             'username' => Yii::t('app', 'Username'),
             'password' => Yii::t('app', 'Password'),
             'email' => Yii::t('app', 'Email'),
+            'mobile' => Yii::t('app', 'Mobile'),
         ];
     }
 
@@ -99,6 +102,7 @@ class SignupForm extends Model
 
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->mobile = $this->mobile;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->status = $this->status;

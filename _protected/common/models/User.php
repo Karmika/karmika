@@ -34,7 +34,7 @@ class User extends UserIdentity
     {
         return [
             [['username', 'email'], 'filter', 'filter' => 'trim'],
-            [['username', 'email', 'status'], 'required'],
+            [['username', 'status'], 'required'],
             ['email', 'email'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -93,6 +93,7 @@ class User extends UserIdentity
             'username' => Yii::t('app', 'Username'),
             'password' => Yii::t('app', 'Password'),
             'email' => Yii::t('app', 'Email'),
+            'mobile' => Yii::t('app', 'Mobile'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

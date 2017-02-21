@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'username') ?>
             <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'mobile') ?>
             <?= $form->field($model, 'password')->widget(PasswordInput::classname(), []) ?>
 
             <div class="form-group">
