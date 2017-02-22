@@ -35,6 +35,8 @@ use yii\widgets\ActiveForm;
         <?php endforeach ?>
         <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
 
+        <?= $form->field($user, 'location')->dropDownList(array("Bangalore"=>"Bangalore","Mysore"=>"Mysore","Marathahalli"=>"Marathahalli")) ?>
+
     </div>
     </div>
 

@@ -120,7 +120,10 @@ class UserController extends BackendController
             if ($user->status == User::STATUS_ACTIVE && $user->account_activation_token != null) 
             {
                 $user->removeAccountActivationToken();
-            }            
+            }
+            
+            $postData = Yii::$app->request->post();
+            $user->location = $postData['User']['location'];
 
             $user->save(false);
             $role->save(false); 

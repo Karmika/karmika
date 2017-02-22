@@ -94,6 +94,7 @@ class User extends UserIdentity
             'password' => Yii::t('app', 'Password'),
             'email' => Yii::t('app', 'Email'),
             'mobile' => Yii::t('app', 'Mobile'),
+            'location' => Yii::t('app', 'Location'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
