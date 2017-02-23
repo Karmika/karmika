@@ -123,7 +123,8 @@ class UserController extends BackendController
             }
             
             $postData = Yii::$app->request->post();
-            $user->location = $postData['User']['location'];
+            $location = $postData['User']['location'];
+            $user->location = (!empty($location))?implode(",",$location):null;
 
             $user->save(false);
             $role->save(false); 
@@ -174,6 +175,8 @@ class UserController extends BackendController
     {
         if (($model = User::findOne($id)) !== null) 
         {
+            if($model->location != null && !empty($model->location))
+                $model->location = explode(",", $model->location);
             return $model;
         } 
         else 
