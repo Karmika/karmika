@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2017 at 05:55 AM
+-- Generation Time: Feb 24, 2017 at 01:42 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -58,6 +58,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', 3, 1487051249),
 ('member', 2, 1486984733),
 ('member', 4, 1487347713),
+('member', 8, 1487783200),
 ('theCreator', 1, 1486804995);
 
 -- --------------------------------------------------------
@@ -165,20 +166,20 @@ CREATE TABLE `beneficiary_master` (
   `benf_caste` enum('Schedule Caste (SC)','Schedule Tribe (ST)','Other Backward Caste (OBC)','General (Others)') COLLATE latin1_general_ci DEFAULT NULL,
   `benf_martial_status` enum('SINGLE','MARRIED','Widowed','Divorced / Separated') COLLATE latin1_general_ci DEFAULT NULL,
   `benf_blood_group` enum('A+','A-','B+','B-','AB+','AB-','O+','O-') COLLATE latin1_general_ci DEFAULT NULL,
-  `benf_local_address_line1` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
+  `benf_local_address_line1` varchar(175) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_local_address_line2` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_local_address_taluk` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_local_address_district` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_local_address_state` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_local_pincode` mediumint(9) DEFAULT NULL,
-  `benf_prmt_address_line1` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
+  `benf_prmt_address_line1` varchar(175) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_prmt_address_line2` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_prmt_address_taluk` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_prmt_address_district` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_prmt_address_state` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `benf_prmt_address_pincode` mediumint(9) DEFAULT NULL,
   `employer_full_name` varchar(40) COLLATE latin1_general_ci DEFAULT NULL,
-  `emplr_address_line1` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
+  `emplr_address_line1` varchar(175) COLLATE latin1_general_ci DEFAULT NULL,
   `emplr_address_line2` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `emplr_address_taluk` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
   `emplr_address_district` varchar(25) COLLATE latin1_general_ci DEFAULT NULL,
@@ -190,9 +191,9 @@ CREATE TABLE `beneficiary_master` (
   `benf_wages_per_month` int(11) DEFAULT NULL,
   `benf_bank_account_number` int(11) DEFAULT NULL,
   `benf_bank_account_type` enum('SAVINGS','JAN-DAN','CURRENT','') COLLATE latin1_general_ci DEFAULT NULL,
-  `benf_bank_name` int(11) DEFAULT NULL,
-  `benf_bank_branch` int(11) DEFAULT NULL,
-  `benf_bank_ifsc` int(11) DEFAULT NULL,
+  `benf_bank_name` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `benf_bank_branch` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `benf_bank_ifsc` varchar(16) COLLATE latin1_general_ci DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by_user_id` int(11) NOT NULL,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -209,12 +210,35 @@ CREATE TABLE `beneficiary_master` (
 --
 
 INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `benf_last_name`, `benf_mobile_no`, `benf_alternate_mobile_no`, `benf_date_of_birth`, `beneficiary_age`, `benf_sex`, `nationality`, `benf_caste`, `benf_martial_status`, `benf_blood_group`, `benf_local_address_line1`, `benf_local_address_line2`, `benf_local_address_taluk`, `benf_local_address_district`, `benf_local_address_state`, `benf_local_pincode`, `benf_prmt_address_line1`, `benf_prmt_address_line2`, `benf_prmt_address_taluk`, `benf_prmt_address_district`, `benf_prmt_address_state`, `benf_prmt_address_pincode`, `employer_full_name`, `emplr_address_line1`, `emplr_address_line2`, `emplr_address_taluk`, `emplr_address_district`, `emplr_address_state`, `emplr_address_pincode`, `benf_nature_of_work`, `benf_date_of_employment`, `benf_wages_per_day`, `benf_wages_per_month`, `benf_bank_account_number`, `benf_bank_account_type`, `benf_bank_name`, `benf_bank_branch`, `benf_bank_ifsc`, `created_date`, `created_by_user_id`, `updated_date`, `updated_by_user_id`, `benf_application_status`, `benf_acknowledgement_number`, `benf_registration_number`, `benf_registration_old_number`, `admin_comments`) VALUES
-(8, 'Sravan', NULL, 'Kumar', 8892233720, NULL, '1991-07-27', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 06:46:56', 1, '2017-02-17 09:15:21', 1, NULL, NULL, NULL, NULL, NULL),
-(9, 'Prashanth', NULL, 'Rao', 8892233721, NULL, '2017-02-06', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 06:48:19', 1, '2017-02-17 06:48:19', 1, NULL, NULL, NULL, NULL, NULL),
-(10, 'Satheesh', NULL, 'Kumar', 9901523288, NULL, '1991-12-25', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 08:47:59', 1, '2017-02-17 09:09:36', 1, NULL, NULL, NULL, NULL, NULL),
-(11, 'Uday', NULL, 'Kumar', 7799000001, NULL, '2017-02-01', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 15:49:59', 1, '2017-02-18 01:57:13', 3, NULL, NULL, NULL, NULL, NULL),
-(12, 'Sreenath', NULL, 'S', 313213131, NULL, '2017-02-07', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 18:05:10', 3, '2017-02-17 18:05:10', 3, NULL, NULL, NULL, NULL, NULL),
-(13, 'SRavam', NULL, 'Test', 1111112222, NULL, '2017-01-31', NULL, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 18:10:54', 3, '2017-02-17 18:10:54', 3, NULL, NULL, NULL, NULL, NULL);
+(8, 'Sravan', NULL, 'Kumar', 8892233720, NULL, '1991-07-27', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 06:46:56', 1, '2017-02-18 14:02:42', 1, NULL, NULL, NULL, NULL, NULL),
+(9, 'Prashanth', NULL, 'Rao', 8892233721, NULL, '2017-02-06', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 06:48:19', 1, '2017-02-18 14:02:45', 1, NULL, NULL, NULL, NULL, NULL),
+(10, 'Satheesh', NULL, 'Kumar', 9901523288, NULL, '1991-12-25', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 08:47:59', 1, '2017-02-18 14:02:48', 1, NULL, NULL, NULL, NULL, NULL),
+(11, 'Uday', NULL, 'Kumar', 7799000001, NULL, '2017-02-01', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 15:49:59', 1, '2017-02-18 14:02:51', 3, NULL, NULL, NULL, NULL, NULL),
+(12, 'Sreenath', NULL, 'S', 313213131, NULL, '2017-02-07', NULL, 'MALE', 'INDIAN', NULL, 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 18:05:10', 3, '2017-02-18 14:02:53', 3, NULL, NULL, NULL, NULL, NULL),
+(13, 'SRavam', NULL, 'Test', 1111112222, NULL, '2017-01-31', NULL, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-17 18:10:54', 3, '2017-02-18 14:02:57', 3, NULL, NULL, NULL, NULL, NULL),
+(21, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-18 14:18:07', 1, '2017-02-18 14:18:07', 1, 'APPLIED', 'BNG000000001', NULL, '', NULL),
+(22, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-18 14:18:07', 1, '2017-02-18 14:18:07', 1, 'APPLIED', 'BNG000000001', NULL, '', NULL),
+(27, 'Sravan', 'Kumar', 'Vanteru', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 04:43:54', 1, '2017-02-19 04:43:54', 1, 'APPLIED', 'BNG000000002', NULL, '', NULL),
+(28, 'Sravan', 'Kumar', 'V', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 04:46:22', 1, '2017-02-19 04:46:22', 1, 'APPLIED', 'BNG000000003', NULL, '', NULL),
+(29, 'Uday', 'Kumar', 'A', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 04:51:14', 1, '2017-02-19 04:51:14', 1, 'APPLIED', 'BNG000000004', NULL, '', NULL),
+(30, 'Satheesh', 'Kumar', 'A', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 04:52:16', 3, '2017-02-19 04:52:16', 3, 'APPLIED', 'BNG000000005', NULL, '', NULL),
+(31, 'Files', 'Check', 'Check', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 04:59:18', 3, '2017-02-19 04:59:18', 3, 'APPLIED', 'BNG000000006', NULL, '', NULL),
+(32, 'Srava-v', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 05:48:29', 3, '2017-02-19 05:48:29', 3, 'APPLIED', 'BNG000000007', NULL, '', NULL),
+(33, 'Sravan-II', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-19 06:47:38', 3, '2017-02-19 06:47:38', 3, 'APPLIED', 'BNG000000008', NULL, '', NULL),
+(34, 'Sravan ---', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 05:54:36', 1, '2017-02-20 05:54:36', 1, 'APPLIED', 'BNG000000009', NULL, '', NULL),
+(35, 'Sravan Test', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 05:59:40', 1, '2017-02-20 05:59:40', 1, 'APPLIED', 'BNG000000010', NULL, '', NULL),
+(36, 'Sravan test--', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 06:00:45', 1, '2017-02-20 06:00:45', 1, 'APPLIED', 'BNG000000011', NULL, '', NULL),
+(37, 'Sravan S', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 06:02:53', 1, '2017-02-20 06:02:53', 1, 'APPLIED', 'BNG000000012', NULL, '', NULL),
+(38, 'Sravan V', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 06:03:39', 1, '2017-02-20 06:03:39', 1, 'APPLIED', 'BNG000000013', NULL, '', NULL),
+(39, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 08:06:05', 3, '2017-02-20 08:06:05', 3, 'APPLIED', 'BNG000000014', NULL, '', NULL),
+(40, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 08:26:27', 3, '2017-02-20 08:26:27', 3, 'APPLIED', 'BNG000000015', NULL, '', NULL),
+(41, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 08:28:07', 3, '2017-02-20 08:28:07', 3, 'APPLIED', 'BNG000000016', NULL, '', NULL),
+(42, 'Prashanth -', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 11:54:15', 3, '2017-02-20 11:54:15', 3, 'APPLIED', 'BNG000000017', NULL, '', NULL),
+(43, 'Sravannnnn', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 11:57:04', 3, '2017-02-20 11:57:04', 3, 'APPLIED', 'BNG000000018', NULL, '', NULL),
+(44, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 12:01:25', 3, '2017-02-20 12:01:25', 3, 'APPLIED', 'BNG000000019', NULL, '', NULL),
+(45, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 12:09:03', 3, '2017-02-20 12:09:03', 3, 'APPLIED', 'BNG000000020', NULL, '', NULL),
+(46, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 13:42:29', 3, '2017-02-20 13:42:29', 3, 'APPLIED', 'BNG000000021', NULL, '', NULL),
+(47, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, NULL, '1', '3', NULL, '2017-02-20 13:45:04', 3, '2017-02-20 13:45:04', 3, 'APPLIED', 'BNG000000022', NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -352,22 +376,8 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('1r0b9j703cal9p2vkhdg20val0', 1487355390, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('391a64336llci2gu3ha8d8emu2', 1487124243, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('6k2hbesr7cuhlqv0c7uc0karv6', 1487383413, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('9nlf4sl2g1tcj60htgroinsjd3', 1487355390, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('cm8hqbvh6fpalp5a3tfdntq9k4', 1487124242, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('gfm6qutb059sj9p8uelrt7v026', 1487124242, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('hab55ib7hskj7unpkr29d3bu96', 1487332902, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('hvg08navdtb1s8bhap2imknhk4', 1487356573, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32303a222f6b61726d696b612f62656e6566696369617279223b5f5f69647c693a333b),
-('kk2o5j8o6l9j5g44dkambbjh35', 1487355390, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('kuad4u89v0735la7hdb3iujcp4', 1487383413, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('lq7sgjkh6vd4mgd7c01k61drl4', 1487383413, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('objt358spmcc9tc19nmu28umq2', 1487311489, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('qoni076684nib9s1i7lnbqr151', 1487311489, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('r6eqbg61f11mkrj96r97lar9m4', 1487395062, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b),
-('s8tavs83qc0eru8s81gd8587v4', 1487387894, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('tibmf6uuihfk43jno42f3ehda7', 1487124242, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b);
+('ineooh9ot15431gr8fshtvssv4', 1487929196, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
+('oc04rhirl8ahnbk0etq6r9kge4', 1487826947, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b);
 
 -- --------------------------------------------------------
 
@@ -379,6 +389,8 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -392,10 +404,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `status`, `auth_key`, `password_reset_token`, `account_activation_token`, `created_at`, `updated_at`) VALUES
-(1, 'superadmin', 'sravan.vanteru@gmail.com', '$2y$13$XrAQa1pKdeKMzeO3Zb8ojetshkajpmDjJnOP0mF74oc94Ok2E6EC2', 10, 'fCVnB_lk4CpmN-gBqKYarK_koxnheAkW', NULL, NULL, 1486804995, 1486804995),
-(3, 'sravan', 'sravan@sravan.com', '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1487347143),
-(4, 'prashanth', 'prashanth100@gmail.com', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1487347713);
+INSERT INTO `user` (`id`, `username`, `email`, `mobile`, `location`, `password_hash`, `status`, `auth_key`, `password_reset_token`, `account_activation_token`, `created_at`, `updated_at`) VALUES
+(1, 'superadmin', 'sravan.vanteru@gmail.com', NULL, NULL, '$2y$13$XrAQa1pKdeKMzeO3Zb8ojetshkajpmDjJnOP0mF74oc94Ok2E6EC2', 10, 'fCVnB_lk4CpmN-gBqKYarK_koxnheAkW', NULL, NULL, 1486804995, 1486804995),
+(3, 'sravan', 'sravan@sravan.com', NULL, NULL, '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1487347143),
+(4, 'prashanth', 'prashanth100@gmail.com', NULL, 'Mysore,Marathahalli', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1487811550),
+(8, 'don', '', '', 'Bangalore', '$2y$13$PJqyY6OIHyHTYtK1FimAAeHkX2tnA2y9Boss2xlhupvveYnW.JgCS', 10, 'YtnDoxjA_e8tq7C7H-ppWjcDarFmKSrL', NULL, NULL, 1487783200, 1487812192);
 
 --
 -- Indexes for dumped tables
@@ -507,7 +520,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `beneficiary_master`
 --
 ALTER TABLE `beneficiary_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `benf_attachments`
 --
@@ -522,7 +535,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --
