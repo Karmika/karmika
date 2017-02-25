@@ -11,20 +11,14 @@ $this->title = Yii::t('app', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <div class="col-lg-5 well bs-component">
-
         <p><?= Yii::t('app', 'Please fill out the following fields to signup:') ?></p>
-
         <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
             <?= $form->field($model, 'username') ?>
             <?= $form->field($model, 'email') ?>
             <?= $form->field($model, 'mobile') ?>
-            <?= $form->field($model, 'password')->widget(PasswordInput::classname(), []) ?>
-
+            <?= $form->field($model, 'password')->passwordInput() ?>
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
@@ -36,6 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i>*<?= Yii::t('app', 'We will send you an email with account activation link.') ?></i>
             </div>
         <?php endif ?>
-
+    </div>
+    <div class="col-lg-6 col-lg-offset-1 well bs-component" style="border:1px dotted black;">
+        <div class="col-md-12">
+            The Content area for the instructions at sign-up page.
+        </div>
     </div>
 </div>

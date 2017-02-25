@@ -41,5 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
 
     </div>
-  
+    <div class="col-lg-6 col-lg-offset-1 well bs-component" style="border:1px dotted black;">
+        <div class="col-md-12">
+            The Content area for the instructions at login page.
+        </div>
+    </div>
 </div>
