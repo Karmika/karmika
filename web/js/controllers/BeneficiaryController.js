@@ -77,8 +77,11 @@ app.controller("BeneficiaryController",['$scope','$http','config','$window','Cus
         $window.location.href = config.baseUrl+"/beneficiary/update?id="+id;
     }
 
+    $scope.ViewBeneficiary = function(id){
+        $window.location.href = config.baseUrl+"/beneficiary/view?id="+id;
+    }
+
     $scope.Beneficiary = {
-        "benf_application_status" :'APPLIED',
         "benf_registration_number": "",
         "benf_registration_old_number" : "",
         "benf_acknowledgement_number" : "",
@@ -238,3 +241,40 @@ app.controller("BeneficiarySuccessController",['$scope','CustomService',
 
 }]);
 
+
+
+
+
+
+
+
+//Beneficiary Success Controller
+app.controller("BeneficiaryDetailsController",['$scope','CustomService','config','$http','$window',
+    function ($scope,CustomService,config,$http,$window) {    
+
+    $scope.Beneficiary = {};
+
+    var id = CustomService.getParameterByName('id');
+    $http.post(config.baseUrl+"/beneficiary/getbeneficiary",{"id":id})
+    .then(function(response) {
+        if(response.data.benf_date_of_birth != null) response.data.benf_date_of_birth = new Date(response.data.benf_date_of_birth);
+        $scope.Beneficiary = response.data;
+    });
+
+    $scope.Approve = function(){
+        if($scope.Beneficiary.actionRequired)
+        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id})
+        .then(function(response) {
+            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
+        });
+    }
+
+    $scope.Reject = function(){
+        if($scope.Beneficiary.actionRequired)
+        $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id})
+        .then(function(response) {
+            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
+        });
+    }
+
+}]);

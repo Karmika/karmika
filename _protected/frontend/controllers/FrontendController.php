@@ -29,7 +29,7 @@ class FrontendController extends Controller
                         'controllers' => ['article','beneficiary'],
                         'actions' => ['index', 'view', 'create', 'update', 'delete', 'admin','allbeneficiaries',
                                         'createbeneficiary','getbeneficiary','updatebeneficiary','success',
-                                        'sample'],
+                                        'sample','approvebeneficiary','rejectbeneficiary'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],

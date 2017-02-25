@@ -60,6 +60,10 @@
           <a href="#" ng-click="orderByField='updated_by'; reverseSort = !reverseSort">
           Updated&nbsp;By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
+        <th>
+          <a href="#" ng-click="orderByField='benf_application_status'; reverseSort = !reverseSort">
+          Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+        </th>
         <?php if($IsAdmin){?>
         <th>
           View
@@ -79,6 +83,7 @@
         <td>{{beneficiary.benf_sex}}</td>
         <td>{{beneficiary.benf_martial_status}}</td>
         <td>{{beneficiary.updated_by}}</td>
+        <td>{{beneficiary.benf_application_status}}</td>
         <?php if($IsAdmin){?>
           <td>
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)">view</a>

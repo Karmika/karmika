@@ -45,9 +45,9 @@ use Yii;
  * @property integer $benf_wages_per_month
  * @property integer $benf_bank_account_number
  * @property string $benf_bank_account_type
- * @property integer $benf_bank_name
- * @property integer $benf_bank_branch
- * @property integer $benf_bank_ifsc
+ * @property string $benf_bank_name
+ * @property string $benf_bank_branch
+ * @property string $benf_bank_ifsc
  * @property string $created_date
  * @property integer $created_by_user_id
  * @property string $updated_date
@@ -74,12 +74,15 @@ class BeneficiaryMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['benf_mobile_no', 'benf_alternate_mobile_no', 'beneficiary_age', 'benf_local_pincode', 'benf_prmt_address_pincode', 'emplr_address_pincode', 'benf_wages_per_day', 'benf_wages_per_month', 'benf_bank_account_number', 'benf_bank_name', 'benf_bank_branch', 'benf_bank_ifsc', 'created_by_user_id', 'updated_by_user_id'], 'integer'],
+            [['benf_mobile_no', 'benf_alternate_mobile_no', 'beneficiary_age', 'benf_local_pincode', 'benf_prmt_address_pincode', 'emplr_address_pincode', 'benf_wages_per_day', 'benf_wages_per_month', 'benf_bank_account_number', 'created_by_user_id', 'updated_by_user_id'], 'integer'],
             [['benf_date_of_birth', 'benf_date_of_employment', 'created_date', 'updated_date'], 'safe'],
             [['benf_sex', 'benf_caste', 'benf_martial_status', 'benf_blood_group', 'benf_nature_of_work', 'benf_bank_account_type', 'benf_application_status', 'benf_acknowledgement_number', 'admin_comments'], 'string'],
             [['created_by_user_id', 'updated_by_user_id'], 'required'],
-            [['benf_first_name', 'benf_middle_name', 'benf_last_name', 'nationality', 'benf_local_address_line1', 'benf_local_address_line2', 'benf_local_address_taluk', 'benf_local_address_district', 'benf_local_address_state', 'benf_prmt_address_line1', 'benf_prmt_address_line2', 'benf_prmt_address_taluk', 'benf_prmt_address_district', 'benf_prmt_address_state', 'emplr_address_line1', 'emplr_address_line2', 'emplr_address_taluk', 'emplr_address_district', 'emplr_address_state'], 'string', 'max' => 25],
+            [['benf_first_name', 'benf_middle_name', 'benf_last_name', 'nationality', 'benf_local_address_line2', 'benf_local_address_taluk', 'benf_local_address_district', 'benf_local_address_state', 'benf_prmt_address_line2', 'benf_prmt_address_taluk', 'benf_prmt_address_district', 'benf_prmt_address_state', 'emplr_address_line2', 'emplr_address_taluk', 'emplr_address_district', 'emplr_address_state'], 'string', 'max' => 25],
+            [['benf_local_address_line1', 'benf_prmt_address_line1', 'emplr_address_line1'], 'string', 'max' => 175],
             [['employer_full_name'], 'string', 'max' => 40],
+            [['benf_bank_name', 'benf_bank_branch'], 'string', 'max' => 50],
+            [['benf_bank_ifsc'], 'string', 'max' => 16],
             [['benf_registration_number', 'benf_registration_old_number'], 'string', 'max' => 35],
             [['benf_registration_number', 'benf_registration_old_number'], 'unique', 'targetAttribute' => ['benf_registration_number', 'benf_registration_old_number'], 'message' => 'The combination of Benf Registration Number and Benf Registration Old Number has already been taken.'],
         ];

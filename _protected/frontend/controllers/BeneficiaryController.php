@@ -18,6 +18,10 @@ use frontend\models\Services;
 class BeneficiaryController extends FrontendController
 {
     public $LoggedInUser;
+    public $AppliedStatus = "APPLIED";
+    public $ApproveStatus = "APPROVED";
+    public $RejectedStatus = "REJECTED";
+
 	public function beforeAction($action) {
 	    $this->enableCsrfValidation = false;
         if(Yii::$app->user->isGuest) $this->LoggedInUser = 0;
@@ -55,6 +59,7 @@ class BeneficiaryController extends FrontendController
         $model = new BeneficiaryMaster();
         $data["created_by_user_id"] = $this->LoggedInUser;
         $data["updated_by_user_id"] = $this->LoggedInUser;
+        $data["benf_application_status"] = $this->AppliedStatus;
         $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
         $model->attributes = $data;
         //print_r($model->validate());echo "<br>";
@@ -75,6 +80,7 @@ class BeneficiaryController extends FrontendController
             ->where(['id' => $data['id']])
             ->one();
             $result = ArrayHelper::toArray($beneficiary_details,'*');
+            $result['actionRequired'] = ($result['benf_application_status'] == $this->AppliedStatus)?true:false;
         }
         return json_encode($result);
     }
@@ -90,10 +96,31 @@ class BeneficiaryController extends FrontendController
         return "failed";
     }
 
+    public function actionApprovebeneficiary()
+    {
+        $post = file_get_contents("php://input");
+        return $this->UpdateBeneficiaryStatus($post,$this->ApproveStatus);
+    }
+
+    public function actionRejectbeneficiary()
+    {
+        $post = file_get_contents("php://input");
+        return $this->UpdateBeneficiaryStatus($post,$this->RejectedStatus);
+    }
+    private function UpdateBeneficiaryStatus($post,$status){
+        $data = json_decode($post, true);
+        $model = BeneficiaryMaster::findOne($data['id']);
+        $data["benf_application_status"] = $status;
+        $data["updated_by_user_id"] = $this->LoggedInUser;
+        $model->attributes = $data;
+        if($model->update()) return "success";
+        return "failed";
+    }
+
     public function actionAllbeneficiaries()
     {
         $beneficiary_details = BeneficiaryMaster::find()
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;

@@ -42,7 +42,14 @@ small.error, span.error {
   margin-top:1%;
   font-size:18px;
 }
-
+.cursorPointer{
+  cursor:pointer;
+}
+.subHeading{
+  border-bottom: 1px solid #adebad;
+  padding-bottom:10px;
+  color:#3c763d
+}
 /*Beneficiary Controller*/
 
 .BeneficiaryCtrl h3{

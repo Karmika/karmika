@@ -82,7 +82,7 @@ app.constant('config', {
               "benf_martial_status": "SINGLE",
               "benf_blood_group": "A+",
               "benf_bank_account_number": "010101010101",
-              "benf_bank_name": 1,
-              "benf_bank_branch": 3
+              "benf_bank_name": "ICIC Bank",
+              "benf_bank_branch": "ECity Bangalore"
             }
 });
