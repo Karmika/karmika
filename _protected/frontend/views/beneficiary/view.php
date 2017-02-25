@@ -237,7 +237,7 @@
 	    <form class="form-vertical" name="Admin" role="form" novalidate ng-show="Beneficiary.actionRequired">
 			<div class="form-group">
 				<label for="comment">Comments :</label>
-				<textarea ng-model="adminComments" name="adminComments" class="form-control" rows="3" id="adminComments"></textarea>
+				<textarea ng-model="adminComments" name="adminComments" class="form-control" rows="3" id="adminComments" required ></textarea>
 				<small class="error" ng-show="Admin.adminComments.$invalid && Admin.adminComments.$dirty">Please provide comments</small>
 			</div>
 			<ul class="list-inline pull-right">
