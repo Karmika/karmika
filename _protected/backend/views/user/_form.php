@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
         <?php endforeach ?>
         <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
 
-        <?= $form->field($user, 'location')->ListBox(array("Bangalore"=>"Bangalore","Mysore"=>"Mysore","Marathahalli"=>"Marathahalli"),array('multiple' => 'multiple')); ?> 
+        <?= $form->field($user, 'location')->ListBox(array("Bangalore South"=>"Bangalore South","Bangalore North"=>"Bangalore North"),array('multiple' => 'multiple')); ?> 
 
     </div>
     </div>
