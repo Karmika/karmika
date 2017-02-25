@@ -111,6 +111,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
+        $data["admin_comments"] = $data['adminComments'];
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
         if($model->update()) return "success";
