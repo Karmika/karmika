@@ -9,6 +9,11 @@ app.constant('config', {
             {id: "Other Backward Caste (OBC)", 'value': 'Other Backward Caste (OBC)' }, 
             {id: "General (Others)", 'value': 'General (Others)' }, 
             ],
+    accountTypeList : [
+            {id: "SAVINGS", 'value': 'SAVINGS' }, 
+            {id: "JAN-DAN", 'value': 'JAN-DAN' }, 
+            {id: "CURRENT", 'value': 'CURRENT' }, 
+            ],      
     natureOfWorks : [
             {id: 'MASON', value : 'MASON'},
             {id: 'BARBENDING', value : 'BARBENDING'},
@@ -59,7 +64,7 @@ app.constant('config', {
               "benf_prmt_address_district": "Bangalore",
               "benf_prmt_address_state": "KARNATAKA",
               "benf_mobile_no": "8892233720",
-              "benf_date_of_birth": "1991-07-26T18:30:00.000Z",
+              "benf_date_of_birth": new Date("1991-07-26"),
               "beneficiary_age": 25,
               "benf_sex": "MALE",
               "benf_local_address_line1": "Bangalore",
@@ -76,13 +81,14 @@ app.constant('config', {
               "emplr_address_taluk": "Bangalore North",
               "emplr_address_district": "Bangalore",
               "emplr_address_state": "KARNATAKA",
-              "benf_date_of_employment": "2014-02-07T18:30:00.000Z",
+              "benf_date_of_employment": new Date("2014-02-07"),
               "benf_wages_per_day": "100",
               "benf_wages_per_month": 3000,
               "benf_martial_status": "SINGLE",
               "benf_blood_group": "A+",
               "benf_bank_account_number": "010101010101",
               "benf_bank_name": "ICIC Bank",
-              "benf_bank_branch": "ECity Bangalore"
+              "benf_bank_branch": "ECity Bangalore",
+              "benf_bank_account_type":"SAVINGS"
             }
 });

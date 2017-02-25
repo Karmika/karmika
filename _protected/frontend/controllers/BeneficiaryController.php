@@ -135,6 +135,7 @@ class BeneficiaryController extends FrontendController
             $result[$key]["updated_by"] = $user["username"];
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
+            $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
         }
         return json_encode($result);
         $result = array(0=>array("full_name"=>"Sravan Kumar","benf_mobile_no"=>"8892233720","benf_date_of_birth"=>"27/07/1991",

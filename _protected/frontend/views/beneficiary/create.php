@@ -274,12 +274,20 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_bank_account_number.$invalid && beneficiary.benf_bank_account_number.$dirty">Please provide bank account Number</small>
                                 </div>
 
+                                <label class="control-label col-md-1" for="benf_bank_account_type"><span class="mandatory-field">*&nbsp;</span>Account Type</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" ng-options="type.id as type.value for type in accountTypeList" ng-model="Beneficiary.benf_bank_account_type"></select>
+                                    <small class="error" ng-show="beneficiary.benf_bank_account_type.$invalid && beneficiary.benf_bank_account_type.$dirty">Please provide bank account type</small>
+                                </div>
+
                                 <label class="control-label col-md-1" for="benf_bank_name"><span class="mandatory-field">*&nbsp;</span>Bank </label>
                                 <div class="col-md-3">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_name" name="benf_bank_name" placeholder="Bank Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_bank_name.$invalid && beneficiary.benf_bank_name.$dirty">Please provide Bank name</small>
                                 </div>
+                            </div>
 
+                            <div class="row form-group">
                                 <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch </label>
                                 <div class="col-md-3">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
@@ -555,7 +563,16 @@ $url =  Yii::$app->homeUrl;?>
                                         <br>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                &nbsp;&nbsp;<b>21 )  Bank Name  <span class="pull-right WordsLeftStyle">:</b>
+                                                &nbsp;&nbsp;<b>21 )  Account Type  <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                {{Beneficiary.benf_bank_account_type}}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                &nbsp;&nbsp;<b>22 )  Bank Name  <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
                                             <div class="col-sm-6">
                                                 {{Beneficiary.benf_bank_name}}
@@ -564,7 +581,7 @@ $url =  Yii::$app->homeUrl;?>
                                         <br>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                &nbsp;&nbsp;<b>22 ) Branch Name  <span class="pull-right WordsLeftStyle">:</b>
+                                                &nbsp;&nbsp;<b>23 ) Branch Name  <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
                                             <div class="col-sm-6">
                                                 {{Beneficiary.benf_bank_branch}}

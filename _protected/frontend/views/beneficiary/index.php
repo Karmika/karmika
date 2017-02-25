@@ -34,11 +34,11 @@
         <th>No.</th>
         <th>
           <a href="#" ng-click="orderByField='full_name'; reverseSort = !reverseSort">
-          Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Acknowledgement&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_acknowledgement_number'; reverseSort = !reverseSort">
-          Acknowledgement&nbsp;No </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_mobile_no'; reverseSort = !reverseSort">
@@ -75,9 +75,10 @@
       <tr dir-paginate="beneficiary in AllBeneficiaries | filter : { full_name: searchName } | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
         <td>{{beneficiary.sno}}</td>
         <td>{{beneficiary.benf_acknowledgement_number}}</td>
-        <td>
+        <td ng-show="beneficiary.actionRequired">
           <a class="nameLink" ng-click="updateBeneficiary(beneficiary.id)">{{beneficiary.full_name}}</a>
         </td>
+        <td ng-show="!beneficiary.actionRequired">{{beneficiary.full_name}}</td>
         <td>{{beneficiary.benf_mobile_no}}</td>
         <td>{{beneficiary.benf_date_of_birth}}</td>
         <td>{{beneficiary.benf_sex}}</td>

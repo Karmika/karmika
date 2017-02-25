@@ -13,6 +13,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.genders = config.genders;
         $scope.martialStatusList = config.martialStatusList;
         $scope.casteList = config.casteList;
+        $scope.accountTypeList = config.accountTypeList;
         $scope.natureOfWorks = config.natureOfWorks;
         $scope.bloodGroupList = config.bloodGroupList;
 
