@@ -1,7 +1,5 @@
 <?php
-    $userType = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
-    //print_r($userType);exit;
-    $IsAdmin = 1;//($userType['name'] == 'theCreator' || $userType['name'] == 'admin' )? 1:0;
+
     $this->title = 'Beneficiary Details';
 ?>
 <div class="BeneficiaryCtrl" ng-cloak ng-controller="BeneficiaryController">

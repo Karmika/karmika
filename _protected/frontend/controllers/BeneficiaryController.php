@@ -18,19 +18,34 @@ use frontend\models\Services;
 class BeneficiaryController extends FrontendController
 {
     public $LoggedInUser;
+    public $LoggedInUserRole;
+    public $UserIdentity;
+    public $IsAdmin;
     public $AppliedStatus = "APPLIED";
     public $ApproveStatus = "APPROVED";
     public $RejectedStatus = "REJECTED";
+    public $AdminRole = "admin";
+    public $TheCreatorRole = "theCreator";
+    public $MemberRole = "member";
 
 	public function beforeAction($action) {
 	    $this->enableCsrfValidation = false;
         if(Yii::$app->user->isGuest) $this->LoggedInUser = 0;
         else $this->LoggedInUser = (string)Yii::$app->user->identity->id;
+
+        $userDetails = Yii::$app->authManager->getRolesByUser($this->LoggedInUser);
+        if(isset($userDetails[$this->TheCreatorRole])) $this->LoggedInUserRole = $this->TheCreatorRole;
+        else if(isset($userDetails[$this->AdminRole])) $this->LoggedInUserRole = $this->AdminRole;
+        else if(isset($userDetails[$this->MemberRole])) $this->LoggedInUserRole = $this->MemberRole;
+        else $this->LoggedInUserRole = "";
+
+        $this->UserIdentity = Yii::$app->user->identity;
+        $this->IsAdmin = ($this->LoggedInUserRole == $this->AdminRole || $this->LoggedInUserRole == $this->TheCreatorRole)?1:0;
 	    return parent::beforeAction($action);
 	}
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index',array('IsAdmin' => $this->IsAdmin));
     }
     public function actionCreate()
     {
@@ -120,7 +135,21 @@ class BeneficiaryController extends FrontendController
 
     public function actionAllbeneficiaries()
     {
+        $Conditions = ['id' => ""];
+
+        switch ($this->LoggedInUserRole) {
+            case $this->TheCreatorRole:
+            case $this->AdminRole:
+                $locations = ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
+                $Conditions = ['in','benf_local_address_taluk',$locations];
+                break;
+            case $this->MemberRole:
+                $Conditions = ['created_by_user_id' => $this->LoggedInUser];
+                break;
+        }
+
         $beneficiary_details = BeneficiaryMaster::find()
+        ->where($Conditions)
         ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
         ->orderBy(['id' => SORT_DESC])
         ->all();

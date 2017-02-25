@@ -34,6 +34,14 @@ class FrontendController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
+                        'controllers' => ['beneficiary'],
+                        'actions' => ['index','create','allbeneficiaries', 'createbeneficiary',
+                                    'getbeneficiary','updatebeneficiary','success'
+                                    ],
+                        'allow' => true,
+                        'roles' => ['member'],
+                    ],
+                    [
                         'controllers' => ['article'],
                         'actions' => ['create', 'update', 'admin'],
                         'allow' => true,
