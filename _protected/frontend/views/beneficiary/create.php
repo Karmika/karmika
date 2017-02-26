@@ -337,8 +337,8 @@ $url =  Yii::$app->homeUrl;?>
                                 <small class="error" ng-show='!nominee.nominee_full_name'>Please provide nominee name</small>
                             </div>
                             <div class="col-md-3">
-                                <textarea name='NomineeForm.address{{$index}}' class="form-control" ng-model='nominee.address' required></textarea>
-                                <small class="error" ng-show="!nominee.address">Please provide nominee address</small>
+                                <textarea name='NomineeForm.nominee_address{{$index}}' class="form-control" ng-model='nominee.nominee_address' required></textarea>
+                                <small class="error" ng-show="!nominee.nominee_address">Please provide nominee address</small>
                             </div>
                             <div class="col-md-2">
                                 <p class="input-group" ng-controller="DatepickerPopupController">
@@ -364,6 +364,68 @@ $url =  Yii::$app->homeUrl;?>
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="NomineeForm.$invalid" >Save and continue</button></li>
+                        </ul>
+                        </form>
+
+
+                        <!-- HELP -->
+                        <h4>Dependents List</h4>
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-3">
+                                <label>Dependent Full Name<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Dependent Address<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>DOB</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Age<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Relation with Beneficiary<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Edit</label>
+                            </div>
+                        </div>
+                        <form role='form' name="DependentForm" novalidate class="form-vertical table table-bordered table-compressed">
+                        <div class="row" ng-repeat="dependent in DependentsList" style="margin:0.5rem;">
+                            <div class="col-md-3">
+                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='dependent.depnt_full_name' name="DependentForm.depnt_full_name+$index" placeholder="Full Name"  maxlength="100" required />
+                                <small class="error" ng-show='!dependent.depnt_full_name'>Please provide dependent name</small>
+                            </div>
+                            <div class="col-md-3">
+                                <textarea name='DependentForm.depnt_address{{$index}}' class="form-control" ng-model='dependent.depnt_address' required></textarea>
+                                <small class="error" ng-show="!dependent.depnt_address">Please provide dependent address</small>
+                            </div>
+
+                            <!-- TO BE DONE -->
+                            <div class="col-md-2">
+                                <p class="input-group" ng-controller="DatepickerPopupController">
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="nominee.nominee_dob" is-open="popup1.opened" name="DependentForm.nominee_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
+                                    <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+                                </p>
+                                <small class="error" ng-show="DependentForm.nominee_dob.$invalid && DependentForm.nominee_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                            </div>
+                            <div class="col-md-1">
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_age" name="DependentForm.nominee_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,nominee.nominee_age,'Nominee')" required />
+                                <small class="error" ng-show="DependentForm.nominee_age.$invalid && DependentForm.nominee_age.$dirty">Please provide nominee Age</small>
+                            </div>
+                            <div class="col-md-1">
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="DependentForm.nominee_share" placeholder="% share" ng-change='changedPercentage($index)' required />
+                                <small class="error" ng-show="DependentForm.nominee_share.$invalid && DependentForm.nominee_share.$dirty">Please provide percentage share</small>
+                            </div>
+                            <div class="col-md-2" style="text-align: right;">
+                                <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
+                                <button class="btn btn-danger" ng-click="deleteNominee()" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+                        </div>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                            <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="DependentForm.$invalid" >Save and continue</button></li>
                         </ul>
                         </form>
                     </div>

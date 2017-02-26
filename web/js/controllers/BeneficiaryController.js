@@ -82,6 +82,21 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         /* END : Nominee */
 
+        /*  Dependents  */
+        $scope.DependentsList = [];
+        $scope.insertDependent = function() {
+            var dependent = {
+                "depnt_full_name" : '',
+                "depnt_address" : '',
+                "depnt_age" : '',
+                "depnt_dob" : '',
+                "depnt_relationship_with_benf" : ''
+            };
+            $scope.DependentsList.push(dependent);
+        };
+        $scope.insertDependent();
+
+        /*  End  Dependents  */
         /* Start : upload related code */
         $scope.uploader = new FileUploader();
         $scope.InitializeUpload = function() {
@@ -116,6 +131,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     }
                 });
         }
+
 
         $scope.updateBeneficiary = function(id) {
             $window.location.href = config.baseUrl + "/beneficiary/update?id=" + id;
