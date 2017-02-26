@@ -30,6 +30,7 @@ $url =  Yii::$app->homeUrl;?>
                         <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Preview and Submit"><span class="round-tab"><i class="glyphicon glyphicon-ok"></i> Preview and Submit</span>
                         </a>
                     </li>
+                    <li ng-show="AcknowledgementNumber" style="float:right;padding-top:10px;" class="text-success"><b>Acknowledgement No : {{AcknowledgementNumber}}</b></li>
                 </ul>
             </div>
 
@@ -447,21 +448,21 @@ $url =  Yii::$app->homeUrl;?>
                                     <thead>
                                         <tr>
                                             <th width="50%">Document Name</th>
-                                            <th ng-show="uploader.isHTML5">Size</th>
+                                            <th>Size</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="item in uploader.queue">
-                                            <td>{{ item.file.name }}</td>
-                                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                        <tr ng-repeat="item in AllUploads">
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.size/1024/1024|number:2 }} MB</td>
                                             <td nowrap>
-                                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                            <span class="glyphicon glyphicon-trash"></span> Remove
-                                        </button>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList($index)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                                </button>
                                             </td>
                                         </tr>
-                                        <tr ng-if="uploader.queue.length < 1">
+                                        <tr ng-if="AllUploads.length < 1">
                                             <td colspan="4">
                                                 <p class="text-center" style="color:red">-- Please upload your files here --</p>
                                             </td>
@@ -472,13 +473,13 @@ $url =  Yii::$app->homeUrl;?>
                         </div>
 
                         <div class="row" style="padding-left:1.5%">
-                            <!-- <input class="btn btn-success" type="file" nv-file-select="" uploader="uploader" multiple  /><br/> -->
-                            <label class="btn btn-success btn-file">Browse <input  type="file" nv-file-select="" uploader="uploader" multiple hidden></label>
+                            <input id="myFile" class="col-sm-2" type="file" file-model="myFile" />
+                            <button class="col-sm-2" ng-click="UploadFile()">Upload</button>
                         </div>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button ng-click="UploadFiles()" type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">

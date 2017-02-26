@@ -1,6 +1,6 @@
 //Beneficiary Controller
-app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window', 'CustomService', 'FileUploader',
-    function($scope, $http, config, $window, CustomService, FileUploader) {
+app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window', 'CustomService', 'fileUpload',
+    function($scope, $http, config, $window, CustomService, fileUpload) {
 
         // for Index page   
         $scope.orderByField = '';
@@ -98,15 +98,24 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         /*  End  Dependents  */
         /* Start : upload related code */
-        $scope.uploader = new FileUploader();
-        $scope.InitializeUpload = function() {
-            $scope.uploader = new FileUploader({
-                url: config.baseUrl + config.uploadRootFolder + "?pathToUpload=" + $scope.AcknowledgementNumber
+
+        $scope.AllUploads = [];
+
+        $scope.getFiles = function(){
+            $http.get(config.retrieveUrl+"?pathToRetrieve="+$scope.AcknowledgementNumber)
+                .then(function(response) {
+                    $scope.AllUploads = response.data;
             });
-            $scope.UploadFiles = function() {
-                uploader.uploadAll();
-            }
         }
+
+        // $scope.RemoveFromList = function(index){
+        //     $scope.AllUploads.splice(index, 1);
+        // }
+
+        $scope.UploadFile = function(){
+            fileUpload.uploadFileToUrl($scope.myFile, config.uploadUrl, $scope.AcknowledgementNumber);
+            //$scope.getFiles();
+        };
 
         /* End : upload related code */
 
@@ -125,9 +134,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 .then(function(response) {
                     $scope.form1submitted = false;
                     if (response.data.status == "success") {
-                        //$scope.UploadFiles();
                         $scope.AcknowledgementNumber = response.data.id;
-                        $scope.InitializeUpload();
                     }
                 });
         }

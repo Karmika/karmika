@@ -1,8 +1,8 @@
-var app = angular.module('app',['ui.router','ngAnimate', 'ui.bootstrap','angularUtils.directives.dirPagination','angularFileUpload']);
+var app = angular.module('app',['ui.router','ngAnimate', 'ui.bootstrap','angularUtils.directives.dirPagination']);
 app.constant('config', {
     baseUrl: "/karmika",
-    uploadRootFolder : "/web/others/upload.php",
-
+    uploadUrl : "/karmika/web/others/upload.php",
+    retrieveUrl : "/karmika/web/others/retrieveFiles.php",
     casteList: [
             {id: "Schedule Caste (SC)", 'value': 'Schedule Caste (SC)' }, 
             {id: "Schedule Tribe (ST)", 'value': 'Schedule Tribe (ST)' }, 

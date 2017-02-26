@@ -3,11 +3,17 @@
 if ( !empty( $_FILES ) ) {
 
     $tempPath = $_FILES[ 'file' ][ 'tmp_name' ];
-    $uploadPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR .'docs'. DIRECTORY_SEPARATOR. $_GET['pathToUpload'] . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+    $uploadPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR .'docs'. DIRECTORY_SEPARATOR . $_POST['pathToUpload'];
 
-    move_uploaded_file( $tempPath, $uploadPath );
+	if (!file_exists($uploadPath)) {
+		mkdir($uploadPath, 0777, true);
+	}
+	
+	$fullUploadpath = $uploadPath. DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
 
-    $answer = array( 'answer' => 'File transfer completed' );
+    move_uploaded_file( $tempPath, $fullUploadpath );
+
+    $answer = array( 'answer' => 'File transfer completed');
     $json = json_encode( $answer );
 
     echo $json;
