@@ -20,22 +20,65 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.AcknowledgementNumber = "";
 
         /* Nominee */
-
-        var individualNominee = {
-            "nominee_full_name": '',
-            "nominee_address": '',
-            "nominee_age": '',
-            "nominee_dob": '',
-            "nominee_share": 0
-        };
         $scope.NomineeList = [];
-        $scope.insertNominee = function() {
-            var nomineeObj;
-            angular.copy(nomineeObj, individualNominee);
-            $scope.NomineeList.push(nomineeObj);
-        };
+        $scope.insertNominee = function(idx) {
+            var individualNominee = {
+                "nominee_full_name": '',
+                "nominee_address": '',
+                "nominee_age": '',
+                "nominee_dob": '',
+                "nominee_share": 100
+            };
+            $scope.NomineeList.push(individualNominee);
 
-        $scope.insertNominee();
+            if(idx>=0){
+                $scope.changedPercentage(idx);
+            }
+        };
+        $scope.insertNominee(-1);
+        $scope.deleteNominee = function(index){
+            $scope.NomineeList.splice(index, 1);
+        }
+        $scope.calculateAgeForNominee = function(index){
+            $scope.NomineeList[index].nominee_age = CustomService.calculateAge(new Date($scope.NomineeList[index].nominee_dob));
+        };
+        $scope.percentage = 100;
+        $scope.presentShare = 0;
+        $scope.changedPercentage = function(idx){
+            $scope.presentShare = 0;
+            for(var i in $scope.NomineeList){
+                $scope.presentShare = parseFloat($scope.NomineeList[i].nominee_share) + $scope.presentShare;
+                console.log($scope.presentShare, i)
+            }
+            // for(var i in $scope.NomineeList){
+            //     if($scope.presentShare < $scope.percentage){
+            //         $scope.NomineeList[i].nominee_share = $scope.presentShare - 100;
+            //     }
+            //     else if($scope.presentShare > $scope.percentage){
+            //         $scope.NomineeList[i].nominee_share = $scope.presentShare - 100;
+            //         $scope.clearNextNomineeShareRecords(i, $scope.presentShare);
+            //         break;
+            //     }else if($scope.presentShare == $scope.percentage){
+            //         if($scope.NomineeList[i+1]){
+            //             $scope.clearNextNomineeShareRecords(i, $scope.presentShare);
+            //         }
+            //     }
+            // }
+        };
+        $scope.clearNextNomineeShareRecords = function(idx, presentPercentage){
+            for(var i = idx+1; i<$scope.NomineeList.length; i++){
+                $scope.NomineeList[i].nominee_share = 0;
+            }
+        }
+
+        $scope.setUnknownDOBbyAge = function(index, age, field){
+            if(field === 'Nominee'){
+                $scope.NomineeList[index].nominee_dob = CustomService.getDateForAge(age);
+            }
+            else if( field === 'Beneficiary'){
+                $scope.Beneficiary.benf_date_of_birth = CustomService.getDateForAge(age);   
+            }
+        };
 
         /* END : Nominee */
 
@@ -63,8 +106,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         });
         $scope.form1submitted = false;
         $scope.Savedata = function() {
-            // alert('being saved');
-            // return;
             $http.post(config.baseUrl + "/beneficiary/createbeneficiary", $scope.Beneficiary)
                 .then(function(response) {
                     $scope.form1submitted = false;

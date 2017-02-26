@@ -77,7 +77,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                                 <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age</label>
                                 <div class="col-md-3">
-                                    <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" required />
+                                    <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" ng-change ="setUnknownDOBbyAge('',Beneficiary.beneficiary_age,'Beneficiary')" required />
                                     <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
                                 </div>
                             </div>
@@ -94,10 +94,10 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Caste</label>
+                                <label class="control-label col-md-1" for="benf_caste"><span class="mandatory-field">*&nbsp;</span>Caste</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-options="caste.id as caste.value for caste in casteList" ng-model="Beneficiary.benf_caste"></select>
-                                    <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select caste</small>
+                                    <small class="error" ng-show="beneficiary.benf_caste.$invalid && beneficiary.benf_caste.$dirty">Please select caste</small>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -308,11 +308,64 @@ $url =  Yii::$app->homeUrl;?>
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <h3 align="center">Nominee and Dependents</h3>
                         <hr/>
+
+                        <h4>Nominee List</h4>
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-3">
+                                <label>Nominee Full Name<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Nominee Address<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>DOB</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Age<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-1">
+                                <label>% Share<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Edit</label>
+                            </div>
+                        </div>
+                        <form role='form' name="NomineeForm" novalidate class="form-vertical table table-bordered table-compressed">
+                        <div class="row" ng-repeat="nominee in NomineeList" style="margin:0.5rem;">
+                            <div class="col-md-3">
+                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='nominee.nominee_full_name' name="NomineeForm.fullname+$index" placeholder="Full Name"  maxlength="100" required />
+                                <small class="error" ng-show='!nominee.nominee_full_name'>Please provide nominee name</small>
+                            </div>
+                            <div class="col-md-3">
+                                <textarea name='NomineeForm.address{{$index}}' class="form-control" ng-model='nominee.address' required></textarea>
+                                <small class="error" ng-show="!nominee.address">Please provide nominee address</small>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="input-group" ng-controller="DatepickerPopupController">
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="nominee.nominee_dob" is-open="popup1.opened" name="NomineeForm.nominee_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
+                                    <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+                                </p>
+                                <small class="error" ng-show="NomineeForm.nominee_dob.$invalid && NomineeForm.nominee_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                            </div>
+                            <div class="col-md-1">
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_age" name="NomineeForm.nominee_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,nominee.nominee_age,'Nominee')" required />
+                                <small class="error" ng-show="NomineeForm.nominee_age.$invalid && NomineeForm.nominee_age.$dirty">Please provide nominee Age</small>
+                            </div>
+                            <div class="col-md-1">
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="NomineeForm.nominee_share" placeholder="% share" ng-change='changedPercentage($index)' required />
+                                <small class="error" ng-show="NomineeForm.nominee_share.$invalid && NomineeForm.nominee_share.$dirty">Please provide percentage share</small>
+                            </div>
+                            <div class="col-md-2" style="text-align: right;">
+                                <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
+                                <button class="btn btn-danger" ng-click="deleteNominee()" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+                        </div>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="NomineeForm.$invalid" >Save and continue</button></li>
                         </ul>
+                        </form>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
                         <h3 align="center">Employment Certificate</h3>

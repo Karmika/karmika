@@ -79,6 +79,12 @@ app.service('CustomService',['$http','config', function($http,config) {
           return year + '-' + month + '-' + date;
         }
       };
+      this.getDateForAge = function(age){
+        var d = new Date();
+        var year = d.getFullYear();
+        d.setFullYear(year - age);
+        return d;
+      };
 
       this.getObjectById = function (entity_id,type) {
         var returnObj = {};
