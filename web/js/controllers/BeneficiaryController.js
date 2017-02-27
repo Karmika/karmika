@@ -1,6 +1,6 @@
 //Beneficiary Controller
-app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window', 'CustomService', 'fileUpload',
-    function($scope, $http, config, $window, CustomService, fileUpload) {
+app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window', 'CustomService', 'fileUpload','$timeout',
+    function($scope, $http, config, $window, CustomService, fileUpload, $timeout) {
 
         // for Index page   
         $scope.orderByField = '';
@@ -111,6 +111,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             console.log($scope.NomineeList, 'NOMINEE');
             console.log($scope.DependentsList, "Dependents");
         };
+        
         /* Start : upload related code */
 
         $scope.AllUploads = [];
@@ -121,13 +122,16 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             });
         }
 
-        // $scope.RemoveFromList = function(index){
-        //     $scope.AllUploads.splice(index, 1);
-        // }
+        $scope.RemoveFromList = function(file){
+            $http.get(config.deleteUrl+"?pathToDelete="+$scope.AcknowledgementNumber+"/"+file)
+                .then(function(response) {
+                    if(response.data) $scope.getFiles();
+            });
+        }
 
         $scope.UploadFile = function(){
             fileUpload.uploadFileToUrl($scope.myFile, config.uploadUrl, $scope.AcknowledgementNumber);
-            //$scope.getFiles();
+            $timeout(function () { $scope.getFiles();$("#myFile").val(null); }, 1000);
         };
 
         /* End : upload related code */

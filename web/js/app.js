@@ -3,6 +3,7 @@ app.constant('config', {
     baseUrl: "/karmika",
     uploadUrl : "/karmika/web/others/upload.php",
     retrieveUrl : "/karmika/web/others/retrieveFiles.php",
+    deleteUrl : "/karmika/web/others/delete.php",
     casteList: [
             {id: "Schedule Caste (SC)", 'value': 'Schedule Caste (SC)' }, 
             {id: "Schedule Tribe (ST)", 'value': 'Schedule Tribe (ST)' }, 

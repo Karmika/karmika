@@ -447,17 +447,17 @@ $url =  Yii::$app->homeUrl;?>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th width="50%">Document Name</th>
-                                            <th>Size</th>
+                                            <th width="70%">Document Name</th>
+                                            <!-- <th>Size</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in AllUploads">
-                                            <td>{{ item.name }}</td>
-                                            <td>{{ item.size/1024/1024|number:2 }} MB</td>
+                                            <td>{{ item }}</td>
+                                            <!-- <td>{{ item.size/1024/1024|number:2 }} MB</td> -->
                                             <td nowrap>
-                                                <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList($index)">
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList(item)">
                                                     <span class="glyphicon glyphicon-trash"></span> Remove
                                                 </button>
                                             </td>

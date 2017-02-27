@@ -10,7 +10,7 @@ if(is_dir($dir)){
             }
         }
     }
-    echo json_encode($return_array);
 }
+echo json_encode($return_array);
 
 ?>
