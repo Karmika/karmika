@@ -30,7 +30,7 @@ $url =  Yii::$app->homeUrl;?>
                         <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Preview and Submit"><span class="round-tab"><i class="glyphicon glyphicon-ok"></i> Preview and Submit</span>
                         </a>
                     </li>
-                    <li ng-show="AcknowledgementNumber" style="float:right;padding-top:10px;" class="text-success"><b>Acknowledgement No : {{AcknowledgementNumber}}</b></li>
+                    <!-- <li ng-show="AcknowledgementNumber" style="float:right;padding-top:10px;" class="text-success"><b>Acknowledgement No : {{AcknowledgementNumber}}</b></li> -->
                 </ul>
             </div>
 
@@ -102,14 +102,13 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-2 stay-left" for="benf_martial_status"><span class="mandatory-field">*&nbsp;</span>Martial&nbsp;Status&nbsp;:&nbsp;</label>
-                                <div class="col-md-4">
+                                <label class="control-label col-md-1 stay-left" for="benf_martial_status"><span class="mandatory-field">*&nbsp;</span>Martial &nbsp; Status&nbsp;:</label>
+                                <div class="col-md-5 grey-border">
                                     <label ng-repeat="item in martialStatusList"><input required type="radio" name="benf_martial_status" ng-model="Beneficiary.benf_martial_status" value="{{item.entity_id}}" class="" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_martial_status.$invalid && beneficiary.benf_martial_status.$dirty">Please select Maritial Status</small>
                                 </div>
-
-                                <label class="control-label col-md-2" for="benf_blood_group"><span class="mandatory-field">*&nbsp;</span>Blood&nbsp;Group&nbsp;:&nbsp;</label>
-                                <div class="col-md-4">
+                                <label class="control-label col-md-1" for="benf_blood_group"><span class="mandatory-field">*&nbsp;</span>Blood &nbsp;Group&nbsp;:&nbsp;</label>
+                                <div class="col-md-5 grey-border">
                                     <label ng-repeat="item in bloodGroupList"><input required type="radio" name="benf_blood_group" ng-model="Beneficiary.benf_blood_group" value="{{item.entity_id}}" class="" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_blood_group.$invalid && beneficiary.benf_blood_group.$dirty">Please select Blood Group</small>
                                 </div>
@@ -358,13 +357,13 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                             <div class="col-md-2" style="text-align: right;">
                                 <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
-                                <button class="btn btn-danger" ng-click="deleteNominee()" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
                             </div>
                         </div>
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="NomineeForm.$invalid" >Save and continue</button></li>
+                            <!-- <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
+                            <!-- <li><button type="button" class="btn btn-success btn-info-full" ng-disabled="NomineeForm.$invalid" >Save Dependents</button></li> -->
                         </ul>
                         </form>
 
@@ -384,10 +383,10 @@ $url =  Yii::$app->homeUrl;?>
                             <div class="col-md-1">
                                 <label>Age<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label>Relation with Beneficiary<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label>Edit</label>
                             </div>
                         </div>
@@ -402,31 +401,32 @@ $url =  Yii::$app->homeUrl;?>
                                 <small class="error" ng-show="!dependent.depnt_address">Please provide dependent address</small>
                             </div>
 
-                            <!-- TO BE DONE -->
                             <div class="col-md-2">
                                 <p class="input-group" ng-controller="DatepickerPopupController">
-                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="nominee.nominee_dob" is-open="popup1.opened" name="DependentForm.nominee_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="dependent.depnt_dob" is-open="popup1.opened" name="DependentForm.depnt_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
                                     <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                 </p>
-                                <small class="error" ng-show="DependentForm.nominee_dob.$invalid && DependentForm.nominee_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                                <small class="error" ng-show="DependentForm.depnt_dob.$invalid && DependentForm.depnt_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                             </div>
                             <div class="col-md-1">
-                                <input class="form-control" numerics-only ng-model="nominee.nominee_age" name="DependentForm.nominee_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,nominee.nominee_age,'Nominee')" required />
-                                <small class="error" ng-show="DependentForm.nominee_age.$invalid && DependentForm.nominee_age.$dirty">Please provide nominee Age</small>
+                                <input class="form-control" numerics-only ng-model="dependent.depnt_age" name="DependentForm.depnt_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,dependent.depnt_age,'Dependents')" required />
+                                <small class="error" ng-show="DependentForm.depnt_age.$invalid && DependentForm.depnt_age.$dirty">Please provide depnt_age Age</small>
                             </div>
-                            <div class="col-md-1">
-                                <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="DependentForm.nominee_share" placeholder="% share" ng-change='changedPercentage($index)' required />
-                                <small class="error" ng-show="DependentForm.nominee_share.$invalid && DependentForm.nominee_share.$dirty">Please provide percentage share</small>
+                            <div class="col-md-2">
+                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="depnt_age.depnt_relationship_with_benf" name="DependentForm.depnt_relationship_with_benf" placeholder="Relation" maxlength="25" required />
+                                <small class="error" ng-show="DependentForm.depnt_relationship_with_benf.$invalid && DependentForm.depnt_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
                             </div>
-                            <div class="col-md-2" style="text-align: right;">
-                                <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
-                                <button class="btn btn-danger" ng-click="deleteNominee()" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                            <div class="col-md-1" style="text-align: right;">
+                                <div class="row">
+                                    <button class="col-md-5 btn btn-default" ng-click="insertDependent($index)"><i class="glyphicon glyphicon-user"></i></button>
+                                    <button class="col-md-offset-1 col-md-5 btn btn-danger" ng-click="deleteDependent($index)" ng-show='DependentsList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                                </div>
                             </div>
                         </div>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="DependentForm.$invalid" >Save and continue</button></li>
+                            <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="DependentForm.$invalid || NomineeForm.$invalid" ng-click='saveNomineeAndDependents()' >Save and continue</button></li>
                         </ul>
                         </form>
                     </div>
@@ -768,6 +768,9 @@ $url =  Yii::$app->homeUrl;?>
 <style type="text/css">
     body {
         /*font-size: 12px;*/
+    }
+    .grey-border{
+        border:1px dotted grey;
     }
 </style>
 <script src="<?=$url?>web/js/references/jQuery/jquery.js"></script>

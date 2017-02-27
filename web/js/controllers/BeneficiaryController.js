@@ -76,13 +76,19 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 $scope.NomineeList[index].nominee_dob = CustomService.getDateForAge(age);
             }
             else if( field === 'Beneficiary'){
-                $scope.Beneficiary.benf_date_of_birth = CustomService.getDateForAge(age);   
+                $scope.Beneficiary.benf_date_of_birth = CustomService.getDateForAge(age);
+            }else if(field === 'Dependents'){
+                $scope.DependentsList[index].depnt_dob = CustomService.getDateForAge(age);
             }
         };
+
 
         /* END : Nominee */
 
         /*  Dependents  */
+        $scope.calculateAgeForNominee = function(index){
+            $scope.DependentsList[index].depnt_age = CustomService.calculateAge(new Date($scope.DependentsList[index].depnt_dob));
+        };
         $scope.DependentsList = [];
         $scope.insertDependent = function() {
             var dependent = {
@@ -95,12 +101,19 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $scope.DependentsList.push(dependent);
         };
         $scope.insertDependent();
+        $scope.deleteDependent = function(index){
+            $scope.DependentsList.splice(index, 1);
+        }
 
         /*  End  Dependents  */
+        $scope.saveNomineeAndDependents = function(){
+            alert('SAVING Data');
+            console.log($scope.NomineeList, 'NOMINEE');
+            console.log($scope.DependentsList, "Dependents");
+        };
         /* Start : upload related code */
 
         $scope.AllUploads = [];
-
         $scope.getFiles = function(){
             $http.get(config.retrieveUrl+"?pathToRetrieve="+$scope.AcknowledgementNumber)
                 .then(function(response) {

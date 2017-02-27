@@ -31,6 +31,7 @@ app.constant('config', {
             ],
     martialStatusList:[
             {"entity_id":"SINGLE","entity_value":"Single"},
+            {"entity_id":"MARRIED","entity_value":"Married"},
             {"entity_id":"Widowed","entity_value":"Widowed"},
             {"entity_id":"Divorced / Separated","entity_value":"Divorced / Separated"}
             ],
