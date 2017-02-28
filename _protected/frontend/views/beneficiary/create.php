@@ -710,17 +710,68 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
 
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="panel-heading cursorPointer">Nominee and Dependents<span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="panel-heading cursorPointer"><b>Nominee and Dependents</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
+                                        <b>Nominee List : </b><br><br>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Age</th>
+                                                    <th>Date Of Birth</th>
+                                                    <th>Share</th>
+                                                    <th>Address</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="nominee in NomineeList">
+                                                    <td>{{ nominee.nominee_full_name }}</td>
+                                                    <td>{{ nominee.nominee_age }}</td>
+                                                    <td>{{ nominee.nominee_dob | date }}</td>
+                                                    <td>{{ nominee.nominee_share }}</td>
+                                                    <td>{{ nominee.nominee_address }}</td>
+                                                </tr>
+                                                <tr ng-if="NomineeList.length < 1">
+                                                    <td colspan="5">
+                                                        <p class="text-center" style="color:red">-- empty nominees --</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
-
+                                        <b>Dependents List : </b><br><br>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Age</th>
+                                                    <th>Date Of Birth</th>
+                                                    <th>Relation</th>
+                                                    <th>Address</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="dependent in DependentsList">
+                                                    <td>{{ dependent.depnt_full_name }}</td>
+                                                    <td>{{ dependent.depnt_age }}</td>
+                                                    <td>{{ dependent.depnt_dob | date }}</td>
+                                                    <td>{{ dependent.depnt_relationship_with_benf }}</td>
+                                                    <td>{{ dependent.depnt_address }}</td>
+                                                </tr>
+                                                <tr ng-if="DependentsList.length < 1">
+                                                    <td colspan="5">
+                                                        <p class="text-center" style="color:red">-- empty dependents --</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading cursorPointer">Employment Certificate<span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading cursorPointer"><b>Employment Certificate</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -730,7 +781,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
 
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer">Uploaded Files<span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -739,14 +790,12 @@ $url =  Yii::$app->homeUrl;?>
                                         <thead>
                                             <tr>
                                                 <th width="70%">Document Name</th>
-                                                <!-- <th>Size</th> -->
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="item in AllUploads">
                                                 <td>{{ item }}</td>
-                                                <!-- <td>{{ item.size/1024/1024|number:2 }} MB</td> -->
                                                 <td nowrap>
                                                     <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList(item)">
                                                         <span class="glyphicon glyphicon-trash"></span> Remove
@@ -755,7 +804,7 @@ $url =  Yii::$app->homeUrl;?>
                                             </tr>
                                             <tr ng-if="AllUploads.length < 1">
                                                 <td colspan="4">
-                                                    <p class="text-center" style="color:red">-- Please upload your files here --</p>
+                                                    <p class="text-center" style="color:red">-- No files uploaded--</p>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -23,6 +23,7 @@ class BeneficiaryController extends FrontendController
     public $LoggedInUserRole;
     public $UserIdentity;
     public $IsAdmin;
+    public $DraftStatus = "DRAFT";
     public $AppliedStatus = "APPLIED";
     public $ApproveStatus = "APPROVED";
     public $RejectedStatus = "REJECTED";
