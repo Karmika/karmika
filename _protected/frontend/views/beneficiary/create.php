@@ -413,7 +413,7 @@ $url =  Yii::$app->homeUrl;?>
                                 <small class="error" ng-show="DependentForm.depnt_age.$invalid && DependentForm.depnt_age.$dirty">Please provide depnt_age Age</small>
                             </div>
                             <div class="col-md-2">
-                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="depnt_age.depnt_relationship_with_benf" name="DependentForm.depnt_relationship_with_benf" placeholder="Relation" maxlength="25" required />
+                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="dependent.depnt_relationship_with_benf" name="DependentForm.depnt_relationship_with_benf" placeholder="Relation" maxlength="25" required />
                                 <small class="error" ng-show="DependentForm.depnt_relationship_with_benf.$invalid && DependentForm.depnt_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
                             </div>
                             <div class="col-md-1" style="text-align: right;">
@@ -733,19 +733,35 @@ $url =  Yii::$app->homeUrl;?>
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer">Uploaded Files<span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <table class="table" style="margin-bottom:0px;">
-                                            <tbody>
-                                                <tr>
-                                                    <th ng-repeat="header in UploadHeaders">{{header.name}}</th>
-                                                </tr>
-                                                <tr ng-repeat="item in AllUploads">
-                                                    <td>{{item.order}}</td>
-                                                    <td>{{item.Actions}}</td>
-                                                    <td>{{item.file}}</td>
-                                                    <td>{{item.designation}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="70%">Document Name</th>
+                                                <!-- <th>Size</th> -->
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in AllUploads">
+                                                <td>{{ item }}</td>
+                                                <!-- <td>{{ item.size/1024/1024|number:2 }} MB</td> -->
+                                                <td nowrap>
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList(item)">
+                                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="AllUploads.length < 1">
+                                                <td colspan="4">
+                                                    <p class="text-center" style="color:red">-- Please upload your files here --</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
                                     </div>
                                 </div>
                             </div>

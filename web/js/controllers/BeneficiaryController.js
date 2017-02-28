@@ -18,6 +18,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.bloodGroupList = config.bloodGroupList;
 
         $scope.AcknowledgementNumber = "";
+        $scope.master_id = "";
 
         /* Nominee */
         $scope.NomineeList = [];
@@ -107,9 +108,12 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         /*  End  Dependents  */
         $scope.saveNomineeAndDependents = function(){
-            alert('SAVING Data');
-            console.log($scope.NomineeList, 'NOMINEE');
-            console.log($scope.DependentsList, "Dependents");
+            $http.post(config.baseUrl + "/beneficiary/createnominee", {"nomineeList":$scope.NomineeList,"master_id":$scope.master_id})
+                .then(function(response) {
+                });
+            $http.post(config.baseUrl + "/beneficiary/createdependents", {"dependentsList":$scope.DependentsList,"master_id":$scope.master_id})
+                .then(function(response) {
+                });
         };
         
         /* Start : upload related code */
@@ -151,7 +155,8 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 .then(function(response) {
                     $scope.form1submitted = false;
                     if (response.data.status == "success") {
-                        $scope.AcknowledgementNumber = response.data.id;
+                        $scope.AcknowledgementNumber = response.data.anumber;
+                        $scope.master_id = response.data.id;
                     }
                 });
         }

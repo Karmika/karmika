@@ -8,6 +8,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use frontend\models\BeneficiaryMaster;
+use frontend\models\BenfNominee;
+use frontend\models\BenfDependents;
 use frontend\models\Publication;
 use common\models\User;
 use frontend\models\Services;
@@ -80,7 +82,7 @@ class BeneficiaryController extends FrontendController
         //print_r($model->validate());echo "<br>";
         //echo "<pre>";print_r($model->getErrors());exit;
         //print_r($model->save());exit;
-        if($model->save()) return json_encode(array("status"=>"success","id"=>$data['benf_acknowledgement_number']));
+        if($model->save()) return json_encode(array("status"=>"success","anumber"=>$data['benf_acknowledgement_number'],"id"=>$model->id));
         return json_encode(array("status"=>"failed"));
     }
  
@@ -171,4 +173,32 @@ class BeneficiaryController extends FrontendController
             "benf_sex"=>"Male","benf_martial_status"=>"Single","updated_by"=>"Superadmin"));
         return json_encode($result);
     } 
+
+    public function actionCreatenominee()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        foreach ($data['nomineeList'] as $nominee) {
+            $model = new BenfNominee();
+            $nominee["benf_master_id"] = $data['master_id'];
+            $nominee["last_updated_by_user_id"] = $this->LoggedInUser;
+            $model->attributes = $nominee;
+            $model->save();
+        }
+        return json_encode(array("status"=>"success"));
+    }
+
+    public function actionCreatedependents()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        foreach ($data['dependentsList'] as $dependent) {
+            $model = new BenfDependents();
+            $dependent["benf_master_id"] = $data['master_id'];
+            $dependent["last_updated_by_user_id"] = $this->LoggedInUser;
+            $model->attributes = $dependent;
+            $model->save();
+        }
+        return json_encode(array("status"=>"success"));
+    }
 }
