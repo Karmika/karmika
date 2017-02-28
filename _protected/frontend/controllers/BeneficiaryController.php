@@ -77,13 +77,26 @@ class BeneficiaryController extends FrontendController
         $model = new BeneficiaryMaster();
         $data["created_by_user_id"] = $this->LoggedInUser;
         $data["updated_by_user_id"] = $this->LoggedInUser;
-        $data["benf_application_status"] = $this->AppliedStatus;
+        $data["benf_application_status"] = $this->DraftStatus;
         $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
         $model->attributes = $data;
         //print_r($model->validate());echo "<br>";
         //echo "<pre>";print_r($model->getErrors());exit;
         //print_r($model->save());exit;
         if($model->save()) return json_encode(array("status"=>"success","anumber"=>$data['benf_acknowledgement_number'],"id"=>$model->id));
+        return json_encode(array("status"=>"failed"));
+    }
+
+    public function actionSubmitbeneficiary()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $model = BeneficiaryMaster::findOne($data['id']);
+        $data["updated_by_user_id"] = $this->LoggedInUser;
+        $data["benf_application_status"] = $this->AppliedStatus;
+        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
+        $model->attributes = $data;
+        if($model->update()) return json_encode(array("status"=>"success","rnumber"=>$data['benf_registration_number']));
         return json_encode(array("status"=>"failed"));
     }
  

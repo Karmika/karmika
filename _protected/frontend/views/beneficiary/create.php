@@ -819,7 +819,7 @@ $url =  Yii::$app->homeUrl;?>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save As Draft</button></li>
-                            <li><button ng-click="print()" type="button" class="btn btn-primary btn-info-full next-step">Submit</button></li>
+                            <li><button ng-click="SubmitBeneficiary()" type="button" class="btn btn-primary btn-info-full next-step">Submit</button></li>
                         </ul>
                     </div>
                     <div class="clearfix"></div>

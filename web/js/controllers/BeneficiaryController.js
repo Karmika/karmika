@@ -161,6 +161,15 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 });
         }
 
+        $scope.SubmitBeneficiary = function() {
+            $http.post(config.baseUrl + "/beneficiary/submitbeneficiary", {"id":$scope.master_id})
+                .then(function(response) {
+                    if (response.data.status == "success") {
+                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + response.data.rnumber;
+                    }
+                });
+        }
+
 
         $scope.updateBeneficiary = function(id) {
             $window.location.href = config.baseUrl + "/beneficiary/update?id=" + id;

@@ -41,6 +41,21 @@ class Services extends Model
         return $StringLetters.$result['benf_acknowledgement_number'];
     }
 
+    public function GetNewBeneficiaryRegistrationNumber()
+    {
+        $arry = BeneficiaryMaster::find()
+        ->select(['id','benf_registration_number'])
+        ->where(['id' => BeneficiaryMaster::find()->max('id')])
+        ->one();
+        if(count($arry) < 1) return "0000000001";
+        $result = ArrayHelper::toArray($arry,'id','benf_registration_number');
+        $result['benf_registration_number'] += 1;
+        while(strlen($result['benf_registration_number']) != 9){
+            $result['benf_registration_number'] = "0".$result['benf_registration_number'];
+        }
+        return $result['benf_registration_number'];
+    }
+
     public function ExecuteSQLQuery($query)
     {        
         $connection = Yii::$app->getDb();
