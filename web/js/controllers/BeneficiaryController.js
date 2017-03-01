@@ -16,6 +16,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.accountTypeList = config.accountTypeList;
         $scope.natureOfWorks = config.natureOfWorks;
         $scope.bloodGroupList = config.bloodGroupList;
+        $scope.IdentityCardTypeList = config.IdentityCardTypeList;
 
         $scope.AcknowledgementNumber = "";
         $scope.master_id = "";

@@ -113,6 +113,18 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_blood_group.$invalid && beneficiary.benf_blood_group.$dirty">Please select Blood Group</small>
                                 </div>
                             </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 stay-left" for="benf_identity_card_type"><span class="mandatory-field">*&nbsp;</span>Identity&nbsp;card&nbsp;Type&nbsp;:</label>
+                                <div class="col-md-3">
+                                    <select name="benf_identity_card_type" class="form-control" ng-model="Beneficiary.benf_identity_card_type" ng-options="cardType.id as cardType.value for cardType in IdentityCardTypeList" ></select>
+                                    <small class="error" ng-show="beneficiary.benf_identity_card_type.$invalid && beneficiary.benf_identity_card_type.$dirty">Please select card type</small>
+                                </div>
+                                <label class="control-label col-md-2" for="benf_identity_card_number"><span class="mandatory-field">*&nbsp;</span>&nbsp;Card&nbsp;number&nbsp;:&nbsp;</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" ng-model="Beneficiary.benf_identity_card_number" name="benf_identity_card_number" placeholder="Enter card number" required />
+                                    <small class="error" ng-show="beneficiary.benf_identity_card_number.$invalid && beneficiary.benf_identity_card_number.$dirty">Please enter card number </small>
+                                </div>
+                            </div>
 
                             <label class="lable-bottom-margin">Beneficiary Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
                             <div class="row form-group">
@@ -311,7 +323,7 @@ $url =  Yii::$app->homeUrl;?>
 
                         <h4>Nominee List</h4>
                         <div class="row" style="text-align:center;">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Nominee Full Name<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-3">
@@ -327,12 +339,15 @@ $url =  Yii::$app->homeUrl;?>
                                 <label>% Share<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
+                                <label>Relation with Beneficiary<span class="mandatory-field">*&nbsp;</span></label>
+                            </div>
+                            <div class="col-md-1">
                                 <label>Edit</label>
                             </div>
                         </div>
                         <form role='form' name="NomineeForm" novalidate class="form-vertical table table-bordered table-compressed">
                         <div class="row" ng-repeat="nominee in NomineeList" style="margin:0.5rem;">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='nominee.nominee_full_name' name="NomineeForm.fullname+$index" placeholder="Full Name"  maxlength="100" required />
                                 <small class="error" ng-show='!nominee.nominee_full_name'>Please provide nominee name</small>
                             </div>
@@ -355,7 +370,11 @@ $url =  Yii::$app->homeUrl;?>
                                 <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="NomineeForm.nominee_share" placeholder="% share" ng-change='changedPercentage($index)' required />
                                 <small class="error" ng-show="NomineeForm.nominee_share.$invalid && NomineeForm.nominee_share.$dirty">Please provide percentage share</small>
                             </div>
-                            <div class="col-md-2" style="text-align: right;">
+                            <div class="col-md-2">
+                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="nominee.nominee_relationship_with_benf" name="NomineeForm.nominee_relationship_with_benf" placeholder="Relation" maxlength="25" required />
+                                <small class="error" ng-show="NomineeForm.nominee_relationship_with_benf.$invalid && NomineeForm.nominee_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
+                            </div>
+                            <div class="col-md-1" style="text-align: right;">
                                 <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
                                 <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
                             </div>
@@ -423,7 +442,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                         </div>
-                        <ul class="list-inline pull-right">
+                        <ul class="list-inline pull-right" style="padding-top:15px;">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="DependentForm.$invalid || NomineeForm.$invalid" ng-click='saveNomineeAndDependents()' >Save and continue</button></li>

@@ -14,6 +14,7 @@ use Yii;
  * @property integer $nominee_age
  * @property string $nominee_dob
  * @property integer $nominee_share
+ * @property string $nominee_relationship_with_benf
  * @property string $last_updated_by_user_id
  * @property string $last_updated_time
  */
@@ -38,6 +39,7 @@ class BenfNominee extends \yii\db\ActiveRecord
             [['nominee_address'], 'string'],
             [['nominee_dob', 'last_updated_time'], 'safe'],
             [['nominee_full_name'], 'string', 'max' => 100],
+            [['nominee_relationship_with_benf'], 'string', 'max' => 30],
         ];
     }
 
@@ -54,6 +56,7 @@ class BenfNominee extends \yii\db\ActiveRecord
             'nominee_age' => 'Nominee Age',
             'nominee_dob' => 'Nominee Dob',
             'nominee_share' => 'Nominee Share',
+            'nominee_relationship_with_benf' => 'Nominee Relationship With Benf',
             'last_updated_by_user_id' => 'Last Updated By User ID',
             'last_updated_time' => 'Last Updated Time',
         ];

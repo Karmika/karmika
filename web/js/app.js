@@ -14,7 +14,12 @@ app.constant('config', {
             {id: "SAVINGS", 'value': 'SAVINGS' }, 
             {id: "JAN-DAN", 'value': 'JAN-DAN' }, 
             {id: "CURRENT", 'value': 'CURRENT' }, 
-            ],      
+            ],
+    IdentityCardTypeList : [
+            {id: "EPIC", 'value': 'EPIC' }, 
+            {id: "ADHAR", 'value': 'ADHAR' }, 
+            {id: "NPR", 'value': 'NPR' }, 
+            ], 
     natureOfWorks : [
             {id: 'MASON', value : 'MASON'},
             {id: 'BARBENDING', value : 'BARBENDING'},
@@ -91,6 +96,8 @@ app.constant('config', {
               "benf_bank_account_number": "010101010101",
               "benf_bank_name": "ICIC Bank",
               "benf_bank_branch": "ECity Bangalore",
-              "benf_bank_account_type":"SAVINGS"
+              "benf_bank_account_type":"SAVINGS",
+              "benf_identity_card_type":"EPIC",
+              "benf_identity_card_number":"213131313"
             }
 });
