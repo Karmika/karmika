@@ -164,6 +164,27 @@ class BeneficiaryController extends FrontendController
                 break;
         }
 
+        $result = $this->GetBeneficiaryDetails($Conditions);
+        return json_encode($result);
+    } 
+
+    public function actionSearchbeneficiaries()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        //$data = array("benf_first_name"=>"Sravan","benf_mobile_no"=>"8892233720");
+        $Conditions = [];
+
+        foreach ($data as $key => $value) {
+            $Conditions[$key] = $value;
+        }
+
+        $result = $this->GetBeneficiaryDetails($Conditions);
+        return json_encode($result);
+    } 
+
+    public function GetBeneficiaryDetails($Conditions){
+
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
         ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
@@ -182,11 +203,8 @@ class BeneficiaryController extends FrontendController
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
         }
-        return json_encode($result);
-        $result = array(0=>array("full_name"=>"Sravan Kumar","benf_mobile_no"=>"8892233720","benf_date_of_birth"=>"27/07/1991",
-            "benf_sex"=>"Male","benf_martial_status"=>"Single","updated_by"=>"Superadmin"));
-        return json_encode($result);
-    } 
+        return $result;
+    }
 
     public function actionCreatenominee()
     {
