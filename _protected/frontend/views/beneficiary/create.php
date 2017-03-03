@@ -375,8 +375,14 @@ $url =  Yii::$app->homeUrl;?>
                                 <small class="error" ng-show="NomineeForm.nominee_relationship_with_benf.$invalid && NomineeForm.nominee_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
                             </div>
                             <div class="col-md-1" style="text-align: right;">
-                                <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
-                                <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
+                                    </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <ul class="list-inline pull-right">

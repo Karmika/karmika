@@ -70,7 +70,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr dir-paginate="beneficiary in AllBeneficiaries | filter : { full_name: searchName } | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
+      <!-- <tr dir-paginate="beneficiary in AllBeneficiaries | filter : { full_name: searchName } | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" > -->
+      <tr dir-paginate="beneficiary in AllBeneficiaries | filter : searchName | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
         <td>{{beneficiary.sno}}</td>
         <td>{{beneficiary.benf_acknowledgement_number}}</td>
         <td ng-show="beneficiary.actionRequired">
