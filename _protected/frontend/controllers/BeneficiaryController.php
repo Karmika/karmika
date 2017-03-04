@@ -94,9 +94,8 @@ class BeneficiaryController extends FrontendController
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["benf_application_status"] = $this->AppliedStatus;
-        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
         $model->attributes = $data;
-        if($model->update()) return json_encode(array("status"=>"success","rnumber"=>$data['benf_registration_number']));
+        if($model->update()) return json_encode(array("status"=>"success"));
         return json_encode(array("status"=>"failed"));
     }
  
@@ -142,6 +141,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
+        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
         $data["admin_comments"] = $data['adminComments'];
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
@@ -213,7 +213,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         foreach ($data['nomineeList'] as $nominee) {
             $model = new BenfNominee();
-            $nominee["benf_master_id"] = $data['master_id'];
+            $nominee["benf_master_id"] = $data['id'];
             $nominee["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $nominee;
             $model->save();
@@ -227,7 +227,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         foreach ($data['dependentsList'] as $dependent) {
             $model = new BenfDependents();
-            $dependent["benf_master_id"] = $data['master_id'];
+            $dependent["benf_master_id"] = $data['id'];
             $dependent["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $dependent;
             $model->save();

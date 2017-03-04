@@ -45,12 +45,12 @@ class Services extends Model
     {
         $arry = BeneficiaryMaster::find()
         ->select(['id','benf_registration_number'])
-        ->where(['id' => BeneficiaryMaster::find()->max('id')])
+        ->where(['id' => BeneficiaryMaster::find()->where(['not', ['benf_registration_number' => null]])->max('id')])
         ->one();
         if(count($arry) < 1) return "0000000001";
         $result = ArrayHelper::toArray($arry,'id','benf_registration_number');
         $result['benf_registration_number'] += 1;
-        while(strlen($result['benf_registration_number']) != 9){
+        while(strlen($result['benf_registration_number']) != 10){
             $result['benf_registration_number'] = "0".$result['benf_registration_number'];
         }
         return $result['benf_registration_number'];
