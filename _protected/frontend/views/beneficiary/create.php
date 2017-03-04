@@ -61,12 +61,6 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No</label>
-                                <div class="col-md-3">
-                                    <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
-                                    <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
-                                </div>
-
                                 <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth</label>
                                 <div class="col-md-3" ng-controller="DatepickerPopupController">
                                     <p class="input-group">
@@ -76,29 +70,36 @@ $url =  Yii::$app->homeUrl;?>
                                     </p>
                                     <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                                 </div>
+
                                 <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age</label>
                                 <div class="col-md-3">
                                     <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" ng-change ="setUnknownDOBbyAge('',Beneficiary.beneficiary_age,'Beneficiary')" required />
                                     <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
                                 </div>
-                            </div>
-                            <div class="row form-group">
+
                                 <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex</label>
                                 <div class="col-md-3">
                                     <label ng-repeat="item in genders"><input required type="radio" name="benf_sex" ng-model="Beneficiary.benf_sex" value="{{item.entity_id}}" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select sex</small>
                                 </div>
-
-                                <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality</label>
-                                <div class="col-md-3">
-                                    <input letters-only class="form-control" ng-model="Beneficiary.nationality" name="nationality" placeholder="INDIAN" maxlength="25" required />
-                                    <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
-                                </div>
+                            </div>
+                            <div class="row form-group">
 
                                 <label class="control-label col-md-1" for="benf_caste"><span class="mandatory-field">*&nbsp;</span>Caste</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-options="caste.id as caste.value for caste in casteList" ng-model="Beneficiary.benf_caste"></select>
                                     <small class="error" ng-show="beneficiary.benf_caste.$invalid && beneficiary.benf_caste.$dirty">Please select caste</small>
+                                </div>
+
+                                <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No</label>
+                                <div class="col-md-3">
+                                    <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
+                                    <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
+                                </div>
+
+                                <label class="control-label col-md-1" for="benf_alternate_mobile_no"><span class="mandatory-field"></span>Alternate Mobile&nbsp;No</label>
+                                <div class="col-md-3">
+                                    <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_alternate_mobile_no" name="benf_alternate_mobile_no" placeholder="Enter alternate mobile number" />
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -114,12 +115,19 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-2 stay-left" for="benf_identity_card_type"><span class="mandatory-field">*&nbsp;</span>Identity&nbsp;card&nbsp;Type&nbsp;:</label>
+
+                                <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality</label>
+                                <div class="col-md-3">
+                                    <input letters-only class="form-control" ng-model="Beneficiary.nationality" name="nationality" placeholder="INDIAN" maxlength="25" required />
+                                    <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
+                                </div>
+
+                                <label class="control-label col-md-1 stay-left" for="benf_identity_card_type"><span class="mandatory-field">*&nbsp;</span>Identity card Type&nbsp;:</label>
                                 <div class="col-md-3">
                                     <select name="benf_identity_card_type" class="form-control" ng-model="Beneficiary.benf_identity_card_type" ng-options="cardType.id as cardType.value for cardType in IdentityCardTypeList" ></select>
                                     <small class="error" ng-show="beneficiary.benf_identity_card_type.$invalid && beneficiary.benf_identity_card_type.$dirty">Please select card type</small>
                                 </div>
-                                <label class="control-label col-md-2" for="benf_identity_card_number"><span class="mandatory-field">*&nbsp;</span>&nbsp;Card&nbsp;number&nbsp;:&nbsp;</label>
+                                <label class="control-label col-md-1" for="benf_identity_card_number"><span class="mandatory-field">*&nbsp;</span>&nbsp;Card number :&nbsp;</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_identity_card_number" name="benf_identity_card_number" placeholder="Enter card number" required />
                                     <small class="error" ng-show="beneficiary.benf_identity_card_number.$invalid && beneficiary.benf_identity_card_number.$dirty">Please enter card number </small>
