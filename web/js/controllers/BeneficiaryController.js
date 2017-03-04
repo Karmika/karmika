@@ -152,6 +152,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         });
         $scope.form1submitted = false;
         $scope.Savedata = function() {
+            //if($scope.AcknowledgementNumber.length > 0) 
             $http.post(config.baseUrl + "/beneficiary/createbeneficiary", $scope.Beneficiary)
                 .then(function(response) {
                     $scope.form1submitted = false;
@@ -166,7 +167,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl + "/beneficiary/submitbeneficiary", {"id":$scope.master_id})
                 .then(function(response) {
                     if (response.data.status == "success") {
-                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + response.data.rnumber;
+                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + $scope.AcknowledgementNumber;
                     }
                 });
         }

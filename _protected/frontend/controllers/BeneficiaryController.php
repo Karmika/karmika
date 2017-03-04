@@ -152,16 +152,17 @@ class BeneficiaryController extends FrontendController
     public function actionAllbeneficiaries()
     {
         $Conditions = ['id' => ""];
-
         switch ($this->LoggedInUserRole) {
             case $this->TheCreatorRole:
+                 $Conditions = [];
+                 break;
             case $this->AdminRole:
-                $locations = ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
-                $Conditions = ['in','benf_local_address_taluk',$locations];
-                break;
+                 $locations = ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
+                 $Conditions = ['in','benf_local_address_taluk',$locations];
+                 break;
             case $this->MemberRole:
-                $Conditions = ['created_by_user_id' => $this->LoggedInUser];
-                break;
+                 $Conditions = ['created_by_user_id' => $this->LoggedInUser];
+                 break;
         }
 
         $result = $this->GetBeneficiaryDetails($Conditions);
