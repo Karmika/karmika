@@ -126,9 +126,18 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.saveNomineeAndDependents = function(){
             $http.post(config.baseUrl + "/beneficiary/createnominee", {"nomineeList":$scope.NomineeList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
+                    $scope.NomineeList = response.data.nomineeList;
+                    angular.forEach($scope.NomineeList, function(value, key) {
+                        $scope.NomineeList[key].nominee_dob = new Date($scope.NomineeList[key].nominee_dob);
+                    });
                 });
+
             $http.post(config.baseUrl + "/beneficiary/createdependents", {"dependentsList":$scope.DependentsList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
+                    $scope.DependentsList = response.data.dependentsList;
+                    angular.forEach($scope.DependentsList, function(value, key) {
+                        $scope.DependentsList[key].depnt_dob = new Date($scope.DependentsList[key].depnt_dob);
+                    });
                 });
         };
         

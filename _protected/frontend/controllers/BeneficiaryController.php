@@ -211,27 +211,47 @@ class BeneficiaryController extends FrontendController
     {
         $post = file_get_contents("php://input");
         $data = json_decode($post, true);
-        foreach ($data['nomineeList'] as $nominee) {
+        foreach ($data['nomineeList'] as $key=>$nominee) {
             $model = new BenfNominee();
+            
+            if(isset($nominee['id']) && $nominee['id'] != null) $model = BenfNominee::findOne($nominee['id']);
+            
             $nominee["benf_master_id"] = $data['id'];
             $nominee["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $nominee;
+            
+            if(isset($nominee['id']) && $nominee['id'] != null){
+              $model->update();
+              continue;   
+            }
+
             $model->save();
+            $data['nomineeList'][$key]['id'] = $model->id;
         }
-        return json_encode(array("status"=>"success"));
+        return json_encode(array("status"=>"success","nomineeList"=>$data['nomineeList']));
     }
 
     public function actionCreatedependents()
     {
         $post = file_get_contents("php://input");
         $data = json_decode($post, true);
-        foreach ($data['dependentsList'] as $dependent) {
+        foreach ($data['dependentsList'] as $key=>$dependent) {
             $model = new BenfDependents();
+
+            if(isset($dependent['id']) && $dependent['id'] != null) $model = BenfDependents::findOne($dependent['id']);
+
             $dependent["benf_master_id"] = $data['id'];
             $dependent["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $dependent;
+            
+            if(isset($dependent['id']) && $dependent['id'] != null){
+              $model->update();
+              continue;   
+            }
+
             $model->save();
+            $data['dependentsList'][$key]['id'] = $model->id;
         }
-        return json_encode(array("status"=>"success"));
+        return json_encode(array("status"=>"success","dependentsList"=>$data['dependentsList']));
     }
 }
