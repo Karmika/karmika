@@ -94,9 +94,8 @@ class BeneficiaryController extends FrontendController
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["benf_application_status"] = $this->AppliedStatus;
-        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
         $model->attributes = $data;
-        if($model->update()) return json_encode(array("status"=>"success","rnumber"=>$data['benf_registration_number']));
+        if($model->update()) return json_encode(array("status"=>"success"));
         return json_encode(array("status"=>"failed"));
     }
  
@@ -142,6 +141,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
+        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
         $data["admin_comments"] = $data['adminComments'];
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
@@ -211,27 +211,47 @@ class BeneficiaryController extends FrontendController
     {
         $post = file_get_contents("php://input");
         $data = json_decode($post, true);
-        foreach ($data['nomineeList'] as $nominee) {
+        foreach ($data['nomineeList'] as $key=>$nominee) {
             $model = new BenfNominee();
-            $nominee["benf_master_id"] = $data['master_id'];
+            
+            if(isset($nominee['id']) && $nominee['id'] != null) $model = BenfNominee::findOne($nominee['id']);
+            
+            $nominee["benf_master_id"] = $data['id'];
             $nominee["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $nominee;
+            
+            if(isset($nominee['id']) && $nominee['id'] != null){
+              $model->update();
+              continue;   
+            }
+
             $model->save();
+            $data['nomineeList'][$key]['id'] = $model->id;
         }
-        return json_encode(array("status"=>"success"));
+        return json_encode(array("status"=>"success","nomineeList"=>$data['nomineeList']));
     }
 
     public function actionCreatedependents()
     {
         $post = file_get_contents("php://input");
         $data = json_decode($post, true);
-        foreach ($data['dependentsList'] as $dependent) {
+        foreach ($data['dependentsList'] as $key=>$dependent) {
             $model = new BenfDependents();
-            $dependent["benf_master_id"] = $data['master_id'];
+
+            if(isset($dependent['id']) && $dependent['id'] != null) $model = BenfDependents::findOne($dependent['id']);
+
+            $dependent["benf_master_id"] = $data['id'];
             $dependent["last_updated_by_user_id"] = $this->LoggedInUser;
             $model->attributes = $dependent;
+            
+            if(isset($dependent['id']) && $dependent['id'] != null){
+              $model->update();
+              continue;   
+            }
+
             $model->save();
+            $data['dependentsList'][$key]['id'] = $model->id;
         }
-        return json_encode(array("status"=>"success"));
+        return json_encode(array("status"=>"success","dependentsList"=>$data['dependentsList']));
     }
 }

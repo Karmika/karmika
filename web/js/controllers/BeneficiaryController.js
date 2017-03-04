@@ -18,8 +18,23 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.bloodGroupList = config.bloodGroupList;
         $scope.IdentityCardTypeList = config.IdentityCardTypeList;
 
-        $scope.AcknowledgementNumber = "";
-        $scope.master_id = "";
+
+        $scope.Beneficiary = {
+            "benf_registration_number": "",
+            "id":"",
+            "benf_registration_old_number": "",
+            "benf_acknowledgement_number": "",
+            "nationality": 'INDIAN',
+            benf_caste: $scope.casteList[3].value
+        };
+
+
+        /* Test data */
+
+        $scope.Beneficiary = config.TestData;
+
+        /* ENd test data */
+
 
         /* Nominee */
         $scope.NomineeList = [];
@@ -109,11 +124,20 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         /*  End  Dependents  */
         $scope.saveNomineeAndDependents = function(){
-            $http.post(config.baseUrl + "/beneficiary/createnominee", {"nomineeList":$scope.NomineeList,"master_id":$scope.master_id})
+            $http.post(config.baseUrl + "/beneficiary/createnominee", {"nomineeList":$scope.NomineeList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
+                    $scope.NomineeList = response.data.nomineeList;
+                    angular.forEach($scope.NomineeList, function(value, key) {
+                        $scope.NomineeList[key].nominee_dob = new Date($scope.NomineeList[key].nominee_dob);
+                    });
                 });
-            $http.post(config.baseUrl + "/beneficiary/createdependents", {"dependentsList":$scope.DependentsList,"master_id":$scope.master_id})
+
+            $http.post(config.baseUrl + "/beneficiary/createdependents", {"dependentsList":$scope.DependentsList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
+                    $scope.DependentsList = response.data.dependentsList;
+                    angular.forEach($scope.DependentsList, function(value, key) {
+                        $scope.DependentsList[key].depnt_dob = new Date($scope.DependentsList[key].depnt_dob);
+                    });
                 });
         };
         
@@ -121,21 +145,21 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         $scope.AllUploads = [];
         $scope.getFiles = function(){
-            $http.get(config.retrieveUrl+"?pathToRetrieve="+$scope.AcknowledgementNumber)
+            $http.get(config.retrieveUrl+"?pathToRetrieve="+$scope.Beneficiary.benf_acknowledgement_number)
                 .then(function(response) {
                     $scope.AllUploads = response.data;
             });
         }
 
         $scope.RemoveFromList = function(file){
-            $http.get(config.deleteUrl+"?pathToDelete="+$scope.AcknowledgementNumber+"/"+file)
+            $http.get(config.deleteUrl+"?pathToDelete="+$scope.Beneficiary.benf_acknowledgement_number+"/"+file)
                 .then(function(response) {
                     if(response.data) $scope.getFiles();
             });
         }
 
         $scope.UploadFile = function(){
-            fileUpload.uploadFileToUrl($scope.myFile, config.uploadUrl, $scope.AcknowledgementNumber);
+            fileUpload.uploadFileToUrl($scope.myFile, config.uploadUrl, $scope.Beneficiary.benf_acknowledgement_number);
             $timeout(function () { $scope.getFiles();$("#myFile").val(null); }, 1000);
         };
 
@@ -152,22 +176,23 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         });
         $scope.form1submitted = false;
         $scope.Savedata = function() {
-            //if($scope.AcknowledgementNumber.length > 0) 
-            $http.post(config.baseUrl + "/beneficiary/createbeneficiary", $scope.Beneficiary)
+            var action = "createbeneficiary";
+            if($scope.Beneficiary.benf_acknowledgement_number.length > 0) action = "updatebeneficiary";
+            $http.post(config.baseUrl + "/beneficiary/"+action, $scope.Beneficiary)
                 .then(function(response) {
                     $scope.form1submitted = false;
-                    if (response.data.status == "success") {
-                        $scope.AcknowledgementNumber = response.data.anumber;
-                        $scope.master_id = response.data.id;
+                    if (response.data.status == "success" && $scope.Beneficiary.benf_acknowledgement_number == "") {
+                        $scope.Beneficiary.benf_acknowledgement_number = response.data.anumber;
+                        $scope.Beneficiary.id = response.data.id;
                     }
                 });
         }
 
         $scope.SubmitBeneficiary = function() {
-            $http.post(config.baseUrl + "/beneficiary/submitbeneficiary", {"id":$scope.master_id})
+            $http.post(config.baseUrl + "/beneficiary/submitbeneficiary", {"id":$scope.Beneficiary.id})
                 .then(function(response) {
                     if (response.data.status == "success") {
-                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + $scope.AcknowledgementNumber;
+                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + $scope.Beneficiary.benf_acknowledgement_number;
                     }
                 });
         }
@@ -180,21 +205,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.ViewBeneficiary = function(id) {
             $window.location.href = config.baseUrl + "/beneficiary/view?id=" + id;
         }
-
-        $scope.Beneficiary = {
-            "benf_registration_number": "",
-            "benf_registration_old_number": "",
-            "benf_acknowledgement_number": "",
-            "nationality": 'INDIAN',
-            benf_caste: $scope.casteList[3].value
-        };
-
-
-        /* Test data */
-
-        $scope.Beneficiary = config.TestData;
-
-        /* ENd test data */
 
         $scope.Benf = { sameAsPermanentAddress: false };
 
