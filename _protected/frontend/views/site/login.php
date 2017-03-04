@@ -43,7 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-lg-6 col-lg-offset-1 well bs-component" style="border:1px dotted black;">
         <div class="col-md-12">
-            The Content area for the instructions at login page.
+            <p style="font-size: 2rem;">Instrcutions for using this application</p>
+            <br><b>Step 1:</b> Enter all mandatory information in Registration Details and Nominee Details.
+            <br><b>Step 2:</b> Have a pre-view and then submit.
+            <br><b>Step 3:</b> Take the print of Application and Nomination Form.
+            <br><b>Step 4:</b> Sign the Application and Nominee Forms. Send to the Registering Authority concerned through post or by hand.
+
+            <br>
+            <br>
+            <p>Use your Application Reference No. for future correspondence or knowing the status of your application.</p>
         </div>
     </div>
 </div>

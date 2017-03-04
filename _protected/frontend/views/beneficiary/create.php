@@ -10,16 +10,16 @@ $url =  Yii::$app->homeUrl;?>
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Beneficiary Details"><span class="round-tab"><i class="glyphicon glyphicon-user"> Beneficiary Form</i></span>
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Registration Details"><span class="round-tab"><i class="glyphicon glyphicon-user"> Registration-Details</i></span>
                         </a>
                     </li>
 
                     <li role="presentation" class="disabled">
-                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Nominee and Dependents"><span class="round-tab"><i class="glyphicon glyphicon-user"></i> Nominee and Dependents</span>
+                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Nominee Details"><span class="round-tab"><i class="glyphicon glyphicon-user"></i> Nominee Details</span>
                             </a>
                     </li>
                     <li role="presentation" class="disabled">
-                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Employment Certificate"><span class="round-tab"><i class="glyphicon glyphicon-certificate"></i> Employment Certificate</span>
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Employer Details"><span class="round-tab"><i class="glyphicon glyphicon-certificate"></i> Employer Details</span>
                         </a>
                     </li>
                     <li role="presentation" class="disabled">
@@ -37,7 +37,7 @@ $url =  Yii::$app->homeUrl;?>
             <div role="">
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
-                        <h3 align="center">Beneficiary Details</h3>
+                        <h3 align="center">Registration Details</h3>
                         <hr/>
                         <form class="form-vertical" name="beneficiary" role="form" novalidate ng-submit="Savedata()">
                             <label class="lable-bottom-margin">Personal Details&nbsp;:&nbsp; ವೈಯಕ್ತಿಕ ವಿವರಗಳು </label><br>
@@ -71,7 +71,7 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age</label>
+                                <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age (years)</label>
                                 <div class="col-md-3">
                                     <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" ng-change ="setUnknownDOBbyAge('',Beneficiary.beneficiary_age,'Beneficiary')" required />
                                     <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
@@ -91,7 +91,7 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_caste.$invalid && beneficiary.benf_caste.$dirty">Please select caste</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No</label>
+                                <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No.</label>
                                 <div class="col-md-3">
                                     <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
                                     <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
@@ -134,9 +134,9 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
 
-                            <label class="lable-bottom-margin">Beneficiary Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
+                            <label class="lable-bottom-margin">Applicant's Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Line-1</label>
+                                <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.benf_prmt_address_line1" name="permanent_address_line1" placeholder="Line 1" maxlength="175" ng-change='setSameLocalIfTrue("line1")' required ></textarea>
                                     <small class="error" ng-show="beneficiary.permanent_address_line1.$invalid && beneficiary.permanent_address_line1.$dirty">Please provide Address</small>
@@ -172,10 +172,10 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                             <hr/>
                             <p class="row">
-                                <label class="col-md-6 stay-left lable-bottom-margin">Beneficiary Local Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ಸ್ಥಳೀಯ ವಿಳಾಸ</label><span class="col-md-3 col-md-offset-3 pull-right"><input type="checkbox" class="" name="" ng-change="toggleSameAsPermanentAddress()" ng-model='Benf.sameAsPermanentAddress'> Same as Permanent Address </span>
+                                <label class="col-md-6 stay-left lable-bottom-margin">Applicant's Local Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ಸ್ಥಳೀಯ ವಿಳಾಸ</label><span class="col-md-3 col-md-offset-3 pull-right"><input type="checkbox" class="" name="" ng-change="toggleSameAsPermanentAddress()" ng-model='Benf.sameAsPermanentAddress'> Same as Permanent Address </span>
                             </p>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Line-1</label>
+                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.benf_local_address_line1" name="address_line1" placeholder="Line 1" maxlength="175" required ng-readonly="Benf.sameAsPermanentAddress"></textarea>
                                     <small class="error" ng-show="beneficiary.address_line1.$invalid && beneficiary.address_line1.$dirty">Please provide Address</small>
@@ -211,6 +211,37 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <br>
+                            <!-- BANK Details -->
+                            <hr/>
+                            <label class="lable-bottom-margin">Bank Details &nbsp;:&nbsp; </label>
+                            <div class="row form-group">
+                                <label class="control-label col-md-1" for="benf_bank_account_number"><span class="mandatory-field">*&nbsp;</span>Account Number</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" numerics-only ng-model="Beneficiary.benf_bank_account_number" name="benf_bank_account_number" placeholder="Account Number" maxlength=15 required />
+                                    <small class="error" ng-show="beneficiary.benf_bank_account_number.$invalid && beneficiary.benf_bank_account_number.$dirty">Please provide bank account Number</small>
+                                </div>
+
+                                <label class="control-label col-md-1" for="benf_bank_account_type"><span class="mandatory-field">*&nbsp;</span>Account Type</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" ng-options="type.id as type.value for type in accountTypeList" ng-model="Beneficiary.benf_bank_account_type"></select>
+                                    <small class="error" ng-show="beneficiary.benf_bank_account_type.$invalid && beneficiary.benf_bank_account_type.$dirty">Please provide bank account type</small>
+                                </div>
+
+                                <label class="control-label col-md-1" for="benf_bank_name"><span class="mandatory-field">*&nbsp;</span>Bank </label>
+                                <div class="col-md-3">
+                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_name" name="benf_bank_name" placeholder="Bank Name" maxlength="25" required />
+                                    <small class="error" ng-show="beneficiary.benf_bank_name.$invalid && beneficiary.benf_bank_name.$dirty">Please provide Bank name</small>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch </label>
+                                <div class="col-md-3">
+                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
+                                    <small class="error" ng-show="beneficiary.benf_bank_branch.$invalid && beneficiary.benf_bank_branch.$dirty">Please provide Bank Branch name</small>
+                                </div>
+                            </div>
+
                             <hr>
                             <label class="lable-bottom-margin">Name and address of Present Employer&nbsp;:&nbsp;</label>
                             <div class="row form-group">
@@ -250,7 +281,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="emplr_address_line1"><span class="mandatory-field">*&nbsp;</span>Line-1</label>
+                                <label class="control-label col-md-1" for="emplr_address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.emplr_address_line1" name="emplr_address_line1" placeholder="Line 1" maxlength="175" required></textarea>
                                     <small class="error" ng-show="beneficiary.emplr_address_line1.$invalid && beneficiary.emplr_address_line1.$dirty">Please provide Address</small>
@@ -284,36 +315,7 @@ $url =  Yii::$app->homeUrl;?>
                                     <input class="form-control" ng-model="Beneficiary.emplr_address_state" name="emplr_address_state" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
                             </div>
-                            <!-- BANK Details -->
-                            <hr/>
-                            <label class="lable-bottom-margin">Bank Details &nbsp;:&nbsp; </label>
-                            <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_bank_account_number"><span class="mandatory-field">*&nbsp;</span>Account Number</label>
-                                <div class="col-md-3">
-                                    <input class="form-control" numerics-only ng-model="Beneficiary.benf_bank_account_number" name="benf_bank_account_number" placeholder="Account Number" maxlength=15 required />
-                                    <small class="error" ng-show="beneficiary.benf_bank_account_number.$invalid && beneficiary.benf_bank_account_number.$dirty">Please provide bank account Number</small>
-                                </div>
-
-                                <label class="control-label col-md-1" for="benf_bank_account_type"><span class="mandatory-field">*&nbsp;</span>Account Type</label>
-                                <div class="col-md-3">
-                                    <select class="form-control" ng-options="type.id as type.value for type in accountTypeList" ng-model="Beneficiary.benf_bank_account_type"></select>
-                                    <small class="error" ng-show="beneficiary.benf_bank_account_type.$invalid && beneficiary.benf_bank_account_type.$dirty">Please provide bank account type</small>
-                                </div>
-
-                                <label class="control-label col-md-1" for="benf_bank_name"><span class="mandatory-field">*&nbsp;</span>Bank </label>
-                                <div class="col-md-3">
-                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_name" name="benf_bank_name" placeholder="Bank Name" maxlength="25" required />
-                                    <small class="error" ng-show="beneficiary.benf_bank_name.$invalid && beneficiary.benf_bank_name.$dirty">Please provide Bank name</small>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch </label>
-                                <div class="col-md-3">
-                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
-                                    <small class="error" ng-show="beneficiary.benf_bank_branch.$invalid && beneficiary.benf_bank_branch.$dirty">Please provide Bank Branch name</small>
-                                </div>
-                            </div>
+                            
                             <hr>
                             <div class="row form-group pull-right">
                                 <div class="col-sm-12">
@@ -326,7 +328,7 @@ $url =  Yii::$app->homeUrl;?>
                         </form>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
-                        <h3 align="center">Nominee and Dependents</h3>
+                        <h3 align="center">Nominee Details</h3>
                         <hr/>
 
                         <h4>Nominee List</h4>
@@ -338,16 +340,16 @@ $url =  Yii::$app->homeUrl;?>
                                 <label>Nominee Address<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>DOB</label>
+                                <label>Date of Birth</label>
                             </div>
                             <div class="col-md-1">
-                                <label>Age<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Age (years)<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
                                 <label>% Share<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Relation with Beneficiary<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Relationship with Applicant<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
                                 <label>Edit</label>
@@ -388,7 +390,7 @@ $url =  Yii::$app->homeUrl;?>
                                         <button class="btn btn-default" ng-click="insertNominee($index)"><i class="glyphicon glyphicon-user"></i></button>
                                     </div>
                                     <div class="col-md-5 col-md-offset-1">
-                                        <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1'><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-danger" ng-click="deleteNominee($index)" ng-show='NomineeList.length>1' tooltop='Add one more Nominee'><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -411,13 +413,13 @@ $url =  Yii::$app->homeUrl;?>
                                 <label>Dependent Address<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>DOB</label>
+                                <label>Date of Birth</label>
                             </div>
                             <div class="col-md-1">
-                                <label>Age<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Age (years)<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Relation with Beneficiary<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Relationship with Applicant<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
                                 <label>Edit</label>
@@ -616,7 +618,7 @@ $url =  Yii::$app->homeUrl;?>
                                         <br>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                &nbsp;&nbsp;<b>11 )  Mobile No  <span class="pull-right WordsLeftStyle">:</b>
+                                                &nbsp;&nbsp;<b>11 )  Mobile No.  <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
                                             <div class="col-sm-6">
                                                 {{Beneficiary.benf_mobile_no}}
@@ -743,7 +745,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
 
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="panel-heading cursorPointer"><b>Nominee and Dependents</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="panel-heading cursorPointer"><b>Nomination Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <b>Nominee List : </b><br><br>
@@ -751,9 +753,10 @@ $url =  Yii::$app->homeUrl;?>
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Age</th>
+                                                    <th>Age (years)</th>
                                                     <th>Date Of Birth</th>
                                                     <th>Share</th>
+                                                    <th>Relationship with Applicant</th>
                                                     <th>Address</th>
                                                 </tr>
                                             </thead>
@@ -763,6 +766,7 @@ $url =  Yii::$app->homeUrl;?>
                                                     <td>{{ nominee.nominee_age }}</td>
                                                     <td>{{ nominee.nominee_dob | date }}</td>
                                                     <td>{{ nominee.nominee_share }}</td>
+                                                    <td>{{ nominee.nominee_relationship_with_benf }}</td>
                                                     <td>{{ nominee.nominee_address }}</td>
                                                 </tr>
                                                 <tr ng-if="NomineeList.length < 1">
@@ -778,7 +782,7 @@ $url =  Yii::$app->homeUrl;?>
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Age</th>
+                                                    <th>Age (years)</th>
                                                     <th>Date Of Birth</th>
                                                     <th>Relation</th>
                                                     <th>Address</th>

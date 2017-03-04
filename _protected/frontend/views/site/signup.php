@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         <?php endif ?>
     </div>
-    <div class="col-lg-6 col-lg-offset-1 well bs-component" style="border:1px dotted black;">
+    <div class="col-lg-6 col-lg-offset-1 well bs-component" style="border:1px dotted black;margin-top: 15rem;">
         <div class="col-md-12">
-            The Content area for the instructions at sign-up page.
+            <b>Note:</b> <i>If a valid mobile number or email id is not provided by the Applicant, the SMS/ Mail alerts will not be delivered.</i>
         </div>
     </div>
 </div>

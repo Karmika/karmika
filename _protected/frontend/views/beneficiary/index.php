@@ -3,8 +3,7 @@
     $this->title = 'Beneficiary Details';
 ?>
 <div class="BeneficiaryCtrl" ng-cloak ng-controller="BeneficiaryController">
-<h3>Beneficiary Details</h3>
-
+<center><p style="font-size: 3rem;">Status of Registration Applications</p></center>
 <br />
 <br />
 
@@ -36,11 +35,11 @@
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_acknowledgement_number'; reverseSort = !reverseSort">
-          Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Applicant’s Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_mobile_no'; reverseSort = !reverseSort">
-          Cell </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Mobile No. </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_date_of_birth'; reverseSort = !reverseSort">
@@ -56,7 +55,7 @@
         </th>
         <th>
           <a href="#" ng-click="orderByField='updated_by'; reverseSort = !reverseSort">
-          Updated&nbsp;By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Submitted By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_application_status'; reverseSort = !reverseSort">

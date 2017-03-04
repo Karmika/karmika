@@ -413,3 +413,13 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
     }
 
 }]);
+/*
+Create nominee and dependents for other users failing.
+Add ifsc code. at registration page.
+
+Nominee Details 
+    Calculate age for entered date and make dob compulsary.
+
+Remove File Upload. (hide infact)
+
+*/
