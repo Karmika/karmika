@@ -59,11 +59,21 @@ WebAsset::register($this);
                 $menuItems[] = ['label' => Yii::t('app', 'Articles'), 'url' => ['/article/admin']];
             }            
             */
+
+
             // display Signup and Login pages to guests of the site
             if (Yii::$app->user->isGuest) 
             {
                 $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+            }
+            else if(Yii::$app->user->can('theCreator')){
+                $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/backend/user']];
+                $menuItems[] = [
+                    'label' => Yii::t('app', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
             }
             // display Logout to all logged in users
             else 

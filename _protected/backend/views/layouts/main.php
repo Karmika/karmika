@@ -24,10 +24,12 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
     <div class="wrap">
+
         <?php
             NavBar::begin([
                 'brandLabel' => Yii::t('app', "Karmika"),
-                'brandUrl' => Yii::$app->homeUrl,
+                // 'brandUrl' => Yii::$app->homeUrl,
+                'brandUrl' => '/karmika',
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top',
                 ],
@@ -74,8 +76,8 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; <?= Yii::t('app', "Karmika") ?> <?= date('Y') ?></p>
-        <p class="pull-right">Karnataka State Government<?//= Yii::powered() ?></p>
+        <p class="pull-left">&copy; <?= Yii::t('app', "KARMIKA 2.0") ?></p>
+        <p class="pull-right">Karnataka Building and Other Construction Workers' Welfare Board<?//= Yii::powered() ?></p>
         </div>
     </footer>
 
