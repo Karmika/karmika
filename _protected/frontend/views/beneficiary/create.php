@@ -22,10 +22,9 @@ $url =  Yii::$app->homeUrl;?>
                         <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Employer Details"><span class="round-tab"><i class="glyphicon glyphicon-certificate"></i> Employer Details</span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled">
+<!--                     <li role="presentation" class="disabled">
                         <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Upload Files"><span class="round-tab"><i class="glyphicon glyphicon-upload"></i></span> Upload Files</a>
-                    </li>
-
+                    </li> -->
                     <li role="presentation" class="disabled">
                         <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Preview and Submit"><span class="round-tab"><i class="glyphicon glyphicon-ok"></i> Preview and Submit</span>
                         </a>
@@ -474,7 +473,7 @@ $url =  Yii::$app->homeUrl;?>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="step4">
+<!--                     <div class="tab-pane" role="tabpanel" id="step4">
                         <h3 align="center">Upload Files</h3>
                         <hr/>
                         <div class="row">
@@ -483,14 +482,12 @@ $url =  Yii::$app->homeUrl;?>
                                     <thead>
                                         <tr>
                                             <th width="70%">Document Name</th>
-                                            <!-- <th>Size</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in AllUploads">
                                             <td>{{ item }}</td>
-                                            <!-- <td>{{ item.size/1024/1024|number:2 }} MB</td> -->
                                             <td nowrap>
                                                 <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveFromList(item)">
                                                     <span class="glyphicon glyphicon-trash"></span> Remove
@@ -516,7 +513,8 @@ $url =  Yii::$app->homeUrl;?>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
-                    </div>
+                    </div> -->
+                    
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3 align="center">Preview and Submit</h3>
                         <hr/>
@@ -817,7 +815,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
 
-                            <div class="panel panel-success">
+<!--                             <div class="panel panel-success">
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
@@ -850,7 +848,7 @@ $url =  Yii::$app->homeUrl;?>
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <ul class="list-inline pull-right">

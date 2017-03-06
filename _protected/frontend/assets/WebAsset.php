@@ -44,6 +44,10 @@ class WebAsset extends AssetBundle
       'web/js/controllers/DatepickerPopupController.js',
       'web/js/controllers/HomeController.js',
       'web/js/controllers/BeneficiaryController.js',
+      'web/js/controllers/BeneficiaryDetailsController.js',
+      'web/js/controllers/BeneficiaryIndexController.js',
+      'web/js/controllers/BeneficiarySuccessController.js',
+      'web/js/controllers/BeneficiaryUpdateController.js',
     ];
     
 }

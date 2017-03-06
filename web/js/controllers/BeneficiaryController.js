@@ -1,14 +1,5 @@
-//Beneficiary Controller
 app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window', 'CustomService', 'fileUpload','$timeout',
     function($scope, $http, config, $window, CustomService, fileUpload, $timeout) {
-
-        // for Index page   
-        $scope.orderByField = '';
-        $scope.reverseSort = false;
-        $scope.AllBeneficiaries = [];
-        $scope.searchName = "";
-        $scope.isActiveFilter = 1;
-        $scope.ListError = false;
 
         $scope.genders = config.genders;
         $scope.martialStatusList = config.martialStatusList;
@@ -17,7 +8,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.natureOfWorks = config.natureOfWorks;
         $scope.bloodGroupList = config.bloodGroupList;
         $scope.IdentityCardTypeList = config.IdentityCardTypeList;
-
 
         $scope.Beneficiary = {
             "benf_registration_number": "",
@@ -28,15 +18,19 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             benf_caste: $scope.casteList[3].value
         };
 
+        $scope.DependentsList = [];
+        $scope.insertDependent = function() {
+            var dependent = {
+                "depnt_full_name" : '',
+                "depnt_address" : '',
+                "depnt_age" : '',
+                "depnt_dob" : '',
+                "depnt_relationship_with_benf" : ''
+            };
+            $scope.DependentsList.push(dependent);
+        };
+        $scope.insertDependent();
 
-        /* Test data */
-
-        $scope.Beneficiary = config.TestData;
-
-        /* ENd test data */
-
-
-        /* Nominee */
         $scope.NomineeList = [];
         $scope.insertNominee = function(idx) {
             var individualNominee = {
@@ -53,6 +47,15 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             }
         };
         $scope.insertNominee(-1);
+
+        /* Test data */
+
+        $scope.Beneficiary = config.TestData;
+
+        /* ENd test data */
+
+
+        /* Nominee */
         $scope.deleteNominee = function(index){
             $scope.NomineeList.splice(index, 1);
         }
@@ -106,18 +109,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.calculateAgeForNominee = function(index){
             $scope.DependentsList[index].depnt_age = CustomService.calculateAge(new Date($scope.DependentsList[index].depnt_dob));
         };
-        $scope.DependentsList = [];
-        $scope.insertDependent = function() {
-            var dependent = {
-                "depnt_full_name" : '',
-                "depnt_address" : '',
-                "depnt_age" : '',
-                "depnt_dob" : '',
-                "depnt_relationship_with_benf" : ''
-            };
-            $scope.DependentsList.push(dependent);
-        };
-        $scope.insertDependent();
         $scope.deleteDependent = function(index){
             $scope.DependentsList.splice(index, 1);
         }
@@ -142,7 +133,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         };
         
         /* Start : upload related code */
-
+/*
         $scope.AllUploads = [];
         $scope.getFiles = function(){
             $http.get(config.retrieveUrl+"?pathToRetrieve="+$scope.Beneficiary.benf_acknowledgement_number)
@@ -162,14 +153,8 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             fileUpload.uploadFileToUrl($scope.myFile, config.uploadUrl, $scope.Beneficiary.benf_acknowledgement_number);
             $timeout(function () { $scope.getFiles();$("#myFile").val(null); }, 1000);
         };
-
+*/
         /* End : upload related code */
-
-        $http.get(config.baseUrl + "/beneficiary/allbeneficiaries")
-            .then(function(response) {
-                $scope.AllBeneficiaries = response.data;
-                if ($scope.AllBeneficiaries.length <= 0) $scope.ListError = true;
-            });
 
         $scope.$watch('Beneficiary.benf_date_of_birth', function(newVal) {
             if (newVal != null && newVal != "") $scope.Beneficiary.beneficiary_age = CustomService.calculateAge(new Date(newVal));
@@ -195,15 +180,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                         $window.location.href = config.baseUrl + "/beneficiary/success?id=" + $scope.Beneficiary.benf_acknowledgement_number;
                     }
                 });
-        }
-
-
-        $scope.updateBeneficiary = function(id) {
-            $window.location.href = config.baseUrl + "/beneficiary/update?id=" + id;
-        }
-
-        $scope.ViewBeneficiary = function(id) {
-            $window.location.href = config.baseUrl + "/beneficiary/view?id=" + id;
         }
 
         $scope.Benf = { sameAsPermanentAddress: false };
@@ -343,93 +319,3 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         }
     }
 ]);
-
-
-
-
-
-
-//Beneficiary Update Controller
-app.controller("BeneficiaryUpdateController", ['$scope', '$http', '$window', 'config', 'CustomService',
-    function($scope, $http, $window, config, CustomService) {
-
-        $scope.genders = config.genders;
-        $scope.martialStatusList = config.martialStatusList;
-
-        var id = CustomService.getParameterByName('id');
-        $http.post(config.baseUrl + "/beneficiary/getbeneficiary", { "id": id })
-            .then(function(response) {
-                if (response.data.benf_date_of_birth != null) response.data.benf_date_of_birth = new Date(response.data.benf_date_of_birth);
-                $scope.BeneficiaryUpdate = response.data;
-            });
-
-        $scope.Updatedata = function() {
-            console.log($scope.BeneficiaryUpdate);
-            if (!$scope.BeneficiaryUpdate.$invalid) $window.location.href = config.baseUrl + "/beneficiary";
-            $http.post(config.baseUrl + "/beneficiary/updatebeneficiary", $scope.BeneficiaryUpdate)
-                .then(function(response) {
-                    if (response.data == "success") $window.location.href = config.baseUrl + "/beneficiary";
-                });
-            return false;
-        }
-    }
-]);
-
-
-
-
-
-
-//Beneficiary Success Controller
-app.controller("BeneficiarySuccessController", ['$scope', 'CustomService',
-    function($scope, CustomService) {
-
-        $scope.ApplicationReferenceNo = CustomService.getParameterByName('id');
-
-    }
-]);
-
-
-
-
-
-//Beneficiary Details Controller
-app.controller("BeneficiaryDetailsController",['$scope','CustomService','config','$http','$window',
-    function ($scope,CustomService,config,$http,$window) {    
-
-    var id = CustomService.getParameterByName('id');
-    $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
-    .then(function(response) {
-        if(response.data.Beneficiary.benf_date_of_birth != null) response.data.Beneficiary.benf_date_of_birth = new Date(response.data.Beneficiary.benf_date_of_birth);
-        $scope.Beneficiary = response.data.Beneficiary;
-        $scope.NomineeList = response.data.NomineeList;
-        $scope.DependentsList = response.data.DependentsList;
-    });
-
-    $scope.Approve = function(){
-        if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"adminComments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
-        .then(function(response) {
-            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
-        });
-    }
-
-    $scope.Reject = function(){
-        if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id,"adminComments":$scope.adminComments})
-        .then(function(response) {
-            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
-        });
-    }
-
-}]);
-/*
-Create nominee and dependents for other users failing.
-Add ifsc code. at registration page.
-
-Nominee Details 
-    Calculate age for entered date and make dob compulsary.
-
-Remove File Upload. (hide infact)
-
-*/

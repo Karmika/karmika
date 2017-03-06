@@ -2,7 +2,7 @@
 
     $this->title = 'Beneficiary Details';
 ?>
-<div class="BeneficiaryCtrl" ng-cloak ng-controller="BeneficiaryController">
+<div class="BeneficiaryCtrl" ng-cloak ng-controller="BeneficiaryIndexController">
 <center><p style="font-size: 3rem;">Status of Registration Applications</p></center>
 <br />
 <br />
@@ -69,14 +69,13 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <tr dir-paginate="beneficiary in AllBeneficiaries | filter : { full_name: searchName } | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" > -->
       <tr dir-paginate="beneficiary in AllBeneficiaries | filter : searchName | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
         <td>{{beneficiary.sno}}</td>
         <td>{{beneficiary.benf_acknowledgement_number}}</td>
-        <td ng-show="beneficiary.actionRequired">
+        <td ng-show="beneficiary.Editable">
           <a class="nameLink" ng-click="updateBeneficiary(beneficiary.id)">{{beneficiary.full_name}}</a>
         </td>
-        <td ng-show="!beneficiary.actionRequired">{{beneficiary.full_name}}</td>
+        <td ng-show="!beneficiary.Editable">{{beneficiary.full_name}}</td>
         <td>{{beneficiary.benf_mobile_no}}</td>
         <td>{{beneficiary.benf_date_of_birth}}</td>
         <td>{{beneficiary.benf_sex}}</td>
@@ -85,7 +84,7 @@
         <td>{{beneficiary.benf_application_status}}</td>
         <?php if($IsAdmin){?>
           <td>
-            <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)">view</a>
+            <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
         </td>
         <?php }?>
       </tr>

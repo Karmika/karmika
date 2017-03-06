@@ -254,6 +254,7 @@ class BeneficiaryController extends FrontendController
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus)?true:false;
         }
         return $result;
     }
