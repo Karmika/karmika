@@ -9,51 +9,88 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.bloodGroupList = config.bloodGroupList;
         $scope.IdentityCardTypeList = config.IdentityCardTypeList;
 
-        $scope.Beneficiary = {
-            "benf_registration_number": "",
-            "id":"",
-            "benf_registration_old_number": "",
-            "benf_acknowledgement_number": "",
-            "nationality": 'INDIAN',
-            benf_caste: $scope.casteList[3].value
-        };
-
-        $scope.DependentsList = [];
-        $scope.insertDependent = function() {
-            var dependent = {
-                "depnt_full_name" : '',
-                "depnt_address" : '',
-                "depnt_age" : '',
-                "depnt_dob" : '',
-                "depnt_relationship_with_benf" : ''
+        $scope.InitializeBasicData= function(){
+            $scope.Beneficiary = {
+                "benf_registration_number": "",
+                "id":"",
+                "benf_registration_old_number": "",
+                "benf_acknowledgement_number": "",
+                "nationality": 'INDIAN',
+                benf_caste: $scope.casteList[3].value
             };
-            $scope.DependentsList.push(dependent);
-        };
-        $scope.insertDependent();
 
-        $scope.NomineeList = [];
-        $scope.insertNominee = function(idx) {
-            var individualNominee = {
-                "nominee_full_name": '',
-                "nominee_address": '',
-                "nominee_age": '',
-                "nominee_dob": '',
-                "nominee_share": 100
+            $scope.DependentsList = [];
+            $scope.insertDependent = function() {
+                var dependent = {
+                    "depnt_full_name" : '',
+                    "depnt_address" : '',
+                    "depnt_age" : '',
+                    "depnt_dob" : '',
+                    "depnt_relationship_with_benf" : ''
+                };
+                $scope.DependentsList.push(dependent);
             };
-            $scope.NomineeList.push(individualNominee);
+            $scope.insertDependent();
 
-            if(idx>=0){
-                $scope.changedPercentage(idx);
-            }
-        };
-        $scope.insertNominee(-1);
+            $scope.NomineeList = [];
+            $scope.insertNominee = function(idx) {
+                var individualNominee = {
+                    "nominee_full_name": '',
+                    "nominee_address": '',
+                    "nominee_age": '',
+                    "nominee_dob": '',
+                    "nominee_share": 100
+                };
+                $scope.NomineeList.push(individualNominee);
 
-        /* Test data */
+                if(idx>=0){
+                    $scope.changedPercentage(idx);
+                }
+            };
+            $scope.insertNominee(-1);
 
-        $scope.Beneficiary = config.TestData;
+            /* Test data : Need to remove this */
 
-        /* ENd test data */
+            $scope.Beneficiary = config.TestData;
 
+            /* ENd test data */
+        }
+
+        /* Start : Load data */
+
+        var id = CustomService.getParameterByName('id');
+        if(id)
+            $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
+            .then(function(response) {
+                $scope.Beneficiary = response.data.Beneficiary;
+                $scope.NomineeList = response.data.NomineeList;
+                $scope.DependentsList = response.data.DependentsList;
+                $scope.FormatNomineeData();
+                $scope.FormatDependentData();
+                $scope.FormatBeneficiaryData();
+            });
+        else $scope.InitializeBasicData();
+
+        /* End : Load data */
+
+        /* Start : data format functions */
+
+        $scope.FormatNomineeData = function(){
+            angular.forEach($scope.NomineeList, function(value, key) {
+                $scope.NomineeList[key].nominee_dob = new Date($scope.NomineeList[key].nominee_dob);
+            });
+        }
+        $scope.FormatDependentData = function(){
+            angular.forEach($scope.DependentsList, function(value, key) {
+                $scope.DependentsList[key].depnt_dob = new Date($scope.DependentsList[key].depnt_dob);
+            });
+        }
+        $scope.FormatBeneficiaryData = function(){
+            if($scope.Beneficiary.benf_date_of_birth != null) $scope.Beneficiary.benf_date_of_birth = new Date($scope.Beneficiary.benf_date_of_birth);
+            if($scope.Beneficiary.benf_date_of_employment != null) $scope.Beneficiary.benf_date_of_employment = new Date($scope.Beneficiary.benf_date_of_employment);
+        }
+
+        /* End : data format functions */
 
         /* Nominee */
         $scope.deleteNominee = function(index){
@@ -118,18 +155,14 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl + "/beneficiary/createnominee", {"nomineeList":$scope.NomineeList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
                     $scope.NomineeList = response.data.nomineeList;
-                    angular.forEach($scope.NomineeList, function(value, key) {
-                        $scope.NomineeList[key].nominee_dob = new Date($scope.NomineeList[key].nominee_dob);
-                    });
                 });
 
             $http.post(config.baseUrl + "/beneficiary/createdependents", {"dependentsList":$scope.DependentsList,"id":$scope.Beneficiary.id})
                 .then(function(response) {
                     $scope.DependentsList = response.data.dependentsList;
-                    angular.forEach($scope.DependentsList, function(value, key) {
-                        $scope.DependentsList[key].depnt_dob = new Date($scope.DependentsList[key].depnt_dob);
-                    });
                 });
+            $scope.FormatNomineeData();
+            $scope.FormatDependentData();
         };
         
         /* Start : upload related code */

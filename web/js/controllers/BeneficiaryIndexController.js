@@ -16,7 +16,7 @@ app.controller("BeneficiaryIndexController", ['$scope', '$http', 'config', '$win
             });
             
         $scope.updateBeneficiary = function(id) {
-            $window.location.href = config.baseUrl + "/beneficiary/update?id=" + id;
+            $window.location.href = config.baseUrl + "/beneficiary/create?id=" + id;
         }
 
         $scope.ViewBeneficiary = function(id) {
