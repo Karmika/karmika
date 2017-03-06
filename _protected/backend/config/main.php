@@ -18,7 +18,7 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => ['@app/views' => '@webroot/themes/slate/views'],
-                'baseUrl' => '@web/themes/slate',
+                'baseUrl' => '@web/themes/spacelab',
             ],
         ],
         'user' => [

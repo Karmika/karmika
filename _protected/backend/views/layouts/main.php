@@ -20,6 +20,13 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css">
+
+    .navbar-brand{
+        font-size: 35px;
+    }
+    
+    </style> 
 </head>
 <body>
     <?php $this->beginBody() ?>
@@ -27,7 +34,7 @@ AppAsset::register($this);
 
         <?php
             NavBar::begin([
-                'brandLabel' => Yii::t('app', "Karmika"),
+                'brandLabel' => Yii::t('app', "Karmika 2.0 "),
                 // 'brandUrl' => Yii::$app->homeUrl,
                 'brandUrl' => '/karmika',
                 'options' => [

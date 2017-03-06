@@ -241,7 +241,7 @@
 				<small class="error" ng-show="Admin.adminComments.$invalid && Admin.adminComments.$dirty">Please provide comments</small>
 			</div>
 			<ul class="list-inline pull-right">
-			  <li><button ng-disabled="Admin.$invalid" ng-click="Approve()" type="button" class="btn btn-success next-step">Approve</button></li>
+			  <li><button ng-click="Approve()" type="button" class="btn btn-success next-step">Approve</button></li>
 			  <li><button ng-disabled="Admin.$invalid" ng-click="Reject()" type="button" class="btn btn-danger prev-step">Reject</button></li>
 			</ul>
 		</form>

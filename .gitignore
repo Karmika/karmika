@@ -32,6 +32,7 @@ phpunit.phar
 /_protected/frontend/runtime/
 /_protected/backend/runtime/
 /backend/assets/
+/backend/runtime/
 /assets
 /web/others/docs
 .bowerrc

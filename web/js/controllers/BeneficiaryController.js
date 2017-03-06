@@ -408,7 +408,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
 
     $scope.Approve = function(){
         if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"adminComments":$scope.adminComments})
+        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"adminComments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
         .then(function(response) {
             if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
         });
