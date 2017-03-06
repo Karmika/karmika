@@ -217,11 +217,64 @@
 
         <br><h3 class="text-center subHeading">Nominee and Dependents</h3><br>
 
+            <b>Nominee List : </b><br><br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age (years)</th>
+                        <th>Date Of Birth</th>
+                        <th>Share</th>
+                        <th>Relationship with Applicant</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="nominee in NomineeList">
+                        <td>{{ nominee.nominee_full_name }}</td>
+                        <td>{{ nominee.nominee_age }}</td>
+                        <td>{{ nominee.nominee_dob | date }}</td>
+                        <td>{{ nominee.nominee_share }}</td>
+                        <td>{{ nominee.nominee_relationship_with_benf }}</td>
+                        <td>{{ nominee.nominee_address }}</td>
+                    </tr>
+                    <tr ng-if="NomineeList.length < 1">
+                        <td colspan="6">
+                            <p class="text-center" style="color:red">-- No data found for nominees --</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <b>Dependents List : </b><br><br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age (years)</th>
+                        <th>Date Of Birth</th>
+                        <th>Relation</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dependent in DependentsList">
+                        <td>{{ dependent.depnt_full_name }}</td>
+                        <td>{{ dependent.depnt_age }}</td>
+                        <td>{{ dependent.depnt_dob | date }}</td>
+                        <td>{{ dependent.depnt_relationship_with_benf }}</td>
+                        <td>{{ dependent.depnt_address }}</td>
+                    </tr>
+                    <tr ng-if="DependentsList.length < 1">
+                        <td colspan="5">
+                            <p class="text-center" style="color:red">-- No data found for dependents --</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
 
         <br><h3 class="text-center subHeading">Employment Certificate</h3><br>
-
-
-        <br><h3 class="text-center subHeading">Uploaded Files</h3><br>
 
         <br>
         <br>

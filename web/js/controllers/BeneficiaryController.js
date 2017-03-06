@@ -397,13 +397,13 @@ app.controller("BeneficiarySuccessController", ['$scope', 'CustomService',
 app.controller("BeneficiaryDetailsController",['$scope','CustomService','config','$http','$window',
     function ($scope,CustomService,config,$http,$window) {    
 
-    $scope.Beneficiary = {};
-
     var id = CustomService.getParameterByName('id');
-    $http.post(config.baseUrl+"/beneficiary/getbeneficiary",{"id":id})
+    $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
     .then(function(response) {
-        if(response.data.benf_date_of_birth != null) response.data.benf_date_of_birth = new Date(response.data.benf_date_of_birth);
-        $scope.Beneficiary = response.data;
+        if(response.data.Beneficiary.benf_date_of_birth != null) response.data.Beneficiary.benf_date_of_birth = new Date(response.data.Beneficiary.benf_date_of_birth);
+        $scope.Beneficiary = response.data.Beneficiary;
+        $scope.NomineeList = response.data.NomineeList;
+        $scope.DependentsList = response.data.DependentsList;
     });
 
     $scope.Approve = function(){

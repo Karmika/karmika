@@ -104,14 +104,7 @@ class BeneficiaryController extends FrontendController
         $post = file_get_contents("php://input");
         $data = json_decode($post, true);
         $result = array();
-
-        if(isset($data['id']) && $data['id'] != ""){
-            $beneficiary_details = BeneficiaryMaster::find()
-            ->where(['id' => $data['id']])
-            ->one();
-            $result = ArrayHelper::toArray($beneficiary_details,'*');
-            $result['actionRequired'] = ($result['benf_application_status'] == $this->AppliedStatus)?true:false;
-        }
+        if(isset($data['id']) && $data['id'] != "") $result = $this->GetBeneficiaryById($data['id']);
         return json_encode($result);
     }
 
@@ -164,7 +157,6 @@ class BeneficiaryController extends FrontendController
                  $Conditions = ['created_by_user_id' => $this->LoggedInUser];
                  break;
         }
-
         $result = $this->GetBeneficiaryDetails($Conditions);
         return json_encode($result);
     } 
@@ -175,36 +167,11 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         //$data = array("benf_first_name"=>"Sravan","benf_mobile_no"=>"8892233720");
         $Conditions = [];
-
         foreach ($data as $key => $value) {
             $Conditions[$key] = $value;
         }
-
         $result = $this->GetBeneficiaryDetails($Conditions);
         return json_encode($result);
-    } 
-
-    public function GetBeneficiaryDetails($Conditions){
-
-        $beneficiary_details = BeneficiaryMaster::find()
-        ->where($Conditions)
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
-        ->orderBy(['id' => SORT_DESC])
-        ->all();
-        $sno = 1;
-        $result = ArrayHelper::toArray($beneficiary_details,'*');
-        foreach ($result as $key=>$val)
-        {            
-            $user = User::find()
-            ->where(['id' => (int)$val["updated_by_user_id"]])
-            ->one();
-            $user = ArrayHelper::toArray($user,'*');
-            $result[$key]["updated_by"] = $user["username"];
-            $result[$key]['sno'] = $sno++;
-            $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
-            $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
-        }
-        return $result;
     }
 
     public function actionCreatenominee()
@@ -253,5 +220,66 @@ class BeneficiaryController extends FrontendController
             $data['dependentsList'][$key]['id'] = $model->id;
         }
         return json_encode(array("status"=>"success","dependentsList"=>$data['dependentsList']));
+    }
+
+    public function actionGetbeneficiaryalldata()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $id = $data['id'];
+        $result = array();
+        if((!isset($id)) || $id == "") return json_encode($result);        
+        $Beneficiary = $this->GetBeneficiaryById($id);
+        $NomineeList = $this->GetNomineesByBeneficiaryId($id);
+        $DependentsList = $this->GetDependentsByBeneficiaryId($id);
+        return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList));
+    }
+
+    private function GetBeneficiaryDetails($Conditions){
+
+        $beneficiary_details = BeneficiaryMaster::find()
+        ->where($Conditions)
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
+        ->orderBy(['id' => SORT_DESC])
+        ->all();
+        $sno = 1;
+        $result = ArrayHelper::toArray($beneficiary_details,'*');
+        foreach ($result as $key=>$val)
+        {            
+            $user = User::find()
+            ->where(['id' => (int)$val["updated_by_user_id"]])
+            ->one();
+            $user = ArrayHelper::toArray($user,'*');
+            $result[$key]["updated_by"] = $user["username"];
+            $result[$key]['sno'] = $sno++;
+            $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
+            $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+        }
+        return $result;
+    }
+
+    private function GetBeneficiaryById($id){
+        $beneficiary_details = BeneficiaryMaster::find()
+            ->where(['id' => $id])
+            ->one();
+        $result = ArrayHelper::toArray($beneficiary_details,'*');
+        $result['actionRequired'] = ($result['benf_application_status'] == $this->AppliedStatus)?true:false;
+        return $result;
+    }
+
+    private function GetNomineesByBeneficiaryId($id){
+        $details = BenfNominee::find()
+            ->where(['benf_master_id' => $id])
+            ->all();
+        $result = ArrayHelper::toArray($details,'*');
+        return $result;
+    }
+
+    private function GetDependentsByBeneficiaryId($id){
+        $details = BenfDependents::find()
+            ->where(['benf_master_id' => $id])
+            ->all();
+        $result = ArrayHelper::toArray($details,'*');
+        return $result;
     }
 }
