@@ -23,4 +23,7 @@ app.controller("BeneficiaryIndexController", ['$scope', '$http', 'config', '$win
             $window.location.href = config.baseUrl + "/beneficiary/view?id=" + id;
         }
 
+        $scope.ViewPayments = function(id) {
+            $window.location.href = config.baseUrl + "/payment/index?id=" + id;
+        }
 }]);

@@ -48,6 +48,7 @@ class WebAsset extends AssetBundle
       'web/js/controllers/BeneficiaryIndexController.js',
       'web/js/controllers/BeneficiarySuccessController.js',
       'web/js/controllers/BeneficiaryUpdateController.js',
+      'web/js/controllers/PaymentController.js',
     ];
     
 }

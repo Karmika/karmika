@@ -10,7 +10,6 @@ use yii\helpers\Json;
 use frontend\models\BeneficiaryMaster;
 use frontend\models\BenfNominee;
 use frontend\models\BenfDependents;
-use frontend\models\Publication;
 use common\models\User;
 use frontend\models\Services;
 
@@ -239,7 +238,7 @@ class BeneficiaryController extends FrontendController
 
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;

@@ -26,12 +26,16 @@ class FrontendController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'controllers' => ['article','beneficiary'],
+                        'controllers' => ['article','beneficiary','payment'],
                         'actions' => ['index', 'view', 'create', 'update', 'delete', 'admin','allbeneficiaries',
                                         'createbeneficiary','getbeneficiary','updatebeneficiary','success',
                                         'sample','approvebeneficiary','rejectbeneficiary','createnominee',
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
-                                        'getbeneficiaryalldata'],
+                                        'getbeneficiaryalldata',
+
+                                        //Payment
+                                        'index','allpayments'
+                                        ],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
