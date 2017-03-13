@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2017 at 05:25 AM
+-- Generation Time: Mar 13, 2017 at 05:28 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -228,7 +228,8 @@ INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `
 (10, 'Sravan', 'Kumar', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 03:47:41', 1, '2017-03-06 18:05:15', 1, 'DRAFT', 'BNG000000010', NULL, '', NULL, 'EPIC', '213131313'),
 (11, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 03:58:58', 1, '2017-03-05 04:06:31', 1, 'APPROVED', 'BNG000000011', '0000000004', '', '', 'EPIC', '213131313'),
 (12, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 04:07:02', 1, '2017-03-05 04:07:34', 1, 'REJECTED', 'BNG000000012', '0000000005', '', 'Hiii', 'EPIC', '213131313'),
-(13, 'SSSSS', 'KKKKK', 'RRRRR', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-06 18:19:23', 1, '2017-03-08 18:05:59', 1, 'APPLIED', 'BNG000000013', '0000000006', '', NULL, 'EPIC', '213131313');
+(13, 'SSSSS', 'KKKKK', 'RRRRR', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-06 18:19:23', 1, '2017-03-13 04:37:46', 1, 'APPROVED', 'BNG000000013', '0000000007', '', 'Ok Boss It''s Approved !!', 'EPIC', '213131313'),
+(14, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-13 10:47:22', 1, '2017-03-13 10:47:22', 1, 'DRAFT', 'BNG000000014', NULL, '', NULL, 'EPIC', '213131313');
 
 -- --------------------------------------------------------
 
@@ -343,6 +344,37 @@ INSERT INTO `benf_nominee` (`id`, `benf_master_id`, `nominee_full_name`, `nomine
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `benf_payments`
+--
+
+CREATE TABLE `benf_payments` (
+  `id` int(11) NOT NULL,
+  `benf_master_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `date_of_payment` date NOT NULL,
+  `notes` text,
+  `created_by_user_id` int(11) NOT NULL,
+  `updated_by_user_id` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `benf_payments`
+--
+
+INSERT INTO `benf_payments` (`id`, `benf_master_id`, `amount`, `date_of_payment`, `notes`, `created_by_user_id`, `updated_by_user_id`, `created_date`, `updated_date`) VALUES
+(1, 13, 1016, '2017-03-06', 'hohijoiojoi', 1, 1, '2017-03-13 09:19:00', '2017-03-13 09:19:00'),
+(2, 13, 1000, '2017-03-01', 'Yes 2nd payment success', 1, 1, '2017-03-13 09:21:31', '2017-03-13 09:21:31'),
+(3, 13, 555, '2017-03-08', 'Hii', 1, 1, '2017-03-13 10:08:26', '2017-03-13 10:08:26'),
+(4, 13, 1234, '2017-02-01', 'paid', 1, 1, '2017-03-13 10:08:59', '2017-03-13 10:08:59'),
+(5, 13, 505, '2017-03-08', 'with tax', 1, 1, '2017-03-13 10:09:14', '2017-03-13 10:09:14'),
+(6, 13, 2999, '2017-03-08', NULL, 1, 1, '2017-03-13 10:14:26', '2017-03-13 10:14:26'),
+(7, 13, 2700, '2017-03-03', NULL, 1, 1, '2017-03-13 10:21:53', '2017-03-13 10:21:53');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migration`
 --
 
@@ -395,7 +427,7 @@ INSERT INTO `session` (`id`, `expire`, `data`) VALUES
 ('9il7fqpgk100vdvsai8dhj3d25', 1488620376, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
 ('9qdj2lod3fho2clijqj46c2gb3', 1488338576, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
 ('cgd25g8dm5sk7pl0jl0ud7iov0', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('dsap6048f88a3oes2pcivmsfj7', 1489380350, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
+('ea9iut8hhrneejlsebrmbmhb50', 1489405203, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
 ('hf6sepsggti24b4u6pd89pskq5', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
 ('jda22m3u2ahcvb8gho0n55d1b3', 1488606160, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
 ('kmjshdmcmgu7rodcno9kasa122', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
@@ -505,6 +537,12 @@ ALTER TABLE `benf_nominee`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `benf_payments`
+--
+ALTER TABLE `benf_payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migration`
 --
 ALTER TABLE `migration`
@@ -543,7 +581,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `beneficiary_master`
 --
 ALTER TABLE `beneficiary_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `benf_attachments`
 --
@@ -559,6 +597,11 @@ ALTER TABLE `benf_dependents`
 --
 ALTER TABLE `benf_nominee`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `benf_payments`
+--
+ALTER TABLE `benf_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `news`
 --
