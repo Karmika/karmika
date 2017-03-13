@@ -96,12 +96,14 @@ td,th{
         <td>{{beneficiary.updated_by}}</td>
         <td>{{beneficiary.benf_application_status}}</td>
         <?php if($IsAdmin){?>
-          <td>
+          <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
           </td>
-          <td>
+          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
+          <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
           </td>
+          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
         <?php }?>
       </tr>
       <tr ng-show="ListError">

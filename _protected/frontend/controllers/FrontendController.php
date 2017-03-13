@@ -34,7 +34,7 @@ class FrontendController extends Controller
                                         'getbeneficiaryalldata',
 
                                         //Payment
-                                        'index','allpayments'
+                                        'index','create','allpayments','createpayment'
                                         ],
                         'allow' => true,
                         'roles' => ['admin'],

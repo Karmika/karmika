@@ -1,7 +1,7 @@
 <?php
     $this->title = 'Beneficiary Payment Details';
 ?>
-<div ng-cloak class="SubscriptionCtrl" ng-controller="PaymentController">
+<div ng-cloak class="PaymentCtrl" ng-controller="PaymentController" ng-init="Index()">
 <center><h3>Beneficiary Payment Details</h3></center>
 <br />
 <br />
@@ -16,8 +16,8 @@
     <thead>
       <tr>
         <th><a href="#" >No.</a></th>
-        <th><a href="#" >Payment Mode </a></th>
-        <th><a href="#" >Payment Status </a></th>
+<!--         <th><a href="#" >Payment Mode </a></th>
+        <th><a href="#" >Payment Status </a></th> -->
         <th><a href="#" >Payment Date </a></th>
         <th><a href="#" >Amount </a></th>
       </tr>
@@ -25,11 +25,11 @@
     <tbody>
       <tr dir-paginate="payment in Payments | filter : searchName | itemsPerPage: selectedRowsPerPage">
         <td>{{$index+1}}</td>
-        <td>
+<!--         <td>
           <a class="nameLink" ng-click="updatePayment(payment.id)">{{payment.payment_mode}}</a>
         </td>
-        <td>{{payment.payment_status}}</td>
-        <td>{{payment.payment_date | date :  "dd-MM-yyyy" }}</td>
+        <td>{{payment.payment_status}}</td> -->
+        <td>{{payment.date_of_payment | date }}</td>
         <td>{{payment.amount}}</td>
       </tr>
       <tr ng-show="ListError">
@@ -39,9 +39,12 @@
       </tr>
     </tbody>
   </table>
+  <div class="row"><div class="col-sm-8 text-right">Total Paid : </div><div class="col-sm-4"><b>&nbsp;&nbsp;{{totalAmount}}</b></div></div>
+<div class="row pull-right" style="padding-right:1%">
   <dir-pagination-controls
     direction-links="true"
     boundary-links="true" >
   </dir-pagination-controls>
+</div>
 </div>
 </div>
