@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2017 at 05:57 AM
+-- Generation Time: Mar 13, 2017 at 05:25 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -89,11 +89,12 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('adminArticle', 2, 'Allows admin+ roles to manage articles', NULL, NULL, 1486799475, 1486799475),
 ('createArticle', 2, 'Allows editor+ roles to create articles', NULL, NULL, 1486799475, 1486799475),
 ('deleteArticle', 2, 'Allows admin+ roles to delete articles', NULL, NULL, 1486799475, 1486799475),
-('editor', 1, 'Editor of this application', NULL, NULL, 1486799475, 1486799475),
+('editor', 2, 'Editor of this application', NULL, NULL, 1486799475, 1486799475),
 ('manageUsers', 2, 'Allows admin+ roles to manage users', NULL, NULL, 1486799475, 1486799475),
 ('member', 1, 'Registered users, members of this site', NULL, NULL, 1486799475, 1486799475),
-('premium', 1, 'Premium members. They have more permissions than normal members', NULL, NULL, 1486799475, 1486799475),
-('support', 1, 'Support staff', NULL, NULL, 1486799475, 1486799475),
+('premium', 2, 'Premium members. They have more permissions than normal members', NULL, NULL, 1486799475, 1486799475),
+('subAdmin', 1, 'Sub-administrator is an administrator on a account with limited authority to approve and deny', NULL, NULL, 1486799475, 1486799475),
+('support', 2, 'Support staff', NULL, NULL, 1486799475, 1486799475),
 ('theCreator', 1, 'You!', NULL, NULL, 1486799475, 1486799475),
 ('updateArticle', 2, 'Allows editor+ roles to update articles', NULL, NULL, 1486799475, 1486799475),
 ('updateOwnArticle', 2, 'Update own article', 'isAuthor', NULL, 1486799475, 1486799475),
@@ -215,8 +216,19 @@ CREATE TABLE `beneficiary_master` (
 --
 
 INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `benf_last_name`, `benf_mobile_no`, `benf_alternate_mobile_no`, `benf_date_of_birth`, `beneficiary_age`, `benf_sex`, `nationality`, `benf_caste`, `benf_martial_status`, `benf_blood_group`, `benf_local_address_line1`, `benf_local_address_line2`, `benf_local_address_taluk`, `benf_local_address_district`, `benf_local_address_state`, `benf_local_pincode`, `benf_prmt_address_line1`, `benf_prmt_address_line2`, `benf_prmt_address_taluk`, `benf_prmt_address_district`, `benf_prmt_address_state`, `benf_prmt_address_pincode`, `employer_full_name`, `emplr_address_line1`, `emplr_address_line2`, `emplr_address_taluk`, `emplr_address_district`, `emplr_address_state`, `emplr_address_pincode`, `benf_nature_of_work`, `benf_date_of_employment`, `benf_wages_per_day`, `benf_wages_per_month`, `benf_bank_account_number`, `benf_bank_account_type`, `benf_bank_name`, `benf_bank_branch`, `benf_bank_ifsc`, `created_date`, `created_by_user_id`, `updated_date`, `updated_by_user_id`, `benf_application_status`, `benf_acknowledgement_number`, `benf_registration_number`, `benf_registration_old_number`, `admin_comments`, `benf_identity_card_type`, `benf_identity_card_number`) VALUES
-(1, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 04:29:21', 4, '2017-03-04 04:29:50', 4, 'APPLIED', 'BNG000000001', '000000001', '', NULL, 'EPIC', '213131313'),
-(2, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 04:31:17', 4, '2017-03-04 04:31:17', 4, 'DRAFT', 'BNG000000002', NULL, '', NULL, 'EPIC', '213131313');
+(1, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 06:08:34', 4, '2017-03-04 06:09:18', 4, 'APPROVED', 'BNG000000001', '0000000001', '', 'Approved', 'EPIC', '213131313'),
+(2, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 06:09:29', 4, '2017-03-04 06:17:49', 4, 'APPROVED', 'BNG000000002', '0000000002', '', 'approved', 'EPIC', '213131313'),
+(3, 'Sravan', 'Test', 'Test', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 06:18:04', 4, '2017-03-04 06:18:17', 4, 'APPROVED', 'BNG000000003', '0000000003', '', 'asdad', 'EPIC', '213131313'),
+(4, 'Nominee', 'Dependents', 'Dependents', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:18:48', 4, '2017-03-04 09:18:48', 4, 'DRAFT', 'BNG000000004', NULL, '', NULL, 'EPIC', '213131313'),
+(5, 'Nominee Sravan', 'Dependents', 'Dependents', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:20:38', 4, '2017-03-04 09:20:38', 1, 'DRAFT', 'BNG000000005', NULL, '', NULL, 'EPIC', '213131313'),
+(6, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:23:03', 4, '2017-03-04 09:23:03', 4, 'DRAFT', 'BNG000000006', NULL, '', NULL, 'EPIC', '213131313'),
+(7, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:30:49', 4, '2017-03-04 09:30:49', 4, 'DRAFT', 'BNG000000007', NULL, '', NULL, 'EPIC', '213131313'),
+(8, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:37:00', 4, '2017-03-04 09:37:00', 4, 'DRAFT', 'BNG000000008', NULL, '', NULL, 'EPIC', '213131313'),
+(9, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-04 09:40:03', 4, '2017-03-04 09:40:03', 4, 'DRAFT', 'BNG000000009', NULL, '', NULL, 'EPIC', '213131313'),
+(10, 'Sravan', 'Kumar', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 03:47:41', 1, '2017-03-06 18:05:15', 1, 'DRAFT', 'BNG000000010', NULL, '', NULL, 'EPIC', '213131313'),
+(11, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 03:58:58', 1, '2017-03-05 04:06:31', 1, 'APPROVED', 'BNG000000011', '0000000004', '', '', 'EPIC', '213131313'),
+(12, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-05 04:07:02', 1, '2017-03-05 04:07:34', 1, 'REJECTED', 'BNG000000012', '0000000005', '', 'Hiii', 'EPIC', '213131313'),
+(13, 'SSSSS', 'KKKKK', 'RRRRR', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-06 18:19:23', 1, '2017-03-08 18:05:59', 1, 'APPLIED', 'BNG000000013', '0000000006', '', NULL, 'EPIC', '213131313');
 
 -- --------------------------------------------------------
 
@@ -257,7 +269,10 @@ CREATE TABLE `benf_dependents` (
 --
 
 INSERT INTO `benf_dependents` (`id`, `benf_master_id`, `depnt_full_name`, `depnt_address`, `depnt_age`, `depnt_dob`, `depnt_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
-(1, 113, 'gjhbjhbjhbjhbj', 'bjbjhbhjbjh', 35, '1982-03-04', 'njbjh', 3, '2017-03-04 01:13:36');
+(1, 8, 'dependen', 'dependen', 34, '1983-03-04', 'dependen', 4, '2017-03-04 09:37:21'),
+(2, 8, 'Satheesh Kumar', 'Marathahalli', 34, '1983-03-04', 'dependen', 4, '2017-03-04 09:37:49'),
+(3, 8, 'Satheesh Kumar', 'Marathahalli', 34, '1983-03-04', 'dependen', 4, '2017-03-04 09:38:19'),
+(4, 9, 'pk', 'pk, Bangalore', 27, '1990-03-04', 'pk', 4, '2017-03-04 09:40:29');
 
 -- --------------------------------------------------------
 
@@ -317,7 +332,13 @@ CREATE TABLE `benf_nominee` (
 --
 
 INSERT INTO `benf_nominee` (`id`, `benf_master_id`, `nominee_full_name`, `nominee_address`, `nominee_age`, `nominee_dob`, `nominee_share`, `nominee_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
-(1, 113, 'jbjbk', 'jnknjknkjn', 25, '1992-03-04', 100, 'bjbj', 3, '2017-03-04 01:13:36');
+(1, 113, 'jbjbk', 'jnknjknkjn', 25, '1992-03-04', 100, 'bjbj', 3, '2017-03-04 01:13:36'),
+(2, 4, 'Sravan', 'Bangalore', 23, '1994-03-04', 100, 'me', 4, '2017-03-04 09:19:38'),
+(3, 5, 'Jaffa Testing', 'Jaffa Testing', 39, '1978-03-04', 100, 'Jaffa Testing', 1, '2017-03-04 09:21:11'),
+(4, 6, 'Biryanai', 'Biryanai, Bangalore', 34, '1983-03-04', 100, 'Jaffa Biryanai', 4, '2017-03-04 09:23:27'),
+(5, 7, 'Vanteru Sravan', 'Bangalore', 56, '1961-03-04', 100, 'aaaaaaa SS', 4, '2017-03-04 09:31:11'),
+(6, 8, 'Satheesh Kumar', 'Satheesh Kumar', 34, '1983-03-04', 100, 'dependen', 4, '2017-03-04 09:37:21'),
+(7, 9, 'pk', 'pk', 23, '1994-03-04', 100, 'pk', 4, '2017-03-04 09:40:29');
 
 -- --------------------------------------------------------
 
@@ -369,11 +390,17 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('7ufdone5m9m0be179r0pj0qad5', 1488604650, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b),
+('0ch79ugjhc7jtjbk20kbogf0u1', 1488606159, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
+('99202bk847ic8qauk7q3r2age3', 1488620376, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('9il7fqpgk100vdvsai8dhj3d25', 1488620376, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
 ('9qdj2lod3fho2clijqj46c2gb3', 1488338576, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
 ('cgd25g8dm5sk7pl0jl0ud7iov0', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('dsap6048f88a3oes2pcivmsfj7', 1489380350, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
 ('hf6sepsggti24b4u6pd89pskq5', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('jda22m3u2ahcvb8gho0n55d1b3', 1488606160, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
 ('kmjshdmcmgu7rodcno9kasa122', 1488600905, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('nhdfp84dcmg57u29pur5ocntv6', 1488620376, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('nov7fnjvoe44bpio9fvqu1uj24', 1488899569, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
 ('smcrdkp7918dfqd6kjcfodg8g1', 1488472622, 0x5f5f666c6173687c613a303a7b7d);
 
 -- --------------------------------------------------------
@@ -516,7 +543,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `beneficiary_master`
 --
 ALTER TABLE `beneficiary_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `benf_attachments`
 --
@@ -526,12 +553,12 @@ ALTER TABLE `benf_attachments`
 -- AUTO_INCREMENT for table `benf_dependents`
 --
 ALTER TABLE `benf_dependents`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `benf_nominee`
 --
 ALTER TABLE `benf_nominee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `news`
 --
@@ -541,7 +568,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
