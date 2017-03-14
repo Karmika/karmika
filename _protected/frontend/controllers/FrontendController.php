@@ -41,8 +41,9 @@ class FrontendController extends Controller
                     ],
                     [
                         'controllers' => ['beneficiary'],
-                        'actions' => ['index','create','allbeneficiaries', 'createbeneficiary',
-                                    'getbeneficiary','updatebeneficiary','success'
+                        'actions' => ['index','create','update','allbeneficiaries', 'createbeneficiary',
+                                      'getbeneficiary','updatebeneficiary','success','createnominee',
+                                      'createdependents','submitbeneficiary'
                                     ],
                         'allow' => true,
                         'roles' => ['member'],
