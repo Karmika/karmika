@@ -54,6 +54,10 @@ app.constant('config', {
     perPageRowSelectionData:[
     		100,50,20,10,5,2
     		],
+    CertificateTypes : [
+                {"value":"V","text":"Form V"},
+                {"value":"IV","text":"Form IV"}
+            ],   
     TestData : {
               "benf_application_status": "APPLIED",
               "benf_registration_number": null,

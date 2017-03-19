@@ -31,7 +31,7 @@ class FrontendController extends Controller
                                         'createbeneficiary','getbeneficiary','updatebeneficiary','success',
                                         'sample','approvebeneficiary','rejectbeneficiary','createnominee',
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
-                                        'getbeneficiaryalldata',
+                                        'getbeneficiaryalldata','createcertificates','deletecertificate',
 
                                         //Payment
                                         'index','create','allpayments','createpayment'
@@ -43,7 +43,8 @@ class FrontendController extends Controller
                         'controllers' => ['beneficiary'],
                         'actions' => ['index','create','update','allbeneficiaries', 'createbeneficiary',
                                       'getbeneficiary','updatebeneficiary','success','createnominee',
-                                      'createdependents','submitbeneficiary'
+                                      'createdependents','submitbeneficiary','createcertificates',
+                                      'deletecertificate'
                                     ],
                         'allow' => true,
                         'roles' => ['member'],

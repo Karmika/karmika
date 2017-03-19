@@ -10,6 +10,7 @@ use yii\helpers\Json;
 use frontend\models\BeneficiaryMaster;
 use frontend\models\BenfNominee;
 use frontend\models\BenfDependents;
+use frontend\models\BenfEmpCertificate;
 use common\models\User;
 use frontend\models\Services;
 
@@ -232,6 +233,44 @@ class BeneficiaryController extends FrontendController
         $NomineeList = $this->GetNomineesByBeneficiaryId($id);
         $DependentsList = $this->GetDependentsByBeneficiaryId($id);
         return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList));
+    }
+
+    public function actionCreatecertificates()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        foreach ($data['Forms'] as $key=>$certificate){
+            $model = new BenfEmpCertificate();
+            if(isset($certificate['id']) && $certificate['id'] != null) $model = BenfEmpCertificate::findOne($certificate['id']);
+
+            $certificate["benf_master_id"] = $data['benf_master_id'];
+            $certificate["last_updated_by_user_id"] = $this->LoggedInUser;
+            $model->attributes = $certificate;
+            
+            if(isset($certificate['id']) && $certificate['id'] != null){
+              $model->update();
+              continue;   
+            }
+
+            $model->save();
+            $data['Forms'][$key]['id'] = $model->id;
+            $data['Forms'][$key]['benf_work_end_date'] = $model->benf_work_end_date;
+            $data['Forms'][$key]['benf_work_start_date'] = $model->benf_work_start_date;
+        }
+
+        return json_encode(array("status"=>"success","Forms"=>$data['Forms']));
+    }
+
+    public function actionDeletecertificate(){
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $response = array("status"=>"failed");
+        if(isset($data['id']) && $data['id'] != null){
+            $model = BenfEmpCertificate::findOne($data['id']);
+            $model->delete();
+            $response = array("status"=>"success");
+        }
+        return json_encode($response);
     }
 
     private function GetBeneficiaryDetails($Conditions){
