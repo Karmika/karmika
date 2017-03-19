@@ -16,7 +16,7 @@ use Yii;
  * @property string $emp_union_branch_address
  * @property string $benf_work_start_date
  * @property string $benf_work_end_date
- * @property string $emp_union-address
+ * @property string $emp_union_address
  * @property string $last_updated_by_user_id
  * @property string $last_updated_time
  */
@@ -38,7 +38,7 @@ class BenfEmpCertificate extends \yii\db\ActiveRecord
         return [
             [['benf_master_id', 'benf_employer_full_name', 'benf_present_work_address', 'benf_present_project_name', 'last_updated_by_user_id'], 'required'],
             [['benf_master_id', 'last_updated_by_user_id'], 'integer'],
-            [['benf_present_work_address', 'emp_union_branch_address', 'emp_union-address'], 'string'],
+            [['benf_present_work_address', 'emp_union_branch_address', 'emp_union_address'], 'string'],
             [['benf_work_start_date', 'benf_work_end_date', 'last_updated_time'], 'safe'],
             [['benf_employer_full_name', 'benf_present_project_name', 'emp_union_full_name'], 'string', 'max' => 50],
         ];
@@ -59,7 +59,7 @@ class BenfEmpCertificate extends \yii\db\ActiveRecord
             'emp_union_branch_address' => 'Emp Union Branch Address',
             'benf_work_start_date' => 'Benf Work Start Date',
             'benf_work_end_date' => 'Benf Work End Date',
-            'emp_union-address' => 'Emp Union Address',
+            'emp_union_address' => 'Emp Union Address',
             'last_updated_by_user_id' => 'Last Updated By User ID',
             'last_updated_time' => 'Last Updated Time',
         ];

@@ -470,13 +470,13 @@ $url =  Yii::$app->homeUrl;?>
                         <div class="row">
                             <form class="col-sm-10"> 
                               <label class="control-label col-md-2"><span class="mandatory-field"></span>Select Form Type :</label>
-                              <label for="FormType"><input type="radio" name="FormType" ng-model="FormType" value="V">&nbsp;Form V&nbsp;&nbsp;</label>
-                              <label for="FormType"><input type="radio" name="FormType" ng-model="FormType" value="IV">&nbsp;Form IV&nbsp;&nbsp;</label>
+                              <label for="FormType"><input type="radio" name="FormType" ng-model="Certificates.FormType" value="V">&nbsp;Form V&nbsp;&nbsp;</label>
+                              <label for="FormType"><input type="radio" name="FormType" ng-model="Certificates.FormType" value="IV">&nbsp;Form IV&nbsp;&nbsp;</label>
                             </form>
                             <button ng-click="AddCertificate($index)" ng-show="Certificates.Forms.length>0" class="btn btn-success pull-right" style="margin-right:15px;">Add Certificate</button>
                         </div><br>
 
-                        <form ng-show="FormType == 'V'" role='form' name="EmploymentFormV" novalidate class="form-vertical">
+                        <form ng-show="Certificates.FormType == 'V'" role='form' name="EmploymentFormV" novalidate class="form-vertical">
                             <div ng-repeat="frm in  Certificates.Forms" class="panel panel-success">
                                 <div class="panel-heading text-left"><b>Certificate {{$index+1}}</b>
                                     <button class="btn btn-danger pull-right" style="margin-top:-9px;margin-right:-15px;" ng-show="Certificates.Forms.length>1" ng-click="deleteCertificate($index)" tooltop="Add one more certificates" style=""><i class="glyphicon glyphicon-remove"></i></button>
@@ -500,14 +500,19 @@ $url =  Yii::$app->homeUrl;?>
                                             <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Certificates.Forms[$index].emp_union_full_name" name="emp_union_full_name_{{$index}}" placeholder="First Name" maxlength="25" required />
                                             <small class="error" ng-show="EmploymentFormV.emp_union_full_name_{{$index}}.$invalid && EmploymentFormV.emp_union_full_name_{{$index}}.$dirty">Please provide union full name</small>
                                         </div>
+                                        <label class="control-label col-md-2" for="emp_union_branch_address_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Union&nbsp;Address</label>
+                                        <div class="col-md-4">
+                                            <textarea class="form-control" ng-model="Certificates.Forms[$index].emp_union_branch_address" name="emp_union_branch_address_{{$index}}" placeholder="Address" maxlength="250" required ></textarea>
+                                            <small class="error" ng-show="EmploymentFormV.emp_union_branch_address_{{$index}}.$invalid && EmploymentFormV.emp_union_branch_address_{{$index}}.$dirty">Please provide union address</small>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
                                         <label class="control-label col-md-2" for="benf_present_work_address_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;Address</label>
                                         <div class="col-md-4">
                                             <textarea class="form-control" ng-model="Certificates.Forms[$index].benf_present_work_address" name="benf_present_work_address_{{$index}}" placeholder="Address" maxlength="250" required ></textarea>
                                             <small class="error" ng-show="EmploymentFormV.benf_present_work_address_{{$index}}.$invalid && EmploymentFormV.benf_present_work_address_{{$index}}.$dirty">Please provide work address</small>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}">Work&nbsp;Start&nbsp;Date</label>
+                                        </div>                                        
+                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;Start&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-click="open1()" ng-model="Certificates.Forms[$index].benf_work_start_date" is-open="popup1.opened" name="benf_work_start_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
@@ -516,7 +521,9 @@ $url =  Yii::$app->homeUrl;?>
                                             </p>
                                             <small class="error" ng-show="EmploymentFormV.benf_work_start_date_{{$index}}.$invalid && EmploymentFormV.benf_work_start_date_{{$index}}.$dirty">Please provide work start date and only acceptable format is DD-MM-YYYY</small>
                                         </div>
-                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}">Work&nbsp;End&nbsp;Date</label>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;End&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" ng-click="open1()" uib-datepicker-popup="{{format}}" ng-model="Certificates.Forms[$index].benf_work_end_date" is-open="popup1.opened" name="benf_work_end_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
@@ -530,28 +537,60 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                         </form>
 
-                        <div ng-show="FormType == 'IV'">
-                            <form role='form' name="EmploymentFormIV" novalidate class="form-vertical">
-                                <div class="row form-group">
-                                    <label class="control-label col-md-2" for="benf_employer_full_name"><span class="mandatory-field">*&nbsp;</span>Full&nbsp;Name</label>
-                                    <div class="col-md-4">
-                                        <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Employment.benf_employer_full_name" name="benf_employer_full_name" placeholder="First Name" maxlength="25" required />
-                                        <small class="error" ng-show="EmploymentFormIV.benf_employer_full_name.$invalid && EmploymentFormIV.benf_employer_full_name.$dirty">Please provide first name</small>
+                        <form ng-show="Certificates.FormType == 'IV'" role='form' name="EmploymentFormIV" novalidate class="form-vertical">
+                            <div ng-repeat="frm in  Certificates.Forms" class="panel panel-success">
+                                <div class="panel-heading text-left"><b>Certificate {{$index+1}}</b>
+                                    <button class="btn btn-danger pull-right" style="margin-top:-9px;margin-right:-15px;" ng-show="Certificates.Forms.length>1" ng-click="deleteCertificate($index)" tooltop="Add one more certificates" style=""><i class="glyphicon glyphicon-remove"></i></button>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row form-group">
+                                        <label class="control-label col-md-2" for="benf_employer_full_name_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Employer&nbsp;Full&nbsp;Name</label>
+                                        <div class="col-md-4">
+                                            <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Certificates.Forms[$index].benf_employer_full_name" name="benf_employer_full_name_{{$index}}" placeholder="First Name" maxlength="25" required />
+                                            <small class="error" ng-show="EmploymentFormIV.benf_employer_full_name_{{$index}}.$invalid && EmploymentFormIV.benf_employer_full_name_{{$index}}.$dirty">Please provide employer first name</small>
+                                        </div>
+                                        <label class="control-label col-md-2" for="benf_present_project_name_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Project&nbsp;Name</label>
+                                        <div class="col-md-4">
+                                            <input class="form-control" ng-model="Certificates.Forms[$index].benf_present_project_name" name="benf_present_project_name_{{$index}}" placeholder="Address" maxlength="25"></input>
+                                            <small class="error" ng-show="EmploymentFormIV.benf_present_project_name_{{$index}}.$invalid && EmploymentFormIV.benf_present_project_name_{{$index}}.$dirty">Please provide project name</small>
+                                        </div>
                                     </div>
-                                    <label class="control-label col-md-2" for="permanentAddress">Permanent&nbsp;residential&nbsp;Address</label>
-                                    <div class="col-md-4">
-                                        <textarea class="form-control" ng-model="Employment.permanentAddress" name="permanentAddress" placeholder="Address" maxlength="25"></textarea>
-                                        <small class="error" ng-show="EmploymentFormIV.permanentAddress.$invalid && EmploymentFormIV.permanentAddress.$dirty">Please provide middle name</small>
+                                    <div class="row form-group">
+                                        <label class="control-label col-md-2" for="benf_present_work_address_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;Address</label>
+                                        <div class="col-md-4">
+                                            <textarea class="form-control" ng-model="Certificates.Forms[$index].benf_present_work_address" name="benf_present_work_address_{{$index}}" placeholder="Address" maxlength="250" required ></textarea>
+                                            <small class="error" ng-show="EmploymentFormIV.benf_present_work_address_{{$index}}.$invalid && EmploymentFormIV.benf_present_work_address_{{$index}}.$dirty">Please provide work address</small>
+                                        </div>
+                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;Start&nbsp;Date</label>
+                                        <div class="col-md-4" ng-controller="DatepickerPopupController">
+                                            <p class="input-group">
+                                                <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-click="open1()" ng-model="Certificates.Forms[$index].benf_work_start_date" is-open="popup1.opened" name="benf_work_start_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                                    placeholder="Select work start date" />
+                                                <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+                                            </p>
+                                            <small class="error" ng-show="EmploymentFormIV.benf_work_start_date_{{$index}}.$invalid && EmploymentFormIV.benf_work_start_date_{{$index}}.$dirty">Please provide work start date and only acceptable format is DD-MM-YYYY</small>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;End&nbsp;Date</label>
+                                        <div class="col-md-4" ng-controller="DatepickerPopupController">
+                                            <p class="input-group">
+                                                <input date-validation class="form-control" ng-click="open1()" uib-datepicker-popup="{{format}}" ng-model="Certificates.Forms[$index].benf_work_end_date" is-open="popup1.opened" name="benf_work_end_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                                    placeholder="Select work start date" />
+                                                <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+                                            </p>
+                                            <small class="error" ng-show="EmploymentFormIV.benf_work_end_date_{{$index}}.$invalid && EmploymentFormIV.benf_work_end_date_{{$index}}.$dirty">Please provide work end date and only acceptable format is DD-MM-YYYY</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
 
                         <br><br>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li ng-show="FormType == 'V'"><button type="button" class="btn btn-primary btn-info-full next-step" ng-disabled="EmploymentFormV.$invalid" ng-click="SaveCertificate(FormType)">Save and Continue</button></li>
-                            <li ng-show="FormType == 'IV'"><button type="button" class="btn btn-primary btn-info-full next-step" ng-disabled="EmploymentFormIV.$invalid" ng-click="SaveCertificate(FormType)">Save and Continue</button></li>
+                            <li ng-show="Certificates.FormType == 'V'"><button type="button" class="btn btn-primary btn-info-full next-step" ng-disabled="EmploymentFormV.$invalid" ng-click="SaveCertificate(FormType)">Save and Continue</button></li>
+                            <li ng-show="Certificates.FormType == 'IV'"><button type="button" class="btn btn-primary btn-info-full next-step" ng-disabled="EmploymentFormIV.$invalid" ng-click="SaveCertificate(FormType)">Save and Continue</button></li>
                         </ul>
                     </div>
 <!--                     <div class="tab-pane" role="tabpanel" id="step4">
@@ -890,8 +929,28 @@ $url =  Yii::$app->homeUrl;?>
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading cursorPointer"><b>Employment Certificate</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body">
-
-
+                                        <div ng-repeat="frm in  Certificates.Forms">
+                                            <div class="panel-heading text-left"><b style="text-decoration: underline;">Certificate {{$index+1}}</b>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row form-group">
+                                                    <label class="control-label col-md-2">Employer&nbsp;Full&nbsp;Name : </label>
+                                                    <div class="col-md-4">{{frm.benf_employer_full_name}}</div>
+                                                    <label class="control-label col-md-2">Project&nbsp;Name : </label>
+                                                    <div class="col-md-4">{{frm.benf_present_project_name}}</div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="control-label col-md-2">Work&nbsp;Address : </label>
+                                                    <div class="col-md-4">{{frm.benf_present_work_address}}</div>
+                                                    <label class="control-label col-md-2">Work&nbsp;Start&nbsp;Date : </label>
+                                                    <div class="col-md-4">{{frm.benf_work_start_date | date}}</div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="control-label col-md-2">Work&nbsp;End&nbsp;Date : </label>
+                                                    <div class="col-md-4">{{frm.benf_work_end_date | date}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
