@@ -276,6 +276,29 @@
 
         <br><h3 class="text-center subHeading">Employment Certificate</h3><br>
 
+        <div ng-repeat="certificate in  Certificates">
+            <div class="panel-heading text-left"><b style="text-decoration: underline;">Certificate {{$index+1}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <label class="control-label col-md-2">Employer&nbsp;Full&nbsp;Name : </label>
+                    <div class="col-md-4">{{certificate.benf_employer_full_name}}</div>
+                    <label class="control-label col-md-2">Project&nbsp;Name : </label>
+                    <div class="col-md-4">{{certificate.benf_present_project_name}}</div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-2">Work&nbsp;Address : </label>
+                    <div class="col-md-4">{{certificate.benf_present_work_address}}</div>
+                    <label class="control-label col-md-2">Work&nbsp;Start&nbsp;Date : </label>
+                    <div class="col-md-4">{{certificate.benf_work_start_date | date}}</div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-2">Work&nbsp;End&nbsp;Date : </label>
+                    <div class="col-md-4">{{certificate.benf_work_end_date | date}}</div>
+                </div>
+            </div>
+        </div>
+
         <br>
         <br>
 		<div class="row" ng-show="!Beneficiary.actionRequired">

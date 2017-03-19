@@ -232,7 +232,8 @@ class BeneficiaryController extends FrontendController
         $Beneficiary = $this->GetBeneficiaryById($id);
         $NomineeList = $this->GetNomineesByBeneficiaryId($id);
         $DependentsList = $this->GetDependentsByBeneficiaryId($id);
-        return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList));
+        $Certificates = $this->GetCertificatesByBeneficiaryId($id);
+        return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList,"Certificates"=>$Certificates));
     }
 
     public function actionCreatecertificates()
@@ -303,6 +304,14 @@ class BeneficiaryController extends FrontendController
             ->one();
         $result = ArrayHelper::toArray($beneficiary_details,'*');
         $result['actionRequired'] = ($result['benf_application_status'] == $this->AppliedStatus)?true:false;
+        return $result;
+    }
+
+    private function GetCertificatesByBeneficiaryId($id){
+        $details = BenfEmpCertificate::find()
+            ->where(['benf_master_id' => $id])
+            ->all();
+        $result = ArrayHelper::toArray($details,'*');
         return $result;
     }
 

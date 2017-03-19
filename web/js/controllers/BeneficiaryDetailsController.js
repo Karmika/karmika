@@ -8,6 +8,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
         $scope.Beneficiary = response.data.Beneficiary;
         $scope.NomineeList = response.data.NomineeList;
         $scope.DependentsList = response.data.DependentsList;
+        $scope.Certificates = response.data.Certificates;
     });
 
     $scope.Approve = function(){
