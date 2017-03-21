@@ -954,7 +954,7 @@ $url =  Yii::$app->homeUrl;?>
                                     </div>
                                 </div>
                             </div>
-
+                            <!--
                             <div class="panel panel-success">
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
@@ -979,7 +979,7 @@ $url =  Yii::$app->homeUrl;?>
                                             </tr>
                                             <tr ng-if="AllUploads.length < 1">
                                                 <td colspan="4">
-                                                    <p class="text-center" style="color:red">-- No files uploaded--</p>
+                                                    <p class="text-center" style="color:red"> No files uploaded </p>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -989,6 +989,7 @@ $url =  Yii::$app->homeUrl;?>
                                     </div>
                                 </div>
                             </div>
+                                -->
                         </div>
 
                         <ul class="list-inline pull-right">

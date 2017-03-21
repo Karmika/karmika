@@ -32,6 +32,7 @@ class FrontendController extends Controller
                                         'sample','approvebeneficiary','rejectbeneficiary','createnominee',
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
                                         'getbeneficiaryalldata','createcertificates','deletecertificate',
+                                        'appliedbeneficiary',
 
                                         //Payment
                                         'index','create','allpayments','createpayment'

@@ -24,6 +24,7 @@ class BeneficiaryController extends FrontendController
     public $UserIdentity;
     public $IsAdmin;
     public $DraftStatus = "DRAFT";
+    public $PendingStatus = "PENDING";
     public $AppliedStatus = "APPLIED";
     public $ApproveStatus = "APPROVED";
     public $RejectedStatus = "REJECTED";
@@ -93,7 +94,7 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
-        $data["benf_application_status"] = $this->AppliedStatus;
+        $data["benf_application_status"] = $this->PendingStatus;
         $model->attributes = $data;
         if($model->update()) return json_encode(array("status"=>"success"));
         return json_encode(array("status"=>"failed"));
@@ -119,6 +120,13 @@ class BeneficiaryController extends FrontendController
         return "failed";
     }
 
+    public function actionAppliedbeneficiary()
+    {
+        $post = file_get_contents("php://input");
+        $status = $this->UpdateBeneficiaryStatus($post,$this->AppliedStatus);
+        return json_encode(array("status"=>$status,"newStatus"=>$this->AppliedStatus));
+    }
+
     public function actionApprovebeneficiary()
     {
         $post = file_get_contents("php://input");
@@ -134,8 +142,10 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
-        $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
-        $data["admin_comments"] = $data['adminComments'];
+        if($this->AppliedStatus != $status){
+            $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
+            $data["admin_comments"] = $data['adminComments'];
+        }
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
         if($model->update()) return "success";
@@ -293,7 +303,8 @@ class BeneficiaryController extends FrontendController
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
-            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus)?true:false;
+            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus || $result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
+            $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
         }
         return $result;
     }

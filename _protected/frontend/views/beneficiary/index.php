@@ -94,20 +94,23 @@ td,th{
         <td>{{beneficiary.benf_sex}}</td>
         <!-- <td>{{beneficiary.benf_martial_status}}</td> -->
         <td>{{beneficiary.updated_by}}</td>
-        <td>{{beneficiary.benf_application_status}}</td>
         <?php if($IsAdmin){?>
-          <td ng-show="!beneficiary.Editable">
+         <td ng-show="!beneficiary.CanConfirm">{{beneficiary.benf_application_status}}</td>
+         <td ng-show="beneficiary.CanConfirm">
+            <a class="nameLink" ng-click="TakeAction($index,beneficiary.id)">{{beneficiary.benf_application_status}}</a>
+         </td>
+         <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
-          </td>
-          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
-          <td ng-show="!beneficiary.Editable">
+         </td>
+         <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
+         <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
-          </td>
-          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
+         </td>
+         <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
         <?php }?>
       </tr>
-      <tr ng-show="ListError">
-        <td colspan="10" style="text-align:center;"> 
+      <tr ng-show="AllBeneficiaries.length <= 0">
+        <td colspan="11" style="text-align:center;"> 
                 <small class="error">----  No beneficiary available   ----</small>
         </td>
       </tr>
@@ -122,4 +125,7 @@ td,th{
   <!--  <button ng-if="AllBeneficiaries.length > 5" style="float:right" ng-repeat-start="pageData in pageSelectionData" value="pageData" ng-click="ChagePageVal(pageData)" class="btn btn-default" >{{pageData}}</button>
     <span style="float:right" ng-repeat-end>&nbsp;</span> -->
 </div>
+  <div id="BeneficiaryActionConfirm" style="display: none;" title="Beneficiary Confirmation">
+    Beneficiary will goes to applied state once you click on Yes. Are you sure?
+  </div>
 </div>
