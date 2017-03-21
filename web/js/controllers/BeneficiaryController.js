@@ -49,52 +49,52 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             };
             $scope.insertNominee(-1);
 
-            /* Start : Certificates logic */
-
-            $scope.Certificates = {};
-            $scope.Certificates.Forms = [];
-            $scope.Certificates.CertificateTypes = config.CertificateTypes;
-            $scope.Certificates.FormType = "V";
-
-            $scope.$watch('FormType', function(newVal){
-                if($scope.Certificates.Forms.length > 0)
-                angular.forEach($scope.Certificates.Forms, function(value, key) {
-                    $scope.deleteCertificate(key);
-                });
-                $scope.Certificates.Forms = [];
-                $scope.AddCertificate();
-            });
-
-            $scope.AddCertificate = function(){
-                $scope.Certificates.Forms.push({
-                });
-            }
-
-            $scope.deleteCertificate = function(index){
-                if($scope.Certificates.Forms[index].id != undefined && $scope.Certificates.Forms[index].id != null)
-                $http.post(config.baseUrl+"/beneficiary/deletecertificate",{"id":$scope.Certificates.Forms[index].id})
-                .then(function(response) {
-                    if(response.data.status == "success") $scope.Certificates.Forms.splice(index, 1);
-                });
-                else $scope.Certificates.Forms.splice(index, 1);
-            }
-
-            $scope.SaveCertificate = function(FormType){
-                $scope.Certificates.benf_master_id = $scope.Beneficiary.id;
-                $http.post(config.baseUrl+"/beneficiary/createcertificates",$scope.Certificates)
-                .then(function(response) {
-                    $scope.FormatCertificates(response.data.Forms);
-                });
-            }
-
-            /* End : Certificates logic */
-
             /* Test data : Need to remove this */
 
             $scope.Beneficiary = config.TestData;
 
             /* ENd test data */
         }
+
+        /* Start : Certificates logic */
+
+        $scope.Certificates = {};
+        $scope.Certificates.Forms = [];
+        $scope.Certificates.CertificateTypes = config.CertificateTypes;
+        $scope.Certificates.FormType = "V";
+
+        $scope.$watch('FormType', function(newVal){
+            if($scope.Certificates.Forms.length > 0)
+            angular.forEach($scope.Certificates.Forms, function(value, key) {
+                $scope.deleteCertificate(key);
+            });
+            $scope.Certificates.Forms = [];
+            $scope.AddCertificate();
+        });
+
+        $scope.AddCertificate = function(){
+            $scope.Certificates.Forms.push({
+            });
+        }
+
+        $scope.deleteCertificate = function(index){
+            if($scope.Certificates.Forms[index].id != undefined && $scope.Certificates.Forms[index].id != null)
+            $http.post(config.baseUrl+"/beneficiary/deletecertificate",{"id":$scope.Certificates.Forms[index].id})
+            .then(function(response) {
+                if(response.data.status == "success") $scope.Certificates.Forms.splice(index, 1);
+            });
+            else $scope.Certificates.Forms.splice(index, 1);
+        }
+
+        $scope.SaveCertificate = function(FormType){
+            $scope.Certificates.benf_master_id = $scope.Beneficiary.id;
+            $http.post(config.baseUrl+"/beneficiary/createcertificates",$scope.Certificates)
+            .then(function(response) {
+                $scope.FormatCertificates(response.data.Forms);
+            });
+        }
+
+        /* End : Certificates logic */
 
         /* Start : Load data */
 
@@ -105,9 +105,13 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 $scope.Beneficiary = response.data.Beneficiary;
                 $scope.NomineeList = response.data.NomineeList;
                 $scope.DependentsList = response.data.DependentsList;
+                $scope.Certificates.FormType = "V";
+                console.log(response.data.Certificates);
+                if(response.data.Certificates.length > 0) $scope.Certificates.Forms = response.data.Certificates;
                 $scope.FormatNomineeData();
                 $scope.FormatDependentData();
                 $scope.FormatBeneficiaryData();
+                $scope.FormatCertificatesDates();
             });
         else $scope.InitializeBasicData();
 
@@ -128,6 +132,12 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.FormatCertificates = function(forms){
             angular.forEach(forms, function(value, key) {
                 $scope.Certificates.Forms[key].id = forms[key].id;
+            });
+        }
+        $scope.FormatCertificatesDates = function(){
+            angular.forEach($scope.Certificates.Forms, function(value, key) {
+                $scope.Certificates.Forms[key].benf_work_start_date = new Date($scope.Certificates.Forms[key].benf_work_start_date);
+                $scope.Certificates.Forms[key].benf_work_end_date = new Date($scope.Certificates.Forms[key].benf_work_end_date);
             });
         }
         $scope.FormatBeneficiaryData = function(){

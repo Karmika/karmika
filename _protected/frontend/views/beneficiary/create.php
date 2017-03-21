@@ -640,7 +640,7 @@ $url =  Yii::$app->homeUrl;?>
                         <hr/>
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="panel-heading cursorPointer"><b>Beneficiary Personal Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="panel-heading cursorPointer"><b>Registration Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse1" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                         <br>
@@ -926,7 +926,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
 
                             <div class="panel panel-success">
-                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading cursorPointer"><b>Employment Certificate</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading cursorPointer"><b>Employer Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div ng-repeat="frm in  Certificates.Forms">
