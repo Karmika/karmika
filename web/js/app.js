@@ -31,13 +31,13 @@ app.constant('config', {
             {id:'OTHERS' , value : 'OTHERS'}
             ],
     genders:[
-            {"entity_id":"MALE","entity_value":"Male"},
-            {"entity_id":"FEMALE","entity_value":"Female"},
-            {"entity_id":"OTHERS","entity_value":"Other"}
+            {"entity_id":"MALE","entity_value":"Male ಪುರುಷ"},
+            {"entity_id":"FEMALE","entity_value":"Female ಮಹಿಳೆ"},
+            {"entity_id":"OTHERS","entity_value":"Other ಇತರೆ"}
             ],
     martialStatusList:[
-            {"entity_id":"SINGLE","entity_value":"Unmarried"},
-            {"entity_id":"MARRIED","entity_value":"Married"}
+            {"entity_id":"SINGLE","entity_value":"Unmarried ಅವಿವಾಹಿತ"},
+            {"entity_id":"MARRIED","entity_value":"Married ವಿವಾಹಿತ"}
             // {"entity_id":"Widowed","entity_value":"Widowed"},
             // {"entity_id":"Divorced / Separated","entity_value":"Divorced / Separated"}
             ],

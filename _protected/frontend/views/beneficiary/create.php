@@ -39,7 +39,7 @@ $url =  Yii::$app->homeUrl;?>
                         <h3 align="center">Registration Details</h3>
                         <hr/>
                         <form class="form-vertical" name="beneficiary" role="form" novalidate ng-submit="Savedata()">
-                            <label class="lable-bottom-margin">Personal Details&nbsp;:&nbsp; ವೈಯಕ್ತಿಕ ವಿವರಗಳು </label><br>
+                            <label class="lable-bottom-margin">Personal Details&nbsp;:&nbsp; ವೈಯಕ್ತಿಕ ವಿವರಗಳು </label><br>
                             <div class="row form-group">
                                 <label class="control-label col-md-1" for="benf_first_name"><span class="mandatory-field">*&nbsp;</span>First&nbsp;Name ಮೊದಲ&nbsp;ಹೆಸರು </label>
                                 <div class="col-md-3">
@@ -60,7 +60,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth</label>
+                                <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth ಜನ್ಮ ದಿನಾಂಕ</label>
                                 <div class="col-md-3" ng-controller="DatepickerPopupController">
                                     <p class="input-group">
                                         <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_birth" is-open="popup1.opened" name="benf_date_of_birth" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
@@ -70,13 +70,13 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age (years)</label>
+                                <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age (years) ವಯಸ್ಸು</label>
                                 <div class="col-md-3">
                                     <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" ng-change ="setUnknownDOBbyAge('',Beneficiary.beneficiary_age,'Beneficiary')" required />
                                     <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex</label>
+                                <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex ಲಿಂಗ</label>
                                 <div class="col-md-3">
                                     <label ng-repeat="item in genders"><input required type="radio" name="benf_sex" ng-model="Beneficiary.benf_sex" value="{{item.entity_id}}" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select sex</small>
@@ -84,7 +84,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                             <div class="row form-group">
 
-                                <label class="control-label col-md-1" for="benf_caste"><span class="mandatory-field">*&nbsp;</span>Caste</label>
+                                <label class="control-label col-md-1" for="benf_caste"><span class="mandatory-field">*&nbsp;</span>Caste ಜಾತಿ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-options="caste.id as caste.value for caste in casteList" ng-model="Beneficiary.benf_caste"></select>
                                     <small class="error" ng-show="beneficiary.benf_caste.$invalid && beneficiary.benf_caste.$dirty">Please select caste</small>
@@ -102,12 +102,12 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1 stay-left" for="benf_martial_status"><span class="mandatory-field">*&nbsp;</span>Martial &nbsp; Status&nbsp;:</label>
+                                <label class="control-label col-md-1 stay-left" for="benf_martial_status"><span class="mandatory-field">*&nbsp;</span>Martial &nbsp; Status&nbsp; ವೈವಾಹಿಕ ಸ್ಥಿತಿ:</label>
                                 <div class="col-md-5 grey-border">
                                     <label ng-repeat="item in martialStatusList"><input required type="radio" name="benf_martial_status" ng-model="Beneficiary.benf_martial_status" value="{{item.entity_id}}" class="" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_martial_status.$invalid && beneficiary.benf_martial_status.$dirty">Please select Maritial Status</small>
                                 </div>
-                                <label class="control-label col-md-1" for="benf_blood_group"><span class="mandatory-field">*&nbsp;</span>Blood &nbsp;Group&nbsp;:&nbsp;</label>
+                                <label class="control-label col-md-1" for="benf_blood_group"><span class="mandatory-field">*&nbsp;</span>Blood &nbsp;Group:&nbsp;ರಕ್ತದ ಗುಂಪು</label>
                                 <div class="col-md-5 grey-border">
                                     <label ng-repeat="item in bloodGroupList"><input required type="radio" name="benf_blood_group" ng-model="Beneficiary.benf_blood_group" value="{{item.entity_id}}" class="" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_blood_group.$invalid && beneficiary.benf_blood_group.$dirty">Please select Blood Group</small>
@@ -115,56 +115,56 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                             <div class="row form-group">
 
-                                <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality</label>
+                                <label class="control-label col-md-1" for="nationality"><span class="mandatory-field">*&nbsp;</span>Nationality ರಾಷ್ಟ್ರೀಯತೆ</label>
                                 <div class="col-md-3">
                                     <input letters-only class="form-control" ng-model="Beneficiary.nationality" name="nationality" placeholder="INDIAN" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.nationality.$invalid && beneficiary.nationality.$dirty">Please provide nationality</small>
                                 </div>
 
-                                <label class="control-label col-md-1 stay-left" for="benf_identity_card_type"><span class="mandatory-field">*&nbsp;</span>Identity card Type&nbsp;:</label>
+                                <label class="control-label col-md-1 stay-left" for="benf_identity_card_type"><span class="mandatory-field">*&nbsp;</span>Identity card Type&nbsp; ಗುರುತಿನ ಚೀಟಿ</label>
                                 <div class="col-md-3">
                                     <select name="benf_identity_card_type" class="form-control" ng-model="Beneficiary.benf_identity_card_type" ng-options="cardType.id as cardType.value for cardType in IdentityCardTypeList" ></select>
                                     <small class="error" ng-show="beneficiary.benf_identity_card_type.$invalid && beneficiary.benf_identity_card_type.$dirty">Please select card type</small>
                                 </div>
-                                <label class="control-label col-md-1" for="benf_identity_card_number"><span class="mandatory-field">*&nbsp;</span>&nbsp;Card number :&nbsp;</label>
+                                <label class="control-label col-md-1" for="benf_identity_card_number"><span class="mandatory-field">*&nbsp;</span>&nbsp;Card number :&nbsp; ಕಾರ್ಡ್ ಸಂಖ್ಯೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_identity_card_number" name="benf_identity_card_number" placeholder="Enter card number" required />
                                     <small class="error" ng-show="beneficiary.benf_identity_card_number.$invalid && beneficiary.benf_identity_card_number.$dirty">Please enter card number </small>
                                 </div>
                             </div>
 
-                            <label class="lable-bottom-margin">Applicant's Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ವಿಳಾಸ </label>
+                            <label class="lable-bottom-margin">Applicant's Permanent Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ಖಾಯ೦ ವಿಳಾಸ </label>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
+                                <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.benf_prmt_address_line1" name="permanent_address_line1" placeholder="Line 1" maxlength="175" ng-change='setSameLocalIfTrue("line1")' required ></textarea>
                                     <small class="error" ng-show="beneficiary.permanent_address_line1.$invalid && beneficiary.permanent_address_line1.$dirty">Please provide Address</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="prmt_pincode"><span class="mandatory-field">*&nbsp;</span>Pincode</label>
+                                <label class="control-label col-md-1" for="prmt_pincode"><span class="mandatory-field">*&nbsp;</span>Pincode ಪಿನ್ ಕೋಡ್</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_prmt_address_pincode" name="pincode" placeholder="Pincode" min='110001' max='999999' numerics-only ng-change="getPostalData(Beneficiary.benf_prmt_address_pincode, 'permanent')" required />
                                     <small class="error" ng-show="beneficiary.prmt_pincode.$invalid && beneficiary.prmt_pincode.$dirty">Please provide Pincode</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="permanent_address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit</label>
+                                <label class="control-label col-md-1" for="permanent_address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit ಅಂಚೆ ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-model="Beneficiary.benf_prmt_address_line2" ng-options="officeName for officeName in Beneficiary.benf_prmt_address_OfficeList" name='permanent_address_line2' ng-change='setSameLocalIfTrue("line2")' ng-readonly="Beneficiary.benf_prmt_address_OfficeList.length==0" name="permanent_address_line2"></select>
                                     <small class="error" ng-show="beneficiary.permanent_address_line2.$invalid && beneficiary.permanent_address_line2.$dirty">Please provide Address</small>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="prmt_address_line_taluk"><span class="mandatory-field">*&nbsp;</span>Taluk</label>
+                                <label class="control-label col-md-1" for="prmt_address_line_taluk"><span class="mandatory-field">*&nbsp;</span>Taluk ತಾಲ್ಲೂಕು</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_prmt_address_taluk" name="prmt_address_line_taluk" placeholder="" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>District</label>
+                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>District ಜಿಲ್ಲೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_prmt_address_district" name="address_line1" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="address_line2"><span class="mandatory-field">*&nbsp;</span>State</label>
+                                <label class="control-label col-md-1" for="address_line2"><span class="mandatory-field">*&nbsp;</span>State ರಾಜ್ಯ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_prmt_address_state" name="address_line2" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
@@ -174,37 +174,37 @@ $url =  Yii::$app->homeUrl;?>
                                 <label class="col-md-6 stay-left lable-bottom-margin">Applicant's Local Address&nbsp;:&nbsp; ಆರ್ಜಿದಾರರ ಸ್ಥಳೀಯ ವಿಳಾಸ</label><span class="col-md-3 col-md-offset-3 pull-right"><input type="checkbox" class="" name="" ng-change="toggleSameAsPermanentAddress()" ng-model='Benf.sameAsPermanentAddress'> Same as Permanent Address </span>
                             </p>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
+                                <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.benf_local_address_line1" name="address_line1" placeholder="Line 1" maxlength="175" required ng-readonly="Benf.sameAsPermanentAddress"></textarea>
                                     <small class="error" ng-show="beneficiary.address_line1.$invalid && beneficiary.address_line1.$dirty">Please provide Address</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="pincode"><span class="mandatory-field">*&nbsp;</span>Pincode</label>
+                                <label class="control-label col-md-1" for="pincode"><span class="mandatory-field">*&nbsp;</span>Pincode ಪಿನ್ ಕೋಡ್</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_local_pincode" name="pincode" placeholder="Pincode" min='110001' max='999999' numerics-only ng-change="getPostalData(Beneficiary.benf_local_pincode, 'local')" ng-readonly="Benf.sameAsPermanentAddress"
                                         required />
                                     <small class="error" ng-show="beneficiary.pincode.$invalid && beneficiary.pincode.$dirty">Please provide Pincode</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit</label>
+                                <label class="control-label col-md-1" for="address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit ಅಂಚೆ ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-model="Beneficiary.benf_local_address_line2" ng-options="officeName for officeName in Beneficiary.benf_local_address_OfficeList" ng-readonly="Benf.sameAsPermanentAddress"></select>
                                     <small class="error" ng-show="beneficiary.address_line2.$invalid && beneficiary.address_line2.$dirty">Please provide Address</small>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="local_address_line1"><span class="mandatory-field">*&nbsp;</span>Taluk</label>
+                                <label class="control-label col-md-1" for="local_address_line1"><span class="mandatory-field">*&nbsp;</span>Taluk ತಾಲ್ಲೂಕು</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_local_address_taluk" name="local_address_line1" placeholder="" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="local_address_district"><span class="mandatory-field">*&nbsp;</span>District</label>
+                                <label class="control-label col-md-1" for="local_address_district"><span class="mandatory-field">*&nbsp;</span>District ಜಿಲ್ಲೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_local_address_district" name="local_address_district" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="local_address_line_state"><span class="mandatory-field">*&nbsp;</span>State</label>
+                                <label class="control-label col-md-1" for="local_address_line_state"><span class="mandatory-field">*&nbsp;</span>State ರಾಜ್ಯ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_local_address_state" name="local_address_line_state" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
@@ -286,30 +286,30 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.emplr_address_line1.$invalid && beneficiary.emplr_address_line1.$dirty">Please provide Address</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="emplr_address_pincode"><span class="mandatory-field">*&nbsp;</span>Pincode</label>
+                                <label class="control-label col-md-1" for="emplr_address_pincode"><span class="mandatory-field">*&nbsp;</span>Pincode ಪಿನ್ ಕೋಡ್</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.emplr_address_pincode" name="emplr_address_pincode" placeholder="Pincode" min='110001' max='999999' numerics-only ng-change="getPostalData(Beneficiary.emplr_address_pincode, 'employer')" required />
                                     <small class="error" ng-show="beneficiary.emplr_address_pincode.$invalid && beneficiary.emplr_address_pincode.$dirty">Please provide Pincode</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="emplr_address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit</label>
+                                <label class="control-label col-md-1" for="emplr_address_line2"><span class="mandatory-field">*&nbsp;</span>Postal&nbsp;Limit ಅಂಚೆ ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="address_line2" ng-model="Beneficiary.emplr_address_line2" ng-options="officeName for officeName in Beneficiary.emplr_address_OfficeList" ng-readonly="Beneficiary.emplr_address_OfficeList.length==0"></select>
                                     <small class="error" ng-show="beneficiary.emplr_address_line2.$invalid && beneficiary.emplr_address_line2.$dirty">Please provide Address</small>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="emplr_address_taluk"><span class="mandatory-field">*&nbsp;</span>Taluk</label>
+                                <label class="control-label col-md-1" for="emplr_address_taluk"><span class="mandatory-field">*&nbsp;</span>Taluk ತಾಲ್ಲೂಕು</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.emplr_address_taluk" name="emplr_address_taluk" placeholder="" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="emplr_address_district"><span class="mandatory-field">*&nbsp;</span>District</label>
+                                <label class="control-label col-md-1" for="emplr_address_district"><span class="mandatory-field">*&nbsp;</span>District ಜಿಲ್ಲೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.emplr_address_district" name="emplr_address_district" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
 
-                                <label class="control-label col-md-1" for="emplr_address_state"><span class="mandatory-field">*&nbsp;</span>State</label>
+                                <label class="control-label col-md-1" for="emplr_address_state"><span class="mandatory-field">*&nbsp;</span>State ರಾಜ್ಯ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.emplr_address_state" name="emplr_address_state" placeholder="" maxlength="25" required readonly="true" />
                                 </div>
@@ -955,7 +955,7 @@ $url =  Yii::$app->homeUrl;?>
                                 </div>
                             </div>
 
-<!--                             <div class="panel panel-success">
+                            <div class="panel panel-success">
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
@@ -988,7 +988,7 @@ $url =  Yii::$app->homeUrl;?>
 
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <ul class="list-inline pull-right">
@@ -1006,9 +1006,6 @@ $url =  Yii::$app->homeUrl;?>
 </div>
 
 <style type="text/css">
-    body {
-        /*font-size: 12px;*/
-    }
     .grey-border{
         border:1px dotted grey;
     }
