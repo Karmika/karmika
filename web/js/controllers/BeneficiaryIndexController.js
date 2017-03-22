@@ -38,6 +38,7 @@ app.controller("BeneficiaryIndexController", ['$scope', '$http', 'config', '$win
                     .then(function(response) {  
                         if(response.data.status == "success"){
                             $scope.AllBeneficiaries[index].benf_application_status = response.data.newStatus;
+                            $scope.AllBeneficiaries[index].benf_acknowledgement_number = response.data.anumber;
                             $scope.AllBeneficiaries[index].CanConfirm = false;
                             $scope.AllBeneficiaries[index].Editable = false;
                         }

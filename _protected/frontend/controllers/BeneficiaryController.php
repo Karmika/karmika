@@ -25,7 +25,7 @@ class BeneficiaryController extends FrontendController
     public $IsAdmin;
     public $DraftStatus = "DRAFT";
     public $PendingStatus = "PENDING";
-    public $AppliedStatus = "APPLIED";
+    public $AcceptedStatus = "ACCEPTED";
     public $ApproveStatus = "APPROVED";
     public $RejectedStatus = "REJECTED";
     public $AdminRole = "admin";
@@ -79,12 +79,12 @@ class BeneficiaryController extends FrontendController
         $data["created_by_user_id"] = $this->LoggedInUser;
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["benf_application_status"] = $this->DraftStatus;
-        $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
+        $data["benf_acknowledgement_number"] = NULL;
         $model->attributes = $data;
         //print_r($model->validate());echo "<br>";
         //echo "<pre>";print_r($model->getErrors());exit;
         //print_r($model->save());exit;
-        if($model->save()) return json_encode(array("status"=>"success","anumber"=>$data['benf_acknowledgement_number'],"id"=>$model->id));
+        if($model->save()) return json_encode(array("status"=>"success","id"=>$model->id));
         return json_encode(array("status"=>"failed"));
     }
 
@@ -95,8 +95,9 @@ class BeneficiaryController extends FrontendController
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["benf_application_status"] = $this->PendingStatus;
+        $data['benf_application_number'] = Services::GetNewBeneficiaryApplicationNumber();
         $model->attributes = $data;
-        if($model->update()) return json_encode(array("status"=>"success"));
+        if($model->update()) return json_encode(array("status"=>"success","anumber"=>$data['benf_application_number']));
         return json_encode(array("status"=>"failed"));
     }
  
@@ -123,33 +124,40 @@ class BeneficiaryController extends FrontendController
     public function actionAppliedbeneficiary()
     {
         $post = file_get_contents("php://input");
-        $status = $this->UpdateBeneficiaryStatus($post,$this->AppliedStatus);
-        return json_encode(array("status"=>$status,"newStatus"=>$this->AppliedStatus));
+        $response = $this->UpdateBeneficiaryStatus($post,$this->AcceptedStatus);
+        if($response["status"] == "success") return json_encode(array("status"=>"success","newStatus"=>$this->AcceptedStatus,"anumber"=>$response["data"]["benf_acknowledgement_number"]));
+        else return $response;
     }
 
     public function actionApprovebeneficiary()
     {
         $post = file_get_contents("php://input");
-        return $this->UpdateBeneficiaryStatus($post,$this->ApproveStatus);
+        $response = $this->UpdateBeneficiaryStatus($post,$this->ApproveStatus);
+        if($response["status"] == "success") return json_encode(array("status"=>"success"));
+        else return json_encode($response);
     }
 
     public function actionRejectbeneficiary()
     {
         $post = file_get_contents("php://input");
-        return $this->UpdateBeneficiaryStatus($post,$this->RejectedStatus);
+        $response = $this->UpdateBeneficiaryStatus($post,$this->RejectedStatus);
+        if($response["status"] == "success") return json_encode(array("status"=>"success"));
+        else return json_encode($response);
     }
     private function UpdateBeneficiaryStatus($post,$status){
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
-        if($this->AppliedStatus != $status){
+        if($this->AcceptedStatus == $status){
+            $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
+        }else{
             $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
             $data["admin_comments"] = $data['adminComments'];
         }
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
-        if($model->update()) return "success";
-        return "failed";
+        if($model->update()) return array("status"=>"success","data"=>$data);
+        return array("status"=>"failed");
     }
 
     public function actionAllbeneficiaries()
@@ -288,7 +296,7 @@ class BeneficiaryController extends FrontendController
 
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;
@@ -302,7 +310,7 @@ class BeneficiaryController extends FrontendController
             $result[$key]["updated_by"] = $user["username"];
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
-            $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+            $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AcceptedStatus)?true:false;
             $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus || $result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
             $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
         }
@@ -314,7 +322,7 @@ class BeneficiaryController extends FrontendController
             ->where(['id' => $id])
             ->one();
         $result = ArrayHelper::toArray($beneficiary_details,'*');
-        $result['actionRequired'] = ($result['benf_application_status'] == $this->AppliedStatus)?true:false;
+        $result['actionRequired'] = ($result['benf_application_status'] == $this->AcceptedStatus)?true:false;
         return $result;
     }
 

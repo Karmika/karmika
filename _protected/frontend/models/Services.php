@@ -28,7 +28,7 @@ class Services extends Model
     {
         $arry = BeneficiaryMaster::find()
         ->select(['id','benf_acknowledgement_number'])
-        ->where(['id' => BeneficiaryMaster::find()->max('id')])
+        ->where(['id' => BeneficiaryMaster::find()->where(['not', ['benf_acknowledgement_number' => null]])->max('id')])
         ->one();
         $StringLetters = "BNG";
         if(count($arry) < 1) return "BNG000000001";
@@ -39,6 +39,21 @@ class Services extends Model
             $result['benf_acknowledgement_number'] = "0".$result['benf_acknowledgement_number'];
         }
         return $StringLetters.$result['benf_acknowledgement_number'];
+    }
+
+    public function GetNewBeneficiaryApplicationNumber()
+    {
+        $arry = BeneficiaryMaster::find()
+        ->select(['id','benf_application_number'])
+        ->where(['id' => BeneficiaryMaster::find()->where(['not', ['benf_application_number' => null]])->max('id')])
+        ->one();
+        if(count($arry) < 1) return "0000000001";
+        $result = ArrayHelper::toArray($arry,'id','benf_application_number');
+        $result['benf_application_number'] += 1;
+        while(strlen($result['benf_application_number']) != 10){
+            $result['benf_application_number'] = "0".$result['benf_application_number'];
+        }
+        return $result['benf_application_number'];
     }
 
     public function GetNewBeneficiaryRegistrationNumber()

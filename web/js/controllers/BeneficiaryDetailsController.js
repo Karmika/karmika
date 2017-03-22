@@ -15,7 +15,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
         if($scope.Beneficiary.actionRequired)
         $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"adminComments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
         .then(function(response) {
-            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
+            if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
         });
     }
 
@@ -23,7 +23,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
         if($scope.Beneficiary.actionRequired)
         $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id,"adminComments":$scope.adminComments})
         .then(function(response) {
-            if(response.data == "success") $window.location.href = config.baseUrl+"/beneficiary";
+            if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
         });
     }
 

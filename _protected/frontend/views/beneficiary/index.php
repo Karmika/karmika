@@ -35,12 +35,16 @@ td,th{
       <tr>
         <th>No.</th>
         <th>
+          <a href="#" ng-click="orderByField='benf_application_number'; reverseSort = !reverseSort">
+          Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+        </th>
+        <th>
           <a href="#" ng-click="orderByField='benf_acknowledgement_number'; reverseSort = !reverseSort">
-          Acknowledgement&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Ack&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_registration_number'; reverseSort = !reverseSort">
-          Registration&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Reg&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='full_name'; reverseSort = !reverseSort">
@@ -83,7 +87,8 @@ td,th{
     <tbody>
       <tr dir-paginate="beneficiary in AllBeneficiaries | filter : searchName | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
         <td>{{beneficiary.sno}}</td>
-        <td>{{beneficiary.benf_acknowledgement_number}}</td>
+        <td>{{beneficiary.benf_application_number || "----"}}</td>
+        <td>{{beneficiary.benf_acknowledgement_number || "----"}}</td>
         <td>{{beneficiary.benf_registration_number || "----"}}</td>
         <td ng-show="beneficiary.Editable">
           <a class="nameLink" ng-click="updateBeneficiary(beneficiary.id)">{{beneficiary.full_name}}</a>
@@ -110,7 +115,7 @@ td,th{
         <?php }?>
       </tr>
       <tr ng-show="AllBeneficiaries.length <= 0">
-        <td colspan="11" style="text-align:center;"> 
+        <td colspan="12" style="text-align:center;"> 
                 <small class="error">----  No beneficiary available   ----</small>
         </td>
       </tr>

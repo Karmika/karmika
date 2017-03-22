@@ -53,6 +53,7 @@ use Yii;
  * @property string $updated_date
  * @property integer $updated_by_user_id
  * @property string $benf_application_status
+ * @property string $benf_application_number
  * @property string $benf_acknowledgement_number
  * @property string $benf_registration_number
  * @property string $benf_registration_old_number
@@ -78,14 +79,14 @@ class BeneficiaryMaster extends \yii\db\ActiveRecord
         return [
             [['benf_mobile_no', 'benf_alternate_mobile_no', 'beneficiary_age', 'benf_local_pincode', 'benf_prmt_address_pincode', 'emplr_address_pincode', 'benf_wages_per_day', 'benf_wages_per_month', 'benf_bank_account_number', 'created_by_user_id', 'updated_by_user_id'], 'integer'],
             [['benf_date_of_birth', 'benf_date_of_employment', 'created_date', 'updated_date'], 'safe'],
-            [['benf_sex', 'benf_caste', 'benf_martial_status', 'benf_blood_group', 'benf_nature_of_work', 'benf_bank_account_type', 'benf_application_status', 'benf_acknowledgement_number', 'admin_comments', 'benf_identity_card_type'], 'string'],
+            [['benf_sex', 'benf_caste', 'benf_martial_status', 'benf_blood_group', 'benf_nature_of_work', 'benf_bank_account_type', 'benf_application_status', 'admin_comments', 'benf_identity_card_type'], 'string'],
             [['created_by_user_id', 'updated_by_user_id'], 'required'],
             [['benf_first_name', 'benf_middle_name', 'benf_last_name', 'nationality', 'benf_local_address_line2', 'benf_local_address_taluk', 'benf_local_address_district', 'benf_local_address_state', 'benf_prmt_address_line2', 'benf_prmt_address_taluk', 'benf_prmt_address_district', 'benf_prmt_address_state', 'emplr_address_line2', 'emplr_address_taluk', 'emplr_address_district', 'emplr_address_state'], 'string', 'max' => 25],
             [['benf_local_address_line1', 'benf_prmt_address_line1', 'emplr_address_line1'], 'string', 'max' => 175],
             [['employer_full_name'], 'string', 'max' => 40],
             [['benf_bank_name', 'benf_bank_branch'], 'string', 'max' => 50],
             [['benf_bank_ifsc'], 'string', 'max' => 16],
-            [['benf_registration_number', 'benf_registration_old_number'], 'string', 'max' => 35],
+            [['benf_application_number', 'benf_acknowledgement_number', 'benf_registration_number', 'benf_registration_old_number'], 'string', 'max' => 35],
             [['benf_identity_card_number'], 'string', 'max' => 20],
             [['benf_registration_number', 'benf_registration_old_number'], 'unique', 'targetAttribute' => ['benf_registration_number', 'benf_registration_old_number'], 'message' => 'The combination of Benf Registration Number and Benf Registration Old Number has already been taken.'],
         ];
@@ -143,6 +144,7 @@ class BeneficiaryMaster extends \yii\db\ActiveRecord
             'updated_date' => 'Updated Date',
             'updated_by_user_id' => 'Updated By User ID',
             'benf_application_status' => 'Benf Application Status',
+            'benf_application_number' => 'Benf Application Number',
             'benf_acknowledgement_number' => 'Benf Acknowledgement Number',
             'benf_registration_number' => 'Benf Registration Number',
             'benf_registration_old_number' => 'Benf Registration Old Number',

@@ -14,7 +14,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 "benf_registration_number": "",
                 "id":"",
                 "benf_registration_old_number": "",
-                "benf_acknowledgement_number": "",
                 "nationality": 'INDIAN',
                 benf_caste: $scope.casteList[3].value
             };
@@ -136,8 +135,10 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         }
         $scope.FormatCertificatesDates = function(){
             angular.forEach($scope.Certificates.Forms, function(value, key) {
-                $scope.Certificates.Forms[key].benf_work_start_date = new Date($scope.Certificates.Forms[key].benf_work_start_date);
-                $scope.Certificates.Forms[key].benf_work_end_date = new Date($scope.Certificates.Forms[key].benf_work_end_date);
+                if($scope.Certificates.Forms[key].benf_work_start_date != null && $scope.Certificates.Forms[key].benf_work_start_date != "")
+                    $scope.Certificates.Forms[key].benf_work_start_date = new Date($scope.Certificates.Forms[key].benf_work_start_date);
+                if($scope.Certificates.Forms[key].benf_work_end_date != null && $scope.Certificates.Forms[key].benf_work_end_date != "")
+                    $scope.Certificates.Forms[key].benf_work_end_date = new Date($scope.Certificates.Forms[key].benf_work_end_date);
             });
         }
         $scope.FormatBeneficiaryData = function(){
@@ -250,13 +251,12 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.form1submitted = false;
         $scope.Savedata = function() {
             var action = "createbeneficiary";
-            if($scope.Beneficiary.benf_acknowledgement_number.length > 0) action = "updatebeneficiary";
+            if($scope.Beneficiary.id != undefined && $scope.Beneficiary.id != 0) action = "updatebeneficiary";
             
             $http.post(config.baseUrl + "/beneficiary/"+action, $scope.Beneficiary)
                 .then(function(response) {
                     $scope.form1submitted = false;
-                    if (response.data.status == "success" && $scope.Beneficiary.benf_acknowledgement_number == "") {
-                        $scope.Beneficiary.benf_acknowledgement_number = response.data.anumber;
+                    if (response.data.status == "success" && action == "createbeneficiary") {
                         $scope.Beneficiary.id = response.data.id;
                     }
                 });
@@ -266,7 +266,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl + "/beneficiary/submitbeneficiary", {"id":$scope.Beneficiary.id})
                 .then(function(response) {
                     if (response.data.status == "success") {
-                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + $scope.Beneficiary.benf_acknowledgement_number;
+                        $window.location.href = config.baseUrl + "/beneficiary/success?id=" + response.data.anumber;
                     }
                 });
         }
