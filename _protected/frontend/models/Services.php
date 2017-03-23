@@ -24,6 +24,15 @@ class Services extends Model
     /**
      * @inheritdoc
      */
+    public static function CustomFormatArray($result,$i=1){
+        $newArray = array();
+        foreach ($result as $key=>$val)
+        {
+            $newArray[$i++] = array('entity_id' => $key,'entity_value' => $val);
+        }
+        return $newArray;
+    }
+    
     public function GetNewBeneficiaryAcknowledgementNumber()
     {
         $arry = BeneficiaryMaster::find()

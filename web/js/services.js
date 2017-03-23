@@ -10,6 +10,15 @@ app.service('CustomService',['$http','config', function($http,config) {
                });
       }
 
+      this.MakeingCustomFormatDataForBeneficiaryPayment = function (Payment) {
+          Payment.payment_date = CS.getDateFormat(Payment.payment_date,"yyyy-MM-dd");
+          Payment.bank_payment_date = CS.getDateFormat(Payment.bank_payment_date,"yyyy-MM-dd");
+          Payment.payment_mode = Payment.payment_mode.entity_id;
+          Payment.payment_status = Payment.payment_status.entity_id;
+          Payment.payment_for = Payment.payment_for.entity_id;
+          return Payment;
+      }
+
       this.getParameterByName = function (name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");

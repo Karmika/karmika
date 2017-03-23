@@ -59,7 +59,7 @@ class PaymentController extends FrontendController
         $Conditions = ["benf_master_id"=>$data["id"]];    
         $payment_details = BenfPayments::find()
         ->where($Conditions)
-        ->select(['id','amount', 'date_of_payment'])
+        ->select(['id','amount', 'payment_date'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $result = ArrayHelper::toArray($payment_details,'*');

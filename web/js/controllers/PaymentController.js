@@ -34,13 +34,44 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
     }
 
     $scope.Create = function(){
+        $scope.paymentModes = {};
+        $scope.paymentStatuses = {};
+        $scope.paymentFors = [];
+
         $scope.Payment = {};
         $scope.Payment.benf_master_id = CustomService.getParameterByName('id');
         $scope.full_name = CustomService.getParameterByName('Name');
         $scope.registration_no = CustomService.getParameterByName('rno');
 
+        CustomService.SeedData('payment_mode').then(function(data) {
+            $scope.paymentModes = data;
+        });
+
+        CustomService.SeedData('payment_status').then(function(data) {
+            $scope.paymentStatuses = data;
+        });
+
+        CustomService.SeedData('payment_for').then(function(data) {
+            $scope.paymentFors = data; 
+        });
+
+        $scope.$watch('Payment.payment_mode',function(newVal){
+            if(newVal != undefined && (newVal.entity_value == "DD" || newVal.entity_value == "Cheque"))
+            { 
+                $scope.BankAndPaydateFieldShow = true;
+            }
+            else
+            { 
+                $scope.BankAndPaydateFieldShow = false;
+                $scope.Payment.bank_name = null;
+                $scope.Payment.chequeordd_no = null;
+                $scope.Payment.bank_payment_date = new Date();
+            }
+        });
+
         $scope.CreatePayment = function(){
-            $http.post(config.baseUrl+"/payment/createpayment",$scope.Payment)
+            var PaymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
+            $http.post(config.baseUrl+"/payment/createpayment",PaymentDetails)
             .then(function(response) {
                 if(response.data.status == "success") $window.location.href = config.baseUrl + "/payment/index?id=" + $scope.Payment.benf_master_id;
             });

@@ -29,7 +29,7 @@
           <a class="nameLink" ng-click="updatePayment(payment.id)">{{payment.payment_mode}}</a>
         </td>
         <td>{{payment.payment_status}}</td> -->
-        <td>{{payment.date_of_payment | date }}</td>
+        <td>{{payment.payment_date | date }}</td>
         <td>{{payment.amount}}</td>
       </tr>
       <tr ng-show="ListError">
