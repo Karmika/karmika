@@ -239,6 +239,12 @@ $url =  Yii::$app->homeUrl;?>
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_bank_branch.$invalid && beneficiary.benf_bank_branch.$dirty">Please provide Bank Branch name</small>
                                 </div>
+
+                                <label class="control-label col-md-1" for="benf_bank_ifsc"><span class="mandatory-field">*&nbsp;</span>IFSC </label>
+                                <div class="col-md-3">
+                                    <input class="form-control" ng-model="Beneficiary.benf_bank_ifsc" name="benf_bank_ifsc" placeholder="IFSC code" maxlength="16" required />
+                                    <small class="error" ng-show="beneficiary.benf_bank_ifsc.$invalid && beneficiary.benf_bank_ifsc.$dirty">Please provide IFSC of Bank</small>
+                                </div>
                             </div>
 
                             <hr>

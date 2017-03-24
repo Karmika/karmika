@@ -102,8 +102,15 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
             .then(function(response) {
                 $scope.Beneficiary = response.data.Beneficiary;
+                $scope.setPOLimitsofAddress();
                 $scope.NomineeList = response.data.NomineeList;
+                if($scope.NomineeList.length == 0){
+                    $scope.insertNominee(-1);
+                }
                 $scope.DependentsList = response.data.DependentsList;
+                if($scope.DependentsList.length == 0){
+                    $scope.insertDependent();
+                }
                 $scope.Certificates.FormType = "V";
                 console.log(response.data.Certificates);
                 if(response.data.Certificates.length > 0) $scope.Certificates.Forms = response.data.Certificates;
@@ -114,6 +121,12 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             });
         else $scope.InitializeBasicData();
 
+        $scope.setPOLimitsofAddress = function(){
+            $scope.Beneficiary.benf_local_address_line2
+            $scope.getPostalData($scope.Beneficiary.benf_local_pincode, 'local', false);
+            $scope.getPostalData($scope.Beneficiary.benf_prmt_address_pincode, 'permanent', false);
+            $scope.getPostalData($scope.Beneficiary.emplr_address_pincode, 'employer', false);
+        }
         /* End : Load data */
 
         /* Start : data format functions */
@@ -308,7 +321,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             }
         };
 
-        $scope.getPostalData = function(code, field) {
+        $scope.getPostalData = function(code, field, retrive) {
             if (!code) {
                 $scope.resetAddressFields(field);
                 return;
@@ -331,7 +344,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                         }
                     } else {
                         var pinDetails = response.data.records;
-                        $scope.setAddressFields(field, pinDetails);
+                        $scope.setAddressFields(field, pinDetails, retrive);
                         if (field === 'permanent' && $scope.Benf.sameAsPermanentAddress) {
                             $scope.toggleSameAsPermanentAddress();
                         }
@@ -354,7 +367,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             }
         }
 
-        $scope.setAddressFields = function(field, pinDetails) {
+        $scope.setAddressFields = function(field, pinDetails, retrive) {
 
             if (field === 'local') {
                 $scope.Beneficiary.benf_local_address_taluk = pinDetails[0].Taluk;
@@ -365,7 +378,17 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     officeList.push(pinDetails[i].OfficeName);
                 }
                 $scope.Beneficiary.benf_local_address_OfficeList = officeList;
-                $scope.Beneficiary.benf_local_address_line2 = $scope.Beneficiary.benf_local_address_OfficeList[0];
+                if(retrive == false){
+                    var line2 = $scope.Beneficiary.benf_local_address_line2;
+                    for(var i in officeList){
+                        if(officeList[i].OfficeName === line2){
+                            $scope.Beneficiary.benf_local_address_line2 = $scope.Beneficiary.benf_local_address_OfficeList[i]
+                        }
+                    }
+                }
+                else {
+                    $scope.Beneficiary.benf_local_address_line2 = $scope.Beneficiary.benf_local_address_OfficeList[0];
+                }
             } else if (field === 'permanent') {
                 $scope.Beneficiary.benf_prmt_address_taluk = pinDetails[0].Taluk;
                 $scope.Beneficiary.benf_prmt_address_district = pinDetails[0].Districtname;
@@ -375,7 +398,17 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     ofcList.push(pinDetails[i].OfficeName);
                 }
                 $scope.Beneficiary.benf_prmt_address_OfficeList = ofcList;
-                $scope.Beneficiary.benf_prmt_address_line2 = $scope.Beneficiary.benf_prmt_address_OfficeList[0];
+                if(retrive == false){
+                    var line2 = $scope.Beneficiary.benf_prmt_address_line2;
+                    for(var i in ofcList){
+                        if(ofcList[i].OfficeName === line2){
+                            $scope.Beneficiary.benf_prmt_address_line2 = $scope.Beneficiary.benf_prmt_address_OfficeList[i]
+                        }
+                    }
+                }
+                else {
+                    $scope.Beneficiary.benf_prmt_address_line2 = $scope.Beneficiary.benf_prmt_address_OfficeList[0];
+                }
             } else if (field === 'employer') {
                 $scope.Beneficiary.emplr_address_taluk = pinDetails[0].Taluk;
                 $scope.Beneficiary.emplr_address_district = pinDetails[0].Districtname;
@@ -385,7 +418,17 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     pOfcList.push(pinDetails[i].OfficeName);
                 }
                 $scope.Beneficiary.emplr_address_OfficeList = pOfcList;
-                $scope.Beneficiary.emplr_address_line2 = $scope.Beneficiary.emplr_address_OfficeList[0];
+                if(retrive == false){
+                    var line2 = $scope.Beneficiary.benf_prmt_address_line2;
+                    for(var i in pOfcList){
+                        if(pOfcList[i].OfficeName === line2){
+                            $scope.Beneficiary.emplr_address_line2 = $scope.Beneficiary.emplr_address_OfficeList[i];
+                        }
+                    }
+                }
+                else {
+                    $scope.Beneficiary.emplr_address_line2 = $scope.Beneficiary.emplr_address_OfficeList[0];
+                }
             }
         };
         $scope.resetAddressFields = function(field) {

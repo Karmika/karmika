@@ -99,6 +99,7 @@ app.constant('config', {
               "benf_blood_group": "A+",
               "benf_bank_account_number": "010101010101",
               "benf_bank_name": "ICIC Bank",
+              "benf_bank_ifsc" : 'ICIC000020',
               "benf_bank_branch": "ECity Bangalore",
               "benf_bank_account_type":"SAVINGS",
               "benf_identity_card_type":"EPIC",
