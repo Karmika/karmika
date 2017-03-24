@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2017 at 04:26 PM
+-- Generation Time: Mar 24, 2017 at 08:41 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -210,16 +210,21 @@ CREATE TABLE `beneficiary_master` (
   `benf_registration_old_number` varchar(35) COLLATE latin1_general_ci DEFAULT NULL,
   `admin_comments` text COLLATE latin1_general_ci,
   `benf_identity_card_type` enum('EPIC','ADHAR','NPR') COLLATE latin1_general_ci DEFAULT NULL,
-  `benf_identity_card_number` varchar(20) COLLATE latin1_general_ci DEFAULT NULL
+  `benf_identity_card_number` varchar(20) COLLATE latin1_general_ci DEFAULT NULL,
+  `applied_date` datetime DEFAULT NULL,
+  `accepted_date` datetime DEFAULT NULL,
+  `approved_or_rejected_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `beneficiary_master`
 --
 
-INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `benf_last_name`, `benf_mobile_no`, `benf_alternate_mobile_no`, `benf_date_of_birth`, `beneficiary_age`, `benf_sex`, `nationality`, `benf_caste`, `benf_martial_status`, `benf_blood_group`, `benf_local_address_line1`, `benf_local_address_line2`, `benf_local_address_taluk`, `benf_local_address_district`, `benf_local_address_state`, `benf_local_pincode`, `benf_prmt_address_line1`, `benf_prmt_address_line2`, `benf_prmt_address_taluk`, `benf_prmt_address_district`, `benf_prmt_address_state`, `benf_prmt_address_pincode`, `employer_full_name`, `emplr_address_line1`, `emplr_address_line2`, `emplr_address_taluk`, `emplr_address_district`, `emplr_address_state`, `emplr_address_pincode`, `benf_nature_of_work`, `benf_date_of_employment`, `benf_wages_per_day`, `benf_wages_per_month`, `benf_bank_account_number`, `benf_bank_account_type`, `benf_bank_name`, `benf_bank_branch`, `benf_bank_ifsc`, `created_date`, `created_by_user_id`, `updated_date`, `updated_by_user_id`, `benf_application_status`, `benf_application_number`, `benf_acknowledgement_number`, `benf_registration_number`, `benf_registration_old_number`, `admin_comments`, `benf_identity_card_type`, `benf_identity_card_number`) VALUES
-(1, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-22 17:41:49', 4, '2017-03-22 17:43:22', 4, 'REJECTED', '0000000001', 'BNG000000001', '0000000002', '', 'Rejected', 'EPIC', '213131313'),
-(2, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', NULL, '2017-03-22 17:42:24', 4, '2017-03-22 17:43:10', 4, 'APPROVED', '0000000002', 'BNG000000002', '0000000001', '', 'Yes Enjoy', 'EPIC', '213131313');
+INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `benf_last_name`, `benf_mobile_no`, `benf_alternate_mobile_no`, `benf_date_of_birth`, `beneficiary_age`, `benf_sex`, `nationality`, `benf_caste`, `benf_martial_status`, `benf_blood_group`, `benf_local_address_line1`, `benf_local_address_line2`, `benf_local_address_taluk`, `benf_local_address_district`, `benf_local_address_state`, `benf_local_pincode`, `benf_prmt_address_line1`, `benf_prmt_address_line2`, `benf_prmt_address_taluk`, `benf_prmt_address_district`, `benf_prmt_address_state`, `benf_prmt_address_pincode`, `employer_full_name`, `emplr_address_line1`, `emplr_address_line2`, `emplr_address_taluk`, `emplr_address_district`, `emplr_address_state`, `emplr_address_pincode`, `benf_nature_of_work`, `benf_date_of_employment`, `benf_wages_per_day`, `benf_wages_per_month`, `benf_bank_account_number`, `benf_bank_account_type`, `benf_bank_name`, `benf_bank_branch`, `benf_bank_ifsc`, `created_date`, `created_by_user_id`, `updated_date`, `updated_by_user_id`, `benf_application_status`, `benf_application_number`, `benf_acknowledgement_number`, `benf_registration_number`, `benf_registration_old_number`, `admin_comments`, `benf_identity_card_type`, `benf_identity_card_number`, `applied_date`, `accepted_date`, `approved_or_rejected_date`) VALUES
+(1, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', 'ICIC000020', '2017-03-24 07:17:10', 4, '2017-03-24 07:18:27', 4, 'APPROVED', '0000000001', 'BNG000000001', '0000000001', '', 'yes Approved', 'EPIC', '213131313', NULL, NULL, NULL),
+(2, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', 'ICIC000020', '2017-03-24 07:22:59', 4, '2017-03-24 07:24:40', 4, 'APPROVED', '0000000002', 'BNG000000003', '0000000002', '', 'Yes Approved', 'EPIC', '213131313', NULL, NULL, NULL),
+(3, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', 'ICIC000020', '2017-03-24 07:23:45', 4, '2017-03-24 07:24:50', 4, 'REJECTED', '0000000003', 'BNG000000002', '0000000003', '', 'Rejected', 'EPIC', '213131313', NULL, NULL, NULL),
+(4, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', 'ICIC000020', '2017-03-24 07:28:39', 4, '2017-03-24 07:39:33', 4, 'APPROVED', '0000000004', 'BNG000000003', '0000000004', '', 'rwewr', 'EPIC', '213131313', '2017-03-24 08:28:57', '2017-03-24 13:09:10', '2017-03-24 13:09:33');
 
 -- --------------------------------------------------------
 
@@ -260,8 +265,10 @@ CREATE TABLE `benf_dependents` (
 --
 
 INSERT INTO `benf_dependents` (`id`, `benf_master_id`, `depnt_full_name`, `depnt_address`, `depnt_age`, `depnt_dob`, `depnt_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
-(1, 1, 'bbkjbkj', 'kjbjbkjbjk', 34, '1983-03-22', 'jhjbhjbkj', 4, '2017-03-22 17:42:03'),
-(2, 2, 'ghjghjhj', 'jhghjghjghjgj', 45, '1972-03-22', 'bkbkj', 4, '2017-03-22 17:42:39');
+(1, 1, 'bhjbjb', 'jhbhjbhjb', 25, '1992-03-24', 'jhbjhbhjb', 4, '2017-03-24 07:17:28'),
+(2, 2, 'jbjkbhkjb', 'jhbjbjhb', 25, '1992-03-24', 'jkhbkjh', 4, '2017-03-24 07:23:17'),
+(3, 3, 'aaaaaaaa', 'aaaaaaaa', 45, '1972-03-24', 'aaaaaaaa', 4, '2017-03-24 07:24:02'),
+(4, 4, 'asdsada', 'asdasdas', 45, '1972-03-24', 'asdada', 4, '2017-03-24 07:28:48');
 
 -- --------------------------------------------------------
 
@@ -289,8 +296,10 @@ CREATE TABLE `benf_emp_certificate` (
 --
 
 INSERT INTO `benf_emp_certificate` (`id`, `benf_master_id`, `benf_employer_full_name`, `benf_present_work_address`, `benf_present_project_name`, `emp_union_full_name`, `emp_union_branch_address`, `benf_work_start_date`, `benf_work_end_date`, `emp_union_address`, `last_updated_by_user_id`, `last_updated_time`) VALUES
-(1, 1, 'jkbjhb', 'bjkhbk', 'hjvjbjkhb', 'hjbjbjb', 'bjkbhjb', NULL, NULL, NULL, 4, '2017-03-22 17:42:09'),
-(2, 2, 'jbjkbjk', 'jhbjhbjb', 'bjbjb', 'jhbjbjhb', 'bjbjbjh', '2017-03-14', NULL, NULL, 4, '2017-03-22 17:42:48');
+(1, 1, 'jbjkhb', 'jhbjbjh', 'jjhbjhbjh', 'bjbjhbhj', 'jhbhjbjhb', NULL, NULL, NULL, 4, '2017-03-24 07:17:35'),
+(2, 2, 'kjhbh', 'jhgjhghj', 'jhghjg', 'hjgghjg', 'jgghjkhg', NULL, NULL, NULL, 4, '2017-03-24 07:23:22'),
+(3, 3, 'aaaaaaaa', 'aaaaaaaa', 'aaaaaaaa', 'aaaaaaaa', 'aaaaaaaa', NULL, NULL, NULL, 4, '2017-03-24 07:24:09'),
+(4, 4, 'asdada', 'asdsa', 'asdas', 'asda', 'asd', NULL, NULL, NULL, 4, '2017-03-24 07:28:55');
 
 -- --------------------------------------------------------
 
@@ -316,8 +325,10 @@ CREATE TABLE `benf_nominee` (
 --
 
 INSERT INTO `benf_nominee` (`id`, `benf_master_id`, `nominee_full_name`, `nominee_address`, `nominee_age`, `nominee_dob`, `nominee_share`, `nominee_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
-(1, 1, 'kjhkjh', 'kkhkjhjkh', 25, '1992-03-22', 100, 'kjbjkjbkjb', 4, '2017-03-22 17:42:03'),
-(2, 2, 'jhghj', 'gjghjghjg', 23, '1994-03-22', 100, 'vjhjhj', 4, '2017-03-22 17:42:39');
+(1, 1, 'jhkjh', 'hkjhkjhkjhjk', 25, '1992-03-24', 100, 'hjbhjbkjb', 4, '2017-03-24 07:17:28'),
+(2, 2, 'jhbjhb', 'hjbhjbb', 28, '1989-03-24', 100, 'mjmjbhj', 4, '2017-03-24 07:23:17'),
+(3, 3, 'aaaaaaaa', 'aaaaaaaa', 34, '1983-03-24', 100, 'aaaaaaaa', 4, '2017-03-24 07:24:02'),
+(4, 4, 'asadad', 'asdsasdada', 45, '1972-03-24', 100, 'sdsada', 4, '2017-03-24 07:28:48');
 
 -- --------------------------------------------------------
 
@@ -328,14 +339,30 @@ INSERT INTO `benf_nominee` (`id`, `benf_master_id`, `nominee_full_name`, `nomine
 CREATE TABLE `benf_payments` (
   `id` int(11) NOT NULL,
   `benf_master_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `date_of_payment` date NOT NULL,
+  `payment_reference_id` int(11) DEFAULT NULL,
+  `payment_mode` int(11) DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_status` int(11) DEFAULT NULL,
+  `amount` bigint(32) DEFAULT NULL,
+  `payment_for` int(11) DEFAULT NULL,
+  `chequeordd_no` varchar(64) DEFAULT NULL,
+  `bank_name` varchar(32) DEFAULT NULL,
+  `bank_payment_date` date DEFAULT NULL,
+  `ref_1` varchar(45) DEFAULT NULL,
+  `ref_2` varchar(45) DEFAULT NULL,
   `notes` text,
   `created_by_user_id` int(11) NOT NULL,
   `updated_by_user_id` int(11) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `benf_payments`
+--
+
+INSERT INTO `benf_payments` (`id`, `benf_master_id`, `payment_reference_id`, `payment_mode`, `payment_date`, `payment_status`, `amount`, `payment_for`, `chequeordd_no`, `bank_name`, `bank_payment_date`, `ref_1`, `ref_2`, `notes`, `created_by_user_id`, `updated_by_user_id`, `created_date`, `updated_date`) VALUES
+(1, 1, NULL, 3, '2017-03-09', 1, 2500, 2, 'jhbkjjkbkb', 'bjbjhb', '2017-03-24', 'jhjkhj', 'ghgj', 'gjgh', 4, 4, '2017-03-24 07:22:45', '2017-03-24 07:22:45');
 
 -- --------------------------------------------------------
 
@@ -373,6 +400,45 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `selection_seed_data`
+--
+
+CREATE TABLE `selection_seed_data` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `entity_type` varchar(45) DEFAULT NULL,
+  `entity_id` int(11) DEFAULT NULL,
+  `entity_value` varchar(45) DEFAULT NULL,
+  `created_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `selection_seed_data`
+--
+
+INSERT INTO `selection_seed_data` (`id`, `entity_type`, `entity_id`, `entity_value`, `created_datetime`, `updated_datetime`, `updated_by`) VALUES
+(1, 'subscription_duration', 1, '1 Year', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(2, 'subscription_duration', 2, '3 Years', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(3, 'subscription_duration', 3, '5 Years', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(4, 'subscription_duration', 4, '10 Years', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(5, 'subscription_duration', 5, '20 Years', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(6, 'subscription_duration', 0, 'Life', '2016-04-29 23:14:30', '2016-04-19 08:05:05', NULL),
+(7, 'payment_mode', 1, 'Cash', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(8, 'payment_mode', 2, 'Cheque', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(9, 'payment_mode', 3, 'DD', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(10, 'payment_mode', 4, 'Net banking', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(11, 'payment_mode', 5, 'Credit Card', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(12, 'payment_mode', 6, 'Debit Card', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(13, 'payment_status', 1, 'Received', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(14, 'payment_status', 2, 'Paid', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(15, 'payment_status', 3, 'Cancelled', '2016-04-29 23:14:30', '2016-04-19 08:22:31', NULL),
+(16, 'payment_for', 1, 'Subscription', '2016-04-29 23:14:30', '2016-04-19 08:29:10', NULL),
+(17, 'payment_for', 2, 'Application Fee', '2016-04-29 23:14:30', '2016-04-19 08:29:10', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `session`
 --
 
@@ -387,17 +453,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('0u6ajvleo58qlp0rtnu33bejg1', 1489887482, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('1sjfph09og7b5mi46abqhfh5t5', 1490064776, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('6hj9g21s483k5pcnnafl1obgo0', 1490027364, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('ehveg0igmtqdvj6buofgm0oqa0', 1489831784, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('gfiaccdrdiks3vqk6q7tj76t26', 1490064776, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('hi4ph1ofd8b88k8pnqedt3qbb3', 1489887482, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('kfntasegbos8ckl1ciknoldl21', 1490029305, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('nmj3rjo88ovhd10vtsptjjdqn2', 1489831785, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a313b),
-('oem7d1qqlrrk5nmlj5nk7qia51', 1489491556, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b),
-('psuftt6ao5dalthjtj0bghqp21', 1490206043, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('ut78r0ofbh793khkbaksahrt33', 1489474048, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b);
+('jcjcl0h8f571f9ku2ig48ucda2', 1490342632, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b);
 
 -- --------------------------------------------------------
 
@@ -520,6 +576,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `selection_seed_data`
+--
+ALTER TABLE `selection_seed_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `session`
 --
 ALTER TABLE `session`
@@ -546,7 +608,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `beneficiary_master`
 --
 ALTER TABLE `beneficiary_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `benf_attachments`
 --
@@ -556,27 +618,32 @@ ALTER TABLE `benf_attachments`
 -- AUTO_INCREMENT for table `benf_dependents`
 --
 ALTER TABLE `benf_dependents`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `benf_emp_certificate`
 --
 ALTER TABLE `benf_emp_certificate`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `benf_nominee`
 --
 ALTER TABLE `benf_nominee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `benf_payments`
 --
 ALTER TABLE `benf_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `selection_seed_data`
+--
+ALTER TABLE `selection_seed_data`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `user`
 --
