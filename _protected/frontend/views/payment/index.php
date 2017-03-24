@@ -16,8 +16,10 @@
     <thead>
       <tr>
         <th><a href="#" >No.</a></th>
-<!--         <th><a href="#" >Payment Mode </a></th>
-        <th><a href="#" >Payment Status </a></th> -->
+        <th><a href="#" >Reference Id</a></th>
+        <th><a href="#" >Payment Mode </a></th>
+        <th><a href="#" >Payment Status </a></th>
+        <th><a href="#" >Payment For </a></th>
         <th><a href="#" >Payment Date </a></th>
         <th><a href="#" >Amount </a></th>
       </tr>
@@ -25,10 +27,10 @@
     <tbody>
       <tr dir-paginate="payment in Payments | filter : searchName | itemsPerPage: selectedRowsPerPage">
         <td>{{$index+1}}</td>
-<!--         <td>
-          <a class="nameLink" ng-click="updatePayment(payment.id)">{{payment.payment_mode}}</a>
-        </td>
-        <td>{{payment.payment_status}}</td> -->
+        <td>{{payment.payment_reference_id}}</td>
+        <td>{{payment.payment_mode}}</td>
+        <td>{{payment.payment_status}}</td>
+        <td>{{payment.payment_for}}</td>
         <td>{{payment.payment_date | date }}</td>
         <td>{{payment.amount}}</td>
       </tr>

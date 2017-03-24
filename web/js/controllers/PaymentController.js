@@ -39,7 +39,7 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         $scope.paymentFors = [];
 
         $scope.Payment = {};
-        $scope.Payment.benf_master_id = CustomService.getParameterByName('id');
+        $scope.benf_master_id = CustomService.getParameterByName('id');
         $scope.full_name = CustomService.getParameterByName('Name');
         $scope.registration_no = CustomService.getParameterByName('rno');
 
@@ -71,9 +71,10 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
 
         $scope.CreatePayment = function(){
             var PaymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
+            PaymentDetails.benf_master_id = $scope.benf_master_id;
             $http.post(config.baseUrl+"/payment/createpayment",PaymentDetails)
             .then(function(response) {
-                if(response.data.status == "success") $window.location.href = config.baseUrl + "/payment/index?id=" + $scope.Payment.benf_master_id;
+                if(response.data.status == "success") $window.location.href = config.baseUrl + "/payment/index?id=" + $scope.benf_master_id;
             });
         }
     }

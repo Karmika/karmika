@@ -98,10 +98,8 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         $scope.Payment = {};
         $scope.Payment.amount = 25;
-        if(!id){
-            $scope.Payment.payment_for = {"entity_id":2,"entity_value":"Application Fee"};
-            $scope.Payment.payment_status = {"entity_id":2,"entity_value":"Paid"};
-        }
+        $scope.Payment.payment_for = {"entity_id":2,"entity_value":"Application Fee"};
+        $scope.Payment.payment_status = {"entity_id":2,"entity_value":"Paid"};
         $scope.paymentModes = {};
         $scope.paymentStatuses = {};
         $scope.paymentFors = [];
@@ -131,7 +129,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 $scope.Payment.bank_payment_date = new Date();
             }
         });
-
+        
         $scope.CreatePayment = function(){
             var paymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
             paymentDetails.benf_master_id = $scope.Beneficiary.id;
@@ -162,6 +160,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 }
                 if(response.data.Payment != null && response.data.Payment != undefined){
                     $scope.Payment = response.data.Payment;
+                    $scope.FormatPayment();
                 }
                 $scope.Certificates.FormType = "V";
                 if(response.data.Certificates.length > 0) $scope.Certificates.Forms = response.data.Certificates;
@@ -169,7 +168,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 $scope.FormatDependentData();
                 $scope.FormatBeneficiaryData();
                 $scope.FormatCertificatesDates();
-                $scope.FormatPayment();
             });
         else $scope.InitializeBasicData();
 

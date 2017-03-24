@@ -361,7 +361,8 @@ class BeneficiaryController extends FrontendController
             ->select(['payment_date','payment_mode','payment_status','payment_for','payment_reference_id','amount','notes','chequeordd_no','bank_name','ifsc_code','id'])
             ->where(['benf_master_id' => $id])
             ->one();
-        $result = ArrayHelper::toArray($details,'*');
+        $result = NULL;    
+        if($details != null) $result = ArrayHelper::toArray($details,'*');
         return $result;
     }
 }
