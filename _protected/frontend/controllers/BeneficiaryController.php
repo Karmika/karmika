@@ -24,7 +24,7 @@ class BeneficiaryController extends FrontendController
     public $UserIdentity;
     public $IsAdmin;
     public $DraftStatus = "DRAFT";
-    public $PendingStatus = "PENDING";
+    public $AppliedStatus = "APPLIED";
     public $AcceptedStatus = "ACCEPTED";
     public $ApproveStatus = "APPROVED";
     public $RejectedStatus = "REJECTED";
@@ -33,6 +33,7 @@ class BeneficiaryController extends FrontendController
     public $MemberRole = "member";
 
 	public function beforeAction($action) {
+        date_default_timezone_set("Asia/Kolkata");
 	    $this->enableCsrfValidation = false;
         if(Yii::$app->user->isGuest) $this->LoggedInUser = 0;
         else $this->LoggedInUser = (string)Yii::$app->user->identity->id;
@@ -94,7 +95,8 @@ class BeneficiaryController extends FrontendController
         $data = json_decode($post, true);
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
-        $data["benf_application_status"] = $this->PendingStatus;
+        $data["benf_application_status"] = $this->AppliedStatus;
+        $data["applied_date"] = date('Y-m-d H:i:s');
         $data['benf_application_number'] = Services::GetNewBeneficiaryApplicationNumber();
         $model->attributes = $data;
         if($model->update()) return json_encode(array("status"=>"success","anumber"=>$data['benf_application_number']));
@@ -149,8 +151,10 @@ class BeneficiaryController extends FrontendController
         $model = BeneficiaryMaster::findOne($data['id']);
         $data["benf_application_status"] = $status;
         if($this->AcceptedStatus == $status){
+            $data["accepted_date"] = date('Y-m-d H:i:s');
             $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
         }else{
+            $data["approved_or_rejected_date"] = date('Y-m-d H:i:s');
             $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
             $data["admin_comments"] = $data['adminComments'];
         }
@@ -311,8 +315,8 @@ class BeneficiaryController extends FrontendController
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AcceptedStatus)?true:false;
-            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus || $result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
-            $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->PendingStatus)?true:false;
+            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus || $result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+            $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
         }
         return $result;
     }
