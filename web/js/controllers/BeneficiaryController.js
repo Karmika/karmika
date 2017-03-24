@@ -33,10 +33,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         $scope.insertNominee = function(idx) {
             var individualNominee = {
-                "nominee_full_name": '',
-                "nominee_address": '',
-                "nominee_age": '',
-                "nominee_dob": '',
                 "nominee_share": 100
             };
             $scope.NomineeList.push(individualNominee);
@@ -45,14 +41,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             }
         };
         $scope.insertDependent = function() {
-            var dependent = {
-                "depnt_full_name" : '',
-                "depnt_address" : '',
-                "depnt_age" : '',
-                "depnt_dob" : '',
-                "depnt_relationship_with_benf" : ''
-            };
-            $scope.DependentsList.push(dependent);
+            $scope.DependentsList.push({});
         };
         /* Start : Certificates logic */
 

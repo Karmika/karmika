@@ -367,31 +367,31 @@ $url =  Yii::$app->homeUrl;?>
                         <form role='form' name="NomineeForm" novalidate class="form-vertical table table-bordered table-compressed">
                         <div class="row" ng-repeat="nominee in NomineeList" style="margin:0.5rem;">
                             <div class="col-md-2">
-                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='nominee.nominee_full_name' name="NomineeForm.fullname+$index" placeholder="Full Name"  maxlength="100" required />
-                                <small class="error" ng-show='!nominee.nominee_full_name'>Please provide nominee name</small>
+                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='nominee.nominee_full_name' name="nominee_full_name{{$index}}" placeholder="Full Name"  maxlength="100" required />
+                                <small class="error" ng-show="NomineeForm.nominee_full_name{{$index}}.$invalid && NomineeForm.nominee_full_name{{$index}}.$dirty">Please provide nominee name</small>
                             </div>
                             <div class="col-md-3">
-                                <textarea name='NomineeForm.nominee_address{{$index}}' class="form-control" ng-model='nominee.nominee_address' required></textarea>
-                                <small class="error" ng-show="!nominee.nominee_address">Please provide nominee address</small>
+                                <textarea name='nominee_address_{{$index}}' class="form-control" ng-model='nominee.nominee_address' required></textarea>
+                                <small class="error" ng-show="NomineeForm.nominee_address_{{$index}}.$invalid && NomineeForm.nominee_address_{{$index}}.$dirty">Please provide nominee address</small>
                             </div>
                             <div class="col-md-2">
                                 <p class="input-group" ng-controller="DatepickerPopupController">
-                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="nominee.nominee_dob" is-open="popup1.opened" name="NomineeForm.nominee_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="nominee.nominee_dob" is-open="popup1.opened" name="nominee_dob_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
                                     <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                 </p>
-                                <small class="error" ng-show="NomineeForm.nominee_dob.$invalid && NomineeForm.nominee_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                                <small class="error" ng-show="NomineeForm.nominee_dob_{{$index}}.$invalid && NomineeForm.nominee_dob_{{$index}}.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                             </div>
                             <div class="col-md-1">
-                                <input class="form-control" numerics-only ng-model="nominee.nominee_age" name="NomineeForm.nominee_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,nominee.nominee_age,'Nominee')" required />
-                                <small class="error" ng-show="NomineeForm.nominee_age.$invalid && NomineeForm.nominee_age.$dirty">Please provide nominee Age</small>
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_age" name="nominee_age_{{$index}}" placeholder="Age" ng-change="setUnknownDOBbyAge($index,nominee.nominee_age,'Nominee')" required />
+                                <small class="error" ng-show="NomineeForm.nominee_age_{{$index}}.$invalid && NomineeForm.nominee_age_{{$index}}.$dirty">Please provide nominee Age</small>
                             </div>
                             <div class="col-md-1">
-                                <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="NomineeForm.nominee_share" placeholder="% share" ng-change='changedPercentage($index)' required />
-                                <small class="error" ng-show="NomineeForm.nominee_share.$invalid && NomineeForm.nominee_share.$dirty">Please provide percentage share</small>
+                                <input class="form-control" numerics-only ng-model="nominee.nominee_share" name="nominee_share_{{$index}}" placeholder="% share" ng-change='changedPercentage($index)' required />
+                                <small class="error" ng-show="NomineeForm.nominee_share_{{$index}}.$invalid && NomineeForm.nominee_share_{{$index}}.$dirty">Please provide percentage share</small>
                             </div>
                             <div class="col-md-2">
-                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="nominee.nominee_relationship_with_benf" name="NomineeForm.nominee_relationship_with_benf" placeholder="Relation" maxlength="25" required />
-                                <small class="error" ng-show="NomineeForm.nominee_relationship_with_benf.$invalid && NomineeForm.nominee_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
+                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="nominee.nominee_relationship_with_benf" name="nominee_relationship_with_benf_{{$index}}" placeholder="Relation" maxlength="25" required />
+                                <small class="error" ng-show="NomineeForm.nominee_relationship_with_benf_{{$index}}.$invalid && NomineeForm.nominee_relationship_with_benf_{{$index}}.$dirty">Please provide Relation with Benefeciary</small>
                             </div>
                             <div class="col-md-1" style="text-align: right;">
                                 <div class="row">
@@ -437,28 +437,28 @@ $url =  Yii::$app->homeUrl;?>
                         <form role='form' name="DependentForm" novalidate class="form-vertical table table-bordered table-compressed">
                         <div class="row" ng-repeat="dependent in DependentsList" style="margin:0.5rem;">
                             <div class="col-md-3">
-                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='dependent.depnt_full_name' name="DependentForm.depnt_full_name+$index" placeholder="Full Name"  maxlength="100" required />
-                                <small class="error" ng-show='!dependent.depnt_full_name'>Please provide dependent name</small>
+                                <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model='dependent.depnt_full_name' name="depnt_full_name_{{$index}}" placeholder="Full Name"  maxlength="100" required />
+                                <small class="error" ng-show="DependentForm.depnt_full_name_{{$index}}.$invalid && DependentForm.depnt_full_name_{{$index}}.$dirty">Please provide dependent name</small>
                             </div>
                             <div class="col-md-3">
-                                <textarea name='DependentForm.depnt_address{{$index}}' class="form-control" ng-model='dependent.depnt_address' required></textarea>
-                                <small class="error" ng-show="!dependent.depnt_address">Please provide dependent address</small>
+                                <textarea name='depnt_address_{{$index}}' class="form-control" ng-model='dependent.depnt_address' required></textarea>
+                                <small class="error" ng-show="DependentForm.depnt_address_{{$index}}.$invalid && DependentForm.depnt_address_{{$index}}.$dirty">Please provide dependent address</small>
                             </div>
 
                             <div class="col-md-2">
                                 <p class="input-group" ng-controller="DatepickerPopupController">
-                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="dependent.depnt_dob" is-open="popup1.opened" name="DependentForm.depnt_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForDependent($index)"/>
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="dependent.depnt_dob" is-open="popup1.opened" name="depnt_dob_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForDependent($index)"/>
                                     <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                 </p>
-                                <small class="error" ng-show="DependentForm.depnt_dob.$invalid && DependentForm.depnt_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
+                                <small class="error" ng-show="DependentForm.depnt_dob_{{$index}}.$invalid && DependentForm.depnt_dob_{{$index}}.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                             </div>
                             <div class="col-md-1">
-                                <input class="form-control" numerics-only ng-model="dependent.depnt_age" name="DependentForm.depnt_age" placeholder="Age" ng-change="setUnknownDOBbyAge($index,dependent.depnt_age,'Dependents')" required />
-                                <small class="error" ng-show="DependentForm.depnt_age.$invalid && DependentForm.depnt_age.$dirty">Please provide depnt_age Age</small>
+                                <input class="form-control" numerics-only ng-model="dependent.depnt_age" name="depnt_age_{{$index}}" placeholder="Age" ng-change="setUnknownDOBbyAge($index,dependent.depnt_age,'Dependents')" required />
+                                <small class="error" ng-show="DependentForm.depnt_age_{{$index}}.$invalid && DependentForm.depnt_age_{{$index}}.$dirty">Please provide depnt_age Age</small>
                             </div>
                             <div class="col-md-2">
-                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="dependent.depnt_relationship_with_benf" name="DependentForm.depnt_relationship_with_benf" placeholder="Relation" maxlength="25" required />
-                                <small class="error" ng-show="DependentForm.depnt_relationship_with_benf.$invalid && DependentForm.depnt_relationship_with_benf.$dirty">Please provide Relation with Benefeciary</small>
+                                <input class="form-control" letterswithsinglequoteandhyphendot-only ng-model="dependent.depnt_relationship_with_benf" name="depnt_relationship_with_benf_{{$index}}" placeholder="Relation" maxlength="25" required />
+                                <small class="error" ng-show="DependentForm.depnt_relationship_with_benf_{{$index}}.$invalid && DependentForm.depnt_relationship_with_benf_{{$index}}.$dirty">Please provide Relation with Benefeciary</small>
                             </div>
                             <div class="col-md-1" style="text-align: right;">
                                 <div class="row">
