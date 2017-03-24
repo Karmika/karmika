@@ -19,33 +19,8 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             };
 
             $scope.DependentsList = [];
-            $scope.insertDependent = function() {
-                var dependent = {
-                    "depnt_full_name" : '',
-                    "depnt_address" : '',
-                    "depnt_age" : '',
-                    "depnt_dob" : '',
-                    "depnt_relationship_with_benf" : ''
-                };
-                $scope.DependentsList.push(dependent);
-            };
             $scope.insertDependent();
-
             $scope.NomineeList = [];
-            $scope.insertNominee = function(idx) {
-                var individualNominee = {
-                    "nominee_full_name": '',
-                    "nominee_address": '',
-                    "nominee_age": '',
-                    "nominee_dob": '',
-                    "nominee_share": 100
-                };
-                $scope.NomineeList.push(individualNominee);
-
-                if(idx>=0){
-                    $scope.changedPercentage(idx);
-                }
-            };
             $scope.insertNominee(-1);
 
             /* Test data : Need to remove this */
@@ -55,6 +30,29 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             /* ENd test data */
         }
 
+        $scope.insertNominee = function(idx) {
+            var individualNominee = {
+                "nominee_full_name": '',
+                "nominee_address": '',
+                "nominee_age": '',
+                "nominee_dob": '',
+                "nominee_share": 100
+            };
+            $scope.NomineeList.push(individualNominee);
+            if(idx>=0){
+                $scope.changedPercentage(idx);
+            }
+        };
+        $scope.insertDependent = function() {
+            var dependent = {
+                "depnt_full_name" : '',
+                "depnt_address" : '',
+                "depnt_age" : '',
+                "depnt_dob" : '',
+                "depnt_relationship_with_benf" : ''
+            };
+            $scope.DependentsList.push(dependent);
+        };
         /* Start : Certificates logic */
 
         $scope.Certificates = {};
@@ -166,8 +164,12 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $scope.NomineeList.splice(index, 1);
         }
         $scope.calculateAgeForNominee = function(index){
+            console.log('hey you', index);
             $scope.NomineeList[index].nominee_age = CustomService.calculateAge(new Date($scope.NomineeList[index].nominee_dob));
         };
+        $scope.calculateAgeForDependent = function(idx){
+            $scope.DependentsList[idx].depnt_age = CustomService.calculateAge(new Date($scope.DependentsList[idx].depnt_dob));
+        }
         $scope.percentage = 100;
         $scope.presentShare = 0;
         $scope.changedPercentage = function(idx){
@@ -212,9 +214,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         /* END : Nominee */
 
         /*  Dependents  */
-        $scope.calculateAgeForNominee = function(index){
-            $scope.DependentsList[index].depnt_age = CustomService.calculateAge(new Date($scope.DependentsList[index].depnt_dob));
-        };
         $scope.deleteDependent = function(index){
             $scope.DependentsList.splice(index, 1);
         }

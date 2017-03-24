@@ -443,7 +443,7 @@ $url =  Yii::$app->homeUrl;?>
 
                             <div class="col-md-2">
                                 <p class="input-group" ng-controller="DatepickerPopupController">
-                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="dependent.depnt_dob" is-open="popup1.opened" name="DependentForm.depnt_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForNominee($index)"/>
+                                    <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="dependent.depnt_dob" is-open="popup1.opened" name="DependentForm.depnt_dob" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Date of Birth" ng-change="calculateAgeForDependent($index)"/>
                                     <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                 </p>
                                 <small class="error" ng-show="DependentForm.depnt_dob.$invalid && DependentForm.depnt_dob.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
