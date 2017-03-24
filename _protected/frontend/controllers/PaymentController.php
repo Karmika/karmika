@@ -32,6 +32,7 @@ class PaymentController extends FrontendController
     public $MemberRole = "member";
 
 	public function beforeAction($action) {
+        date_default_timezone_set("Asia/Kolkata");
 	    $this->enableCsrfValidation = false;
         if(Yii::$app->user->isGuest) $this->LoggedInUser = 0;
         else $this->LoggedInUser = (string)Yii::$app->user->identity->id;
@@ -82,7 +83,19 @@ class PaymentController extends FrontendController
         //print_r($model->validate());echo "<br>";
         //echo "<pre>";print_r($model->getErrors());exit;
         //print_r($model->save());exit;
-        if($model->save()) return json_encode(array("status"=>"success"));
+        if($model->save()) return json_encode(array("status"=>"success","id"=>$model->id));
         return json_encode(array("status"=>"failed"));
+    }
+
+    public function actionUpdatepayment()
+    {
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $model = BenfPayments::findOne($data['id']);
+        $data["updated_by_user_id"] = $this->LoggedInUser;
+        $data["updated_date"] = date('Y-m-d H:i:s');
+        $model->attributes = $data;
+        if($model->update()) return "success";
+        return "failed";
     }
 }

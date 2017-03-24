@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use frontend\models\BeneficiaryMaster;
+use frontend\models\SelectionSeedData;
 
 /**
  * This is the model class for table "selection_seed_data".
@@ -31,6 +32,14 @@ class Services extends Model
             $newArray[$i++] = array('entity_id' => $key,'entity_value' => $val);
         }
         return $newArray;
+    }
+    
+    public static function getObjectForSelectBox($id,$columnName){
+        $details = SelectionSeedData::find()
+            ->select(['entity_id', 'entity_value'])
+            ->where(['entity_id' => $id,'entity_type'=>$columnName])
+            ->one();
+        return ArrayHelper::toArray($details,'*');
     }
     
     public function GetNewBeneficiaryAcknowledgementNumber()

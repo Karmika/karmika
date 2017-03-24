@@ -11,12 +11,19 @@ app.service('CustomService',['$http','config', function($http,config) {
       }
 
       this.MakeingCustomFormatDataForBeneficiaryPayment = function (Payment) {
-          Payment.payment_date = CS.getDateFormat(Payment.payment_date,"yyyy-MM-dd");
-          Payment.bank_payment_date = CS.getDateFormat(Payment.bank_payment_date,"yyyy-MM-dd");
-          Payment.payment_mode = Payment.payment_mode.entity_id;
-          Payment.payment_status = Payment.payment_status.entity_id;
-          Payment.payment_for = Payment.payment_for.entity_id;
-          return Payment;
+          var data = {};
+          data.payment_date = CS.getDateFormat(Payment.payment_date,"yyyy-MM-dd");
+          data.payment_mode = Payment.payment_mode.entity_id;
+          data.payment_status = Payment.payment_status.entity_id;
+          data.payment_for = Payment.payment_for.entity_id;
+          data.payment_reference_id = Payment.payment_reference_id;
+          data.amount = Payment.amount;
+          data.notes = Payment.notes;
+          data.chequeordd_no = Payment.chequeordd_no;
+          data.bank_name = Payment.bank_name;
+          data.ifsc_code = Payment.ifsc_code;
+          if(Payment.id != undefined) data.id = Payment.id;
+          return data;
       }
 
       this.getParameterByName = function (name, url) {

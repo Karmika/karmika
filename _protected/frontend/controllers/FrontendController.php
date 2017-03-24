@@ -35,7 +35,7 @@ class FrontendController extends Controller
                                         'appliedbeneficiary',
 
                                         //Payment
-                                        'index','create','allpayments','createpayment',
+                                        'index','create','allpayments','createpayment','updatepayment',
 
                                         //SeedData
                                         'getdata'

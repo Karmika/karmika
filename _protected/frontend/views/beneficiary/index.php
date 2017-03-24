@@ -104,10 +104,10 @@ td,th{
          <td ng-show="beneficiary.CanConfirm">
             <a class="nameLink" ng-click="TakeAction($index,beneficiary.id)">{{beneficiary.benf_application_status}}</a>
          </td>
-         <td ng-show="!beneficiary.Editable">
+         <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired">
             <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>
-         <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
+         <td ng-show="beneficiary.Editable || beneficiary.actionRequired"><span style="padding-left:10px;"> --- </span></td>
          <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>

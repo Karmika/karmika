@@ -22,6 +22,10 @@ $url =  Yii::$app->homeUrl;?>
                         <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Employer Details"><span class="round-tab"><i class="glyphicon glyphicon-certificate"></i> Employer Details</span>
                         </a>
                     </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Payments"><span class="round-tab"><i class="fa fa-inr" style="font-size:18px"></i> Payment</span>
+                        </a>
+                    </li>
 <!--                     <li role="presentation" class="disabled">
                         <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Upload Files"><span class="round-tab"><i class="glyphicon glyphicon-upload"></i></span> Upload Files</a>
                     </li> -->
@@ -465,7 +469,6 @@ $url =  Yii::$app->homeUrl;?>
                         </div>
                         <ul class="list-inline pull-right" style="padding-top:15px;">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-success btn-info-full next-step" ng-disabled="DependentForm.$invalid || NomineeForm.$invalid" ng-click='saveNomineeAndDependents()' >Save and continue</button></li>
                         </ul>
                         </form>
@@ -599,6 +602,94 @@ $url =  Yii::$app->homeUrl;?>
                             <li ng-show="Certificates.FormType == 'IV'"><button type="button" class="btn btn-primary btn-info-full next-step" ng-disabled="EmploymentFormIV.$invalid" ng-click="SaveCertificate(FormType)">Save and Continue</button></li>
                         </ul>
                     </div>
+
+                    <div class="tab-pane" role="tabpanel" id="step4">
+                        <h3 align="center">Payment</h3>
+                        <hr/>
+                        <form role='form' name="PaymentCreateForm" novalidate class="form-vertical">
+                            <div class="row form-group">
+                                <label class="control-label col-sm-2" for="amount"><span class="mandatory-field">*&nbsp;</span>Amount :</label>
+                                <div class="col-sm-4">
+                                  <input numerics-only class="form-control" ng-model="Payment.amount" ng-disabled="true" name="amount" placeholder="Enter amount" required />
+                                  <small class="error" ng-show="PaymentCreateForm.amount.$invalid && PaymentCreateForm.amount.$dirty">Please provide amount</small>
+                                </div>
+
+                                <label class="control-label col-sm-2" for="payment_for"><span class="mandatory-field">*&nbsp;</span>Payment For :</label>
+                                <div class="col-sm-4">
+                                  <select ng-disabled="true" required name="payment_for" class="form-control" ng-model="Payment.payment_for" ng-options="for.entity_value for for in paymentFors track by for.entity_id">
+                                    <option value="">Please select payment for </option>
+                                  </select>
+                                  <small class="error" ng-show="PaymentCreateForm.payment_for.$invalid && PaymentCreateForm.payment_for.$dirty">Please provide payment for</small>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="control-label col-sm-2" for="payment_status"><span class="mandatory-field">*&nbsp;</span>Payment Status :</label>
+                                <div class="col-sm-4">
+                                  <select ng-disabled="true" required name="payment_status" class="form-control" ng-model="Payment.payment_status" ng-options="status.entity_value for status in paymentStatuses track by status.entity_id">
+                                      <option value="">Please select payment status </option>
+                                  </select>
+                                  <small class="error" ng-show="PaymentCreateForm.payment_status.$invalid && PaymentCreateForm.payment_status.$dirty">Please provide payment status</small>
+                                </div>
+                                
+                                <label class="control-label col-sm-2" for="payment_reference_id">&nbsp;&nbsp;Payment Reference Id :</label>
+                                <div class="col-sm-4">
+                                  <input numerics-only class="form-control" ng-model="Payment.payment_reference_id" name="payment_reference_id" placeholder="Enter reference details" />
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="control-label col-sm-2" for="payment_date"><span class="mandatory-field">*&nbsp;</span>Payment date :</label>
+                                <div class="col-sm-4" ng-controller="DatepickerPopupController">
+                                    <p class="input-group">
+                                      <input date-validation ng-click="open1()" class="form-control" uib-datepicker-popup="{{format}}" ng-model="Payment.payment_date" is-open="popup1.opened" name="payment_date" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" placeholder="Select payment date" required />
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </p>
+                                    <small class="error" ng-show="PaymentCreateForm.payment_date.$invalid && PaymentCreateForm.payment_date.$dirty">Please provide payment date and only acceptable format is DD-MM-YYYY</small>
+                                </div>
+
+                                <label class="control-label col-sm-2" for="payment_mode"><span class="mandatory-field">*&nbsp;</span>Payment Mode :</label>
+                                <div class="col-sm-4">
+                                  <select required name="payment_mode" class="form-control" ng-model="Payment.payment_mode" ng-options="mode.entity_value for mode in paymentModes track by mode.entity_id">
+                                      <option value="">Please select payment mode </option>
+                                  </select>
+                                  <small class="error" ng-show="PaymentCreateForm.payment_mode.$invalid && PaymentCreateForm.payment_mode.$dirty">Please provide payment mode</small>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" ng-show="BankAndPaydateFieldShow">
+                                  <label class="control-label col-sm-2" for="chequeordd_no"><span class="mandatory-field">*&nbsp;</span>Cheque / DD No :</label>
+                                  <div class="col-sm-4">
+                                    <input alphanumerics-only class="form-control" ng-model="Payment.chequeordd_no" name="chequeordd_no" placeholder="Enter Cheque / DD No" ng-required="BankAndPaydateFieldShow" />
+                                    <small class="error" ng-show="PaymentCreateForm.chequeordd_no.$invalid && PaymentCreateForm.chequeordd_no.$dirty">Please provide chequeordd no</small>
+                                  </div>
+                                  <label class="control-label col-sm-2" for="bank_name">&nbsp;&nbsp;Bank Name :</label>
+                                  <div class="col-sm-4">
+                                    <input class="form-control" ng-model="Payment.bank_name" name="bank_name" placeholder="Enter bank name" />
+                                  </div>
+                            </div>
+                            <div class="row form-group">
+                                <div ng-show="BankAndPaydateFieldShow">
+                                    <label class="control-label col-sm-2" for="ifsc_code">&nbsp;&nbsp;IFSC Code :</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" ng-model="Payment.ifsc_code" name="ifsc_code" placeholder="Enter ifsc code" />
+                                    </div>
+                                </div>
+                                <label class="control-label col-sm-2" for="notes">&nbsp;&nbsp;Remarks :</label>
+                                <div class="col-sm-4">
+                                  <textarea min="1" max="250" class="form-control" ng-model="Payment.notes" name="notes" placeholder="Enter remarks" ></textarea>
+                                </div>
+                            </div>
+
+                            <ul class="list-inline pull-right">
+                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                <li><button ng-disabled="PaymentCreateForm.$invalid" type="button" ng-click="CreatePayment()" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                            </ul>
+                        </form>
+                    </div>
+
 <!--                     <div class="tab-pane" role="tabpanel" id="step4">
                         <h3 align="center">Upload Files</h3>
                         <hr/>
@@ -960,6 +1051,88 @@ $url =  Yii::$app->homeUrl;?>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="panel panel-success">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Payment Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
+                                <div id="collapse4" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="panel-body">
+                                        <div class="row form-group">
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Payment For<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.payment_for.entity_value}}
+                                            </div>
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Amount<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.amount}}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Payment Status<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.payment_status.entity_value}}
+                                            </div>
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Payment Reference Id<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.payment_reference_id}}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Payment date<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.payment_date | date }}
+                                            </div>
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Payment Mode<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.payment_mode.entity_value}}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group" ng-show="BankAndPaydateFieldShow">
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Cheque / DD No<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.chequeordd_no}}
+                                            </div>
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b> Bank Name<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.bank_name}}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div ng-show="BankAndPaydateFieldShow">
+                                                <div class="control-label col-sm-2">
+                                                    &nbsp;&nbsp;<b>IFSC Code<span class="pull-right WordsLeftStyle">:</b>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    {{Payment.ifsc_code}}
+                                                </div>
+                                            </div>
+                                            <div class="control-label col-sm-2">
+                                                &nbsp;&nbsp;<b>Remarks<span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Payment.notes}}
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!--
                             <div class="panel panel-success">
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
@@ -1000,7 +1173,6 @@ $url =  Yii::$app->homeUrl;?>
 
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save As Draft</button></li>
                             <li><button ng-click="SubmitBeneficiary()" type="button" class="btn btn-primary btn-info-full next-step">Submit</button></li>
                         </ul>
                     </div>

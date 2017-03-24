@@ -8,6 +8,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.natureOfWorks = config.natureOfWorks;
         $scope.bloodGroupList = config.bloodGroupList;
         $scope.IdentityCardTypeList = config.IdentityCardTypeList;
+        var id = CustomService.getParameterByName('id');
 
         $scope.InitializeBasicData= function(){
             $scope.Beneficiary = {
@@ -93,9 +94,59 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         /* End : Certificates logic */
 
+        /* Start : Payment logic */
+
+        $scope.Payment = {};
+        $scope.Payment.amount = 25;
+        if(!id){
+            $scope.Payment.payment_for = {"entity_id":2,"entity_value":"Application Fee"};
+            $scope.Payment.payment_status = {"entity_id":2,"entity_value":"Paid"};
+        }
+        $scope.paymentModes = {};
+        $scope.paymentStatuses = {};
+        $scope.paymentFors = [];
+
+        CustomService.SeedData('payment_mode').then(function(data) {
+            $scope.paymentModes = data;
+        });
+
+        CustomService.SeedData('payment_status').then(function(data) {
+            $scope.paymentStatuses = data;
+        });
+
+        CustomService.SeedData('payment_for').then(function(data) {
+            $scope.paymentFors = data;
+        });
+
+        $scope.$watch('Payment.payment_mode',function(newVal){
+            if(newVal != undefined && (newVal.entity_value == "DD" || newVal.entity_value == "Cheque"))
+            { 
+                $scope.BankAndPaydateFieldShow = true;
+            }
+            else
+            { 
+                $scope.BankAndPaydateFieldShow = false;
+                $scope.Payment.bank_name = null;
+                $scope.Payment.chequeordd_no = null;
+                $scope.Payment.bank_payment_date = new Date();
+            }
+        });
+
+        $scope.CreatePayment = function(){
+            var paymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
+            paymentDetails.benf_master_id = $scope.Beneficiary.id;
+            var action = "createpayment";
+            if($scope.Payment.id != undefined && $scope.Payment.id != null) action = "updatepayment";
+            $http.post(config.baseUrl+"/payment/"+action,paymentDetails)
+            .then(function(response) {
+                if(response.data.status == "success" && action == "createpayment") $scope.Payment.id = response.data.id;
+            });
+        }
+
+        /* End : Payment Logic */
+
         /* Start : Load data */
 
-        var id = CustomService.getParameterByName('id');
         if(id)
             $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
             .then(function(response) {
@@ -109,13 +160,16 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 if($scope.DependentsList.length == 0){
                     $scope.insertDependent();
                 }
+                if(response.data.Payment != null && response.data.Payment != undefined){
+                    $scope.Payment = response.data.Payment;
+                }
                 $scope.Certificates.FormType = "V";
-                console.log(response.data.Certificates);
                 if(response.data.Certificates.length > 0) $scope.Certificates.Forms = response.data.Certificates;
                 $scope.FormatNomineeData();
                 $scope.FormatDependentData();
                 $scope.FormatBeneficiaryData();
                 $scope.FormatCertificatesDates();
+                $scope.FormatPayment();
             });
         else $scope.InitializeBasicData();
 
@@ -157,6 +211,21 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             if($scope.Beneficiary.benf_date_of_employment != null) $scope.Beneficiary.benf_date_of_employment = new Date($scope.Beneficiary.benf_date_of_employment);
         }
 
+        $scope.FormatPayment = function(){
+            $scope.Payment.payment_date = new Date($scope.Payment.payment_date);
+            angular.forEach($scope.paymentModes, function(value, key) {
+                if(value.entity_id == $scope.Payment.payment_mode)
+                    $scope.Payment.payment_mode = $scope.paymentModes[key];
+            });
+            angular.forEach($scope.paymentStatuses, function(value1, key1) {
+                if(value1.entity_id == $scope.Payment.payment_status)
+                    $scope.Payment.payment_status = $scope.paymentStatuses[key1];
+            });
+            angular.forEach($scope.paymentFors, function(value2, key2) {
+                if(value2.entity_id == $scope.Payment.payment_for)
+                    $scope.Payment.payment_for = $scope.paymentFors[key2];
+            });
+        }
         /* End : data format functions */
 
         /* Nominee */
@@ -164,7 +233,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $scope.NomineeList.splice(index, 1);
         }
         $scope.calculateAgeForNominee = function(index){
-            console.log('hey you', index);
             $scope.NomineeList[index].nominee_age = CustomService.calculateAge(new Date($scope.NomineeList[index].nominee_dob));
         };
         $scope.calculateAgeForDependent = function(idx){
@@ -334,7 +402,6 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             urls += '&filters[pincode]=' + pincode + '&fields=OfficeName,Taluk,Districtname,statename';
             $http.get(urls)
                 .then(function(response) {
-                    console.log(response)
                     if (response.data.count === 0) {
                         alert('Invalid Pincode. Please try again');
                         $scope.resetAddressFields(field);

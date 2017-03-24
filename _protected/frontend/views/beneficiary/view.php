@@ -299,6 +299,86 @@
             </div>
         </div>
 
+        <br><h3 class="text-center subHeading">Payment Details</h3><br>
+
+        <div class="panel-body">
+	        <div class="panel-body">
+
+				<div class="row form-group">
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Payment For<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.payment_for.entity_value}}
+                    </div>
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Amount<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="fa fa-inr"></i>&nbsp;{{Payment.amount}}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Payment Status<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.payment_status.entity_value}}
+                    </div>
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Payment Ref Id<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.payment_reference_id}}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Payment date<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.payment_date | date }}
+                    </div>
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Payment Mode<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.payment_mode.entity_value}}
+                    </div>
+                </div>
+                <div class="row form-group" ng-show="BankAndPaydateFieldShow">
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Cheque / DD No<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.chequeordd_no}}
+                    </div>
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b> Bank Name<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.bank_name}}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div ng-show="BankAndPaydateFieldShow">
+                        <div class="control-label col-sm-2">
+                            &nbsp;&nbsp;<b>IFSC Code<span class="pull-right WordsLeftStyle">:</b>
+                        </div>
+                        <div class="col-sm-4">
+                            {{Payment.ifsc_code}}
+                        </div>
+                    </div>
+                    <div class="control-label col-sm-2">
+                        &nbsp;&nbsp;<b>Remarks<span class="pull-right WordsLeftStyle">:</b>
+                    </div>
+                    <div class="col-sm-4">
+                        {{Payment.notes}}
+                    </div>
+                </div>
+	        </div>
+        </div>
+
         <br>
         <br>
 		<div class="row" ng-show="!Beneficiary.actionRequired">

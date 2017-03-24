@@ -11,6 +11,7 @@ use frontend\models\BeneficiaryMaster;
 use frontend\models\BenfNominee;
 use frontend\models\BenfDependents;
 use frontend\models\BenfEmpCertificate;
+use frontend\models\BenfPayments;
 use common\models\User;
 use frontend\models\Services;
 
@@ -255,7 +256,8 @@ class BeneficiaryController extends FrontendController
         $NomineeList = $this->GetNomineesByBeneficiaryId($id);
         $DependentsList = $this->GetDependentsByBeneficiaryId($id);
         $Certificates = $this->GetCertificatesByBeneficiaryId($id);
-        return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList,"Certificates"=>$Certificates));
+        $Payment = $this->GetPaymentByBeneficiaryId($id);
+        return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList,"Certificates"=>$Certificates,"Payment"=>$Payment));
     }
 
     public function actionCreatecertificates()
@@ -350,6 +352,15 @@ class BeneficiaryController extends FrontendController
         $details = BenfDependents::find()
             ->where(['benf_master_id' => $id])
             ->all();
+        $result = ArrayHelper::toArray($details,'*');
+        return $result;
+    }
+
+    private function GetPaymentByBeneficiaryId($id){
+        $details = BenfPayments::find()
+            ->select(['payment_date','payment_mode','payment_status','payment_for','payment_reference_id','amount','notes','chequeordd_no','bank_name','ifsc_code','id'])
+            ->where(['benf_master_id' => $id])
+            ->one();
         $result = ArrayHelper::toArray($details,'*');
         return $result;
     }

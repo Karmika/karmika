@@ -17,9 +17,7 @@ use Yii;
  * @property integer $payment_for
  * @property string $chequeordd_no
  * @property string $bank_name
- * @property string $bank_payment_date
- * @property string $ref_1
- * @property string $ref_2
+ * @property string $ifsc_code
  * @property string $notes
  * @property integer $created_by_user_id
  * @property integer $updated_by_user_id
@@ -44,11 +42,11 @@ class BenfPayments extends \yii\db\ActiveRecord
         return [
             [['benf_master_id', 'created_by_user_id', 'updated_by_user_id'], 'required'],
             [['benf_master_id', 'payment_reference_id', 'payment_mode', 'payment_status', 'amount', 'payment_for', 'created_by_user_id', 'updated_by_user_id'], 'integer'],
-            [['payment_date', 'bank_payment_date', 'created_date', 'updated_date'], 'safe'],
+            [['payment_date', 'created_date', 'updated_date'], 'safe'],
             [['notes'], 'string'],
             [['chequeordd_no'], 'string', 'max' => 64],
             [['bank_name'], 'string', 'max' => 32],
-            [['ref_1', 'ref_2'], 'string', 'max' => 45],
+            [['ifsc_code'], 'string', 'max' => 20],
         ];
     }
 
@@ -68,9 +66,7 @@ class BenfPayments extends \yii\db\ActiveRecord
             'payment_for' => 'Payment For',
             'chequeordd_no' => 'Chequeordd No',
             'bank_name' => 'Bank Name',
-            'bank_payment_date' => 'Bank Payment Date',
-            'ref_1' => 'Ref 1',
-            'ref_2' => 'Ref 2',
+            'ifsc_code' => 'Ifsc Code',
             'notes' => 'Notes',
             'created_by_user_id' => 'Created By User ID',
             'updated_by_user_id' => 'Updated By User ID',

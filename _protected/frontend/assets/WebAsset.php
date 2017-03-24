@@ -27,6 +27,7 @@ class WebAsset extends AssetBundle
     public $css = [
         'web/js/references/jQuery/jquery-ui.css',
         'web/css/custom.css',
+        'web/css/font-awesome.min.css',
     ];
     public $js = [
       'web/js/references/angular/angular.min.js',
