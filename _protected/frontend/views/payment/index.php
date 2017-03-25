@@ -1,12 +1,12 @@
 <?php
-    $this->title = 'Beneficiary Payment Details';
+    $this->title = 'Applicant Payment Details';
 ?>
 <div ng-cloak class="PaymentCtrl" ng-controller="PaymentController" ng-init="Index()">
-<center><h3>Beneficiary Payment Details</h3></center>
+<center><h3>Applicant Payment Details</h3></center>
 <br />
 <br />
 <div class="row">
-  <span class="gridDetails">Beneficiary Name : <b>{{full_name}}</b> &nbsp;&nbsp;&nbsp;Registration No : <b>{{registration_no}}</b> </span>
+  <span class="gridDetails">Applicant Name : <b>{{full_name}}</b> &nbsp;&nbsp;&nbsp;Registration No : <b>{{registration_no}}</b> </span>
   <a class="nameLink" href="{{baseUrl}}/beneficiary"><button type="button" style="float:right;" class="btn btn-default">Back </button></a>
   <button type="button" style="float:right;margin-right:1%;" ng-click="AddPayment()" class="btn btn-default">Add Payment</button>
 </div>

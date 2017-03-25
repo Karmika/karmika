@@ -17,7 +17,7 @@ td,th{
   <div class="col-sm-4" style="padding-left: 0px;">
       <div id="imaginary_container"> 
           <div class="input-group stylish-input-group">
-              <input type="text" class="form-control"  ng-model="searchName" placeholder="Search" >
+              <input type="text" class="form-control"  ng-model="searchName" placeholder="Search (Enter Application No. / Ack No / Reg No / ...)" >
               <span class="input-group-addon">
                   <button type="submit">
                       <span class="glyphicon glyphicon-search"></span>
@@ -33,7 +33,6 @@ td,th{
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>No.</th>
         <th>
           <a href="#" ng-click="orderByField='benf_application_number'; reverseSort = !reverseSort">
           Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
@@ -86,7 +85,7 @@ td,th{
     </thead>
     <tbody>
       <tr dir-paginate="beneficiary in AllBeneficiaries | filter : searchName | orderBy:orderByField:reverseSort | itemsPerPage: selectedRowsPerPage" >
-        <td>{{beneficiary.sno}}</td>
+        <!-- <td>{{beneficiary.sno}}</td> -->
         <td>{{beneficiary.benf_application_number || "----"}}</td>
         <td>{{beneficiary.benf_acknowledgement_number || "----"}}</td>
         <td>{{beneficiary.benf_registration_number || "----"}}</td>
@@ -122,6 +121,9 @@ td,th{
     </tbody>
   </table>
 </div>
+<div class="row pull-right">
+  Showing : <number> of {{AllBeneficiaries.length}} entries
+</div>
 <div class="row pull-right"> 
   <dir-pagination-controls
     direction-links="true"
@@ -130,7 +132,7 @@ td,th{
   <!--  <button ng-if="AllBeneficiaries.length > 5" style="float:right" ng-repeat-start="pageData in pageSelectionData" value="pageData" ng-click="ChagePageVal(pageData)" class="btn btn-default" >{{pageData}}</button>
     <span style="float:right" ng-repeat-end>&nbsp;</span> -->
 </div>
-  <div id="BeneficiaryActionConfirm" style="display: none;" title="Beneficiary Confirmation">
-    Beneficiary will goes to applied state once you click on Yes. Are you sure?
+  <div id="BeneficiaryActionConfirm" style="display: none;" title="Application Acceptance Confirmation">
+    Application will go to "Applied" state and will be processed once you click Yes. Are you sure?
   </div>
 </div>

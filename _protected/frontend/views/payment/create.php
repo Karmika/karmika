@@ -1,9 +1,9 @@
 <?php
-    $this->title = 'Create Payment';
+    $this->title = 'Make Payment';
 ?>
 
 <div class="PaymentCtrl" ng-cloak ng-controller="PaymentController" ng-init="Create()">
-<h3 align="center">Create Payment</h3>
+<h3 align="center">Subscription and Other Payment</h3>
 <div class="row">
   <span class="pull-right" style="padding:3%;">Full&nbsp;Name : <b>{{full_name}}</b> &nbsp;&nbsp;&nbsp;Registration No : <b>{{registration_no}}</b></span>
 </div>
