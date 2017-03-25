@@ -111,7 +111,9 @@ td,th{
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>
          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
-        <?php }?>
+        <?php }else{ ?>
+         <td>{{beneficiary.benf_application_status}}</td>
+        <?php } ?>
       </tr>
       <tr ng-show="AllBeneficiaries.length <= 0">
         <td colspan="12" style="text-align:center;"> 

@@ -44,11 +44,17 @@ class FrontendController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'controllers' => ['beneficiary'],
+                        'controllers' => ['beneficiary','payment','seeddata'],
                         'actions' => ['index','create','update','allbeneficiaries', 'createbeneficiary',
                                       'getbeneficiary','updatebeneficiary','success','createnominee',
                                       'createdependents','submitbeneficiary','createcertificates',
-                                      'deletecertificate'
+                                      'deletecertificate', 'getbeneficiaryalldata',
+
+                                        //Payment
+                                        'index','create','allpayments','createpayment','updatepayment',
+
+                                        //SeedData
+                                        'getdata'
                                     ],
                         'allow' => true,
                         'roles' => ['member'],
