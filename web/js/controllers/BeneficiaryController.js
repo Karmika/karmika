@@ -8,6 +8,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         $scope.natureOfWorks = config.natureOfWorks;
         $scope.bloodGroupList = config.bloodGroupList;
         $scope.IdentityCardTypeList = config.IdentityCardTypeList;
+        $scope.defaultPic = config.defaultPic;
         var id = CustomService.getParameterByName('id');
 
         $scope.InitializeBasicData= function(){
@@ -138,6 +139,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
             .then(function(response) {
                 $scope.Beneficiary = response.data.Beneficiary;
+                $scope.defaultPic = config.profilePicUploadedPath + $scope.Beneficiary.id + ".png";
                 $scope.setPOLimitsofAddress();
                 $scope.NomineeList = response.data.NomineeList;
                 if($scope.NomineeList.length == 0){
@@ -286,9 +288,17 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 });
             $scope.FormatNomineeData();
             $scope.FormatDependentData();
-        };
+        }
         
         /* Start : upload related code */
+
+        /* Start :  Profile Pic */
+
+        $scope.UploadFile = function(id){
+            fileUpload.uploadFileToUrl($scope.myFile, config.uploadProfilePicUrl, id);
+        }
+
+        /* End : Profile Pic */
 /*
         $scope.AllUploads = [];
         $scope.getFiles = function(){
@@ -316,7 +326,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             if (newVal != null && newVal != "") $scope.Beneficiary.beneficiary_age = CustomService.calculateAge(new Date(newVal));
         });
         $scope.form1submitted = false;
-        $scope.Savedata = function() {
+        $scope.SaveRegistrationDetails = function() {
             var action = "createbeneficiary";
             if($scope.Beneficiary.id != undefined && $scope.Beneficiary.id != 0) action = "updatebeneficiary";
             
@@ -326,6 +336,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     if (response.data.status == "success" && action == "createbeneficiary") {
                         $scope.Beneficiary.id = response.data.id;
                     }
+                    $scope.UploadFile($scope.Beneficiary.id);
                 });
         }
 

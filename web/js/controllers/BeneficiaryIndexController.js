@@ -41,6 +41,7 @@ app.controller("BeneficiaryIndexController", ['$scope', '$http', 'config', '$win
                             $scope.AllBeneficiaries[index].benf_acknowledgement_number = response.data.anumber;
                             $scope.AllBeneficiaries[index].CanConfirm = false;
                             $scope.AllBeneficiaries[index].Editable = false;
+                            $scope.AllBeneficiaries[index].actionRequired = true;
                         }
                     });
                 },

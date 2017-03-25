@@ -42,30 +42,39 @@ $url =  Yii::$app->homeUrl;?>
                     <div class="tab-pane active" role="tabpanel" id="step1">
                         <h3 align="center">Registration Details</h3>
                         <hr/>
-                        <form class="form-vertical" name="beneficiary" role="form" novalidate ng-submit="Savedata()">
+                        <form class="form-vertical" name="beneficiary" role="form" novalidate>
+                       
+                    <div class="row form-group">     
+                        <div class="row form-group pull-right col-md-2">
+                            <div class="row" style="padding-left:1.5%">
+                                <a class="nameLink"><img id="ProfilePicPreview" ng-cloak src="{{defaultPic}}" alt="your image" /></a> <br>
+                                <input id="myFile" onchange="readURL(this)" style="display:none" class="col-sm-2" type="file" file-model="myFile" />
+                            </div>
+                        </div>
+                        <div class="pull-left col-md-10">
                             <label class="lable-bottom-margin">Personal Details&nbsp;:&nbsp; ವೈಯಕ್ತಿಕ ವಿವರಗಳು </label><br>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_first_name"><span class="mandatory-field">*&nbsp;</span>First&nbsp;Name ಮೊದಲ&nbsp;ಹೆಸರು </label>
-                                <div class="col-md-3">
+                                <label class="control-label col-md-2" for="benf_first_name"><span class="mandatory-field">*&nbsp;</span>First&nbsp;Name ಮೊದಲ&nbsp;ಹೆಸರು </label>
+                                <div class="col-md-4">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_first_name" name="benf_first_name" placeholder="First Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_first_name.$invalid && beneficiary.benf_first_name.$dirty">Please provide first name</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_middle_name">Middle&nbsp;Name ಮಧ್ಯ ಹೆಸರು </label>
-                                <div class="col-md-3">
+                                <label class="control-label col-md-2" for="benf_middle_name">Middle&nbsp;Name ಮಧ್ಯ ಹೆಸರು </label>
+                                <div class="col-md-4">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_middle_name" name="benf_middle_name" placeholder="Middle Name" maxlength="25" />
                                     <small class="error" ng-show="beneficiary.benf_middle_name.$invalid && beneficiary.benf_middle_name.$dirty">Please provide middle name</small>
                                 </div>
-
-                                <label class="control-label col-md-1" for="benf_last_name">Last&nbsp;Name ಕೊನೆ ಹೆಸರು </label>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2" for="benf_last_name">Last&nbsp;Name ಕೊನೆ ಹೆಸರು </label>
+                                <div class="col-md-4">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_last_name" name="benf_last_name" placeholder="Last Name" maxlength="25" />
                                     <small class="error" ng-show="beneficiary.benf_last_name.$invalid && beneficiary.benf_last_name.$dirty">Please provide Last name</small>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth ಜನ್ಮ ದಿನಾಂಕ</label>
-                                <div class="col-md-3" ng-controller="DatepickerPopupController">
+
+                                <label class="control-label col-md-2" for="benf_date_of_birth">Date&nbsp;of&nbsp;Birth ಜನ್ಮ ದಿನಾಂಕ</label>
+                                <div class="col-md-4" ng-controller="DatepickerPopupController">
                                     <p class="input-group">
                                         <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_birth" is-open="popup1.opened" name="benf_date_of_birth" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
                                             placeholder="Select date of birth" />
@@ -73,19 +82,22 @@ $url =  Yii::$app->homeUrl;?>
                                     </p>
                                     <small class="error" ng-show="beneficiary.benf_date_of_birth.$invalid && beneficiary.benf_date_of_birth.$dirty">Please provide date of birth and only acceptable format is DD-MM-YYYY</small>
                                 </div>
-
-                                <label class="control-label col-md-1" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age (years) ವಯಸ್ಸು</label>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2" for="benf_age"><span class="mandatory-field">*&nbsp;</span>Age (years) ವಯಸ್ಸು</label>
+                                <div class="col-md-4">
                                     <input class="form-control" numerics-only ng-model="Beneficiary.beneficiary_age" name="benf_age" placeholder="Age" ng-change ="setUnknownDOBbyAge('',Beneficiary.beneficiary_age,'Beneficiary')" required />
                                     <small class="error" ng-show="beneficiary.benf_age.$invalid && beneficiary.benf_age.$dirty">Please provide applicant Age</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex ಲಿಂಗ</label>
-                                <div class="col-md-3">
+                                <label class="control-label col-md-2" for="benf_sex"><span class="mandatory-field">*&nbsp;</span>Sex ಲಿಂಗ</label>
+                                <div class="col-md-4">
                                     <label ng-repeat="item in genders"><input required type="radio" name="benf_sex" ng-model="Beneficiary.benf_sex" value="{{item.entity_id}}" /> {{item.entity_value}} &nbsp;&nbsp;</label>
                                     <small class="error" ng-show="beneficiary.benf_sex.$invalid && beneficiary.benf_sex.$dirty">Please select sex</small>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                             <div class="row form-group">
 
                                 <label class="control-label col-md-1" for="benf_caste"><span class="mandatory-field">*&nbsp;</span>Caste ಜಾತಿ</label>
@@ -329,7 +341,7 @@ $url =  Yii::$app->homeUrl;?>
                             <div class="row form-group pull-right">
                                 <div class="col-sm-12">
                                     <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-success next-step" ng-disabled="beneficiary.$invalid || form1submitted" ng-click="Savedata()">Save and continue</button>
+                                        <li><button type="button" class="btn btn-success next-step" ng-disabled="beneficiary.$invalid || form1submitted" ng-click="SaveRegistrationDetails()">Save and continue</button>
                                     </li>
                                     </ul>
                                 </div>

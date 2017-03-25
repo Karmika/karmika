@@ -50,6 +50,11 @@ small.error, span.error {
   padding-bottom:10px;
   color:#3c763d
 }
+#ProfilePicPreview{
+  max-width:185px;
+  max-height:209px;
+  border: 1px solid #ccc;
+}
 /*Beneficiary Controller*/
 
 .BeneficiaryCtrl h3{

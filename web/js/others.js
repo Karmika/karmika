@@ -35,3 +35,22 @@ function prevTab(elem) {
 }
 
 /*   END :         Beneficiary  Creation                  */
+
+
+/* Start : Profile Pic Upload */
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#ProfilePicPreview')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$('#ProfilePicPreview').click(function(){ $('#myFile').trigger('click'); });
+
+/* End : Profile Pic Upload */

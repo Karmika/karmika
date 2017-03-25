@@ -2,8 +2,11 @@ var app = angular.module('app',['ui.router','ngAnimate', 'ui.bootstrap','angular
 app.constant('config', {
     baseUrl: "/karmika",
     uploadUrl : "/karmika/web/others/upload.php",
+    uploadProfilePicUrl : "/karmika/web/others/uploadProfilePic.php",
+    profilePicUploadedPath : "/karmika/web/others/docs/profilePics/",
     retrieveUrl : "/karmika/web/others/retrieveFiles.php",
     deleteUrl : "/karmika/web/others/delete.php",
+    defaultPic : "/karmika/web/img/profile-default.png",
     casteList: [
             {id: "Schedule Caste (SC)", 'value': 'Schedule Caste (SC)' }, 
             {id: "Schedule Tribe (ST)", 'value': 'Schedule Tribe (ST)' }, 
