@@ -35,7 +35,35 @@ use yii\widgets\ActiveForm;
         <?php endforeach ?>
         <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
 
-        <?= $form->field($user, 'location')->ListBox(array("Bangalore South"=>"Bangalore South","Bangalore North"=>"Bangalore North"),array('multiple' => 'multiple')); ?> 
+        <?= $form->field($user, 'location')->ListBox(array("Bangalore South"=>"Bangalore South","Bangalore North"=>"Bangalore North",
+            "Belgaum"=>"Belgaum",
+"Ballary"=>"Ballary",
+"Bidar"=>"Bidar",
+"Bijapur"=>"Bijapur",
+"Chamarajnagar"=>"Chamarajnagar",
+"Chitradurga"=>"Chitradurga",
+"Chikkaballapur"=>"Chikkaballapur",
+"Chikkamagalur"=>"Chikkamagalur",
+"Davanagere"=>"Davanagere",
+"Dharwad"=>"Dharwad",
+"Gadag"=>"Gadag",
+"Gulbarga"=>"Gulbarga",
+"Haveri"=>"Haveri",
+"Hassan"=>"Hassan",
+"Koppal"=>"Koppal",
+"Karwar"=>"Karwar",
+"Kolar"=>"Kolar",
+"Mandya"=>"Mandya",
+"Madikeri"=>"Madikeri",
+"Mangalore"=>"Mangalore",
+"Mysore"=>"Mysore",
+"Raichur"=>"Raichur",
+"Ramnagar"=>"Ramnagar",
+"Shimoga"=>"Shimoga",
+"Tumkur"=>"Tumkur",
+"Udupi"=>"Udupi",
+"Yadgiri"=>"Yadgiri"
+        ),array('multiple' => 'multiple')); ?> 
 
     </div>
     </div>
