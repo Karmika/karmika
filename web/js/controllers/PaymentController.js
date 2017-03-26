@@ -29,17 +29,22 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         }
 
         $scope.AddPayment = function(){
-            $window.location.href = config.baseUrl + "/payment/create?id=" + id +"&Name="+ $scope.full_name +"&rno="+ $scope.registration_no;
+            $window.location.href = config.baseUrl + "/payment/create?master_id=" + id +"&Name="+ $scope.full_name +"&rno="+ $scope.registration_no;
+        }
+
+        $scope.UpdatePayment = function(PaymentId){
+            $window.location.href = config.baseUrl + "/payment/create?master_id=" + id+"&pid="+ PaymentId +"&Name="+ $scope.full_name +"&rno="+ $scope.registration_no;
         }
     }
 
     $scope.Create = function(){
+
         $scope.paymentModes = {};
         $scope.paymentStatuses = {};
         $scope.paymentFors = [];
 
         $scope.Payment = {};
-        $scope.benf_master_id = CustomService.getParameterByName('id');
+        $scope.benf_master_id = CustomService.getParameterByName('master_id');
         $scope.full_name = CustomService.getParameterByName('Name');
         $scope.registration_no = CustomService.getParameterByName('rno');
 
@@ -54,6 +59,22 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         CustomService.SeedData('payment_for').then(function(data) {
             $scope.paymentFors = data; 
         });
+
+        $scope.FormatPayment = function(){
+            $scope.Payment.payment_date = new Date($scope.Payment.payment_date);
+            angular.forEach($scope.paymentModes, function(value, key) {
+                if(value.entity_id == $scope.Payment.payment_mode)
+                    $scope.Payment.payment_mode = $scope.paymentModes[key];
+            });
+            angular.forEach($scope.paymentStatuses, function(value1, key1) {
+                if(value1.entity_id == $scope.Payment.payment_status)
+                    $scope.Payment.payment_status = $scope.paymentStatuses[key1];
+            });
+            angular.forEach($scope.paymentFors, function(value2, key2) {
+                if(value2.entity_id == $scope.Payment.payment_for)
+                    $scope.Payment.payment_for = $scope.paymentFors[key2];
+            });
+        }
 
         $scope.$watch('Payment.payment_mode',function(newVal){
             if(newVal != undefined && (newVal.entity_value == "DD" || newVal.entity_value == "Cheque"))
@@ -70,13 +91,24 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         });
 
         $scope.CreatePayment = function(){
-            var PaymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
-            PaymentDetails.benf_master_id = $scope.benf_master_id;
-            $http.post(config.baseUrl+"/payment/createpayment",PaymentDetails)
+            var paymentDetails = CustomService.MakeingCustomFormatDataForBeneficiaryPayment($scope.Payment);
+            paymentDetails.benf_master_id = $scope.benf_master_id;
+            var action = "createpayment";
+            if($scope.PaymentId != undefined && $scope.PaymentId != null) action = "updatepayment";
+            $http.post(config.baseUrl+"/payment/"+action,paymentDetails)
             .then(function(response) {
                 if(response.data.status == "success") $window.location.href = config.baseUrl + "/payment/index?id=" + $scope.benf_master_id;
             });
         }
+        
+        $scope.PaymentId = CustomService.getParameterByName('pid');
+        if($scope.PaymentId)
+        $http.post(config.baseUrl+"/payment/getpayment",{"id":$scope.PaymentId})
+        .then(function(response) {
+                $scope.Payment = response.data.Payment;
+                $scope.FormatPayment();
+        });
+
     }
 
 }]);

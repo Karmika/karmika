@@ -89,6 +89,16 @@ class Services extends Model
         return $result['benf_registration_number'];
     }
 
+    public function GetPaymentByBeneficiaryOrPaymentId($id,$field){
+        $details = BenfPayments::find()
+            ->select(['payment_date','payment_mode','payment_status','payment_for','payment_reference_id','amount','notes','chequeordd_no','bank_name','ifsc_code','id'])
+            ->where([$field => $id])
+            ->one();
+        $result = NULL;    
+        if($details != null) $result = ArrayHelper::toArray($details,'*');
+        return $result;
+    }
+
     public function ExecuteSQLQuery($query)
     {        
         $connection = Yii::$app->getDb();

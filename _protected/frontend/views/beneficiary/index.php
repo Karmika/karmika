@@ -98,11 +98,15 @@ td,th{
         <td>{{beneficiary.benf_sex}}</td>
         <!-- <td>{{beneficiary.benf_martial_status}}</td> -->
         <td>{{beneficiary.updated_by}}</td>
-        <?php if($IsAdmin){?>
+        <?php if($IsSubAdmin || $IsAdmin){?>
          <td ng-show="!beneficiary.CanConfirm">{{beneficiary.benf_application_status}}</td>
          <td ng-show="beneficiary.CanConfirm">
             <a class="nameLink" ng-click="TakeAction($index,beneficiary.id)">{{beneficiary.benf_application_status}}</a>
          </td>
+        <?php }else{ ?>
+         <td>{{beneficiary.benf_application_status}}</td>
+        <?php } ?>
+        <?php if($IsAdmin){?>
          <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired">
             <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>
@@ -111,9 +115,7 @@ td,th{
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>
          <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
-        <?php }else{ ?>
-         <td>{{beneficiary.benf_application_status}}</td>
-        <?php } ?>
+        <?php }?>
       </tr>
       <tr ng-show="AllBeneficiaries.length <= 0">
         <td colspan="12" style="text-align:center;"> 
@@ -123,8 +125,8 @@ td,th{
     </tbody>
   </table>
 </div>
-<div class="row pull-right">
-  Showing : <number> of {{AllBeneficiaries.length}} entries
+<div class="row pull-left" ng-show="AllBeneficiaries.length > 0">
+  Showing : {{selectedRowsPerPage}}<number> of {{AllBeneficiaries.length}} entries
 </div>
 <div class="row pull-right"> 
   <dir-pagination-controls

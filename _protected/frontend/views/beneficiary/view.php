@@ -9,52 +9,60 @@
       <div class="panel-body">
         <h3 class="text-center subHeading">Beneficiary Personal Details </h3><br>
         
-	            <br>
-	              <div class="row">
-	                <div class="col-sm-6">
-	                    &nbsp;&nbsp;<b>1) First Name <span class="pull-right WordsLeftStyle">:</b>
-	                </div>
-	                <div class="col-sm-6">
-	                    {{Beneficiary.benf_first_name}}
-	                </div>
-	              </div>
-	            <br>
-	              <div class="row">
-	                <div class="col-sm-6">
-	                    &nbsp;&nbsp;<b>2) Middle Name <span class="pull-right WordsLeftStyle">:</b>
-	                </div>
-	                <div class="col-sm-6">
-	                    {{Beneficiary.benf_middle_name}}
-	                </div>
-	              </div>
-	            <br>
-	              <div class="row">
-	                <div class="col-sm-6">
-	                    &nbsp;&nbsp;<b>3) Last Name <span class="pull-right WordsLeftStyle">:</b>
-	                </div>
-	                <div class="col-sm-6">
-	                    {{Beneficiary.benf_last_name}}
-	                </div>
-	              </div>
-	            <br>
-	              <div class="row">
-	                <div class="col-sm-6">
-	                    &nbsp;&nbsp;<b>4 ) Date Of Birth <span class="pull-right WordsLeftStyle">:</b>
-	                </div>
-	                <div class="col-sm-6">
-	                    {{Beneficiary.benf_date_of_birth | date }}
-	                </div>
-	              </div>
-	            <br>
-	              <div class="row">
-	                <div class="col-sm-6">
-	                    &nbsp;&nbsp;<b>5) Age <span class="pull-right WordsLeftStyle">:</b>
-	                </div>
-	                <div class="col-sm-6">
-	                    {{Beneficiary.beneficiary_age}}
-	                </div>
-	              </div>
-	            <br>
+								<div class="row">       
+                                    <div class="col-sm-9 pull-left">    
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                &nbsp;&nbsp;<b>1) First Name <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Beneficiary.benf_first_name}}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                &nbsp;&nbsp;<b>2) Middle Name <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Beneficiary.benf_middle_name}}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                &nbsp;&nbsp;<b>3) Last Name <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Beneficiary.benf_last_name}}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                &nbsp;&nbsp;<b>4 ) Date Of Birth <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Beneficiary.benf_date_of_birth | date }}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                &nbsp;&nbsp;<b>5) Age <span class="pull-right WordsLeftStyle">:</b>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                {{Beneficiary.beneficiary_age}}
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>    
+                                    <div class="col-sm-3 pull-right">
+                                        <img class="ProfilePicPreview img-responsive" src="{{defaultPic}}" alt="your image" />
+                                    </div>
+                                </div>
+
 	              <div class="row">
 	                <div class="col-sm-6">
 	                    &nbsp;&nbsp;<b>6 )   Sex   <span class="pull-right WordsLeftStyle">:</b>

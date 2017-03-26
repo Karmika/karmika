@@ -6,6 +6,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
     .then(function(response) {
         if(response.data.Beneficiary.benf_date_of_birth != null) response.data.Beneficiary.benf_date_of_birth = new Date(response.data.Beneficiary.benf_date_of_birth);
         $scope.Beneficiary = response.data.Beneficiary;
+        $scope.defaultPic = config.profilePicUploadedPath + $scope.Beneficiary.id + ".png";
         $scope.NomineeList = response.data.NomineeList;
         $scope.DependentsList = response.data.DependentsList;
         $scope.Certificates = response.data.Certificates;

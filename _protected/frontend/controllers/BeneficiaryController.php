@@ -24,6 +24,7 @@ class BeneficiaryController extends FrontendController
     public $LoggedInUserRole;
     public $UserIdentity;
     public $IsAdmin;
+    public $IsSubAdmin;
     public $DraftStatus = "DRAFT";
     public $AppliedStatus = "APPLIED";
     public $AcceptedStatus = "ACCEPTED";
@@ -32,6 +33,7 @@ class BeneficiaryController extends FrontendController
     public $AdminRole = "admin";
     public $TheCreatorRole = "theCreator";
     public $MemberRole = "member";
+    public $SubAdminRole = "subAdmin";
 
 	public function beforeAction($action) {
         date_default_timezone_set("Asia/Kolkata");
@@ -43,15 +45,17 @@ class BeneficiaryController extends FrontendController
         if(isset($userDetails[$this->TheCreatorRole])) $this->LoggedInUserRole = $this->TheCreatorRole;
         else if(isset($userDetails[$this->AdminRole])) $this->LoggedInUserRole = $this->AdminRole;
         else if(isset($userDetails[$this->MemberRole])) $this->LoggedInUserRole = $this->MemberRole;
+        else if(isset($userDetails[$this->SubAdminRole])) $this->LoggedInUserRole = $this->SubAdminRole;
         else $this->LoggedInUserRole = "";
 
         $this->UserIdentity = Yii::$app->user->identity;
         $this->IsAdmin = ($this->LoggedInUserRole == $this->AdminRole || $this->LoggedInUserRole == $this->TheCreatorRole)?1:0;
-	    return parent::beforeAction($action);
+	    $this->IsSubAdmin = ($this->LoggedInUserRole == $this->SubAdminRole)?1:0;
+        return parent::beforeAction($action);
 	}
     public function actionIndex()
     {
-        return $this->render('index',array('IsAdmin' => $this->IsAdmin));
+        return $this->render('index',array('IsAdmin' => $this->IsAdmin,'IsSubAdmin' => $this->IsSubAdmin));
     }
     public function actionCreate()
     {
@@ -170,11 +174,11 @@ class BeneficiaryController extends FrontendController
         $Conditions = ['id' => ""];
         switch ($this->LoggedInUserRole) {
             case $this->TheCreatorRole:
-                 $Conditions = [];
+                 $Conditions = ['not in','benf_application_status',array($this->DraftStatus)];
                  break;
-            case $this->AdminRole:
+            case $this->AdminRole || $this->SubAdminRole:
                  $locations = ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
-                 $Conditions = ['in','benf_local_address_taluk',$locations];
+                 $Conditions = ['and',['in','benf_local_address_taluk',$locations],['not in','benf_application_status',array($this->DraftStatus)]];
                  break;
             case $this->MemberRole:
                  $Conditions = ['created_by_user_id' => $this->LoggedInUser];
@@ -256,7 +260,7 @@ class BeneficiaryController extends FrontendController
         $NomineeList = $this->GetNomineesByBeneficiaryId($id);
         $DependentsList = $this->GetDependentsByBeneficiaryId($id);
         $Certificates = $this->GetCertificatesByBeneficiaryId($id);
-        $Payment = $this->GetPaymentByBeneficiaryId($id);
+        $Payment = Services::GetPaymentByBeneficiaryOrPaymentId($id,'benf_master_id');
         return json_encode(array("Beneficiary"=>$Beneficiary,"NomineeList"=>$NomineeList,"DependentsList"=>$DependentsList,"Certificates"=>$Certificates,"Payment"=>$Payment));
     }
 
@@ -299,9 +303,12 @@ class BeneficiaryController extends FrontendController
     }
 
     private function GetBeneficiaryDetails($Conditions){
+        $OrWhereConditions = ['created_by_user_id' => $this->LoggedInUser];
+        if(empty($Conditions)) $OrWhereConditions = $Conditions;
 
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
+        ->orWhere($OrWhereConditions)
         ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
@@ -317,7 +324,7 @@ class BeneficiaryController extends FrontendController
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AcceptedStatus)?true:false;
-            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus || $result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+            $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus)?true:false;
             $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
         }
         return $result;
@@ -353,16 +360,6 @@ class BeneficiaryController extends FrontendController
             ->where(['benf_master_id' => $id])
             ->all();
         $result = ArrayHelper::toArray($details,'*');
-        return $result;
-    }
-
-    private function GetPaymentByBeneficiaryId($id){
-        $details = BenfPayments::find()
-            ->select(['payment_date','payment_mode','payment_status','payment_for','payment_reference_id','amount','notes','chequeordd_no','bank_name','ifsc_code','id'])
-            ->where(['benf_master_id' => $id])
-            ->one();
-        $result = NULL;    
-        if($details != null) $result = ArrayHelper::toArray($details,'*');
         return $result;
     }
 }

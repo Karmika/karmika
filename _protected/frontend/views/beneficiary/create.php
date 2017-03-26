@@ -47,7 +47,7 @@ $url =  Yii::$app->homeUrl;?>
                     <div class="row form-group">     
                         <div class="row form-group pull-right col-md-2">
                             <div class="row" style="padding-left:1.5%">
-                                <a class="nameLink"><img id="ProfilePicPreview" ng-cloak src="{{defaultPic}}" alt="your image" /></a> <br>
+                                <a class="nameLink"><img id="ProfilePicPreview" class="ProfilePicPreview" ng-cloak src="{{defaultPic}}" alt="your image" /></a> <br>
                                 <input id="myFile" onchange="readURL(this)" style="display:none" class="col-sm-2" type="file" file-model="myFile" />
                             </div>
                         </div>
@@ -752,52 +752,59 @@ $url =  Yii::$app->homeUrl;?>
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="panel-heading cursorPointer"><b>Registration Details</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse1" class="panel-collapse collapse in">
                                     <div class="panel-body">
+                                 <div class="row">       
+                                    <div class="col-sm-10 pull-left">    
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 &nbsp;&nbsp;<b>1) First Name <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 {{Beneficiary.benf_first_name}}
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 &nbsp;&nbsp;<b>2) Middle Name <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 {{Beneficiary.benf_middle_name}}
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 &nbsp;&nbsp;<b>3) Last Name <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 {{Beneficiary.benf_last_name}}
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 &nbsp;&nbsp;<b>4 ) Date Of Birth <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 {{Beneficiary.benf_date_of_birth | date }}
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 &nbsp;&nbsp;<b>5) Age <span class="pull-right WordsLeftStyle">:</b>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 {{Beneficiary.beneficiary_age}}
                                             </div>
                                         </div>
                                         <br>
+                                    </div>    
+                                    <div class="col-sm-2 pull-right">
+                                        <img class="ProfilePicPreview" src="{{defaultPic}}" alt="your image" />
+                                    </div>
+                                </div>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 &nbsp;&nbsp;<b>6 )   Sex   <span class="pull-right WordsLeftStyle">:</b>

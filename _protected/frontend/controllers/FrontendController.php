@@ -36,12 +36,25 @@ class FrontendController extends Controller
 
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
+                                        'getpayment',
 
                                         //SeedData
                                         'getdata'
                                         ],
                         'allow' => true,
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'controllers' => ['article','beneficiary','payment','seeddata'],
+                        'actions' => ['index', 'create', 'update', 'delete', 'admin','allbeneficiaries',
+                                        'createbeneficiary','getbeneficiary','updatebeneficiary','success',
+                                        'sample','createnominee',
+                                        'createdependents','submitbeneficiary','searchbeneficiaries',
+                                        'getbeneficiaryalldata','createcertificates','deletecertificate',
+                                        'appliedbeneficiary',
+                                        ],
+                        'allow' => true,
+                        'roles' => ['subAdmin'],
                     ],
                     [
                         'controllers' => ['beneficiary','payment','seeddata'],
@@ -52,6 +65,7 @@ class FrontendController extends Controller
 
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
+                                        'getpayment',
 
                                         //SeedData
                                         'getdata'
