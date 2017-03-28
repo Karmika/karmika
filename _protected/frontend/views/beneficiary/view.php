@@ -473,4 +473,12 @@
       </div>
     </div>
   </div>
+  <div id="RejectConfirm" style="display:none" title="Reject Confirmation">
+    Please select the reason for rejection <br><br>
+  <div ng-repeat="reason in rejectReasons">
+    <input type="checkbox" name="rejection_reason_{{reason.entity_id}}" ng-model="Beneficiary.Reasons[$index].rejection_reason" ng-value="reason.entity_id"/>
+    <label>{{reason.entity_value}}</label>
+  </div><br>
+    Application will get <b> rejected </b> once you click Yes. Are you sure?<br>
+  </div>
 </div>
