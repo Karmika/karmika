@@ -40,17 +40,35 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
 
     $scope.Approve = function(){
         if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"adminComments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
+        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"admin_comments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
         .then(function(response) {
             if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
         });
     }
 
     $scope.Reject = function(){
-        if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id,"adminComments":$scope.adminComments})
-        .then(function(response) {
-            if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
+        if($scope.Beneficiary.actionRequired) $scope.CallReject();
+    }
+
+    $scope.CallReject = function(){
+        $scope.Beneficiary.rejection_reason = 1;
+        $( "#RejectConfirm" ).dialog({
+          resizable: true,
+          height:250,
+          width:'35%',
+          modal: true,
+          buttons: {
+            "Yes": function() {
+                $( this ).dialog( "close" );
+                $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id,"admin_comments":$scope.adminComments,"rejection_reason":$scope.Beneficiary.rejection_reason})
+                .then(function(response) {
+                    if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
+                });
+            },
+            "No": function() {
+              $( this ).dialog( "close" );
+            }
+          }
         });
     };
     $scope.dt = new Date();
@@ -65,4 +83,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
         myWindow.print();
     };
 
+    CustomService.SeedData('rejection_reason').then(function(data) {
+        $scope.rejectReasons = data;
+    });
 }]);

@@ -57,8 +57,10 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         });
 
         CustomService.SeedData('payment_for').then(function(data) {
-            $scope.paymentFors = data; 
-        });
+            angular.forEach(data,function(value, key){
+                if(value.entity_id != 2) $scope.paymentFors.push(value);
+            })
+        })
 
         $scope.FormatPayment = function(){
             $scope.Payment.payment_date = new Date($scope.Payment.payment_date);
@@ -77,7 +79,7 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         }
 
         $scope.$watch('Payment.payment_mode',function(newVal){
-            if(newVal != undefined && (newVal.entity_value == "DD" || newVal.entity_value == "Cheque"))
+            if(newVal != undefined && (newVal.entity_id == 1 || newVal.entity_id == 2))
             { 
                 $scope.BankAndPaydateFieldShow = true;
             }

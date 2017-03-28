@@ -443,26 +443,33 @@
 
         <br>
         <br>
-        <div class="row" ng-show="!Beneficiary.actionRequired">
-          <div class="col-sm-3">
-            &nbsp;&nbsp;<b style="color:green;font-size:18px;">Admin Comments  <span class="pull-right WordsLeftStyle">:</b>
-          </div>
-          <div class="col-sm-9">
-            {{Beneficiary.admin_comments}}
-          </div>
-        </div>
-
-        <form class="form-vertical" name="Admin" role="form" novalidate ng-show="Beneficiary.actionRequired">
-          <div class="form-group">
-            <label for="comment">Comments :</label>
-            <textarea ng-model="adminComments" name="adminComments" class="form-control" rows="3" id="adminComments" required></textarea>
-            <small class="error" ng-show="Admin.adminComments.$invalid && Admin.adminComments.$dirty">Please provide comments</small>
-          </div>
-          <ul class="list-inline pull-right">
-            <li><button ng-click="Approve()" type="button" class="btn btn-success next-step">Approve</button></li>
-            <li><button ng-disabled="Admin.$invalid" ng-click="Reject()" type="button" class="btn btn-danger prev-step">Reject</button></li>
-          </ul>
-        </form>
+		<div class="row" ng-show="!Beneficiary.actionRequired">
+			<div class="col-sm-3">
+			    &nbsp;&nbsp;<b style="color:green;font-size:18px;">Admin Comments  <span class="pull-right WordsLeftStyle">:</b>
+			</div>
+			<div class="col-sm-9">
+			    {{Beneficiary.admin_comments}}
+			</div>
+		</div><br>
+		<div class="row" ng-show="!Beneficiary.actionRequired">
+			<div class="col-sm-3">
+			    &nbsp;&nbsp;<b style="color:green;font-size:18px;">Rejection Reason  <span class="pull-right WordsLeftStyle">:</b>
+			</div>
+			<div class="col-sm-9">
+			    {{Beneficiary.rejection_reason}}
+			</div>
+		</div>
+	    <form class="form-vertical" name="Admin" role="form" novalidate ng-show="Beneficiary.actionRequired">
+			<div class="form-group">
+				<label for="comment">Comments :</label>
+				<textarea ng-model="adminComments" name="adminComments" class="form-control" rows="3" id="adminComments" required ></textarea>
+				<small class="error" ng-show="Admin.adminComments.$invalid && Admin.adminComments.$dirty">Please provide comments</small>
+			</div>
+			<ul class="list-inline pull-right">
+			  <li><button ng-click="Approve()" type="button" class="btn btn-success next-step">Approve</button></li>
+			  <li><button ng-disabled="Admin.$invalid" ng-click="Reject()" type="button" class="btn btn-danger prev-step">Reject</button></li>
+			</ul>
+		</form>
       </div>
     </div>
   </div>

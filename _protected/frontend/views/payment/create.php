@@ -63,10 +63,10 @@
     </div>
 
     <div class="row form-group" ng-show="BankAndPaydateFieldShow">
-          <label class="control-label col-sm-2" for="chequeordd_no"><span class="mandatory-field">*&nbsp;</span>Cheque / DD No :</label>
+          <label class="control-label col-sm-2" for="chequeordd_no"><span class="mandatory-field">*&nbsp;</span>Challan / DD No :</label>
           <div class="col-sm-4">
-            <input alphanumerics-only class="form-control" ng-model="Payment.chequeordd_no" name="chequeordd_no" placeholder="Enter Cheque / DD No" ng-required="BankAndPaydateFieldShow" />
-            <small class="error" ng-show="PaymentCreateForm.chequeordd_no.$invalid && PaymentCreateForm.chequeordd_no.$dirty">Please provide chequeordd no</small>
+            <input alphanumerics-only class="form-control" ng-model="Payment.chequeordd_no" name="chequeordd_no" placeholder="Enter Challan / DD No" ng-required="BankAndPaydateFieldShow" />
+            <small class="error" ng-show="PaymentCreateForm.chequeordd_no.$invalid && PaymentCreateForm.chequeordd_no.$dirty">Please provide Challan or DD no</small>
           </div>
           <label class="control-label col-sm-2" for="bank_name">&nbsp;&nbsp;Bank Name :</label>
           <div class="col-sm-4">

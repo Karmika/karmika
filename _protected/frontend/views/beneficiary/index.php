@@ -107,10 +107,10 @@ td,th{
          <td>{{beneficiary.benf_application_status}}</td>
         <?php } ?>
         <?php if($IsAdmin){?>
-         <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired">
+         <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved">
             <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>
-         <td ng-show="beneficiary.Editable || beneficiary.actionRequired"><span style="padding-left:10px;"> --- </span></td>
+         <td ng-show="!(!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved)"><span style="padding-left:10px;"> --- </span></td>
          <td ng-show="!beneficiary.Editable">
             <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
          </td>

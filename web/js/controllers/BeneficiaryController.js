@@ -103,11 +103,13 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
         });
 
         CustomService.SeedData('payment_for').then(function(data) {
-            $scope.paymentFors = data;
+            angular.forEach(data,function(value, key){
+                if(value.entity_id == 2) $scope.paymentFors.push(value);
+            })
         });
 
         $scope.$watch('Payment.payment_mode',function(newVal){
-            if(newVal != undefined && (newVal.entity_value == "DD" || newVal.entity_value == "Cheque"))
+            if(newVal != undefined && (newVal.entity_id == 1 || newVal.entity_id == 2))
             { 
                 $scope.BankAndPaydateFieldShow = true;
             }
@@ -139,7 +141,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
             .then(function(response) {
                 $scope.Beneficiary = response.data.Beneficiary;
-                $scope.defaultPic = config.profilePicUploadedPath + $scope.Beneficiary.id + ".png";
+                $scope.SetProfilePicture($scope.Beneficiary.id);
                 $scope.setPOLimitsofAddress();
                 $scope.NomineeList = response.data.NomineeList;
                 if($scope.NomineeList.length == 0){
@@ -167,6 +169,16 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
             $scope.getPostalData($scope.Beneficiary.benf_local_pincode, 'local', false);
             $scope.getPostalData($scope.Beneficiary.benf_prmt_address_pincode, 'permanent', false);
             $scope.getPostalData($scope.Beneficiary.emplr_address_pincode, 'employer', false);
+        }
+
+        $scope.SetProfilePicture = function(id){
+            var imgCheck = config.profilePicUploadedPath + id + ".png";
+            $http.get(imgCheck)
+                 .success(function(data, status){
+                    if(status==200){
+                        $scope.defaultPic = imgCheck;
+                    }
+                 })
         }
         /* End : Load data */
 
@@ -495,6 +507,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                 }
             }
         };
+
         $scope.resetAddressFields = function(field) {
             if (field === 'local') {
                 $scope.Beneficiary.benf_local_address_taluk = "";

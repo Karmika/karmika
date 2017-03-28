@@ -33,7 +33,8 @@ class SelectionSeedData extends \yii\db\ActiveRecord
         return [
             [['entity_id'], 'integer'],
             [['created_datetime', 'updated_datetime'], 'safe'],
-            [['entity_type', 'entity_value', 'updated_by'], 'string', 'max' => 45],
+            [['entity_type', 'updated_by'], 'string', 'max' => 45],
+            [['entity_value'], 'string', 'max' => 150],
         ];
     }
 

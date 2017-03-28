@@ -140,7 +140,10 @@ class BeneficiaryController extends FrontendController
     {
         $post = file_get_contents("php://input");
         $response = $this->UpdateBeneficiaryStatus($post,$this->ApproveStatus);
-        if($response["status"] == "success") return json_encode(array("status"=>"success"));
+        if($response["status"] == "success"){
+            $this->MarkPayemntAsReceived(json_decode($post, true));
+            return json_encode(array("status"=>"success"));
+        }
         else return json_encode($response);
     }
 
@@ -160,8 +163,7 @@ class BeneficiaryController extends FrontendController
             $data['benf_acknowledgement_number'] = Services::GetNewBeneficiaryAcknowledgementNumber();
         }else{
             $data["approved_or_rejected_date"] = date('Y-m-d H:i:s');
-            $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
-            $data["admin_comments"] = $data['adminComments'];
+            if($status == $this->ApproveStatus) $data['benf_registration_number'] = Services::GetNewBeneficiaryRegistrationNumber();
         }
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $model->attributes = $data;
@@ -326,6 +328,7 @@ class BeneficiaryController extends FrontendController
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AcceptedStatus)?true:false;
             $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus)?true:false;
             $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
+            $result[$key]['Approved'] = ($result[$key]['benf_application_status'] == $this->ApproveStatus)?true:false;
         }
         return $result;
     }
@@ -336,6 +339,8 @@ class BeneficiaryController extends FrontendController
             ->one();
         $result = ArrayHelper::toArray($beneficiary_details,'*');
         $result['actionRequired'] = ($result['benf_application_status'] == $this->AcceptedStatus)?true:false;
+        $rejection_reason = Services::getObjectForSelectBox($result['rejection_reason'],'rejection_reason');
+        if(isset($rejection_reason['entity_value'])) $result["rejection_reason"] = $rejection_reason['entity_value'];
         return $result;
     }
 
@@ -361,5 +366,17 @@ class BeneficiaryController extends FrontendController
             ->all();
         $result = ArrayHelper::toArray($details,'*');
         return $result;
+    }
+
+    private function MarkPayemntAsReceived($data){
+        $model = BenfPayments::find()
+            ->where(['benf_master_id' => $data['id']])
+            ->one();
+        $data["updated_by_user_id"] = $this->LoggedInUser;
+        $data["updated_date"] = date('Y-m-d H:i:s');
+        $data["payment_status"] = 1;
+        $model->attributes = $data;
+        if($model->update()) return array("status"=>"success");
+        return array("status"=>"failed");
     }
 }
