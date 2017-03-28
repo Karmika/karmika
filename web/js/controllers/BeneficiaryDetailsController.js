@@ -55,12 +55,10 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
     };
     $scope.dt = new Date();
     $scope.printPage = function(divID) {
-
         var printContents = document.getElementById(divID).innerHTML;
-        console.log('hh')
         var myWindow = window.open('', 'PRINT', 'width=1100,height=600');
         var prefix = '<link href="web/js/references/datepicker/ui-bootstrap-tpls-1.3.2.js" rel="stylesheet" type="text/css" /> <script src="js/bootstrap.min.js" type="text/javascript"></script><script src="/web/js/references/angular/angular.min.js"></script>';
-        var completeContent;
+        var completeContent = "";
         completeContent += printContents;
         myWindow.document.write(completeContent);
         myWindow.document.close();

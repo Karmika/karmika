@@ -11,14 +11,14 @@
     <b>Application for Registration as a Beneficiary</b></p>
   </center>
   <div class="row">
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-md-7 col-md-offset-1">
       <p>ಗೆ/TO</p>
       <p>ಫಲಾನುಭವಿ ನೋಂದಣಾಧಿಕಾರಿ/Beneficiary Registration officer</p>
       <p>(ಕಾರ್ಮಿಕ ಅಧಿಕಾರಿ/ಹಿರಿಯ ಕಾರ್ಮಿಕ ನಿರೀಕ್ಷಕರು/ಕಾರ್ಮಿಕ ನಿರೀಕ್ಷಕರು)</p>
       <p>(Labour Officer/Senior Labour Inspector/ Labour Inspector) ವಿಳಾಸ/Address:</p>
     </div>
-    <div class="col-md-3">
-      <img class="ProfilePicPreview img-responsive" src="{{defaultPic}}" alt="Applicant image" />
+    <div class="col-md-4">
+      <img class="ProfilePicPreview img-responsive" ng-src="{{defaultPic}}"  alt="Applicant image" height="150px;" width="100px"/>
     </div>
   </div>
   <div class="row">
@@ -321,9 +321,10 @@
     </div>
   </div>
   <div class="row">
-    <footer class="col-md-6 col-md-offset-6">
-      <p>Acknowledgement Number&nbsp;:&nbsp;<b>{{Beneficiary.benf_acknowledgement_number}}</b></p>
-      <small>Generated : {{dt | date : "dd-MMM-y hh:mm a"}}</small>
+    <footer class="col-md-6 col-md-offset-5">
+      <p class="pull-right">Acknowledgement Number&nbsp;:&nbsp;<b>{{Beneficiary.benf_acknowledgement_number}}</b><br>
+      <small>Generated : <b>{{dt | date : "dd-MMM-y hh:mm a"}} </b></small>
+      </p>
     </footer>
   </div>
 </div>
