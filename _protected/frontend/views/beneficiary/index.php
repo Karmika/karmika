@@ -126,7 +126,7 @@ td,th{
   </table>
 </div>
 <div class="row pull-left" ng-show="AllBeneficiaries.length > 0">
-  Showing : {{selectedRowsPerPage}}<number> of {{AllBeneficiaries.length}} entries
+  Showing :{{ (AllBeneficiaries | filter:searchName).length }} of {{AllBeneficiaries.length}} entries
 </div>
 <div class="row pull-right"> 
   <dir-pagination-controls

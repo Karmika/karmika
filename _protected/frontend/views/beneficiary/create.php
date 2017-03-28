@@ -228,21 +228,21 @@ $url =  Yii::$app->homeUrl;?>
                             <br>
                             <!-- BANK Details -->
                             <hr/>
-                            <label class="lable-bottom-margin">Bank Details &nbsp;:&nbsp; </label>
+                            <label class="lable-bottom-margin">ಬ್ಯಾಂಕ್ ವಿವರ Bank Details &nbsp;:&nbsp; </label>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_bank_account_number"><span class="mandatory-field">*&nbsp;</span>Account Number</label>
+                                <label class="control-label col-md-1" for="benf_bank_account_number"><span class="mandatory-field">*&nbsp;</span>Account Number ಖಾತೆ ಸಂಖ್ಯೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" numerics-only ng-model="Beneficiary.benf_bank_account_number" name="benf_bank_account_number" placeholder="Account Number" maxlength=15 required />
                                     <small class="error" ng-show="beneficiary.benf_bank_account_number.$invalid && beneficiary.benf_bank_account_number.$dirty">Please provide bank account Number</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_bank_account_type"><span class="mandatory-field">*&nbsp;</span>Account Type</label>
+                                <label class="control-label col-md-1" for="benf_bank_account_type"><span class="mandatory-field">*&nbsp;</span>Account Type ಖಾತೆಯ ವಿಧ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-options="type.id as type.value for type in accountTypeList" ng-model="Beneficiary.benf_bank_account_type"></select>
                                     <small class="error" ng-show="beneficiary.benf_bank_account_type.$invalid && beneficiary.benf_bank_account_type.$dirty">Please provide bank account type</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_bank_name"><span class="mandatory-field">*&nbsp;</span>Bank </label>
+                                <label class="control-label col-md-1" for="benf_bank_name"><span class="mandatory-field">*&nbsp;</span>Bank ಬ್ಯಾಂಕ್</label>
                                 <div class="col-md-3">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_name" name="benf_bank_name" placeholder="Bank Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_bank_name.$invalid && beneficiary.benf_bank_name.$dirty">Please provide Bank name</small>
@@ -250,7 +250,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
 
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch </label>
+                                <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch ಶಾಖೆ</label>
                                 <div class="col-md-3">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_bank_branch.$invalid && beneficiary.benf_bank_branch.$dirty">Please provide Bank Branch name</small>
@@ -272,14 +272,14 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.employer_full_name.$invalid && beneficiary.employer_full_name.$dirty">Please provide employer name</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_nature_of_work"><span class="mandatory-field">*&nbsp;</span>Nature of Work</label>
+                                <label class="control-label col-md-1" for="benf_nature_of_work"><span class="mandatory-field">*&nbsp;</span>Nature of Work ಕೆಲಸದ ಸ್ವರೂಪ</label>
                                 <div class="col-md-3">
                                     <select class="form-control" ng-options="caste.id as caste.value for caste in natureOfWorks" ng-model="Beneficiary.benf_nature_of_work"></select>
                                     <small class="error" ng-show="beneficiary.benf_nature_of_work.$invalid && beneficiary.benf_nature_of_work.$dirty">Please select Nature of Work</small>
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="control-label col-md-1" for="benf_date_of_employment"><span class="mandatory-field">*&nbsp;</span>Date&nbsp;of Employment</label>
+                                <label class="control-label col-md-1" for="benf_date_of_employment"><span class="mandatory-field">*&nbsp;</span>Date&nbsp;of Employment ಉದ್ಯೋಗಕ್ಕೆ ಸೇರಿದ ದಿನಾಂಕ</label>
                                 <div class="col-md-3" ng-controller="DatepickerPopupController">
                                     <p class="input-group">
                                         <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-model="Beneficiary.benf_date_of_employment" is-open="popup1.opened" name="benf_date_of_employment" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
@@ -289,20 +289,20 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_date_of_employment.$invalid && beneficiary.benf_date_of_employment.$dirty">Please provide date of employment and only acceptable format is DD-MM-YYYY</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day</label>
+                                <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day ವೇತನ ಒಂದು ದಿನಕ್ಕೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_wages_per_day" name="benf_wages_per_day" placeholder="Wages per Day" required ng-value="" ng-change="setWagesPerMonth()" />
                                     <small class="error" ng-show="beneficiary.benf_wages_per_day.$invalid && beneficiary.benf_wages_per_day.$dirty">Please provide applicant wages per day</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month</label>
+                                <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month ವೇತನ ಪ್ರತಿ ತಿಂಗಳಿಗೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_wages_per_month" name="benf_wages_per_month" placeholder="Wages per Month" ng-change="setWagesPerDay()" required />
-                                    <small class="error" ng-show="beneficiary.benf_wages_per_month.$invalid && beneficiary.benf_wages_per_month.$dirty">Please provide applicant Age</small>
+                                    <small class="error" ng-show="beneficiary.benf_wages_per_month.$invalid && beneficiary.benf_wages_per_month.$dirty">Please provide applicant wages detail</small>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="control-label col-md-1" for="emplr_address_line1"><span class="mandatory-field">*&nbsp;</span>Address</label>
+                                <label class="control-label col-md-1" for="emplr_address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                                 <div class="col-md-3">
                                     <textarea class="form-control" ng-model="Beneficiary.emplr_address_line1" name="emplr_address_line1" placeholder="Line 1" maxlength="175" required></textarea>
                                     <small class="error" ng-show="beneficiary.emplr_address_line1.$invalid && beneficiary.emplr_address_line1.$dirty">Please provide Address</small>
@@ -349,28 +349,28 @@ $url =  Yii::$app->homeUrl;?>
                         </form>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
-                        <h3 align="center">Nominee Details</h3>
+                        <h3 align="center">Nominee Details ನಾಮನಿರ್ದೇಶಿತರ ಪಟ್ಟಿ</h3>
                         <hr/>
 
                         <h4>Nominee List</h4>
                         <div class="row" style="text-align:center;">
                             <div class="col-md-2">
-                                <label>Nominee Full Name<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Nominee Full Name ನಾಮನಿರ್ದೇಶಿತರ ಪೂರ್ಣ ಹೆಸರು<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label>Nominee Address<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Nominee Address ನಾಮನಿರ್ದೇಶಿತರ ವಿಳಾಸ<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Date of Birth</label>
+                                <label>Date of Birth ಜನ್ಮ ದಿನಾಂಕ</label>
                             </div>
                             <div class="col-md-1">
-                                <label>Age (years)<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Age (years) ವಯಸ್ಸು<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
-                                <label>% Share<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>% Share ಶೇಕಡವಾರು ಪಾಲು<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Relationship with Applicant<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Relationship with Applicant ಫಲಾನುಭವಿಗೆ ಇರುವ ಸಂಬಂಧ<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
                                 <label>Edit</label>
@@ -425,22 +425,22 @@ $url =  Yii::$app->homeUrl;?>
 
 
                         <!-- HELP -->
-                        <h4>Dependents List</h4>
+                        <h4>Dependents List ಅವಲಂಭಿತರ  ಪಟ್ಟಿ</h4>
                         <div class="row" style="text-align:center;">
                             <div class="col-md-3">
-                                <label>Dependent Full Name<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Dependent Full Name ಅವಲಂಭಿತರ ಪೂರ್ಣ ಹೆಸರು<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label>Dependent Address<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Dependent Address ಅವಲಂಭಿತರ ವಿಳಾಸ<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Date of Birth</label>
+                                <label>Date of Birth ಜನ್ಮ ದಿನಾಂಕ</label>
                             </div>
                             <div class="col-md-1">
-                                <label>Age (years)<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Age (years) ವಯಸ್ಸು <span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-2">
-                                <label>Relationship with Applicant<span class="mandatory-field">*&nbsp;</span></label>
+                                <label>Relationship with Applicant ಫಲಾನುಭವಿಗೆ ಇರುವ ಸಂಬಂಧ<span class="mandatory-field">*&nbsp;</span></label>
                             </div>
                             <div class="col-md-1">
                                 <label>Edit</label>
