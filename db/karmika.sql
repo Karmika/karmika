@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2017 at 08:56 AM
+-- Generation Time: Mar 30, 2017 at 06:30 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -215,8 +215,7 @@ CREATE TABLE `beneficiary_master` (
   `benf_identity_card_number` varchar(20) COLLATE latin1_general_ci DEFAULT NULL,
   `applied_date` datetime DEFAULT NULL,
   `accepted_date` datetime DEFAULT NULL,
-  `approved_or_rejected_date` datetime DEFAULT NULL,
-  `rejection_reason` int(3) DEFAULT NULL
+  `approved_or_rejected_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -321,6 +320,58 @@ CREATE TABLE `benf_payments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL,
+  `parent_location_id` int(11) DEFAULT NULL,
+  `location` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `parent_location_id`, `location`) VALUES
+(1, NULL, 'Bagalkot'),
+(2, NULL, 'Belagavi'),
+(3, NULL, 'Vijayapura'),
+(4, NULL, 'Dharwad'),
+(5, NULL, 'Gadag'),
+(6, NULL, 'Haveri'),
+(7, NULL, 'Uttara Kannada'),
+(8, NULL, 'Bengaluru Urban'),
+(9, NULL, 'Bengaluru Rural'),
+(10, NULL, 'Chikkaballapur'),
+(11, NULL, 'Chitradurga'),
+(12, NULL, 'Davanagere'),
+(13, NULL, 'Kolar'),
+(14, NULL, 'Ramanagara'),
+(15, NULL, 'Shivamogga'),
+(16, NULL, 'Tumakuru'),
+(17, NULL, 'Ballari'),
+(18, NULL, 'Bidar'),
+(19, NULL, 'Kalaburagi'),
+(20, NULL, 'Koppal'),
+(21, NULL, 'Raichur'),
+(22, NULL, 'Yadgir'),
+(23, NULL, 'Chamarajanagar'),
+(24, NULL, 'Chikkamagaluru'),
+(25, NULL, 'Dakshina Kannada'),
+(26, NULL, 'Hassan'),
+(27, NULL, 'Kodagu'),
+(28, NULL, 'Mandya'),
+(29, NULL, 'Mysuru'),
+(30, NULL, 'Udupi'),
+(31, 9, 'Krishnarajapura'),
+(32, 9, 'Bangalore North'),
+(33, 9, 'Anekal'),
+(34, 9, 'Bangalore South');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migration`
 --
 
@@ -409,7 +460,12 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('9v3jume7pbigftc9a0chuqfga3', 1490685614, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('3iaqn9potd71bo636cdcq6c5v1', 1490849338, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b),
+('a7ai7s81id3d7kl364dro9hg26', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('bctfvu818c6to01vbept3m5086', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('fbcgptetno6c00pffarks8akg5', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('g0l9n5j9t73u5kfok1eti7hp12', 1490694320, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
+('k55odq1gfsjq1tp0dt8edn7vj0', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
 ('os4qn86v7hsckp3danstl9rq52', 1490516987, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b);
 
 -- --------------------------------------------------------
@@ -439,11 +495,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `mobile`, `location`, `password_hash`, `status`, `auth_key`, `password_reset_token`, `account_activation_token`, `created_at`, `updated_at`) VALUES
 (1, 'superadmin', 'sravan.vanteru@gmail.com', NULL, NULL, '$2y$13$XrAQa1pKdeKMzeO3Zb8ojetshkajpmDjJnOP0mF74oc94Ok2E6EC2', 10, 'fCVnB_lk4CpmN-gBqKYarK_koxnheAkW', 'L3Sy05jwVbLYWxnDR6Rueivvae1mxwjE_1488023153', NULL, 1486804995, 1488023153),
-(3, 'sravan', 'sravan@sravan.com', NULL, 'Bangalore South', '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1487347143),
-(4, 'prashanth', 'prashanth100@gmail.com', NULL, 'Bangalore North', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1488037061),
+(3, 'sravan', 'sravan@sravan.com', NULL, 'Bangalore South', '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1490846969),
+(4, 'prashanth', 'prashanth100@gmail.com', NULL, 'Bangalore North', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1490846949),
 (5, 'test', 'test@best.com', '', NULL, '$2y$13$hgQqcSNimfbUYV7PDEa9SO5mJT24o8uTbS/ZxZo4Az.q7CbWm5wxy', 10, 'qTCcl2dxj63-KBeZoAGZF6DoNV0r5BJG', NULL, NULL, 1489489922, 1489489922),
 (6, 'kumar', '', '123456', NULL, '$2y$13$M3EyTyuhMH6ce3xd6fxzQOymNEjofgp3ezMOdwxt3x8kmH9KBRW5y', 10, 'TTl0BaQCM4FXyNJqktULNBzkGD1fgq5-', NULL, NULL, 1490419100, 1490419100),
-(7, 'Reddy', '', NULL, 'Bangalore North', '$2y$13$ptGnPKZoSRmiwjRNDR8IMenltstVF3BOS1aRD.N/uwlS/PMdrzYgi', 10, 'bASRP19gQAyfdxcGcD_MvIz1GZYluad7', NULL, NULL, 1490515421, 1490515540);
+(7, 'Reddy', '', NULL, '2', '$2y$13$ptGnPKZoSRmiwjRNDR8IMenltstVF3BOS1aRD.N/uwlS/PMdrzYgi', 10, 'bASRP19gQAyfdxcGcD_MvIz1GZYluad7', NULL, NULL, 1490515421, 1490809209);
 
 --
 -- Indexes for dumped tables
@@ -523,6 +579,12 @@ ALTER TABLE `benf_payments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migration`
 --
 ALTER TABLE `migration`
@@ -593,6 +655,11 @@ ALTER TABLE `benf_nominee`
 --
 ALTER TABLE `benf_payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `news`
 --
