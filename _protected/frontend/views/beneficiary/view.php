@@ -443,21 +443,15 @@
 
         <br>
         <br>
-		<div class="row" ng-show="!Beneficiary.actionRequired">
+		<div class="row" ng-show="!Beneficiary.actionRequired && Beneficiary.admin_comments.length > 0">
 			<div class="col-sm-3">
 			    &nbsp;&nbsp;<b style="color:green;font-size:18px;">Admin Comments  <span class="pull-right WordsLeftStyle">:</b>
 			</div>
 			<div class="col-sm-9">
-			    {{Beneficiary.admin_comments}}
-			</div>
-		</div><br>
-		<div class="row" ng-show="!Beneficiary.actionRequired">
-			<div class="col-sm-3">
-			    &nbsp;&nbsp;<b style="color:green;font-size:18px;">Rejection Reason  <span class="pull-right WordsLeftStyle">:</b>
-			</div>
-			<div class="col-sm-9">
-			    {{Beneficiary.rejection_reason}}
-			</div>
+          <ul>
+            <li ng-repeat="comment in Beneficiary.admin_comments">{{comment}}</li>
+          </ul>
+			</div><br>
 		</div>
 	    <form class="form-vertical" name="Admin" role="form" novalidate ng-show="Beneficiary.actionRequired">
 			<div class="form-group">
@@ -467,7 +461,7 @@
 			</div>
 			<ul class="list-inline pull-right">
 			  <li><button ng-click="Approve()" type="button" class="btn btn-success next-step">Approve</button></li>
-			  <li><button ng-disabled="Admin.$invalid" ng-click="Reject()" type="button" class="btn btn-danger prev-step">Reject</button></li>
+			  <li><button ng-click="Reject()" type="button" class="btn btn-danger prev-step">Reject</button></li>
 			</ul>
 		</form>
       </div>
@@ -476,9 +470,12 @@
   <div id="RejectConfirm" style="display:none" title="Reject Confirmation">
     Please select the reason for rejection <br><br>
   <div ng-repeat="reason in rejectReasons">
-    <input type="checkbox" name="rejection_reason_{{reason.entity_id}}" ng-model="Beneficiary.Reasons[$index].rejection_reason" ng-value="reason.entity_id"/>
+    <input type="checkbox" ng-model="reason.selected" ng-value="reason.entity_value"/>
     <label>{{reason.entity_value}}</label>
   </div><br>
     Application will get <b> rejected </b> once you click Yes. Are you sure?<br>
+  </div>
+  <div id="ApproveConfirm" style="display:none" title="Approve Confirmation">
+    Application will get <b> Approved </b> once you click Yes. Are you sure?<br>
   </div>
 </div>

@@ -24,7 +24,7 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
 
         $scope.CalculateAmount = function(){
             angular.forEach($scope.Payments, function(val, key) {
-               $scope.totalAmount += val.amount;
+               $scope.totalAmount += parseInt(val.amount);
             });
         }
 

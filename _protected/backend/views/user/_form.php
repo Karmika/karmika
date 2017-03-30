@@ -1,8 +1,10 @@
 <?php
 use common\rbac\models\AuthItem;
+use frontend\models\Locations;
 use nenad\passwordStrength\PasswordInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
@@ -34,36 +36,29 @@ use yii\widgets\ActiveForm;
             <?php $roles[$item_name->name] = $item_name->name ?>
         <?php endforeach ?>
         <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
-
-        <?= $form->field($user, 'location')->ListBox(array("Bangalore South"=>"Bangalore South","Bangalore North"=>"Bangalore North",
-            "Belgaum"=>"Belgaum",
-"Ballary"=>"Ballary",
-"Bidar"=>"Bidar",
-"Bijapur"=>"Bijapur",
-"Chamarajnagar"=>"Chamarajnagar",
-"Chitradurga"=>"Chitradurga",
-"Chikkaballapur"=>"Chikkaballapur",
-"Chikkamagalur"=>"Chikkamagalur",
-"Davanagere"=>"Davanagere",
-"Dharwad"=>"Dharwad",
-"Gadag"=>"Gadag",
-"Gulbarga"=>"Gulbarga",
-"Haveri"=>"Haveri",
-"Hassan"=>"Hassan",
-"Koppal"=>"Koppal",
-"Karwar"=>"Karwar",
-"Kolar"=>"Kolar",
-"Mandya"=>"Mandya",
-"Madikeri"=>"Madikeri",
-"Mangalore"=>"Mangalore",
-"Mysore"=>"Mysore",
-"Raichur"=>"Raichur",
-"Ramnagar"=>"Ramnagar",
-"Shimoga"=>"Shimoga",
-"Tumkur"=>"Tumkur",
-"Udupi"=>"Udupi",
-"Yadgiri"=>"Yadgiri"
-        ),array('multiple' => 'multiple')); ?> 
+<?php 
+        $locations = Locations::find()
+        ->select(['id','parent_location_id', 'location'])
+        ->where(['parent_location_id' => null])
+        ->orderBy(['location' => SORT_ASC])
+        ->all();
+        $locations = ArrayHelper::toArray($locations,'*');
+        $finalList = array();
+        foreach ($locations as $key => $value) {
+            $subLocations = Locations::find()
+                        ->select(['location'])
+                        ->where(['parent_location_id' => $value['id']])
+                        ->orderBy(['location' => SORT_ASC])
+                        ->all();
+            $subLocations = ArrayHelper::toArray($subLocations,'*');
+            $FinalSubList = array();
+            foreach ($subLocations as $key => $value2) {
+                $FinalSubList[$value2["location"]] = $value2["location"];
+            }
+            $finalList[$value['location']] = $FinalSubList;
+        }
+?>
+        <?= $form->field($user, 'location')->ListBox($finalList, array('multiple' => 'multiple')); ?> 
 
     </div>
     </div>

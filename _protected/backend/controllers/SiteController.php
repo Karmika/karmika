@@ -5,6 +5,7 @@ use common\models\LoginForm;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use Yii;
 
 /**
@@ -112,6 +113,8 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return Yii::$app->response->redirect(Url::to(['../']));
+
+        //return $this->goHome();
     }
 }

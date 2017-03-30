@@ -63,7 +63,6 @@ use Yii;
  * @property string $applied_date
  * @property string $accepted_date
  * @property string $approved_or_rejected_date
- * @property integer $rejection_reason
  */
 class BeneficiaryMaster extends \yii\db\ActiveRecord
 {
@@ -81,7 +80,7 @@ class BeneficiaryMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['benf_mobile_no', 'benf_alternate_mobile_no', 'beneficiary_age', 'benf_local_pincode', 'benf_prmt_address_pincode', 'emplr_address_pincode', 'benf_wages_per_day', 'benf_wages_per_month', 'benf_bank_account_number', 'created_by_user_id', 'updated_by_user_id', 'rejection_reason'], 'integer'],
+            [['benf_mobile_no', 'benf_alternate_mobile_no', 'beneficiary_age', 'benf_local_pincode', 'benf_prmt_address_pincode', 'emplr_address_pincode', 'benf_wages_per_day', 'benf_wages_per_month', 'benf_bank_account_number', 'created_by_user_id', 'updated_by_user_id'], 'integer'],
             [['benf_date_of_birth', 'benf_date_of_employment', 'created_date', 'updated_date', 'applied_date', 'accepted_date', 'approved_or_rejected_date'], 'safe'],
             [['benf_sex', 'benf_caste', 'benf_martial_status', 'benf_blood_group', 'benf_nature_of_work', 'benf_bank_account_type', 'benf_application_status', 'admin_comments', 'benf_identity_card_type'], 'string'],
             [['created_by_user_id', 'updated_by_user_id'], 'required'],
@@ -158,7 +157,6 @@ class BeneficiaryMaster extends \yii\db\ActiveRecord
             'applied_date' => 'Applied Date',
             'accepted_date' => 'Accepted Date',
             'approved_or_rejected_date' => 'Approved Or Rejected Date',
-            'rejection_reason' => 'Rejection Reason',
         ];
     }
 }

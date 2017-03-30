@@ -179,7 +179,7 @@ class BeneficiaryController extends FrontendController
                  $Conditions = ['not in','benf_application_status',array($this->DraftStatus)];
                  break;
             case $this->AdminRole || $this->SubAdminRole:
-                 $locations = ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
+                 $locations = $this->GetUserLocations();
                  $Conditions = ['and',['in','benf_local_address_taluk',$locations],['not in','benf_application_status',array($this->DraftStatus)]];
                  break;
             case $this->MemberRole:
@@ -311,7 +311,7 @@ class BeneficiaryController extends FrontendController
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
         ->orWhere($OrWhereConditions)
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number','benf_local_address_taluk'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;
@@ -329,6 +329,13 @@ class BeneficiaryController extends FrontendController
             $result[$key]['Editable'] = ($result[$key]['benf_application_status'] == $this->DraftStatus)?true:false;
             $result[$key]['CanConfirm'] = ($result[$key]['benf_application_status'] == $this->AppliedStatus)?true:false;
             $result[$key]['Approved'] = ($result[$key]['benf_application_status'] == $this->ApproveStatus)?true:false;
+            if($this->AdminRole || $this->SubAdminRole){
+                 $locations = $this->GetUserLocations();
+                 if(!in_array($val["benf_local_address_taluk"], $locations)) {
+                    $result[$key]['CanConfirm'] = false;
+                    $result[$key]['actionRequired'] = false;
+                 }
+            }
         }
         return $result;
     }
@@ -339,8 +346,6 @@ class BeneficiaryController extends FrontendController
             ->one();
         $result = ArrayHelper::toArray($beneficiary_details,'*');
         $result['actionRequired'] = ($result['benf_application_status'] == $this->AcceptedStatus)?true:false;
-        $rejection_reason = Services::getObjectForSelectBox($result['rejection_reason'],'rejection_reason');
-        if(isset($rejection_reason['entity_value'])) $result["rejection_reason"] = $rejection_reason['entity_value'];
         return $result;
     }
 
@@ -378,5 +383,9 @@ class BeneficiaryController extends FrontendController
         $model->attributes = $data;
         if($model->update()) return array("status"=>"success");
         return array("status"=>"failed");
+    }
+
+    private function GetUserLocations(){
+        return ($this->UserIdentity->location != null && $this->UserIdentity->location != "")?explode(',', $this->UserIdentity->location):[];
     }
 }

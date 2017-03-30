@@ -1,11 +1,13 @@
 app.controller("BeneficiaryDetailsController",['$scope','CustomService','config','$http','$window',
     function ($scope,CustomService,config,$http,$window) {    
-
+    $scope.adminComments = "";
     var id = CustomService.getParameterByName('id');
     $http.post(config.baseUrl+"/beneficiary/getbeneficiaryalldata",{"id":id})
     .then(function(response) {
         if(response.data.Beneficiary.benf_date_of_birth != null) response.data.Beneficiary.benf_date_of_birth = new Date(response.data.Beneficiary.benf_date_of_birth);
         $scope.Beneficiary = response.data.Beneficiary;
+        if($scope.Beneficiary.admin_comments != null) $scope.Beneficiary.admin_comments = $scope.Beneficiary.admin_comments.split("\n");
+        else $scope.Beneficiary.admin_comments = [];
         $scope.defaultPic = config.profilePicUploadedPath + $scope.Beneficiary.id + ".png";
         $scope.NomineeList = response.data.NomineeList;
         $scope.DependentsList = response.data.DependentsList;
@@ -40,10 +42,24 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
 
     $scope.Approve = function(){
         if($scope.Beneficiary.actionRequired)
-        $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"admin_comments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
-        .then(function(response) {
-            if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
+        $( "#ApproveConfirm" ).dialog({
+          resizable: true,
+          height:150,
+          width:'25%',
+          modal: true,
+          buttons: {
+            "Yes": function() {
+                $http.post(config.baseUrl+"/beneficiary/approvebeneficiary",{"id":id,"admin_comments":(typeof $scope.adminComments != "undefined" && $scope.adminComments)?$scope.adminComments:""})
+                .then(function(response) {
+                    if(response.data.status == "success") $window.location.href = config.baseUrl+"/beneficiary";
+                });
+            },
+            "No": function() {
+              $( this ).dialog( "close" );
+            }
+          }
         });
+        $(".ui-dialog-titlebar-close").html("X");
     }
 
     $scope.Reject = function(){
@@ -51,7 +67,6 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
     }
 
     $scope.CallReject = function(){
-        $scope.Beneficiary.rejection_reason = 1;
         $( "#RejectConfirm" ).dialog({
           resizable: true,
           height:250,
@@ -59,6 +74,9 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
           modal: true,
           buttons: {
             "Yes": function() {
+                angular.forEach($scope.rejectReasons, function(reason){
+                    if (reason.selected) $scope.adminComments += "\n"+reason.entity_value;
+                })
                 $( this ).dialog( "close" );
                 $http.post(config.baseUrl+"/beneficiary/rejectbeneficiary",{"id":id,"admin_comments":$scope.adminComments,"rejection_reason":$scope.Beneficiary.rejection_reason})
                 .then(function(response) {
@@ -70,6 +88,7 @@ app.controller("BeneficiaryDetailsController",['$scope','CustomService','config'
             }
           }
         });
+        $(".ui-dialog-titlebar-close").html("X");
     };
     $scope.dt = new Date();
     $scope.printPage = function(divID) {

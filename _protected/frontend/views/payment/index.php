@@ -46,7 +46,7 @@
       </tr>
     </tbody>
   </table>
-  <div class="row"><div class="col-sm-8 text-right">Total Paid : </div><div class="col-sm-4"><b>&nbsp;&nbsp;{{totalAmount}}</b></div></div>
+  <div class="row"><div class="text-right" style="margin-right:2%;">Total Paid : <b>&nbsp;&nbsp;{{totalAmount}}</b></div></div>
 <div class="row pull-right" style="padding-right:1%">
   <dir-pagination-controls
     direction-links="true"
