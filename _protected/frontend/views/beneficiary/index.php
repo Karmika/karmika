@@ -35,43 +35,43 @@ td,th{
       <tr>
         <th>
           <a href="#" ng-click="orderByField='benf_application_number'; reverseSort = !reverseSort">
-          Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_acknowledgement_number'; reverseSort = !reverseSort">
-          Ack&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Ack&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_registration_number'; reverseSort = !reverseSort">
-          Reg&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Reg&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='full_name'; reverseSort = !reverseSort">
-          Applicant’s Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Applicant’s Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_mobile_no'; reverseSort = !reverseSort">
-          Mobile No. </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Mobile No. </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_date_of_birth'; reverseSort = !reverseSort">
-          Date Of Birth </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_date_of_birth'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Date Of Birth </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_date_of_birth'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_sex'; reverseSort = !reverseSort">
-          Sex </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_sex'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Sex </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_sex'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
 <!--         <th>
           <a href="#" ng-click="orderByField='benf_martial_status'; reverseSort = !reverseSort">
-          Martial Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_martial_status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Martial Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_martial_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th> -->
         <th>
           <a href="#" ng-click="orderByField='updated_by'; reverseSort = !reverseSort">
-          Submitted By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Submitted By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_application_status'; reverseSort = !reverseSort">
-          Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+          Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
         </th>
         <?php if($IsAdmin){?>
         <th>

@@ -27,7 +27,7 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
             /* Test data : Need to remove this */
 
-            $scope.Beneficiary = config.TestData;
+            // $scope.Beneficiary = config.TestData;
 
             /* ENd test data */
         }
