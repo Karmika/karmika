@@ -25,6 +25,10 @@ app.controller("BeneficiaryIndexController", ['$scope', '$http', 'config', '$win
             $window.location.href = config.baseUrl + "/payment/index?id=" + id;
         }
 
+        $scope.PrintApplication = function(id) {
+            $window.location.href = config.baseUrl + "/beneficiary/ackprint?id=" + id;
+        }
+
         $scope.TakeAction = function(index,id){
             $( "#BeneficiaryActionConfirm" ).dialog({
               resizable: true,

@@ -55,6 +55,11 @@ small.error, span.error {
   max-height:209px;
   border: 1px solid #ccc;
 }
+.KarnatakaLogoPreview{
+  width: 50px;
+  height: 50px;
+}
+
 /*Beneficiary Controller*/
 
 .BeneficiaryCtrl h3{
@@ -98,4 +103,30 @@ small.error, span.error {
     background: white;
     cursor: inherit;
     display: block;
+}
+
+/* ack print */
+
+.AckPrintCtrl p{
+  margin: 0 0 0px;
+}
+.AckPrintCtrl .center-block {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+.AckPrintCtrl .AckHeading{
+  font-size: 17px;
+}
+.AckPrintCtrl .BttomBorder{
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    padding:10px;
+}
+.AckPrintCtrl #ackPrint{
+  width: 80%;
+  margin:0 auto;
+}
+.AckPrintCtrl .srow{
+  margin:4px;
 }

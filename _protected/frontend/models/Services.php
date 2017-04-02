@@ -22,9 +22,6 @@ use frontend\models\SelectionSeedData;
  */
 class Services extends Model
 {
-    /**
-     * @inheritdoc
-     */
     public static function CustomFormatArray($result,$i=1){
         $newArray = array();
         foreach ($result as $key=>$val)
@@ -97,6 +94,29 @@ class Services extends Model
         $result = NULL;    
         if($details != null) $result = ArrayHelper::toArray($details,'*');
         return $result;
+    }
+
+    public function getRegistrationFee($id){
+        $payment = BenfPayments::find()
+            ->select(['amount'])
+            ->where(['benf_master_id' => $id,'payment_for'=>$this->RegistrationFeeTypeId])
+            ->one();
+        if($payment != null) return $payment['amount'];
+        else return 0;
+    }
+
+    public function getSubscriptionFee($id){
+        $payments = BenfPayments::find()
+            ->select(['amount'])
+            ->where(['benf_master_id' => $id,'payment_for'=>$this->SubscriptionFeeTypeId])
+            ->all();
+        if(count($payments) > 0){
+            $total = 0;
+            foreach($payments as $value){
+                $total += (int)$value['amount'];
+            }
+            return $total;
+        }else return 0;
     }
 
     public function ExecuteSQLQuery($query)

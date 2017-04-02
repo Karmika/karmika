@@ -7,6 +7,7 @@ app.constant('config', {
     retrieveUrl : "/karmika/web/others/retrieveFiles.php",
     deleteUrl : "/karmika/web/others/delete.php",
     defaultPic : "/karmika/web/img/profile-default.png",
+    KarnatakaLogo : "/karmika/web/img/KarnatakaLogo.png",
     casteList: [
             {id: "Schedule Caste (SC)", 'value': 'Schedule Caste (SC)' }, 
             {id: "Schedule Tribe (ST)", 'value': 'Schedule Tribe (ST)' }, 

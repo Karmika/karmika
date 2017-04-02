@@ -35,52 +35,45 @@ td,th{
       <tr>
         <th>
           <a href="#" ng-click="orderByField='benf_application_number'; reverseSort = !reverseSort">
-          Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Application&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_acknowledgement_number'; reverseSort = !reverseSort">
-          Ack&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Ack&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_acknowledgement_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_registration_number'; reverseSort = !reverseSort">
-          Reg&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Reg&nbsp;No</a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_registration_number'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='full_name'; reverseSort = !reverseSort">
-          Applicant’s Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Applicant’s Name </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'full_name'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_mobile_no'; reverseSort = !reverseSort">
-          Mobile No. </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Mobile No. </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_mobile_no'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_date_of_birth'; reverseSort = !reverseSort">
-          Date Of Birth </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_date_of_birth'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          DOB </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_date_of_birth'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_sex'; reverseSort = !reverseSort">
-          Sex </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_sex'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Sex </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_sex'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
-<!--         <th>
-          <a href="#" ng-click="orderByField='benf_martial_status'; reverseSort = !reverseSort">
-          Martial Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_martial_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
-        </th> -->
         <th>
           <a href="#" ng-click="orderByField='updated_by'; reverseSort = !reverseSort">
-          Submitted By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Submitted By </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'updated_by'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
         <th>
           <a href="#" ng-click="orderByField='benf_application_status'; reverseSort = !reverseSort">
-          Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span
+          Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
-        <?php if($IsAdmin){?>
-        <th>
-          Payments
-        </th>
-        <th>
-          View
-        </th>
+        <?php if($IsMember){?>
+          <th> Ack</th>
         <?php }?>
+        <th> Payments </th>
+        <th> View </th>
       </tr>
     </thead>
     <tbody>
@@ -106,16 +99,22 @@ td,th{
         <?php }else{ ?>
          <td>{{beneficiary.benf_application_status}}</td>
         <?php } ?>
-        <?php if($IsAdmin){?>
-         <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved">
-            <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
-         </td>
-         <td ng-show="!(!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved)"><span style="padding-left:10px;"> --- </span></td>
-         <td ng-show="!beneficiary.Editable">
-            <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
-         </td>
-         <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
-        <?php }?>
+        
+        <?php if($IsMember){?>
+          <td ng-show="!beneficiary.Editable">
+            <a class="nameLink" ng-click="PrintApplication(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
+          </td>
+         <?php }?>
+        <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
+        <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved">
+          <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
+        </td>
+        <td ng-show="!(!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved)"><span style="padding-left:10px;"> --- </span></td>
+
+        <td ng-show="!beneficiary.Editable">
+          <a class="nameLink" ng-click="ViewBeneficiary(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
+        </td>
+        <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
       </tr>
       <tr ng-show="AllBeneficiaries.length <= 0">
         <td colspan="12" style="text-align:center;"> 

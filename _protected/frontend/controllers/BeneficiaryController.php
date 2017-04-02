@@ -25,6 +25,7 @@ class BeneficiaryController extends FrontendController
     public $UserIdentity;
     public $IsAdmin;
     public $IsSubAdmin;
+    public $IsMember;
     public $DraftStatus = "DRAFT";
     public $AppliedStatus = "APPLIED";
     public $AcceptedStatus = "ACCEPTED";
@@ -34,6 +35,8 @@ class BeneficiaryController extends FrontendController
     public $TheCreatorRole = "theCreator";
     public $MemberRole = "member";
     public $SubAdminRole = "subAdmin";
+    public $RegistrationFeeTypeId = 2;
+    public $SubscriptionFeeTypeId = 1;
 
 	public function beforeAction($action) {
         date_default_timezone_set("Asia/Kolkata");
@@ -51,11 +54,12 @@ class BeneficiaryController extends FrontendController
         $this->UserIdentity = Yii::$app->user->identity;
         $this->IsAdmin = ($this->LoggedInUserRole == $this->AdminRole || $this->LoggedInUserRole == $this->TheCreatorRole)?1:0;
 	    $this->IsSubAdmin = ($this->LoggedInUserRole == $this->SubAdminRole)?1:0;
+        $this->IsMember = ($this->LoggedInUserRole == $this->MemberRole)?1:0;
         return parent::beforeAction($action);
 	}
     public function actionIndex()
     {
-        return $this->render('index',array('IsAdmin' => $this->IsAdmin,'IsSubAdmin' => $this->IsSubAdmin));
+        return $this->render('index',array('IsAdmin' => $this->IsAdmin,'IsSubAdmin' => $this->IsSubAdmin,'IsMember' => $this->IsMember));
     }
     public function actionCreate()
     {
@@ -76,6 +80,10 @@ class BeneficiaryController extends FrontendController
     public function actionSample()
     {
         return $this->render('sample');
+    }
+    public function actionAckprint()
+    {
+        return $this->render('ackprint');
     }
     public function actionCreatebeneficiary()
     {
@@ -302,6 +310,31 @@ class BeneficiaryController extends FrontendController
             $response = array("status"=>"success");
         }
         return json_encode($response);
+    }
+
+    public function actionAckprintdata(){
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $id = $data['id'];
+        $result = array();
+        if(isset($id) && $id != ""){
+            $beneficiary = BeneficiaryMaster::find()
+            ->where(['id' => $id ])
+            ->select(['benf_acknowledgement_number','benf_first_name', 'benf_last_name','applied_date','benf_identity_card_number','benf_prmt_address_line1','benf_prmt_address_line2','benf_prmt_address_taluk','benf_prmt_address_district','benf_prmt_address_state','benf_prmt_address_pincode'])
+            ->one();
+            $beneficiary = ArrayHelper::toArray($beneficiary,'*');
+            $result['acknowledgement_number'] = $beneficiary['benf_acknowledgement_number'];
+            $result['applicant_name'] = $beneficiary['benf_first_name']." ".$beneficiary['benf_last_name'];
+            $result['applicant_address'] = $beneficiary['benf_prmt_address_line1'].", ".$beneficiary['benf_prmt_address_line2'].", ".$beneficiary['benf_prmt_address_taluk'].", ".$beneficiary['benf_prmt_address_district'].", ".$beneficiary['benf_prmt_address_state'].", ".$beneficiary['benf_prmt_address_pincode'];
+            $result['identity_card_number'] = $beneficiary['benf_identity_card_number'];
+            $result['date_of_application'] = $beneficiary['applied_date'];
+            $result['received_application_name'] = $result['applicant_name'];
+            $result['registration_fee'] = Services::getRegistrationFee($id);
+            $result['subscription_fee'] = Services::getSubscriptionFee($id);
+            $result['contact_ro_by_date'] = date('Y-m-d', strtotime($result['date_of_application']. ' + 10 days'));
+            $result['office_contact_no'] = 9876543210;
+        }
+        return json_encode($result);
     }
 
     private function GetBeneficiaryDetails($Conditions){

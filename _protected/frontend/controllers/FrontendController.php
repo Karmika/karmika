@@ -32,7 +32,7 @@ class FrontendController extends Controller
                                         'sample','approvebeneficiary','rejectbeneficiary','createnominee',
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
                                         'getbeneficiaryalldata','createcertificates','deletecertificate',
-                                        'appliedbeneficiary',
+                                        'appliedbeneficiary','ackprint','ackprintdata',
 
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
@@ -58,11 +58,11 @@ class FrontendController extends Controller
                     ],
                     [
                         'controllers' => ['beneficiary','payment','seeddata'],
-                        'actions' => ['index','create','update','allbeneficiaries', 'createbeneficiary',
+                        'actions' => ['index','view','create','update','allbeneficiaries', 'createbeneficiary',
                                       'getbeneficiary','updatebeneficiary','success','createnominee',
                                       'createdependents','submitbeneficiary','createcertificates',
-                                      'deletecertificate', 'getbeneficiaryalldata',
-
+                                      'deletecertificate', 'getbeneficiaryalldata','ackprint','ackprintdata',
+                                      
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
                                         'getpayment',
