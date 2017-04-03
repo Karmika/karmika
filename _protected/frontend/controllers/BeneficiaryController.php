@@ -12,6 +12,7 @@ use frontend\models\BenfNominee;
 use frontend\models\BenfDependents;
 use frontend\models\BenfEmpCertificate;
 use frontend\models\BenfPayments;
+use frontend\models\Subscriptions;
 use common\models\User;
 use frontend\models\Services;
 
@@ -84,6 +85,10 @@ class BeneficiaryController extends FrontendController
     public function actionAckprint()
     {
         return $this->render('ackprint');
+    }
+    public function actionSubscriptions()
+    {
+        return $this->render('subscriptions');
     }
     public function actionCreatebeneficiary()
     {
@@ -337,6 +342,24 @@ class BeneficiaryController extends FrontendController
         return json_encode($result);
     }
 
+    public function actionAllsubscriptions(){
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $subscriptions = Subscriptions::find()
+        ->select(['start_date','end_date','updated_by_user_id','payment_id'])
+        ->all();
+        $subscriptions = ArrayHelper::toArray($subscriptions,'*');
+        foreach ($subscriptions as $key => $value) {
+            $user = User::find()
+            ->where(['id' => (int)$value["updated_by_user_id"]])
+            ->one();
+            $user = ArrayHelper::toArray($user,'*');
+            $subscriptions[$key]['updated_by'] = $user["username"];
+            $subscriptions[$key]['amountPaid'] = 50;
+        }
+        $model = BeneficiaryMaster::findOne($data['id']);
+        return json_encode(array("subscriptions"=>$subscriptions,"full_name"=>$model->benf_first_name." ".$model->benf_last_name,"registration_no"=>($model->benf_registration_number != null)?$model->benf_registration_number:""));
+    }
     private function GetBeneficiaryDetails($Conditions){
         $OrWhereConditions = ['created_by_user_id' => $this->LoggedInUser];
         if(empty($Conditions)) $OrWhereConditions = $Conditions;
@@ -349,7 +372,7 @@ class BeneficiaryController extends FrontendController
         ->all();
         $sno = 1;
         $result = ArrayHelper::toArray($beneficiary_details,'*');
-        
+
         foreach ($result as $key=>$val)
         {            
             $user = User::find()

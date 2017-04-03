@@ -9,6 +9,7 @@
   <span class="gridDetails">Applicant Name : <b>{{full_name}}</b> &nbsp;&nbsp;&nbsp;Registration No : <b>{{registration_no}}</b> </span>
   <a class="nameLink" href="{{baseUrl}}/beneficiary"><button type="button" style="float:right;" class="btn btn-default">Back </button></a>
   <button type="button" style="float:right;margin-right:1%;" ng-click="AddPayment()" class="btn btn-default">Add Payment</button>
+  <button type="button" style="float:right;margin-right:1%;" ng-click="GoToSubscriptions()" class="btn btn-default">Subscriptions</button>
 </div>
 <br />
 <div class="row"> 

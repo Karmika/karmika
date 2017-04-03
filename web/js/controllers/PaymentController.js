@@ -35,6 +35,10 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
         $scope.UpdatePayment = function(PaymentId){
             $window.location.href = config.baseUrl + "/payment/create?master_id=" + id+"&pid="+ PaymentId +"&Name="+ $scope.full_name +"&rno="+ $scope.registration_no;
         }
+
+        $scope.GoToSubscriptions = function(){
+            $window.location.href = config.baseUrl + "/beneficiary/subscriptions?id=" + id;   
+        }
     }
 
     $scope.Create = function(){
@@ -111,6 +115,46 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
                 $scope.FormatPayment();
         });
 
+    }
+
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.controller("SubscriptionController", ['$scope', '$http', 'config', '$window','CustomService',
+    function($scope, $http, config, $window, CustomService) {
+
+    $scope.Index = function(){
+
+        $scope.orderByField = '';
+        $scope.reverseSort = false;
+        $scope.Subscriptions = [];
+        $scope.searchName = "";
+        $scope.isActiveFilter = 1;
+        $scope.ListError = false;
+        $scope.totalAmount = 0;
+
+        $scope.id = CustomService.getParameterByName('id');
+
+        $http.post(config.baseUrl+"/beneficiary/allsubscriptions",{"id":$scope.id})
+        .then(function(response) {
+            $scope.Subscriptions = response.data.subscriptions;
+            if ($scope.Subscriptions.length <= 0) $scope.ListError = true;
+            $scope.full_name = response.data.full_name;
+            $scope.registration_no = response.data.registration_no;
+        });
     }
 
 }]);
