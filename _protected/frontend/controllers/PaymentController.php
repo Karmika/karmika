@@ -11,6 +11,7 @@ use frontend\models\BeneficiaryMaster;
 use frontend\models\BenfNominee;
 use frontend\models\BenfDependents;
 use frontend\models\BenfPayments;
+use frontend\models\Subscriptions;
 use common\models\User;
 use frontend\models\Services;
 
@@ -31,6 +32,8 @@ class PaymentController extends FrontendController
     public $TheCreatorRole = "theCreator";
     public $MemberRole = "member";
     public $SubAdminRole = "subAdmin";
+    public $SubscriptionFeeTypeId = 1;
+    public $PaymentStatusReceivedId = 1;
 
 	public function beforeAction($action) {
         date_default_timezone_set("Asia/Kolkata");
@@ -97,6 +100,7 @@ class PaymentController extends FrontendController
         $model = BenfPayments::findOne($data['id']);
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["updated_date"] = date('Y-m-d H:i:s');
+        if($data['payment_for'] == $this->SubscriptionFeeTypeId && $data['payment_status'] == $this->PaymentStatusReceivedId) $this->CreateSubscrciptions($model);
         $model->attributes = $data;
         if($model->update()) return json_encode(array("status"=>"success"));
         return json_encode(array("status"=>"failed"));
@@ -121,5 +125,32 @@ class PaymentController extends FrontendController
             if(isset($payment_mode['entity_value'])) $result[$key]["payment_mode"] = $payment_mode['entity_value'];
         }
         return $result;
+    }
+
+    private function CreateSubscrciptions($payment){
+        $bnf = BeneficiaryMaster::findOne($payment['benf_master_id']);
+        $totalPaid = $payment['amount'];
+        $baseCost = 50;
+        $start_date = $bnf['approved_or_rejected_date'];
+        $start_date = date('Y-m-d', strtotime($start_date));
+
+        for($i=1;$totalPaid >= ($baseCost*$i);$i++){
+            $data = array();
+            $model = new Subscriptions();
+            $data["benf_master_id"] = $payment['benf_master_id'];
+            $data["payment_id"] = $payment['id'];
+            $start_date = date('Y-m-d', strtotime($start_date. '+1 days'));
+            $data["start_date"] = $start_date;
+            $start_date = date('Y-m-d', strtotime($start_date. '+1 years'));
+            $start_date = date('Y-m-d', strtotime($start_date. '-1 days'));
+            $data["end_date"] = $start_date;
+            $data["created_date"] = date('Y-m-d H:i:s');
+            $data["updated_date"] = date('Y-m-d H:i:s');
+            $data["created_by_user_id"] = $this->LoggedInUser;
+            $data["updated_by_user_id"] = $this->LoggedInUser;
+            $model->attributes = $data;
+            $model->save();
+        }
+        return true;
     }
 }

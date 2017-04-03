@@ -344,18 +344,19 @@ class BeneficiaryController extends FrontendController
         $beneficiary_details = BeneficiaryMaster::find()
         ->where($Conditions)
         ->orWhere($OrWhereConditions)
-        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','updated_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number','benf_local_address_taluk'])
+        ->select(['id','benf_first_name', 'benf_last_name','benf_mobile_no','benf_date_of_birth','benf_sex','benf_martial_status','created_by_user_id','benf_acknowledgement_number','benf_application_status','benf_registration_number','benf_application_number','benf_local_address_taluk'])
         ->orderBy(['id' => SORT_DESC])
         ->all();
         $sno = 1;
         $result = ArrayHelper::toArray($beneficiary_details,'*');
+        
         foreach ($result as $key=>$val)
         {            
             $user = User::find()
-            ->where(['id' => (int)$val["updated_by_user_id"]])
+            ->where(['id' => (int)$val["created_by_user_id"]])
             ->one();
             $user = ArrayHelper::toArray($user,'*');
-            $result[$key]["updated_by"] = $user["username"];
+            $result[$key]["created_by"] = $user["username"];
             $result[$key]['sno'] = $sno++;
             $result[$key]['full_name'] = $result[$key]['benf_first_name']." ".$result[$key]['benf_last_name'];
             $result[$key]['actionRequired'] = ($result[$key]['benf_application_status'] == $this->AcceptedStatus)?true:false;

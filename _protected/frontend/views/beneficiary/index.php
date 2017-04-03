@@ -90,7 +90,7 @@ td,th{
         <td>{{beneficiary.benf_date_of_birth}}</td>
         <td>{{beneficiary.benf_sex}}</td>
         <!-- <td>{{beneficiary.benf_martial_status}}</td> -->
-        <td>{{beneficiary.updated_by}}</td>
+        <td>{{beneficiary.created_by}}</td>
         <?php if($IsSubAdmin || $IsAdmin){?>
          <td ng-show="!beneficiary.CanConfirm">{{beneficiary.benf_application_status}}</td>
          <td ng-show="beneficiary.CanConfirm">
