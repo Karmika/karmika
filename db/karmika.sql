@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2017 at 06:30 AM
+-- Generation Time: Apr 03, 2017 at 10:32 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -364,10 +364,213 @@ INSERT INTO `locations` (`id`, `parent_location_id`, `location`) VALUES
 (28, NULL, 'Mandya'),
 (29, NULL, 'Mysuru'),
 (30, NULL, 'Udupi'),
-(31, 9, 'Krishnarajapura'),
-(32, 9, 'Bangalore North'),
-(33, 9, 'Anekal'),
-(34, 9, 'Bangalore South');
+(174, 1, 'Bagalkote'),
+(175, 1, 'Jamkhandi'),
+(176, 1, 'Mudhool'),
+(177, 1, 'Badami'),
+(178, 1, 'Bilagi'),
+(179, 1, 'Hungund'),
+(180, 1, 'Ilkal'),
+(181, 1, 'Rabkavi Banhatti'),
+(182, 1, 'Guledgudda'),
+(183, 2, 'Athani'),
+(184, 2, 'Bailahongal'),
+(185, 2, 'Belagaum'),
+(186, 2, 'Chikodi'),
+(187, 2, 'Gokak'),
+(188, 2, 'Hukkeri'),
+(189, 2, 'Khanapur'),
+(190, 2, 'Ramdurg'),
+(191, 2, 'Raybag'),
+(192, 2, 'Saundatti'),
+(193, 2, 'Kittur'),
+(194, 2, 'Nipani'),
+(195, 2, 'Mudalgi'),
+(196, 2, 'Kagawad'),
+(197, 3, 'Bijapur'),
+(198, 3, 'Basavan Bagevadi'),
+(199, 3, 'Indi'),
+(200, 3, 'Sindagi'),
+(201, 3, 'Talikota'),
+(202, 3, 'Chadchan'),
+(203, 3, 'Devar Hipparagi'),
+(204, 3, 'Kolhar'),
+(205, 3, 'Nidagundi'),
+(206, 3, 'Babaleshwar'),
+(207, 3, 'Tikota'),
+(208, 4, 'Kalghatgi'),
+(209, 4, 'Dharwad'),
+(210, 4, 'Hubli'),
+(211, 4, 'Hubli city'),
+(212, 4, 'Kundgol'),
+(213, 4, 'Navalgund'),
+(214, 4, 'Alnavar'),
+(215, 4, 'Annigeri'),
+(216, 5, 'Gadag-Betigeri'),
+(217, 5, 'Nargund'),
+(218, 5, 'Mundargi'),
+(219, 5, 'Ron'),
+(220, 5, 'Shirahatti'),
+(221, 6, 'Ranibennur'),
+(222, 6, 'Byadgi'),
+(223, 6, 'Hangal'),
+(224, 6, 'Haveri'),
+(225, 6, 'Savanur'),
+(226, 6, 'Hirekerur'),
+(227, 6, 'Shiggaon'),
+(228, 7, 'Karwar'),
+(229, 7, 'Sirsi'),
+(230, 7, 'Joida'),
+(231, 7, 'Dandeli'),
+(232, 7, 'Bhatkal'),
+(233, 7, 'Kumta'),
+(234, 7, 'Ankola'),
+(235, 7, 'Haliyal'),
+(236, 7, 'Honavar'),
+(237, 7, 'Mundgod'),
+(238, 7, 'Siddapur'),
+(239, 7, 'Yellapur'),
+(240, 8, 'Anekal'),
+(241, 8, 'Bangalore South'),
+(242, 8, 'Bangalore North'),
+(243, 8, 'Bengaluru East'),
+(244, 9, 'Doddaballapura'),
+(245, 9, 'Devanhalli'),
+(246, 9, 'Hosakote'),
+(247, 9, 'Nelmangala'),
+(248, 10, 'Chikkaballapur'),
+(249, 10, 'Bagepalli'),
+(250, 10, 'Chintamani'),
+(251, 10, 'Gauribidanur'),
+(252, 10, 'Gudibanda'),
+(253, 10, 'Sidlaghatta'),
+(254, 11, 'Chitradurga'),
+(255, 11, 'Challakere'),
+(256, 11, 'Hiriyur'),
+(257, 11, 'Holalkere'),
+(258, 11, 'Hosdurga'),
+(259, 11, 'Molakalmuru'),
+(260, 12, 'Davanagere'),
+(261, 12, 'Harihar'),
+(262, 12, 'Channagiri'),
+(263, 12, 'Harpanahalli'),
+(264, 12, 'Honnali'),
+(265, 12, 'Jagalur'),
+(266, 13, 'Kolar'),
+(267, 13, 'Bangarapet'),
+(268, 13, 'Malur'),
+(269, 13, 'Mulbagal'),
+(270, 13, 'Srinivaspur'),
+(271, 14, 'Ramanagara'),
+(272, 14, 'Magadi'),
+(273, 14, 'Kanakapura'),
+(274, 14, 'Channapatna'),
+(275, 15, 'Sagar'),
+(276, 15, 'Shimoga'),
+(277, 15, 'Bhadravati'),
+(278, 15, 'Hosanagara'),
+(279, 15, 'Shikaripura'),
+(280, 15, 'Sorab'),
+(281, 15, 'Tirthahalli'),
+(282, 16, 'Tumkuru'),
+(283, 16, 'Chiknayakanhalli'),
+(284, 16, 'Kunigal'),
+(285, 16, 'Madhugiri'),
+(286, 16, 'Sira'),
+(287, 16, 'Tiptur'),
+(288, 16, 'Gubbi'),
+(289, 16, 'Koratagere'),
+(290, 16, 'Pavagada'),
+(291, 16, 'Turuvekere'),
+(292, 17, 'Bellary'),
+(293, 17, 'Hospet'),
+(294, 17, 'Hoovina Hadagalli'),
+(295, 17, 'Hagaribommanahalli'),
+(296, 17, 'Kudligi'),
+(297, 17, 'Sanduru'),
+(298, 17, 'Siruguppa'),
+(299, 17, 'Kotturu'),
+(300, 17, 'Kampli'),
+(301, 17, 'Kurugodu'),
+(302, 18, 'Aurad'),
+(303, 18, 'Basavakalyan'),
+(304, 18, 'Bidar'),
+(305, 18, 'Bhalki'),
+(306, 18, 'Homnabad'),
+(307, 18, 'Chitgoppa'),
+(308, 18, 'Kamalnagar'),
+(309, 19, 'Gulbarga'),
+(310, 19, 'Afzalpur'),
+(311, 19, 'Aland'),
+(312, 19, 'Chincholi'),
+(313, 19, 'Chitapur'),
+(314, 19, 'Jevargi'),
+(315, 19, 'Sedam'),
+(316, 20, 'Gangawati'),
+(317, 20, 'Koppal'),
+(318, 20, 'Kushtagi'),
+(319, 20, 'Yelbarga'),
+(320, 21, 'Raichur'),
+(321, 21, 'Manvi'),
+(322, 21, 'Sindhnur'),
+(323, 21, 'Devadurga'),
+(324, 21, 'Lingsugur'),
+(325, 21, 'Sirwar'),
+(326, 21, 'Maski'),
+(327, 22, 'Yadgir'),
+(328, 22, 'Shahpur'),
+(329, 22, 'Shorapur'),
+(330, 23, 'Chamrajnagar'),
+(331, 23, 'Gundlupet'),
+(332, 23, 'Kollegal'),
+(333, 23, 'Yelandur'),
+(334, 23, 'Hanur'),
+(335, 24, 'Chikmagalur'),
+(336, 24, 'Kadur'),
+(337, 24, 'Koppa'),
+(338, 24, 'Mudigere'),
+(339, 24, 'Narasimharajapura'),
+(340, 24, 'Sringeri'),
+(341, 24, 'Tarikere'),
+(342, 25, 'Mangalore'),
+(343, 25, 'Ullal'),
+(344, 25, 'Kotekar'),
+(345, 25, 'Mulki'),
+(346, 25, 'Puttur'),
+(347, 25, 'Bantwal'),
+(348, 25, 'Sulya'),
+(349, 25, 'Moodbidri'),
+(350, 26, 'Hassan'),
+(351, 26, 'Arsikere'),
+(352, 26, 'Channarayapattana'),
+(353, 26, 'Holenarsipur'),
+(354, 26, 'Sakleshpur'),
+(355, 26, 'Alur'),
+(356, 26, 'Arkalgud'),
+(357, 26, 'Belur'),
+(358, 27, 'Madikeri'),
+(359, 27, 'Somvarpet'),
+(360, 27, 'Virajpet'),
+(361, 28, 'Mandya'),
+(362, 28, 'Maddur'),
+(363, 28, 'Malavalli'),
+(364, 28, 'Shrirangapattana'),
+(365, 28, 'Krishnarajpet'),
+(366, 28, 'Nagamangala'),
+(367, 28, 'Pandavapura'),
+(368, 29, 'Mysuru'),
+(369, 29, 'Hunsur'),
+(370, 29, 'Krishnarajanagar'),
+(371, 29, 'Nanjangud'),
+(372, 29, 'Heggadadevanakote'),
+(373, 29, 'Piriyapatna'),
+(374, 29, 'Tirumakudalu Narasipura'),
+(375, 30, 'Udupi'),
+(376, 30, 'Kaup'),
+(377, 30, 'Bramahavara'),
+(378, 30, 'Karkala'),
+(379, 30, 'Kundapura'),
+(380, 30, 'Byndoor');
 
 -- --------------------------------------------------------
 
@@ -438,10 +641,12 @@ INSERT INTO `selection_seed_data` (`id`, `entity_type`, `entity_id`, `entity_val
 (17, 'payment_for', 2, 'Application Fee', '2016-04-29 23:14:30', '2016-04-19 08:29:10', NULL),
 (18, 'payment_for', 3, 'Late Payment Fee', '2016-04-29 23:14:30', '2016-04-19 08:29:10', NULL),
 (19, 'payment_for', 4, 'Others', '2016-04-29 23:14:30', '2016-04-19 08:29:10', NULL),
-(20, 'rejection_reason', 1, 'The data provided is not valid', '2017-03-27 23:38:50', '2017-03-28 00:05:37', NULL),
-(21, 'rejection_reason', 2, 'Not eligible to apply', '2017-03-27 23:38:50', '2017-03-28 00:05:44', NULL),
-(22, 'rejection_reason', 3, 'Other Reason', '2017-03-27 23:38:50', '2017-03-28 00:05:40', NULL),
-(23, 'payment_mode', 3, 'NEFT', '2016-04-29 23:14:30', '2017-03-28 00:53:52', NULL);
+(20, 'rejection_reason', 1, 'Those who have not completed eighteen (18) years of age but\n\ncompleted sixty (60) years of age', '2017-03-27 23:38:50', '2017-04-02 02:41:35', NULL),
+(21, 'rejection_reason', 2, 'Those who have been not engaged in building or other construction\n\nwork for ninety (90) days in preceding 12 months', '2017-03-27 23:38:50', '2017-04-02 02:41:47', NULL),
+(22, 'rejection_reason', 3, 'Those who are not submitting the application to the authorised\n\n‘Registering Authority’ in the requisite ‘Form’ prescribed by the Board', '2017-03-27 23:38:50', '2017-04-02 02:41:57', NULL),
+(23, 'payment_mode', 3, 'NEFT', '2016-04-29 23:14:30', '2017-03-28 00:53:52', NULL),
+(24, 'rejection_reason', 4, 'Those applications which are not accompanied by the necessary relevant\r\n\r\ndocuments as prescribed in the Act', '2017-03-27 23:38:50', '2017-04-02 02:41:57', NULL),
+(25, 'rejection_reason', 5, 'Those applications which are not accompanied by necessary fees as\r\n\r\nprescribed in the Act', '2017-03-27 23:38:50', '2017-04-02 02:41:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -460,13 +665,29 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('3iaqn9potd71bo636cdcq6c5v1', 1490849338, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b),
-('a7ai7s81id3d7kl364dro9hg26', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('bctfvu818c6to01vbept3m5086', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('fbcgptetno6c00pffarks8akg5', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('g0l9n5j9t73u5kfok1eti7hp12', 1490694320, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('k55odq1gfsjq1tp0dt8edn7vj0', 1490701031, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a343b),
-('os4qn86v7hsckp3danstl9rq52', 1490516987, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a313b);
+('cfl3puiahfk6ccasgq42rsdrc6', 1491191680, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('ct9kh075gg1bcoicdhqs78df86', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('h8rh8ds5u6gqdd3o3g5ndu6v55', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('j2ive7i2mbbdjsqba0tsl4ks43', 1491209551, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a363b),
+('j690b0402lhtk2bqngnmknc9p7', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `id` int(11) NOT NULL,
+  `benf_master_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `created_by_user_id` int(11) NOT NULL,
+  `updated_by_user_id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -495,11 +716,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `mobile`, `location`, `password_hash`, `status`, `auth_key`, `password_reset_token`, `account_activation_token`, `created_at`, `updated_at`) VALUES
 (1, 'superadmin', 'sravan.vanteru@gmail.com', NULL, NULL, '$2y$13$XrAQa1pKdeKMzeO3Zb8ojetshkajpmDjJnOP0mF74oc94Ok2E6EC2', 10, 'fCVnB_lk4CpmN-gBqKYarK_koxnheAkW', 'L3Sy05jwVbLYWxnDR6Rueivvae1mxwjE_1488023153', NULL, 1486804995, 1488023153),
-(3, 'sravan', 'sravan@sravan.com', NULL, 'Bangalore South', '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1490846969),
-(4, 'prashanth', 'prashanth100@gmail.com', NULL, 'Bangalore North', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1490846949),
+(3, 'sravan', 'sravan@sravan.com', NULL, 'Bangalore South', '$2y$13$/TtC89z0b7qmOF.ReSwYl.BLWsRmniw1DUUJnp7F/YFGMpHWoRglS', 10, 'hblrgv2kGfg4oQvsjBt2ZVi5OAE0dBiO', NULL, NULL, 1487051249, 1490974516),
+(4, 'prashanth', 'prashanth100@gmail.com', NULL, 'Bangalore North', '$2y$13$6nGKmP85dqBVXkci2qB8VOM4ZP2WVwkl1qYzlYWDGhgcwh.rnGJ6G', 10, '03NqoZdpsGz2v3wgAhjgAd7NvPprdq48', NULL, NULL, 1487347713, 1490974626),
 (5, 'test', 'test@best.com', '', NULL, '$2y$13$hgQqcSNimfbUYV7PDEa9SO5mJT24o8uTbS/ZxZo4Az.q7CbWm5wxy', 10, 'qTCcl2dxj63-KBeZoAGZF6DoNV0r5BJG', NULL, NULL, 1489489922, 1489489922),
-(6, 'kumar', '', '123456', NULL, '$2y$13$M3EyTyuhMH6ce3xd6fxzQOymNEjofgp3ezMOdwxt3x8kmH9KBRW5y', 10, 'TTl0BaQCM4FXyNJqktULNBzkGD1fgq5-', NULL, NULL, 1490419100, 1490419100),
-(7, 'Reddy', '', NULL, '2', '$2y$13$ptGnPKZoSRmiwjRNDR8IMenltstVF3BOS1aRD.N/uwlS/PMdrzYgi', 10, 'bASRP19gQAyfdxcGcD_MvIz1GZYluad7', NULL, NULL, 1490515421, 1490809209);
+(6, 'kumar', '', '123456', NULL, '$2y$13$M3EyTyuhMH6ce3xd6fxzQOymNEjofgp3ezMOdwxt3x8kmH9KBRW5y', 10, 'TTl0BaQCM4FXyNJqktULNBzkGD1fgq5-', NULL, NULL, 1490419100, 1490419100);
 
 --
 -- Indexes for dumped tables
@@ -609,6 +829,12 @@ ALTER TABLE `session`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -659,7 +885,7 @@ ALTER TABLE `benf_payments`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=381;
 --
 -- AUTO_INCREMENT for table `news`
 --
@@ -669,7 +895,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `selection_seed_data`
 --
 ALTER TABLE `selection_seed_data`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
