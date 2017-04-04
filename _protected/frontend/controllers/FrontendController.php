@@ -32,7 +32,8 @@ class FrontendController extends Controller
                                         'sample','approvebeneficiary','rejectbeneficiary','createnominee',
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
                                         'getbeneficiaryalldata','createcertificates','deletecertificate',
-                                        'appliedbeneficiary','ackprint','ackprintdata',
+                                        'appliedbeneficiary','ackprint','ackprintdata','subscriptions',
+                                        'allsubscriptions',
 
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
@@ -62,6 +63,7 @@ class FrontendController extends Controller
                                       'getbeneficiary','updatebeneficiary','success','createnominee',
                                       'createdependents','submitbeneficiary','createcertificates',
                                       'deletecertificate', 'getbeneficiaryalldata','ackprint','ackprintdata',
+                                      'subscriptions','allsubscriptions',
                                       
                                         //Payment
                                         'index','create','allpayments','createpayment','updatepayment',
