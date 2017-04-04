@@ -108,13 +108,13 @@ $url =  Yii::$app->homeUrl;?>
 
                                 <label class="control-label col-md-1" for="benf_mobile_no"><span class="mandatory-field">*&nbsp;</span>Mobile&nbsp;No.</label>
                                 <div class="col-md-3">
-                                    <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
+                                    <input digitswithplusandhyphen-only maxlength="10" class="form-control" ng-model="Beneficiary.benf_mobile_no" name="benf_mobile_no" placeholder="Enter mobile number" required />
                                     <small class="error" ng-show="beneficiary.benf_mobile_no.$invalid && beneficiary.benf_mobile_no.$dirty">Please provide mobile number</small>
                                 </div>
 
                                 <label class="control-label col-md-1" for="benf_alternate_mobile_no"><span class="mandatory-field"></span>Alternate Mobile&nbsp;No</label>
                                 <div class="col-md-3">
-                                    <input digitswithplusandhyphen-only maxlength="13" class="form-control" ng-model="Beneficiary.benf_alternate_mobile_no" name="benf_alternate_mobile_no" placeholder="Enter alternate mobile number" />
+                                    <input digitswithplusandhyphen-only maxlength="10" class="form-control" ng-model="Beneficiary.benf_alternate_mobile_no" name="benf_alternate_mobile_no" placeholder="Enter alternate mobile number" />
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -289,13 +289,13 @@ $url =  Yii::$app->homeUrl;?>
                                     <small class="error" ng-show="beneficiary.benf_date_of_employment.$invalid && beneficiary.benf_date_of_employment.$dirty">Please provide date of employment and only acceptable format is DD-MM-YYYY</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day ವೇತನ ಒಂದು ದಿನಕ್ಕೆ</label>
+                                <label class="control-label col-md-1" for="benf_wages_per_day"><span class="mandatory-field">*&nbsp;</span>Wages per Day (Rs.) ವೇತನ ಒಂದು ದಿನಕ್ಕೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_wages_per_day" name="benf_wages_per_day" placeholder="Wages per Day" required ng-value="" ng-change="setWagesPerMonth()" />
                                     <small class="error" ng-show="beneficiary.benf_wages_per_day.$invalid && beneficiary.benf_wages_per_day.$dirty">Please provide applicant wages per day</small>
                                 </div>
 
-                                <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month ವೇತನ ಪ್ರತಿ ತಿಂಗಳಿಗೆ</label>
+                                <label class="control-label col-md-1" for="benf_wages_per_month"><span class="mandatory-field">*&nbsp;</span>Wages per&nbsp;Month (Rs) ವೇತನ ಪ್ರತಿ ತಿಂಗಳಿಗೆ</label>
                                 <div class="col-md-3">
                                     <input class="form-control" ng-model="Beneficiary.benf_wages_per_month" name="benf_wages_per_month" placeholder="Wages per Month" ng-change="setWagesPerDay()" required />
                                     <small class="error" ng-show="beneficiary.benf_wages_per_month.$invalid && beneficiary.benf_wages_per_month.$dirty">Please provide applicant wages detail</small>
@@ -684,7 +684,7 @@ $url =  Yii::$app->homeUrl;?>
                             </div>
                             <div class="row form-group">
                                 <div ng-show="BankAndPaydateFieldShow">
-                                    <label class="control-label col-sm-2" for="ifsc_code">&nbsp;&nbsp;IFSC Code :</label>
+                                    <label class="control-label col-sm-2" for="ifsc_code">&nbsp;&nbsp;IFSC</label>
                                     <div class="col-sm-4">
                                         <input class="form-control" ng-model="Payment.ifsc_code" name="ifsc_code" placeholder="Enter ifsc code" />
                                     </div>

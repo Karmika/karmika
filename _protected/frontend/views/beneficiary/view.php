@@ -222,9 +222,39 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>ನಾನು ಈ ಮೂಲಕ ದೃಢೀಕರಿಸುವುದೇನೆಂದರೆ ಮೇಲೆ ನೀಡಿದ ಮಾಹಿತಿಯು ನನ್ನ ತಿಳುವಳಿಕೆ ಹಾಗೂ ನಂಬಿಕೆಗೆ ಅನುಗುಣವಾಗಿ ಸರಿ ಇರುತ್ತದೆ ಹಾಗೂ ನಿಜವಾಗಿರುತ್ತದೆ.</p>
+          <p>I hereby declare that the above information is true and correct to the best of my knowledge and belief.
+        </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <br>
+          <label>ಸ್ಥಳ/Place: </label><br>
+          <label>ದಿನಾಂಕ/Date:</label>
+        </div>
+        <div class="col-md-4 pull-right" style="padding-top: 3rem;">
+          <p>ಅರ್ಜಿದಾರನ ಸಹಿ/ಎಡ ಹೆಬ್ಬೆರಳಿನ ಗುರುತು</p>
+          <p>Signature/Left Hand Thumb </p>
+          <p>Impression of the Applicant </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <label>ಕಛೇರಿಯ ಉಪಯೋಗಕ್ಕಾಗಿ ಮಾತ್ರ </label><br>
+        </div>
+      </div>
+      <div class="row">
+        
+      </div>
     </div>
   </div>
   <br>
+  <hr>
   <div class="row">
     <div class="col-md-11 col-md-offset-1">
       <center>
@@ -336,7 +366,7 @@
 
     <div id="collapse1" class="panel-collapse collapse in">
       <div class="panel-body">
-        <h3 class="text-center subHeading">Employment Certificate</h3><br>
+        <h3 class="text-center subHeading">Employment Certificate Details (For Office Use Only)</h3><br>
 
         <div ng-repeat="certificate in  Certificates">
           <div class="panel-heading text-left"><b style="text-decoration: underline;">Certificate {{$index+1}}</b>
@@ -361,7 +391,7 @@
           </div>
         </div>
         <br>
-        <h3 class="text-center subHeading">Payment Details</h3><br>
+        <h3 class="text-center subHeading">Payment Details (For Office Use Only)</h3><br>
 
         <div class="panel-body">
           <div class="panel-body">
