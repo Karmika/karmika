@@ -62,7 +62,7 @@ app.controller("PaymentController", ['$scope', '$http', 'config', '$window','Cus
 
         CustomService.SeedData('payment_for').then(function(data) {
             angular.forEach(data,function(value, key){
-                if(value.entity_id != 2) $scope.paymentFors.push(value);
+                if(value.entity_id != 2) $scope.paymentFors.push(data[key]);
             })
         })
 
