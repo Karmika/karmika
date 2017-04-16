@@ -121,6 +121,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+        if(strlen($password) < 1) return false;
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
