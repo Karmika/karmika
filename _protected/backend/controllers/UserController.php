@@ -62,6 +62,10 @@ class UserController extends BackendController
             $user->setPassword($user->password);
             $user->generateAuthKey();
             
+            $postData = Yii::$app->request->post();
+            $location = $postData['User']['location'];
+            $user->location = (!empty($location))?implode(",",$location):null;
+            
             if ($user->save()) 
             {
                 $role->user_id = $user->getId();
