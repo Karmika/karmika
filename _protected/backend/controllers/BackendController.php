@@ -32,6 +32,18 @@ class BackendController extends Controller
                         'roles' => ['theCreator'],
                     ],
                     [
+                        'controllers' => ['user'],
+                        'actions' => ['index', 'view', 'update'],
+                        'allow' => false,
+                        'roles' => ['member'],
+                    ],
+                    [
+                        'controllers' => ['user'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => false,
+                        'roles' => ['admin','subAdmin'],
+                    ],
+                    [
                         // other rules
                     ],
 

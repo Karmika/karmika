@@ -155,8 +155,13 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
                     $scope.Payment = response.data.Payment;
                     $scope.FormatPayment();
                 }
-                $scope.Certificates.FormType = "V";
-                if(response.data.Certificates.length > 0) $scope.Certificates.Forms = response.data.Certificates;
+                if(response.data.Certificates.length > 0) {
+                    var unionName = response.data.Certificates[0].emp_union_full_name;
+                    if(unionName != null && unionName != undefined && unionName != "")
+                        $scope.Certificates.FormType = "V";
+                    else $scope.Certificates.FormType = "IV";
+                    $scope.Certificates.Forms = response.data.Certificates;
+                }
                 $scope.FormatNomineeData();
                 $scope.FormatDependentData();
                 $scope.FormatBeneficiaryData();

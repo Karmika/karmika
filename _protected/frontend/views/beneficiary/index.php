@@ -69,9 +69,7 @@ td,th{
           <a href="#" ng-click="orderByField='benf_application_status'; reverseSort = !reverseSort">
           Status </a>&nbsp;<span class="Arrow" ng-show="orderByField == 'benf_application_status'"><span ng-show="!reverseSort">&uArr;</span><span ng-show="reverseSort">&dArr;</span>
         </th>
-        <?php if($IsMember){?>
-          <th> Ack</th>
-        <?php }?>
+        <th> Ack</th>
         <th> Payments </th>
         <th> View </th>
       </tr>
@@ -99,12 +97,9 @@ td,th{
         <?php }else{ ?>
          <td>{{beneficiary.benf_application_status}}</td>
         <?php } ?>
-        
-        <?php if($IsMember){?>
-          <td ng-show="!beneficiary.Editable">
-            <a class="nameLink" ng-click="PrintApplication(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
-          </td>
-         <?php }?>
+        <td ng-show="!beneficiary.Editable">
+          <a class="nameLink" ng-click="PrintApplication(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>
+        </td>
         <td ng-show="beneficiary.Editable"><span style="padding-left:10px;"> --- </span></td>
         <td ng-show="!beneficiary.Editable && !beneficiary.actionRequired && beneficiary.Approved">
           <a class="nameLink" ng-click="ViewPayments(beneficiary.id)"><span style="font-size: 20px;padding-left:10px;" class="glyphicon glyphicon-list-alt"></span></a>

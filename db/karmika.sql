@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2017 at 10:32 AM
+-- Generation Time: Apr 05, 2017 at 11:14 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -218,6 +218,13 @@ CREATE TABLE `beneficiary_master` (
   `approved_or_rejected_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dumping data for table `beneficiary_master`
+--
+
+INSERT INTO `beneficiary_master` (`id`, `benf_first_name`, `benf_middle_name`, `benf_last_name`, `benf_mobile_no`, `benf_alternate_mobile_no`, `benf_date_of_birth`, `beneficiary_age`, `benf_sex`, `nationality`, `benf_caste`, `benf_martial_status`, `benf_blood_group`, `benf_local_address_line1`, `benf_local_address_line2`, `benf_local_address_taluk`, `benf_local_address_district`, `benf_local_address_state`, `benf_local_pincode`, `benf_prmt_address_line1`, `benf_prmt_address_line2`, `benf_prmt_address_taluk`, `benf_prmt_address_district`, `benf_prmt_address_state`, `benf_prmt_address_pincode`, `employer_full_name`, `emplr_address_line1`, `emplr_address_line2`, `emplr_address_taluk`, `emplr_address_district`, `emplr_address_state`, `emplr_address_pincode`, `benf_nature_of_work`, `benf_date_of_employment`, `benf_wages_per_day`, `benf_wages_per_month`, `benf_bank_account_number`, `benf_bank_account_type`, `benf_bank_name`, `benf_bank_branch`, `benf_bank_ifsc`, `created_date`, `created_by_user_id`, `updated_date`, `updated_by_user_id`, `benf_application_status`, `benf_application_number`, `benf_acknowledgement_number`, `benf_registration_number`, `benf_registration_old_number`, `admin_comments`, `benf_identity_card_type`, `benf_identity_card_number`, `applied_date`, `accepted_date`, `approved_or_rejected_date`) VALUES
+(1, 'Sravan', 'Vanteru', 'Kumar', 8892233720, NULL, '1991-07-26', 25, 'MALE', 'INDIAN', 'General (Others)', 'SINGLE', 'A+', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'Happiest Minds Techonologies', 'Bangalore', 'Bangalore', 'Bangalore North', 'Bangalore', 'KARNATAKA', 560037, 'PLUMBING', '2014-02-07', 100, 3000, 2147483647, 'SAVINGS', 'ICIC Bank', 'ECity Bangalore', 'ICIC000020', '2017-04-03 15:45:52', 6, '2017-04-05 09:05:49', 4, 'APPROVED', '0000000001', 'BNG000000001', '0000000001', '', '', 'EPIC', '213131313', '2017-04-05 14:35:11', '2017-04-05 14:35:42', '2017-04-05 14:35:49');
+
 -- --------------------------------------------------------
 
 --
@@ -252,6 +259,13 @@ CREATE TABLE `benf_dependents` (
   `last_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dumping data for table `benf_dependents`
+--
+
+INSERT INTO `benf_dependents` (`id`, `benf_master_id`, `depnt_full_name`, `depnt_address`, `depnt_age`, `depnt_dob`, `depnt_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
+(1, 1, 'jhbhjbhjbh', 'bjkjhbjhb', 35, '1982-04-03', 'jkbhjbj', 6, '2017-04-03 15:46:05');
+
 -- --------------------------------------------------------
 
 --
@@ -273,6 +287,13 @@ CREATE TABLE `benf_emp_certificate` (
   `last_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dumping data for table `benf_emp_certificate`
+--
+
+INSERT INTO `benf_emp_certificate` (`id`, `benf_master_id`, `benf_employer_full_name`, `benf_present_work_address`, `benf_present_project_name`, `emp_union_full_name`, `emp_union_branch_address`, `benf_work_start_date`, `benf_work_end_date`, `emp_union_address`, `last_updated_by_user_id`, `last_updated_time`) VALUES
+(1, 1, 'kjhbhjb', 'hjbjhbjhbjk', 'jhbjbjh', 'bhjbjhb', 'ljbbjb', NULL, NULL, NULL, 6, '2017-04-03 15:46:11');
+
 -- --------------------------------------------------------
 
 --
@@ -291,6 +312,13 @@ CREATE TABLE `benf_nominee` (
   `last_updated_by_user_id` bigint(20) NOT NULL,
   `last_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `benf_nominee`
+--
+
+INSERT INTO `benf_nominee` (`id`, `benf_master_id`, `nominee_full_name`, `nominee_address`, `nominee_age`, `nominee_dob`, `nominee_share`, `nominee_relationship_with_benf`, `last_updated_by_user_id`, `last_updated_time`) VALUES
+(1, 1, 'kjbkjb', 'bjkbjkbkj', 25, '1992-04-03', 100, 'jbjbhjb', 6, '2017-04-03 15:46:05');
 
 -- --------------------------------------------------------
 
@@ -316,6 +344,14 @@ CREATE TABLE `benf_payments` (
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `benf_payments`
+--
+
+INSERT INTO `benf_payments` (`id`, `benf_master_id`, `payment_reference_id`, `payment_mode`, `payment_date`, `payment_status`, `amount`, `payment_for`, `chequeordd_no`, `bank_name`, `ifsc_code`, `notes`, `created_by_user_id`, `updated_by_user_id`, `created_date`, `updated_date`) VALUES
+(1, 1, 2312313, 3, '2017-04-13', 1, 25, 2, NULL, NULL, NULL, NULL, 6, 4, '2017-04-05 09:04:44', '2017-04-05 09:05:49'),
+(2, 1, 322121321, 3, '2017-04-12', 2, 200, 1, NULL, NULL, NULL, 'ASsss', 6, 4, '2017-04-05 09:06:23', '2017-04-05 09:06:57');
 
 -- --------------------------------------------------------
 
@@ -665,11 +701,13 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`) VALUES
-('cfl3puiahfk6ccasgq42rsdrc6', 1491191680, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('5o2u9ucin0hiak792tbgd64tq1', 1491384666, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32363a222f6b61726d696b612f62656e65666963696172792f696e646578223b5f5f69647c693a343b),
 ('ct9kh075gg1bcoicdhqs78df86', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
 ('h8rh8ds5u6gqdd3o3g5ndu6v55', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
-('j2ive7i2mbbdjsqba0tsl4ks43', 1491209551, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a363b),
-('j690b0402lhtk2bqngnmknc9p7', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b);
+('j690b0402lhtk2bqngnmknc9p7', 1491111445, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a333b),
+('p092vn9m7sk7b7f26talhl8943', 1491276502, 0x5f5f666c6173687c613a303a7b7d),
+('p0asb7uh45p492l5d6tf5366a0', 1491385064, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a363b),
+('pdjjn5aj3gfh2ssii2a5cqvpc5', 1491276502, 0x5f5f666c6173687c613a303a7b7d5f5f72657475726e55726c7c733a32313a222f6b61726d696b612f62656e65666963696172792f223b);
 
 -- --------------------------------------------------------
 
@@ -855,7 +893,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `beneficiary_master`
 --
 ALTER TABLE `beneficiary_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `benf_attachments`
 --
@@ -865,22 +903,22 @@ ALTER TABLE `benf_attachments`
 -- AUTO_INCREMENT for table `benf_dependents`
 --
 ALTER TABLE `benf_dependents`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `benf_emp_certificate`
 --
 ALTER TABLE `benf_emp_certificate`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `benf_nominee`
 --
 ALTER TABLE `benf_nominee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `benf_payments`
 --
 ALTER TABLE `benf_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `locations`
 --

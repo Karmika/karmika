@@ -533,22 +533,22 @@ $url =  Yii::$app->homeUrl;?>
                                             <textarea class="form-control" ng-model="Certificates.Forms[$index].benf_present_work_address" name="benf_present_work_address_{{$index}}" placeholder="Address" maxlength="250" required ></textarea>
                                             <small class="error" ng-show="EmploymentFormV.benf_present_work_address_{{$index}}.$invalid && EmploymentFormV.benf_present_work_address_{{$index}}.$dirty">Please provide work address</small>
                                         </div>                                        
-                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;Start&nbsp;Date</label>
+                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;Start&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-click="open1()" ng-model="Certificates.Forms[$index].benf_work_start_date" is-open="popup1.opened" name="benf_work_start_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
-                                                    placeholder="Select work start date" />
+                                                    placeholder="Select work start date" required />
                                                 <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                             </p>
                                             <small class="error" ng-show="EmploymentFormV.benf_work_start_date_{{$index}}.$invalid && EmploymentFormV.benf_work_start_date_{{$index}}.$dirty">Please provide work start date and only acceptable format is DD-MM-YYYY</small>
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;End&nbsp;Date</label>
+                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;End&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" ng-click="open1()" uib-datepicker-popup="{{format}}" ng-model="Certificates.Forms[$index].benf_work_end_date" is-open="popup1.opened" name="benf_work_end_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
-                                                    placeholder="Select work start date" />
+                                                    placeholder="Select work start date" required />
                                                 <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                             </p>
                                             <small class="error" ng-show="EmploymentFormV.benf_work_end_date_{{$index}}.$invalid && EmploymentFormV.benf_work_end_date_{{$index}}.$dirty">Please provide work end date and only acceptable format is DD-MM-YYYY</small>
@@ -582,22 +582,22 @@ $url =  Yii::$app->homeUrl;?>
                                             <textarea class="form-control" ng-model="Certificates.Forms[$index].benf_present_work_address" name="benf_present_work_address_{{$index}}" placeholder="Address" maxlength="250" required ></textarea>
                                             <small class="error" ng-show="EmploymentFormIV.benf_present_work_address_{{$index}}.$invalid && EmploymentFormIV.benf_present_work_address_{{$index}}.$dirty">Please provide work address</small>
                                         </div>
-                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;Start&nbsp;Date</label>
+                                        <label class="control-label col-md-2" for="benf_work_start_date_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;Start&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" uib-datepicker-popup="{{format}}" ng-click="open1()" ng-model="Certificates.Forms[$index].benf_work_start_date" is-open="popup1.opened" name="benf_work_start_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
-                                                    placeholder="Select work start date" />
+                                                    placeholder="Select work start date" required />
                                                 <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                             </p>
                                             <small class="error" ng-show="EmploymentFormIV.benf_work_start_date_{{$index}}.$invalid && EmploymentFormIV.benf_work_start_date_{{$index}}.$dirty">Please provide work start date and only acceptable format is DD-MM-YYYY</small>
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}">&nbsp;&nbsp;Work&nbsp;End&nbsp;Date</label>
+                                        <label class="control-label col-md-2" for="benf_work_end_date_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Work&nbsp;End&nbsp;Date</label>
                                         <div class="col-md-4" ng-controller="DatepickerPopupController">
                                             <p class="input-group">
                                                 <input date-validation class="form-control" ng-click="open1()" uib-datepicker-popup="{{format}}" ng-model="Certificates.Forms[$index].benf_work_end_date" is-open="popup1.opened" name="benf_work_end_date_{{$index}}" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
-                                                    placeholder="Select work start date" />
+                                                    placeholder="Select work start date" required />
                                                 <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
                                             </p>
                                             <small class="error" ng-show="EmploymentFormIV.benf_work_end_date_{{$index}}.$invalid && EmploymentFormIV.benf_work_end_date_{{$index}}.$dirty">Please provide work end date and only acceptable format is DD-MM-YYYY</small>

@@ -130,6 +130,8 @@ class Breadcrumbs extends Widget
      */
     public function run()
     {
+        Yii::$app->homeUrl = str_replace("/backend/","",Yii::$app->homeUrl);
+        
         if (empty($this->links)) {
             return;
         }
