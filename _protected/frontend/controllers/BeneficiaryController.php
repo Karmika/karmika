@@ -99,6 +99,7 @@ class BeneficiaryController extends FrontendController
         $data["updated_by_user_id"] = $this->LoggedInUser;
         $data["benf_application_status"] = $this->DraftStatus;
         $data["benf_acknowledgement_number"] = NULL;
+        $data["benf_registration_number"] = NULL;
         $model->attributes = $data;
         //print_r($model->validate());echo "<br>";
         //echo "<pre>";print_r($model->getErrors());exit;
