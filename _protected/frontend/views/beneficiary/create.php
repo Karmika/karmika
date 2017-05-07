@@ -252,7 +252,7 @@ $url =  Yii::$app->homeUrl;?>
                             <div class="row form-group">
                                 <label class="control-label col-md-1" for="benf_bank_branch"><span class="mandatory-field">*&nbsp;</span>Branch ಶಾಖೆ</label>
                                 <div class="col-md-3">
-                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bacnk branch Name" maxlength="25" required />
+                                    <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_bank_branch" name="benf_bank_branch" placeholder="bank branch Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_bank_branch.$invalid && beneficiary.benf_bank_branch.$dirty">Please provide Bank Branch name</small>
                                 </div>
 
@@ -492,7 +492,7 @@ $url =  Yii::$app->homeUrl;?>
                             <form class="col-sm-10"> 
                               <label class="control-label col-md-2"><span class="mandatory-field"></span>Select Form Type :</label>
                               <label for="FormType"><input type="radio" name="FormType" ng-model="Certificates.FormType" value="V">&nbsp;Form V&nbsp;&nbsp;</label>
-                              <label for="FormType"><input type="radio" name="FormType" ng-model="Certificates.FormType" value="IV">&nbsp;Form IV&nbsp;&nbsp;</label>
+                              <label for="FormType"><input type="radio" name="FormType" ng-model="Certificates.FormType" value="IV">&nbsp;Form VI&nbsp;&nbsp;</label>
                             </form>
                             <button ng-click="AddCertificate($index)" ng-show="Certificates.Forms.length>0" class="btn btn-success pull-right" style="margin-right:15px;">Add Certificate</button>
                         </div><br>
@@ -518,7 +518,7 @@ $url =  Yii::$app->homeUrl;?>
                                     <div class="row form-group">
                                         <label class="control-label col-md-2" for="emp_union_full_name_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Union&nbsp;Full&nbsp;Name</label>
                                         <div class="col-md-4">
-                                            <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Certificates.Forms[$index].emp_union_full_name" name="emp_union_full_name_{{$index}}" placeholder="First Name" maxlength="25" required />
+                                            <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Certificates.Forms[$index].emp_union_full_name" name="emp_union_full_name_{{$index}}" placeholder="Union Full Name" maxlength="25" required />
                                             <small class="error" ng-show="EmploymentFormV.emp_union_full_name_{{$index}}.$invalid && EmploymentFormV.emp_union_full_name_{{$index}}.$dirty">Please provide union full name</small>
                                         </div>
                                         <label class="control-label col-md-2" for="emp_union_branch_address_{{$index}}"><span class="mandatory-field">*&nbsp;</span>Union&nbsp;Address</label>
