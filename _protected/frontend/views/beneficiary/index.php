@@ -13,7 +13,7 @@ td,th{
 <br />
 
 <div class="row">
-  <a class="nameLink" href="{{baseUrl}}/beneficiary/create"><button type="button" class="btn btn-default">Add Beneficiary </button></a>&nbsp;&nbsp;&nbsp;
+  <a class="nameLink" href="{{baseUrl}}/beneficiary/create"><button type="button" class="btn btn-default">Add Application </button></a>&nbsp;&nbsp;&nbsp;
   <div class="col-sm-4" style="padding-left: 0px;">
       <div id="imaginary_container"> 
           <div class="input-group stylish-input-group">

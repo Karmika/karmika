@@ -59,7 +59,6 @@ $url =  Yii::$app->homeUrl;?>
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_first_name" name="benf_first_name" placeholder="First Name" maxlength="25" required />
                                     <small class="error" ng-show="beneficiary.benf_first_name.$invalid && beneficiary.benf_first_name.$dirty">Please provide first name</small>
                                 </div>
-
                                 <label class="control-label col-md-2" for="benf_middle_name">Middle&nbsp;Name ಮಧ್ಯ ಹೆಸರು </label>
                                 <div class="col-md-4">
                                     <input letterswithsinglequoteandhyphendot-only class="form-control" ng-model="Beneficiary.benf_middle_name" name="benf_middle_name" placeholder="Middle Name" maxlength="25" />
@@ -1157,8 +1156,6 @@ $url =  Yii::$app->homeUrl;?>
                                 <div data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="panel-heading cursorPointer"><b>Uploaded Files</b><span class="glyphicon glyphicon-sort pull-right"></span></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
-
-
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -1182,8 +1179,6 @@ $url =  Yii::$app->homeUrl;?>
                                             </tr>
                                         </tbody>
                                     </table>
-
-
                                     </div>
                                 </div>
                             </div>

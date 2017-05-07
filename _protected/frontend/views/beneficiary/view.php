@@ -11,14 +11,14 @@
     <b>Application for Registration as a Beneficiary</b></p>
   </center>
   <div class="row">
-    <div class="col-md-7 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-1 inline">
       <p>ಗೆ/TO</p>
       <p>ಫಲಾನುಭವಿ ನೋಂದಣಾಧಿಕಾರಿ/Beneficiary Registration officer</p>
       <p>(ಕಾರ್ಮಿಕ ಅಧಿಕಾರಿ/ಹಿರಿಯ ಕಾರ್ಮಿಕ ನಿರೀಕ್ಷಕರು/ಕಾರ್ಮಿಕ ನಿರೀಕ್ಷಕರು)</p>
       <p>(Labour Officer/Senior Labour Inspector/ Labour Inspector) ವಿಳಾಸ/Address:</p>
     </div>
-    <div class="col-md-4">
-      <img class="ProfilePicPreview img-responsive" ng-src="{{defaultPic}}"  alt="Applicant image" height="150px;" width="100px"/>
+    <div class="col-md-3 inline-right">
+      <img class="ProfilePicPreview img-responsive" ng-src="{{defaultPic}}" alt="Applicant image" height="150px;" width="100px"/>
     </div>
   </div>
   <div class="row">
