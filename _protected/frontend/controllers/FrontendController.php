@@ -40,7 +40,10 @@ class FrontendController extends Controller
                                         'getpayment',
 
                                         //SeedData
-                                        'getdata'
+                                        'getdata',
+
+                                        //User
+                                        'resetpassword',
                                         ],
                         'allow' => true,
                         'roles' => ['admin'],
@@ -53,6 +56,9 @@ class FrontendController extends Controller
                                         'createdependents','submitbeneficiary','searchbeneficiaries',
                                         'getbeneficiaryalldata','createcertificates','deletecertificate',
                                         'appliedbeneficiary',
+
+                                        //User
+                                        'resetpassword',
                                         ],
                         'allow' => true,
                         'roles' => ['subAdmin'],
@@ -70,7 +76,10 @@ class FrontendController extends Controller
                                         'getpayment',
 
                                         //SeedData
-                                        'getdata'
+                                        'getdata',
+
+                                        //User
+                                        'resetpassword',
                                     ],
                         'allow' => true,
                         'roles' => ['member'],

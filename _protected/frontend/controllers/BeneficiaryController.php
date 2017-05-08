@@ -361,6 +361,16 @@ class BeneficiaryController extends FrontendController
         $model = BeneficiaryMaster::findOne($data['id']);
         return json_encode(array("subscriptions"=>$subscriptions,"full_name"=>$model->benf_first_name." ".$model->benf_last_name,"registration_no"=>($model->benf_registration_number != null)?$model->benf_registration_number:""));
     }
+
+    public function actionResetpassword(){
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $user = User::findOne(3);
+        $user->password_hash = Yii::$app->security->generatePasswordHash($data['pass']);
+        if($user->update()) return "success";
+        else return "failed";
+    }
+
     private function GetBeneficiaryDetails($Conditions){
         $OrWhereConditions = ['created_by_user_id' => $this->LoggedInUser];
         if(empty($Conditions)) $OrWhereConditions = $Conditions;
