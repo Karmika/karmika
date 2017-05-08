@@ -152,7 +152,7 @@ $url =  Yii::$app->homeUrl;?>
               <div class="row form-group">
                 <label class="control-label col-md-1" for="permanent_address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                 <div class="col-md-3">
-                  <textarea class="form-control" ng-model="Beneficiary.benf_prmt_address_line1" name="permanent_address_line1" placeholder="Line 1" maxlength="175" ng-change='setSameLocalIfTrue("line1")' required></textarea>
+                  <textarea class="form-control" ng-model="Beneficiary.benf_prmt_address_line1" name="permanent_address_line1" placeholder="Permanent Address" maxlength="175" ng-change='setSameLocalIfTrue("line1")' required></textarea>
                   <small class="error" ng-show="beneficiary.permanent_address_line1.$invalid && beneficiary.permanent_address_line1.$dirty">Please provide Address</small>
                 </div>
 
@@ -191,7 +191,7 @@ $url =  Yii::$app->homeUrl;?>
               <div class="row form-group">
                 <label class="control-label col-md-1" for="address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                 <div class="col-md-3">
-                  <textarea class="form-control" ng-model="Beneficiary.benf_local_address_line1" name="address_line1" placeholder="Line 1" maxlength="175" required ng-readonly="Benf.sameAsPermanentAddress"></textarea>
+                  <textarea class="form-control" ng-model="Beneficiary.benf_local_address_line1" name="address_line1" placeholder="Local Address" maxlength="175" required ng-readonly="Benf.sameAsPermanentAddress"></textarea>
                   <small class="error" ng-show="beneficiary.address_line1.$invalid && beneficiary.address_line1.$dirty">Please provide Address</small>
                 </div>
 
@@ -301,7 +301,7 @@ $url =  Yii::$app->homeUrl;?>
               <div class="row form-group">
                 <label class="control-label col-md-1" for="emplr_address_line1"><span class="mandatory-field">*&nbsp;</span>Address ವಿಳಾಸ</label>
                 <div class="col-md-3">
-                  <textarea class="form-control" ng-model="Beneficiary.emplr_address_line1" name="emplr_address_line1" placeholder="Line 1" maxlength="175" required></textarea>
+                  <textarea class="form-control" ng-model="Beneficiary.emplr_address_line1" name="emplr_address_line1" placeholder="Employer Address" maxlength="175" required></textarea>
                   <small class="error" ng-show="beneficiary.emplr_address_line1.$invalid && beneficiary.emplr_address_line1.$dirty">Please provide Address</small>
                 </div>
 
@@ -635,7 +635,7 @@ $url =  Yii::$app->homeUrl;?>
                   <small class="error" ng-show="PaymentCreateForm.payment_status.$invalid && PaymentCreateForm.payment_status.$dirty">Please provide payment status</small>
                 </div>
 
-                <label class="control-label col-sm-2" for="payment_reference_id">&nbsp;&nbsp;Payment Reference Id :</label>
+                <label class="control-label col-sm-2" for="payment_reference_id"><span class="mandatory-field">*&nbsp;</span>Payment Reference Id :</label>
                 <div class="col-sm-4">
                   <input numerics-only class="form-control" ng-model="Payment.payment_reference_id" name="payment_reference_id" placeholder="Enter reference details" />
                 </div>
@@ -1213,7 +1213,7 @@ $url =  Yii::$app->homeUrl;?>
                         </div>
                             -->
             </div>
-
+            <br>
             <ul class="list-inline pull-right">
               <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
               <li><button ng-click="SubmitBeneficiary()" type="button" class="btn btn-primary btn-info-full next-step">Submit</button></li>

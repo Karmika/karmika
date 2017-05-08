@@ -13,9 +13,9 @@ app.controller("BeneficiaryController", ['$scope', '$http', 'config', '$window',
 
         $scope.InitializeBasicData= function(){
             $scope.Beneficiary = {
-                "benf_registration_number": "",
-                "id":"",
-                "benf_registration_old_number": "",
+                "benf_registration_number": null,
+                "id":null,
+                "benf_registration_old_number": null,
                 "nationality": 'INDIAN',
                 benf_caste: $scope.casteList[3].value
             };

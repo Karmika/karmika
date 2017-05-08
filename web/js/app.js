@@ -65,7 +65,7 @@ app.constant('config', {
     TestData : {
               "benf_application_status": "APPLIED",
               "benf_registration_number": null,
-              "benf_registration_old_number": "",
+              "benf_registration_old_number": null,
               "benf_acknowledgement_number": "",
               "nationality": "INDIAN",
               "benf_caste": "General (Others)",

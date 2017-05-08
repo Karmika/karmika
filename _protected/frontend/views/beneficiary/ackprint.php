@@ -23,7 +23,7 @@
       </div>
     </div><br>
     <div class="row srow">
-      <div class="col-xs-6">Acknowledgement Number<span class="pull-right">:</span></div><div class="col-xs-6">{{Ack.acknowledgement_number}}</div>
+      <div class="col-xs-6">Acknowledgement Number<span class="pull-right">:</span></div><div class="col-xs-6">{{Ack.acknowledgement_number || '----' }}</div>
     </div>
     <div class="row srow">
       <div class="col-xs-6">Name of the Applicant<span class="pull-right">:</span></div><div class="col-xs-6">{{Ack.applicant_name}}</div>
