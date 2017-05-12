@@ -20,19 +20,20 @@ class UserController extends ActiveController
     public $modelClass = 'common\models\User';
 
     public function actionSaveuser(){
-
         $post = file_get_contents("php://input");
         $users = json_decode($post, true);
         foreach ($users as $key => $user) {
         	$user_exists = User::findByUsername($user['2']);
         	if(!empty($user_exists) || $user_exists != null) continue;
-			$model = new User();
-			$model->attributes = array('username' => $user['2'],'status' => 10,'email' => $user['3'],'password' => $user['4']);
-			$model->save();
-	        $userUpdate = User::findOne($model->id);
-	        $userUpdate->password_hash = Yii::$app->security->generatePasswordHash($user['4']);
-	        $userUpdate->update();
+	        $NewUser = new User();
+	        $NewUser->username = $user['2'];
+	        $NewUser->email = $user['3'];
+	        //$NewUser->mobile = $this->mobile;
+	        $NewUser->setPassword($user['4']);
+	        $NewUser->generateAuthKey();
+	        $NewUser->status = User::STATUS_ACTIVE;
+			$NewUser->save();
         }
-        return true;;
+        return true;
     }
 }
