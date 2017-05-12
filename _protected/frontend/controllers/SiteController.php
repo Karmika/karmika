@@ -393,4 +393,15 @@ class SiteController extends Controller
 
         return $this->redirect('login');
     }
+
+    public function actionRequestChangePassword()
+    {
+        return $this->render('requestChangePassword');
+    }
+
+    public function actionSavePassword()
+    {
+        Yii::$app->session->setFlash('success', 'Successfully changed your password, Please login !');
+        return $this->goHome();
+    }
 }

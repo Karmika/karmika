@@ -50,6 +50,7 @@ class WebAsset extends AssetBundle
       'web/js/controllers/BeneficiarySuccessController.js',
       'web/js/controllers/BeneficiaryUpdateController.js',
       'web/js/controllers/PaymentController.js',
+      'web/js/controllers/PasswordController.js',
     ];
     
 }
