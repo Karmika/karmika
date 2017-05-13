@@ -125,4 +125,12 @@ class Services extends Model
         $command = $connection->createCommand($query);
         return $command->queryAll();
     } 
+
+    public function SendSMS($mobile,$msg)
+    {   
+        $url = "http://203.212.70.200/smpp/sendsms?username=kbocwbhttp&password=kbocwbhttp1&to=".$mobile."&from=KBOCWB&udh=&text=".$msg."&dlr-mask=19&dlr-url";
+        $url = str_replace(' ', '%20', $url);
+        $res = file_get_contents($url);
+        return $res;
+    } 
 }

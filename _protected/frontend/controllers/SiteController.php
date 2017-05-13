@@ -15,6 +15,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
+use frontend\models\Services;
+use frontend\models\Otps;
 
 /**
  * Site controller.
@@ -403,5 +405,25 @@ class SiteController extends Controller
     {
         Yii::$app->session->setFlash('success', 'Successfully changed your password, Please login !');
         return $this->goHome();
+    }   
+
+    public function actionChangePassword(){
+        $post = file_get_contents("php://input");
+        $data = json_decode($post, true);
+        $user = User::findOne(3);
+        $user->password_hash = Yii::$app->security->generatePasswordHash($data['pass']);
+        if($user->update()) return "success";
+        else return "failed";
+    }
+    
+    public function actionSendotp(){
+        $oneTimePassword = mt_rand(100000,999999);
+        $msg = "Please use this OTP ".$oneTimePassword." to reset your password.";
+        $response = Services::SendSMS($_GET['mob'],$msg);
+        $otp = new Otps();
+        $otp->mobile = $_GET['mob'];
+        $otp->otp = "".$oneTimePassword."";
+        $otp->save();
+        return json_encode($response);
     }
 }
