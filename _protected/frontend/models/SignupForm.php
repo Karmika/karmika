@@ -40,6 +40,7 @@ class SignupForm extends Model
                 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
+            ['mobile', 'required'],
             ['mobile', 'string', 'max' => 15],
             // use passwordStrengthRule() method to determine password strength
             $this->passwordStrengthRule(),
