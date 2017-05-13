@@ -405,17 +405,8 @@ class SiteController extends Controller
     {
         Yii::$app->session->setFlash('success', 'Successfully changed your password, Please login !');
         return $this->goHome();
-    }   
-
-    public function actionChangePassword(){
-        $post = file_get_contents("php://input");
-        $data = json_decode($post, true);
-        $user = User::findOne(3);
-        $user->password_hash = Yii::$app->security->generatePasswordHash($data['pass']);
-        if($user->update()) return "success";
-        else return "failed";
     }
-    
+
     public function actionSendotp(){
         $oneTimePassword = mt_rand(100000,999999);
         $msg = "Please use this OTP ".$oneTimePassword." to reset your password.";
@@ -424,6 +415,25 @@ class SiteController extends Controller
         $otp->mobile = $_GET['mob'];
         $otp->otp = "".$oneTimePassword."";
         $otp->save();
-        return json_encode($response);
+        return $response;
+    }
+    
+    public function actionVerifyotp(){
+        return Services::VerifyOTP($_GET['mob'],$_GET['otp']);
+    }
+
+    public function actionChangepassword(){
+        $user = User::find()
+        ->where(['mobile' => $_GET['mob']])
+        ->one();
+        $user->password_hash = Yii::$app->security->generatePasswordHash($_GET['pass']);
+        if($user->update()) return true;
+        else return false;
+    }
+
+    public function actionCustomError()
+    {
+        Yii::$app->session->setFlash('error', 'Something went wrong please contact admin');
+        return $this->goHome();
     }
 }

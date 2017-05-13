@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use frontend\models\BeneficiaryMaster;
 use frontend\models\SelectionSeedData;
+use frontend\models\Otps;
 
 /**
  * This is the model class for table "selection_seed_data".
@@ -131,6 +132,16 @@ class Services extends Model
         $url = "http://203.212.70.200/smpp/sendsms?username=kbocwbhttp&password=kbocwbhttp1&to=".$mobile."&from=KBOCWB&udh=&text=".$msg."&dlr-mask=19&dlr-url";
         $url = str_replace(' ', '%20', $url);
         $res = file_get_contents($url);
-        return $res;
+        return true;
     } 
+
+    public function VerifyOTP($mobile,$otp)
+    {   
+        $latestOTP = Otps::find()
+        ->where(['mobile' => $mobile])
+        ->select(['otp'])
+        ->orderBy(['id' => SORT_DESC])
+        ->one();
+        return $latestOTP->otp == $otp;
+    }
 }

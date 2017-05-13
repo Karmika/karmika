@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             <div class="col-xs-5 well bs-component">
                 <label for="ex2">Mobile : </label>
-                <input class="form-control" ng-model="PasswordReset.mob" name="mob" type="text" />
+                <input class="form-control" ng-model="PasswordReset.mob" name="mob" type="number" />
                 <br>
                 <button type="button" class="btn btn-default pull-right" ng-click="GenerateOTP()">Next</button>
             </div>

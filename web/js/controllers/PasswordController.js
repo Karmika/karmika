@@ -6,24 +6,39 @@ app.controller("PasswordController", ['$scope', '$http', 'config', '$window','Cu
         $scope.step3 = false;
         $scope.PasswordReset = {}
 
-        $scope.GenerateOTP = function(){
-            $scope.step1 = false;
-            $scope.step2 = true;
-            $scope.step3 = false;
-            
+        $scope.GenerateOTP = function(){            
             $http.get(config.baseUrl+"/site/sendotp?mob="+ $scope.PasswordReset.mob)
             .then(function(response) {
-                console.log(response.data);
+                if(response.data){
+                    $scope.step1 = false;
+                    $scope.step2 = true;
+                }else $window.location.href = config.baseUrl + "/site/custom-error";
+            },
+            function(){
+                $window.location.href = config.baseUrl + "/site/custom-error";
             });
         }
 
         $scope.VerifyOTP = function(){
-            $scope.step1 = false;
-            $scope.step2 = false;
-            $scope.step3 = true;
+            $http.get(config.baseUrl+"/site/verifyotp?mob="+ $scope.PasswordReset.mob + "&otp="+ $scope.PasswordReset.otp)
+            .then(function(response) {
+                if(response.data){
+                    $scope.step2 = false;
+                    $scope.step3 = true;
+                }else $window.location.href = config.baseUrl + "/site/custom-error";
+            },
+            function(){
+                $window.location.href = config.baseUrl + "/site/custom-error";
+            });
         }
 
         $scope.SavePassword = function(){
-            $window.location.href = config.baseUrl + "/site/save-password";
+            $http.get(config.baseUrl+"/site/changepassword?mob="+ $scope.PasswordReset.mob + "&pass="+ $scope.PasswordReset.new_password)
+            .then(function(response) {
+                if(response.data) $window.location.href = config.baseUrl + "/site/save-password";
+            },
+            function(){
+                $window.location.href = config.baseUrl + "/site/custom-error";
+            });
         }
 }]);
