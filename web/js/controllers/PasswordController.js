@@ -4,7 +4,15 @@ app.controller("PasswordController", ['$scope', '$http', 'config', '$window','Cu
         $scope.step1 = true;
         $scope.step2 = false;
         $scope.step3 = false;
-        $scope.PasswordReset = {}
+        $scope.PasswordReset = {};
+        $scope.regEx="/^[0-9]{10,10}$/;";
+        $scope.ServerVaidationErrorForOTP = false;
+        $scope.ServerVaidationErrorForMobile = false;
+
+        $scope.$watchGroup(['PasswordReset.otp','PasswordReset.mob'], function(){
+            $scope.ServerVaidationErrorForOTP = false;
+            $scope.ServerVaidationErrorForMobile = false;
+        });
 
         $scope.GenerateOTP = function(){            
             $http.get(config.baseUrl+"/site/sendotp?mob="+ $scope.PasswordReset.mob)
@@ -12,7 +20,7 @@ app.controller("PasswordController", ['$scope', '$http', 'config', '$window','Cu
                 if(response.data){
                     $scope.step1 = false;
                     $scope.step2 = true;
-                }else $window.location.href = config.baseUrl + "/site/custom-error";
+                }else $scope.ServerVaidationErrorForMobile = true;
             },
             function(){
                 $window.location.href = config.baseUrl + "/site/custom-error";
@@ -25,7 +33,7 @@ app.controller("PasswordController", ['$scope', '$http', 'config', '$window','Cu
                 if(response.data){
                     $scope.step2 = false;
                     $scope.step3 = true;
-                }else $window.location.href = config.baseUrl + "/site/custom-error";
+                }else $scope.ServerVaidationErrorForOTP = true;
             },
             function(){
                 $window.location.href = config.baseUrl + "/site/custom-error";

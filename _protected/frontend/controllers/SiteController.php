@@ -408,6 +408,11 @@ class SiteController extends Controller
     }
 
     public function actionSendotp(){
+        $user = User::find()
+        ->where(['mobile' => $_GET['mob']])
+        ->one();
+        if(empty($user) && $user == null) return false;
+
         $oneTimePassword = mt_rand(100000,999999);
         $msg = "Please use this OTP ".$oneTimePassword." to reset your password.";
         $response = Services::SendSMS($_GET['mob'],$msg);
