@@ -127,6 +127,13 @@ class Services extends Model
         return $command->queryAll();
     } 
 
+    public function ExecuteSQL($query)
+    {        
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand($query);
+        return $command->execute();
+    } 
+
     public function SendSMS($mobile,$msg)
     {   
         $url = "http://203.212.70.200/smpp/sendsms?username=kbocwbhttp&password=kbocwbhttp1&to=".$mobile."&from=KBOCWB&udh=&text=".$msg."&dlr-mask=19&dlr-url";

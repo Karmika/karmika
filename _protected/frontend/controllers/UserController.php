@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use common\models\User;
+use frontend\models\Services;
 
 /**
  * Country Controller API
@@ -32,7 +33,8 @@ class UserController extends ActiveController
 	        $NewUser->setPassword($user['4']);
 	        $NewUser->generateAuthKey();
 	        $NewUser->status = User::STATUS_ACTIVE;
-			$NewUser->save();
+            if($NewUser->save())
+                Services::ExecuteSQL("INSERT INTO auth_assignment (item_name, user_id, created_at) VALUES ('admin', '".$NewUser->id."', NOW())");
         }
         return true;
     }
